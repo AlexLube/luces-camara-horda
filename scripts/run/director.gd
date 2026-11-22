@@ -102,14 +102,17 @@ func _event(ev: String) -> void:
 			_named(T.BOSS, boss_name, 0.35 * lvl_k)
 			run.announce(Loc.t("ev_boss", [boss_name]))
 			Sfx.play("boss")
+			Music.play("jefe")
 		"boss":
 			_named(T.BOSS, boss_name, 0.9 * lvl_k)
 			run.announce(Loc.t("ev_boss", [boss_name]))
 			Sfx.play("boss")
+			Music.play("jefe")
 		"boss_final":
 			_named(T.BOSS, boss_name + " (" + Loc.t("final_cut") + ")", 1.8 * lvl_k)
 			run.announce(Loc.t("ev_final", [boss_name]))
 			Sfx.play("boss")
+			Music.play("jefe")
 		"wave":
 			# a ring of extras closing in from every side
 			for k in 70:
