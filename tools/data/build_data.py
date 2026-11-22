@@ -221,7 +221,7 @@ for r in table('# | Escenario | Festival'):
 for s in stages:
     s['id'] = slug(s['name']); s.setdefault('minutes', 30)
 # art sets that exist today (from the web prototype); others fall back to the forest set
-ART = {1:'forest',2:'west',3:'station',4:'noir',5:'jungle',6:'broadway',7:'kaiju',8:'drivein',9:'school',10:'galleon',11:'mansion',12:'lab'}
+ART = {1:'forest',2:'west',3:'station',4:'noir',5:'jungle',6:'broadway',7:'kaiju',8:'drivein',9:'school',10:'galleon',11:'mansion',12:'lab',13:'silent',14:'colosseum',15:'wasteland',16:'dojo',17:'train',18:'telenovela'}
 for s in stages: s['art'] = ART.get(s['num'], 'forest')
 out['stages'] = stages
 

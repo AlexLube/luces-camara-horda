@@ -166,7 +166,7 @@
   "kind": "desafio",
   "id": "archivo_de_cine_mudo",
   "minutes": 30,
-  "art": "forest"
+  "art": "silent"
  },
  {
   "num": 14,
@@ -179,7 +179,7 @@
   "kind": "desafio",
   "id": "coliseo_de_peplum",
   "minutes": 30,
-  "art": "forest"
+  "art": "colosseum"
  },
  {
   "num": 15,
@@ -192,7 +192,7 @@
   "kind": "desafio",
   "id": "carretera_del_fin",
   "minutes": 30,
-  "art": "forest"
+  "art": "wasteland"
  },
  {
   "num": 16,
@@ -205,7 +205,7 @@
   "kind": "desafio",
   "id": "dojo_de_la_montana",
   "minutes": 30,
-  "art": "forest"
+  "art": "dojo"
  },
  {
   "num": 17,
@@ -218,7 +218,7 @@
   "kind": "desafio",
   "id": "expreso_de_medianoche",
   "minutes": 30,
-  "art": "forest"
+  "art": "train"
  },
  {
   "num": 18,
@@ -231,7 +231,7 @@
   "kind": "desafio",
   "id": "plato_de_telenovela",
   "minutes": 30,
-  "art": "forest"
+  "art": "telenovela"
  },
  {
   "num": 19,
