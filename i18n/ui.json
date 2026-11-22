@@ -386,5 +386,45 @@
  "game_title": {
   "es": "LUCES, CÁMARA, HORDA",
   "en": "LIGHTS, CAMERA, HORDE!"
+ },
+ "relic_found": {
+  "es": "¡Reliquia encontrada: %s!",
+  "en": "Relic found: %s!"
+ },
+ "collection": {
+  "es": "Colección",
+  "en": "Collection"
+ },
+ "col_weapons": {
+  "es": "Armas",
+  "en": "Weapons"
+ },
+ "col_unions": {
+  "es": "Uniones",
+  "en": "Unions"
+ },
+ "col_passives": {
+  "es": "Mejoras",
+  "en": "Items"
+ },
+ "col_relics": {
+  "es": "Reliquias",
+  "en": "Relics"
+ },
+ "col_evo_req": {
+  "es": "%s al máximo + %s, desde el minuto 10",
+  "en": "%s maxed + %s, from minute 10"
+ },
+ "col_evo_hidden": {
+  "es": "Evolución por descubrir",
+  "en": "Evolution not found yet"
+ },
+ "col_union_hidden": {
+  "es": "Unión por descubrir: %s",
+  "en": "Union not found yet: %s"
+ },
+ "col_hint": {
+  "es": "Pista: %s",
+  "en": "Hint: %s"
  }
 }

@@ -128,7 +128,7 @@ static func open_chest(run, n: int) -> Array:
 				run.weapons.evolve(w.id)
 				run.evolutions += 1
 				run.evolved_ids.append(w.id)
-				got.append({"kind": "evolve", "id": w.id, "name": w.data.evolution.name, "desc": w.data.evolution.desc})
+				got.append({"kind": "evolve", "id": w.id, "icon": w.data.evolution.id, "name": w.data.evolution.name, "desc": w.data.evolution.desc})
 				evolved = true
 				break
 		if evolved: continue

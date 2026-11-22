@@ -16,6 +16,8 @@ var guiones: Array = []
 var modifiers: Array = []
 var achievements: Array = []
 var art_sets := {}
+var evolution_of := {}             # evolution id -> base weapon id
+var relic_by_id := {}
 var _tex := {}
 
 func _ready() -> void:
@@ -30,6 +32,9 @@ func _ready() -> void:
 	stages = _load("stages")
 	for s in stages: stage_by_id[s.id] = s
 	relics = _load("relics")
+	for r in relics: relic_by_id[r.id] = r
+	for w in weapon_list:
+		if w.has("evolution"): evolution_of[w.evolution.id] = w.id
 	guiones = _load("guiones")
 	modifiers = _load("modifiers")
 	achievements = _load("achievements")
@@ -57,6 +62,21 @@ func _make_union_weapons() -> void:
 			"evolution": {"id": u.id, "name": u.name, "desc": u.desc, "requires": "", "mods": mods}}
 		weapons[u.id] = w
 
+## Relics hidden in a stage (their "where" is the stage name).
+func relics_at(stage: Dictionary) -> Array:
+	var out: Array = []
+	for r in relics:
+		if r.where == stage.get("name", ""): out.append(r)
+	return out
+
+## Relics earned by finishing a number of stages ("Completar N escenarios").
+func relics_for_completions(done: int) -> Array:
+	var out: Array = []
+	for r in relics:
+		var m := RegEx.create_from_string("^Completar (\\d+) escenarios$").search(r.where)
+		if m and done >= int(m.get_string(1)): out.append(r)
+	return out
+
 func _load(name: String) -> Variant:
 	var f := FileAccess.open("res://data/%s.json" % name, FileAccess.READ)
 	if f == null:
@@ -80,6 +100,7 @@ func icon_for(id: String) -> Texture2D:
 	if ResourceLoader.exists(path): return tex(path)
 	# a Unión shows the icon of its first weapon
 	if weapons.has(id) and weapons[id].has("parts"): return icon_for(weapons[id].parts[0])
+	if evolution_of.has(id): return icon_for(evolution_of[id])
 	return null
 
 ## Weapons that can appear in level-up for this profile: base list, unlocked festival weapons, the character's own.

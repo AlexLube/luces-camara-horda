@@ -76,12 +76,21 @@ func _draw_overlay() -> void:
 		overlay.draw_rect(r, UIKit.GOLD.darkened(0.4), false, 1.0)
 		if k < run.weapons.list.size():
 			var w: Dictionary = run.weapons.list[k]
-			_slot(r, w.id, w.data.name, w.level, w.evolved, font)
+			_slot(r, w.data.evolution.id if w.evolved else w.id, w.data.name, w.level, w.evolved, font)
 	var pk: Array = run.passives.keys()
 	for k in 6:
 		var r := Rect2(x0 + k * 40.0, 66, 36, 36)
 		overlay.draw_rect(r, Color(0, 0, 0, 0.45))
 		if k < pk.size(): _slot(r, pk[k], Data.passives[pk[k]].name, int(run.passives[pk[k]]), false, font)
+	# Mapa de Localizaciones: arrows to the relics still hidden in this stage
+	if Save.is_unlocked("relics", "mapa_de_localizaciones"):
+		var c := size / 2.0
+		for p in run.relic_pickups():
+			var d: Vector2 = Vector2(p.x, p.y) - run.player_pos
+			if d.length() < 420.0: continue
+			var dir := d.normalized()
+			var at: Vector2 = c + dir * (minf(size.x, size.y) / 2.0 - 46.0)
+			overlay.draw_colored_polygon(PackedVector2Array([at + dir * 14.0, at + dir.orthogonal() * 9.0 - dir * 6.0, at - dir.orthogonal() * 9.0 - dir * 6.0]), UIKit.GOLD)
 	# boss bar
 	var boss := -1
 	var best := 0.0
@@ -176,7 +185,7 @@ func show_chest(got: Array, gold: int) -> void:
 	v.add_child(ic)
 	for o in got:
 		var tag := Loc.t("evolved") if o.kind == "evolve" else (Loc.t("union") if o.kind == "union" else "")
-		var c := UIKit.card(Data.icon_for(o.id), o.name, tag, o.desc, func(): pass)
+		var c := UIKit.card(Data.icon_for(o.get("icon", o.id)), o.name, tag, o.desc, func(): pass)
 		c.focus_mode = Control.FOCUS_NONE
 		v.add_child(c)
 	v.add_child(UIKit.label("+ %d $" % gold, 22, UIKit.GOLD))
@@ -220,6 +229,8 @@ func show_results(r: Dictionary) -> void:
 		v.add_child(UIKit.label("%s  (%s)  —  %d" % [w[0], Loc.t("lvl_n", [w[1]]), w[2]], 17))
 	for a in r.achievements:
 		v.add_child(UIKit.label("» " + a.name, 18, UIKit.GOLD.lightened(0.2)))
+	for n in r.get("relics", []):
+		v.add_child(UIKit.label(Loc.t("relic_found", [n]), 18, UIKit.GOLD.lightened(0.2)))
 	var row2 := HBoxContainer.new()
 	row2.alignment = BoxContainer.ALIGNMENT_CENTER
 	row2.add_theme_constant_override("separation", 12)

@@ -61,6 +61,7 @@ var bosses_killed := 0
 var evolutions := 0
 var evolved_ids: Array = []
 var productor_killed := false
+var found_relics: Array = []        # relic ids picked up this run
 var dmg_by_weapon := {}
 
 # --- world objects ---
@@ -120,8 +121,22 @@ func _ready() -> void:
 	hud = preload("res://scripts/ui/hud.gd").new()
 	hud.run = self
 	add_child(hud)
+	_place_relics()
 	for p in art.get("start", []):
 		props[Vector2i(99999, 0)] = props.get(Vector2i(99999, 0), []) + [[p[0], float(p[1]), float(p[2]), art.get("land_scale", 1.0) if p[0] == art.get("land", "") else 0.8]]
+
+## Relics of this stage not found yet lie far from the start, each in its own fixed direction.
+func _place_relics() -> void:
+	for r in Data.relics_at(stage):
+		if Save.is_unlocked("relics", r.id) and not bot: continue
+		var h := absi(hash(r.id))
+		var ang := float(h % 360) * PI / 180.0
+		var dist := 1400.0 + float(h % 700)
+		pickups.append({"k": "relic", "id": r.id, "x": cos(ang) * dist, "y": sin(ang) * dist})
+		sheets["r_" + r.id] = Data.tex("res://assets/sprites/icons/%s.png" % r.id)
+
+func relic_pickups() -> Array:
+	return pickups.filter(func(p): return p.k == "relic")
 
 # ---------- assets ----------
 func _sheet(path: String, frames: int) -> Dictionary:
@@ -385,6 +400,8 @@ func record() -> Dictionary:
 	if completed and stage.id not in s.completed: s.completed.append(stage.id)
 	if stage.id not in s.played: s.played.append(stage.id)
 	if productor_killed: s.productor += 1
+	for r in Data.relics_for_completions(s.completed.size()):
+		if Save.unlock("relics", r.id): found_relics.append(r.id)
 	Save.data.taquilla = int(Save.data.taquilla) + earned
 	Save.data.last = {"character": character.id, "stage": stage.id}
 	Save.save_game()
@@ -392,7 +409,8 @@ func record() -> Dictionary:
 	var dmg: Array = []
 	for w in weapons.list: dmg.append([w.data.name if not w.evolved or w.data.source == "union" else w.data.evolution.name, w.level, int(dmg_by_weapon.get(w.id, 0.0))])
 	return {"time": time, "kills": kills, "level": level, "coins": int(round(coins)), "earned": earned, "completed": completed,
-		"achievements": new_ach, "weapons": dmg, "character": character.name, "stage": stage.name}
+		"achievements": new_ach, "weapons": dmg, "character": character.name, "stage": stage.name,
+		"relics": found_relics.map(func(id): return Data.relic_by_id[id].name)}
 
 # ---------- update ----------
 func _process(delta: float) -> void:
@@ -561,6 +579,13 @@ func _collect(p: Dictionary) -> void:
 			heal(30.0)
 			Sfx.play("pickup", 0.6)
 		"chest": open_chest(p.get("boss", false))
+		"relic":
+			found_relics.append(p.id)
+			if not bot and Save.unlock("relics", p.id): Save.save_game()
+			fx_ring(Vector2(p.x, p.y), 160.0, Color("f2b83b"))
+			fx_flash(0.6)
+			Sfx.play("chest", 1.2)
+			announce(Loc.t("relic_found", [Data.relic_by_id[p.id].name]))
 		"magnet":
 			for q in pickups:
 				if q.k == "xp": q.pull = true
@@ -669,6 +694,13 @@ func _draw() -> void:
 			"magnet": tx = sheets.i_mic
 			"cut": tx = sheets.i_clap
 			"freeze": tx = sheets.i_reel
+			"relic":
+				var c := Vector2(p.x, p.y + sin(time * 3.0) * 4.0)
+				draw_circle(c, 34.0 + sin(time * 5.0) * 4.0, Color(1.0, 0.8, 0.3, 0.18))
+				draw_arc(c, 30.0, time * 2.0, time * 2.0 + PI * 1.4, 24, Color(1.0, 0.85, 0.35, 0.8), 2.0)
+				var rt: Texture2D = sheets.get("r_" + p.id)
+				if rt: draw_texture_rect(rt, Rect2(c - Vector2(24, 24), Vector2(48, 48)), false)
+				continue
 		if tx:
 			var s := tx.get_size() * (0.6 if p.k in ["magnet", "cut", "freeze"] else 1.0)
 			var bob := sin(time * 4.0 + p.x) * 2.0 if p.k != "xp" else 0.0

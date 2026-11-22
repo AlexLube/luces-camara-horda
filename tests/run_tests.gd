@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -188,6 +188,28 @@ func t_union() -> void:
 	for wid in u.weapons: ok(not r.weapons.has(wid), "union consumed " + wid)
 	r.queue_free()
 	await get_tree().process_frame
+
+func t_relics() -> void:
+	for w in Data.weapon_list: ok(ResourceLoader.exists("res://assets/sprites/icons/%s.png" % w.evolution.id), "evolution icon " + w.evolution.id)
+	for u in Data.unions: ok(ResourceLoader.exists("res://assets/sprites/icons/%s.png" % u.id), "union icon " + u.id)
+	for r in Data.relics: ok(ResourceLoader.exists("res://assets/sprites/icons/%s.png" % r.id), "relic icon " + r.id)
+	ok(Data.relics_at(Data.stage_by_id.bosque_de_la_cabana).any(func(x): return x.id == "mapa_de_localizaciones"), "the map hides in the first stage")
+	ok(Data.relics_for_completions(4).is_empty() and Data.relics_for_completions(5).size() == 1, "director's chair after 5 stages")
+	var r := new_run()
+	var rel: Array = r.relic_pickups()
+	ok(rel.size() == 1 and Vector2(rel[0].x, rel[0].y).length() > 1300.0, "relic placed far from the start")
+	r.bot = false
+	r._collect(rel[0])
+	ok(Save.is_unlocked("relics", "mapa_de_localizaciones") and r.found_relics == ["mapa_de_localizaciones"], "picking a relic saves it")
+	r.queue_free()
+	await get_tree().process_frame
+	var r2 := new_run()
+	r2.bot = false
+	r2._place_relics()
+	ok(r2.relic_pickups().size() == 1, "found relics are not placed again (bot run still places its own)")
+	r2.queue_free()
+	await get_tree().process_frame
+	Save.data.unlocked.relics.clear()
 
 func t_achievements() -> void:
 	Save.data = Save.defaults()

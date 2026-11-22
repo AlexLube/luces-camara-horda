@@ -40,6 +40,7 @@ func _ready() -> void:
 			"options": show_options()
 			"awards": show_achievements()
 			"credits": show_credits()
+			"collection": show_collection(opt.get("tab", "weapons"))
 			"splash": show_splash()
 			_: show_title() if opt.has("screen") or opt.has("shot") else show_splash()
 	if opt.has("shot"): _shot(opt.shot, float(opt.get("wait", "1.5")), opt.get("panel", ""))
@@ -49,6 +50,10 @@ func _shot(path: String, wait: float, panel: String) -> void:
 	if run and panel == "boss":
 		var b := run.enemies.spawn(EnemyPool.T.BOSS, run.player_pos.x + 260.0, run.player_pos.y - 40.0, 30.0)
 		run.enemies.names[b] = run.stage.boss
+	if run and panel == "relic" and not run.relic_pickups().is_empty():
+		var rp: Dictionary = run.relic_pickups()[0]
+		run.player_pos = Vector2(rp.x - 300.0, rp.y + 60.0)
+		run.cam.position = run.player_pos
 	await get_tree().create_timer(wait).timeout
 	if run and panel == "levelup":
 		run.bot = false
@@ -158,6 +163,7 @@ func show_title() -> void:
 	var row2 := HBoxContainer.new()
 	row2.add_theme_constant_override("separation", 8)
 	col.add_child(row2)
+	row2.add_child(UIKit.button(Loc.t("collection"), show_collection, 240))
 	row2.add_child(UIKit.button(Loc.t("options"), show_options, 240))
 	row2.add_child(UIKit.button(Loc.t("credits"), show_credits, 240))
 	if not OS.has_feature("web"): row2.add_child(UIKit.button(Loc.t("quit"), func(): get_tree().quit(), 240))
@@ -300,6 +306,61 @@ func show_achievements() -> void:
 		var l := UIKit.label(("» " if got else "·  ") + a.name + "  —  " + a.desc, 19, UIKit.GOLD if got else UIKit.CREAM.darkened(0.35))
 		list.add_child(l)
 	UIKit.focus_first(v)
+
+# ---------- Colección ----------
+func show_collection(tab := "weapons") -> void:
+	var v := _clear()
+	var found: int = Save.data.unlocked.relics.size()
+	_header(v, Loc.t("collection"))
+	var tabs := HBoxContainer.new()
+	tabs.alignment = BoxContainer.ALIGNMENT_CENTER
+	tabs.add_theme_constant_override("separation", 8)
+	v.add_child(tabs)
+	for t in [["weapons", Loc.t("col_weapons")], ["unions", Loc.t("col_unions")], ["passives", Loc.t("col_passives")], ["relics", Loc.t("col_relics") + "  %d/%d" % [found, Data.relics.size()]]]:
+		var b := UIKit.button(t[1], show_collection.bind(t[0]), 250)
+		if t[0] == tab: b.modulate = UIKit.GOLD.lightened(0.4)
+		tabs.add_child(b)
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 8)
+	grid.add_theme_constant_override("v_separation", 8)
+	_scroll(v).add_child(grid)
+	var evolved: Array = Save.data.stats.evolved
+	var book := Save.is_unlocked("relics", "libro_de_montaje")
+	match tab:
+		"weapons":
+			for w in Data.weapon_list:
+				var avail: bool = w.source == "base" or Save.is_unlocked("weapons", w.id)
+				grid.add_child(_col_card(Data.icon_for(w.id), w.name, w.desc, avail))
+				var e: Dictionary = w.evolution
+				var known: bool = w.id in evolved
+				var req: String = Data.passives[e.requires].name if Data.passives.has(e.requires) else ""
+				var how := Loc.t("col_evo_req", [w.name, req]) if req != "" else ""
+				var desc: String = (e.desc + ("\n" if e.desc != "" else "") + how) if known or book else Loc.t("col_evo_hidden")
+				grid.add_child(_col_card(Data.icon_for(e.id), e.name if known or book else "???", desc, known, "★"))
+		"unions":
+			for u in Data.unions:
+				var known: bool = u.id in evolved
+				var parts: Array = []
+				for id in u.weapons + u.passives:
+					parts.append(Data.weapons[id].name if Data.weapons.has(id) else Data.passives.get(id, {}).get("name", id))
+				grid.add_child(_col_card(Data.icon_for(u.id), u.name if known or book else "???", u.desc + "\n" + " + ".join(parts) if known or book else Loc.t("col_union_hidden", [" + ".join(parts)]), known, "★★"))
+		"passives":
+			for p in Data.passive_list:
+				grid.add_child(_col_card(Data.icon_for(p.id), p.name, p.desc, true))
+		"relics":
+			for r in Data.relics:
+				var got := Save.is_unlocked("relics", r.id)
+				grid.add_child(_col_card(Data.icon_for(r.id), r.name if got else "???", r.unlocks if got else Loc.t("col_hint", [r.where]), got))
+	UIKit.focus_first(tabs)
+
+## One entry of the Colección: icon (a dark silhouette while undiscovered), name and text.
+func _col_card(icon: Texture2D, name: String, desc: String, known: bool, tag := "") -> Control:
+	var c := UIKit.card(icon, name, tag, desc, func(): pass, 600)
+	c.focus_mode = Control.FOCUS_NONE
+	if not known:
+		for n in c.find_children("*", "TextureRect", true, false): n.modulate = Color(0.05, 0.03, 0.08, 0.9)
+	return c
 
 # ---------- options ----------
 func show_options() -> void:
