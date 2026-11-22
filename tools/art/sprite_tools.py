@@ -39,7 +39,8 @@ def key(path, tol=90, speck=150, shadows=False, open_px=0):
     open_px: morphological opening that erases thin grid lines between frames."""
     im = np.array(Image.open(path).convert("RGB")).astype(int)
     border = np.concatenate([im[:5].reshape(-1, 3), im[-5:].reshape(-1, 3), im[:, :5].reshape(-1, 3), im[:, -5:].reshape(-1, 3)])
-    bright = border[border.sum(-1) > 250]  # ignore dark frame lines Gemini draws around the image
+    sums = border.sum(-1)
+    bright = border[(sums > 250) & (sums >= np.percentile(sums, 50))]  # ignore frame lines Gemini draws around the image
     bg = np.median(bright if len(bright) > len(border) // 4 else border, axis=0)
     dist = np.sqrt(((im - bg) ** 2).sum(-1))
     mag = (im[..., 0] > 150) & (im[..., 2] > 150) & (im[..., 1] < 130) & ((im[..., 0] + im[..., 2]) / 2 - im[..., 1] > 90)
@@ -121,6 +122,11 @@ def cmd_sheet(a):
                 edge = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
                 for e in edge:
                     cell[lab == e, 3] = 0
+                m = cell[..., 3] > 0
+                glab, gn = ndimage.label(ndimage.binary_dilation(m, iterations=a.merge))
+                if gn > 1:  # keep the figure, drop stray bits of the drawn frame
+                    big = np.argmax(ndimage.sum(m, glab, range(1, gn + 1))) + 1
+                    cell[(glab != big), 3] = 0
                 ys, xs = np.where(cell[..., 3] > 0)
                 if len(ys) >= a.minarea:
                     ps.append(((i, j), cell[ys.min():ys.max() + 1, xs.min():xs.max() + 1]))
