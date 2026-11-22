@@ -33,7 +33,7 @@ from PIL import Image, ImageEnhance, ImageFilter
 from scipy import ndimage
 
 
-def key(path, tol=90, speck=150, shadows=False, open_px=0):
+def key(path, tol=90, speck=150, shadows=False, open_px=0, erode=True):
     """RGBA with the background removed. The background is the median colour of the image border.
     shadows: also drop dark purple floor shadows Gemini paints under the feet.
     open_px: morphological opening that erases thin grid lines between frames."""
@@ -48,7 +48,8 @@ def key(path, tol=90, speck=150, shadows=False, open_px=0):
     if shadows:
         purple = (im[..., 2] > im[..., 1] + 35) & (im[..., 0] > im[..., 1] + 20) & (im.sum(-1) < 420)
         alpha[purple] = 0
-    alpha = np.array(Image.fromarray(alpha).filter(ImageFilter.MinFilter(3)))  # eat the 1-px fringe
+    if erode:
+        alpha = np.array(Image.fromarray(alpha).filter(ImageFilter.MinFilter(3)))  # eat the 1-px fringe
     if open_px:
         alpha = np.where(ndimage.binary_opening(alpha > 0, iterations=open_px), alpha, 0).astype(np.uint8)
     lab, n = ndimage.label(alpha > 0)
@@ -96,7 +97,7 @@ def strip(frames, height):
 
 
 def cmd_sheet(a):
-    rgba = key(a.img, tol=a.tol, shadows=a.shadows, open_px=a.open)
+    rgba = key(a.img, tol=a.tol, shadows=a.shadows, open_px=a.open, erode=not a.keep_thin)
     if a.inset:
         rgba[:a.inset] = 0; rgba[-a.inset:] = 0; rgba[:, :a.inset] = 0; rgba[:, -a.inset:] = 0
     if a.grid and a.grid_lines:
@@ -134,6 +135,10 @@ def cmd_sheet(a):
         ps = parts(rgba, minarea=a.minarea, merge=a.merge, by_row=a.by_row, row_gap=a.row_gap)
     if a.first:
         ps = ps[:a.first]
+    for r in (a.replace or "").split(","):
+        if r:  # a frame Gemini drew wrong (e.g. without the prop) takes the pose of another
+            i, j = (int(x) for x in r.split(":"))
+            ps[i] = ps[j]
     frames = [Image.fromarray(p[1]) for p in ps]
     if a.frames and len(frames) != a.frames:
         print(f"warning: found {len(frames)} figures, expected {a.frames} (try --inset or --minarea)")
@@ -238,6 +243,8 @@ def main():
     s.add_argument("--first", type=int, help="keep only the first N figures"); s.add_argument("--row-gap", type=int, default=250)
     s.add_argument("--grid-lines", action="store_true", help="with --grid: erase only the lines (figures may touch them)")
     s.add_argument("--tol", type=int, default=90, help="background colour tolerance (lower keeps pinks/purples)")
+    s.add_argument("--replace", help="I:J,... copy frame J over frame I (0-based)")
+    s.add_argument("--keep-thin", action="store_true", help="don't erode the edge (keeps 1-2 px swords, canes, wires)")
     s.add_argument("--merge", type=int, default=12, help="join pieces closer than this (px)")
     s.set_defaults(f=cmd_sheet)
     s = sub.add_parser("props"); s.add_argument("img"); s.add_argument("outdir"); s.add_argument("--names", required=True)
