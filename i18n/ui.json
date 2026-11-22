@@ -458,5 +458,21 @@
  "mod_locked": {
   "es": "Se desbloquea con: %s",
   "en": "Unlocked by: %s"
+ },
+ "guion_pick": {
+  "es": "Elige un Guion",
+  "en": "Pick a Script"
+ },
+ "guion_on": {
+  "es": "Guion: %s",
+  "en": "Script: %s"
+ },
+ "guion_verdict": {
+  "es": "¡La crítica ha hablado! Latas de premio",
+  "en": "The critics have spoken! Prize cans"
+ },
+ "col_guiones": {
+  "es": "Guiones",
+  "en": "Scripts"
  }
 }

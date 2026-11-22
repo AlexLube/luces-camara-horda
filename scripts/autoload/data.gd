@@ -63,7 +63,7 @@ func _make_union_weapons() -> void:
 		weapons[u.id] = w
 
 ## Taquilla bonus of each modifier (fraction), the ones that can be switched on, and what unlocks each.
-const MOD_BONUS := {"toma_rapida": 0.5, "fuera_de_plazo": 0.5, "sin_limite": 0.5, "negativo": 1.0, "imprevistos_de_rodaje": 0.25, "cine_mudo": 0.3}
+const MOD_BONUS := {"guiones": 0.0, "toma_rapida": 0.5, "fuera_de_plazo": 0.5, "sin_limite": 0.5, "negativo": 1.0, "imprevistos_de_rodaje": 0.25, "cine_mudo": 0.3}
 
 func modifier_ready(m: Dictionary) -> bool:
 	return MOD_BONUS.has(m.id)
@@ -73,6 +73,9 @@ func modifier_unlocked(m: Dictionary) -> bool:
 	for r in relics:
 		if r.name == m.relic: return Save.is_unlocked("relics", r.id)
 	return false
+
+func guion_icon(id: String) -> Texture2D:
+	return tex("res://assets/sprites/guiones/%s.png" % id)
 
 ## Relics hidden in a stage (their "where" is the stage name).
 func relics_at(stage: Dictionary) -> Array:

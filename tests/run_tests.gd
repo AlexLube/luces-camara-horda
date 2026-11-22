@@ -230,6 +230,23 @@ func t_modifiers() -> void:
 	ok(r.pickups.filter(func(p): return p.k == "chest").size() == chests_before + 1, "an Imprevisto ends with a lata")
 	r.queue_free()
 	await get_tree().process_frame
+	Save.data.unlocked.relics.append("baraja_del_guionista")
+	Save.data.mods_on = ["guiones"]
+	var r3 := new_run()
+	r3.step(0.05)
+	for k in 25: r3.step(0.05)
+	ok(r3.guiones.size() == 1 and r3.guiones[0] in Run.GUION_READY, "Guiones: a card is chosen at the start")
+	r3.guiones.clear()
+	r3.rebuild_stats()
+	var hp0: float = r3.stats.max_hp
+	var pw0: float = r3.stats.power
+	r3.pick_guion("g_v")
+	ok(absf(float(r3.stats.max_hp) - (hp0 - 0.2)) < 0.001 and absf(float(r3.stats.power) - (pw0 + 0.4)) < 0.001, "El Pacto con el Diablo: -20 % vida, +40 % poder")
+	r3.pick_guion("g_x")
+	ok(r3.weapon_cap(r3.weapons.list[0]) == 9, "La Secuela: one level more")
+	for g in Data.guiones: ok(ResourceLoader.exists("res://assets/sprites/guiones/%s.png" % g.id), "card art " + g.id)
+	r3.queue_free()
+	await get_tree().process_frame
 	Save.data.mods_on = ["negativo"]
 	var r2 := new_run()
 	ok(r2.has_mod("negativo") and r2._filter != null, "Negativo puts a filter over the world")

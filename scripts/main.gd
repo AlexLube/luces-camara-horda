@@ -63,6 +63,10 @@ func _shot(path: String, wait: float, panel: String) -> void:
 		run.pending_levels = 1
 		run.open_levelup()
 	elif run and panel == "pause": run.toggle_pause()
+	elif run and panel == "guion":
+		run.bot = false
+		run.guion_offers = 0
+		run.offer_guion()
 	elif run and panel == "results":
 		run.bot = false
 		run.finish(false)
@@ -345,8 +349,8 @@ func show_collection(tab := "weapons") -> void:
 	tabs.alignment = BoxContainer.ALIGNMENT_CENTER
 	tabs.add_theme_constant_override("separation", 8)
 	v.add_child(tabs)
-	for t in [["weapons", Loc.t("col_weapons")], ["unions", Loc.t("col_unions")], ["passives", Loc.t("col_passives")], ["relics", Loc.t("col_relics") + "  %d/%d" % [found, Data.relics.size()]]]:
-		var b := UIKit.button(t[1], show_collection.bind(t[0]), 250)
+	for t in [["weapons", Loc.t("col_weapons")], ["unions", Loc.t("col_unions")], ["passives", Loc.t("col_passives")], ["guiones", Loc.t("col_guiones")], ["relics", Loc.t("col_relics") + "  %d/%d" % [found, Data.relics.size()]]]:
+		var b := UIKit.button(t[1], show_collection.bind(t[0]), 200)
 		if t[0] == tab: b.modulate = UIKit.GOLD.lightened(0.4)
 		tabs.add_child(b)
 	var grid := GridContainer.new()
@@ -377,6 +381,14 @@ func show_collection(tab := "weapons") -> void:
 		"passives":
 			for p in Data.passive_list:
 				grid.add_child(_col_card(Data.icon_for(p.id), p.name, p.desc, true))
+		"guiones":
+			var deck := Save.is_unlocked("relics", "baraja_del_guionista")
+			for g in Data.guiones:
+				var playable: bool = g.id in Run.GUION_READY
+				var known: bool = deck and not g.cursed
+				var text: String = g.desc if known else (Loc.t("col_hint", [g.get("how", Data.relic_by_id.baraja_del_guionista.name)]))
+				if known and not playable: text += "  (" + Loc.t("mod_soon") + ")"
+				grid.add_child(_col_card(Data.guion_icon(g.id), g.name if known else "???", text, known, ("☠ " if g.cursed else "") + g.num))
 		"relics":
 			for r in Data.relics:
 				var got := Save.is_unlocked("relics", r.id)

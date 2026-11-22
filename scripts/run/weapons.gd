@@ -88,7 +88,7 @@ func update(dt: float) -> void:
 			"aura": _aura_tick(w, dt)
 			"cone":
 				if p.has("rotate"): w.state.ang += dt * float(p.rotate)
-		w.cd -= dt
+		w.cd -= dt * (1.35 if run.has_guion("g_iii") and run.move_dir.length() > 0.1 else 1.0)
 		if w.cd <= 0.0 and arch != "orbit":
 			w.cd = p.cooldown
 			_fire(w)

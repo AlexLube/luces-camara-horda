@@ -67,6 +67,10 @@ var event_t := 120.0                # Imprevistos de Rodaje: next event
 var event_name := ""
 var event_left := 0.0
 var _filter: ColorRect
+var guiones: Array = []             # Guion cards chosen this run (modifier «Guiones»)
+var guion_offers := 0
+var guion_t := 300.0                # El Juicio de la Crítica: next verdict
+const GUION_READY := ["g_i", "g_iii", "g_iv", "g_v", "g_x", "g_xi", "g_xii", "g_xiii", "g_xvi", "g_xvii", "g_xix", "g_xx"]
 var dmg_by_weapon := {}
 
 # --- world objects ---
@@ -112,7 +116,58 @@ func has_mod(id: String) -> bool:
 	return id in mods
 
 func weapon_cap(w: Dictionary) -> int:
-	return 99 if has_mod("sin_limite") and w.data.source != "union" else int(w.data.max_level)
+	if has_mod("sin_limite") and w.data.source != "union": return 99
+	return int(w.data.max_level) + (1 if has_guion("g_x") and w.data.source != "union" else 0)
+
+# ---------- Guiones (cards chosen at the start and after each boss) ----------
+func has_guion(id: String) -> bool:
+	return id in guiones
+
+func _guion_stats() -> Dictionary:
+	var e := {}
+	if has_guion("g_v"): e = {"max_hp": -0.2, "power": 0.4}
+	if has_guion("g_xi"): e.boss_damage = 0.5
+	if has_guion("g_xii"): e.revival = 1.0
+	if has_guion("g_iv"): e.power = float(e.get("power", 0.0)) + 0.1 + 0.6 * max(0.0, float(stats.get("speed", 1.0)) - 1.0)
+	return e
+
+## Damage multiplier that changes during the run (El Cliffhanger, La Estrella).
+func guion_damage() -> float:
+	var k := 1.0
+	if has_guion("g_xvi") and stats.has("hp_max"): k *= 1.0 + 0.6 * (1.0 - clampf(hp / float(stats.hp_max), 0.0, 1.0))
+	if has_guion("g_xix"): k *= 1.0 + kills * 0.0001
+	return k
+
+func offer_guion() -> void:
+	var pool: Array = GUION_READY.filter(func(id): return id not in guiones)
+	if pool.is_empty() or guion_offers >= 3: return
+	guion_offers += 1
+	pool.shuffle()
+	var opts: Array = []
+	for id in pool.slice(0, 3):
+		for g in Data.guiones:
+			if g.id == id: opts.append(g)
+	if bot:
+		pick_guion(opts[0].id)
+		return
+	state = "guion"
+	Sfx.play("chest", 0.9)
+	hud.show_guion(opts)
+
+func pick_guion(id: String) -> void:
+	guiones.append(id)
+	rebuild_stats()
+	if state == "guion":
+		state = "play"
+		hud.hide_panels()
+	announce(Loc.t("guion_on", [Data.guiones.filter(func(g): return g.id == id)[0].name]))
+
+## Explosion around the player (El Héroe Reticente on level-up).
+func blast(r: float, dmg: float) -> void:
+	for i in enemies.query_circle(player_pos.x, player_pos.y, r, _q):
+		damage_enemy(i, dmg, (Vector2(enemies.x[i], enemies.y[i]) - player_pos).normalized() * 300.0, null)
+	fx_ring(player_pos, r, Color("ff9a3c"))
+
 
 ## Extra Taquilla for the modifiers of this run (0.5 = +50 %).
 func mod_bonus() -> float:
@@ -254,7 +309,7 @@ func _load_sheets() -> void:
 # ---------- stats ----------
 func rebuild_stats() -> void:
 	var old_max: float = stats.get("hp_max", 0.0)
-	stats = Stats.build(character, passives, Save.clause_bonus(), level)
+	stats = Stats.build(character, passives, Save.clause_bonus(), level, _guion_stats())
 	if old_max > 0.0 and stats.hp_max > old_max: hp += stats.hp_max - old_max
 	hp = min(hp, stats.hp_max)
 	if weapons: weapons.recompute_all()
@@ -294,6 +349,7 @@ func block_bullets(at: Vector2, r: float) -> void:
 func damage_enemy(i: int, amount: float, kb: Vector2, w) -> void:
 	if enemies.alive[i] == 0: return
 	var t := enemies.type[i]
+	amount *= guion_damage()
 	var crit := randf() < float(stats.crit)
 	if crit: amount *= 2.0
 	if t == T.BOSS or t == T.GUEST or t == T.STAR: amount *= float(stats.boss_damage)
@@ -322,6 +378,8 @@ func kill(i: int, drops := true) -> void:
 		if d.has("chest"): pickups.append({"k": "chest", "x": at.x, "y": at.y, "boss": d.get("boss", false)})
 		if d.get("boss", false) or t == T.GUEST:
 			bosses_killed += 1
+			if has_guion("g_xiii"): pickups.append({"k": "chest", "x": at.x + 40.0, "y": at.y})
+			if has_mod("guiones") and t == T.BOSS: offer_guion()
 			shake = 0.5
 			Sfx.play("explode", 0.7)
 		if t == T.PRODUCTOR:
@@ -488,7 +546,7 @@ func record() -> Dictionary:
 
 # ---------- update ----------
 func _process(delta: float) -> void:
-	if state == "pause" or state == "levelup" or state == "chest":
+	if state == "pause" or state == "levelup" or state == "chest" or state == "guion":
 		queue_redraw()
 		return
 	if state == "over":
@@ -501,6 +559,15 @@ func _process(delta: float) -> void:
 func step(dt: float) -> void:
 	time += dt * (2.0 if has_mod("fuera_de_plazo") else 1.0)
 	if has_mod("imprevistos_de_rodaje"): _update_events(dt)
+	if has_mod("guiones"):
+		if guion_offers == 0 and time > 1.0: offer_guion()
+		if has_guion("g_xx"):
+			guion_t -= dt
+			if guion_t <= 0.0:   # El Juicio de la Crítica: a lata, better the more you killed
+				guion_t = 300.0
+				for k in 1 + int(kills >= 1000) + int(kills >= 3000):
+					pickups.append({"k": "chest", "x": player_pos.x + 90.0 * (k - 1), "y": player_pos.y - 110.0})
+				announce(Loc.t("guion_verdict"))
 	_hit_sfx_t -= dt
 	freeze_t = max(0.0, freeze_t - dt)
 	flash = max(0.0, flash - dt * 2.0)
@@ -636,6 +703,7 @@ func _update_pickups(dt: float) -> void:
 		xp -= xp_for(level)
 		level += 1
 		pending_levels += 1
+		if has_guion("g_i"): blast(160.0 + level * 4.0, 15.0 + level * 4.0)
 		rebuild_stats()
 		fx_ring(player_pos, 120.0, Color("f2b83b"))
 	if pending_levels > 0 and state == "play": open_levelup()
@@ -646,6 +714,7 @@ func _collect(p: Dictionary) -> void:
 			gem_count -= 1
 			if p == vip_gem: vip_gem = null
 			xp += float(p.v) * float(stats.growth)
+			if has_guion("g_xvii"): add_coins(0.04 * float(p.v))
 			Sfx.play("pickup", randf_range(1.0, 1.3))
 		"coin":
 			add_coins(float(p.v))

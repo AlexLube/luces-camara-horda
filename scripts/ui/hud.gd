@@ -205,6 +205,17 @@ func show_chest(got: Array, gold: int) -> void:
 	v.add_child(UIKit.button(Loc.t("continue"), run.close_chest))
 	UIKit.focus_first(v)
 
+## Choose one Guion card (modifier «Guiones»): at the start and after each boss.
+func show_guion(opts: Array) -> void:
+	hide_panels()
+	var v := UIKit.centered_panel(panel_root, Vector2(640, 0))
+	v.add_child(UIKit.title(Loc.t("guion_pick"), 42))
+	for g in opts:
+		var c := UIKit.card(Data.guion_icon(g.id), g.name, g.num, g.desc, run.pick_guion.bind(g.id), 600)
+		c.custom_minimum_size.y = 100
+		v.add_child(c)
+	UIKit.focus_first(v)
+
 func show_pause() -> void:
 	hide_panels()
 	var v := UIKit.centered_panel(panel_root, Vector2(560, 0))
