@@ -400,7 +400,7 @@
   "kind": "festival",
   "id": "reino_del_dragon",
   "minutes": 30,
-  "art": "forest"
+  "art": "dragon"
  },
  {
   "num": 32,
@@ -413,7 +413,7 @@
   "kind": "festival",
   "id": "torre_del_hechicero",
   "minutes": 30,
-  "art": "forest"
+  "art": "tower"
  },
  {
   "num": 33,
@@ -426,7 +426,7 @@
   "kind": "festival",
   "id": "mundo_de_plastilina",
   "minutes": 30,
-  "art": "forest"
+  "art": "clay"
  },
  {
   "num": 34,
@@ -439,6 +439,6 @@
   "kind": "festival",
   "id": "catedral_del_conde",
   "minutes": 30,
-  "art": "forest"
+  "art": "count"
  }
 ]
