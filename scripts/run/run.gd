@@ -70,7 +70,10 @@ var _filter: ColorRect
 var guiones: Array = []             # Guion cards chosen this run (modifier «Guiones»)
 var guion_offers := 0
 var guion_t := 300.0                # El Juicio de la Crítica: next verdict
-const GUION_READY := ["g_i", "g_iii", "g_iv", "g_v", "g_x", "g_xi", "g_xii", "g_xiii", "g_xvi", "g_xvii", "g_xix", "g_xx"]
+var montage_t := 0.0                # El Montaje de Entrenamiento: buff after picking a ticket
+var letters: Array = []             # Los Créditos Finales: letters falling on the horde
+var _bursting := false
+const GUION_READY := ["g_i", "g_ii", "g_vi", "g_vii", "g_viii", "g_xxi", "g_iii", "g_iv", "g_v", "g_x", "g_xi", "g_xii", "g_xiii", "g_xvi", "g_xvii", "g_xix", "g_xx"]
 var dmg_by_weapon := {}
 
 # --- world objects ---
@@ -128,6 +131,9 @@ func _guion_stats() -> Dictionary:
 	if has_guion("g_v"): e = {"max_hp": -0.2, "power": 0.4}
 	if has_guion("g_xi"): e.boss_damage = 0.5
 	if has_guion("g_xii"): e.revival = 1.0
+	if has_guion("g_vi"):
+		e.proj_speed = -0.3
+		e.power = float(e.get("power", 0.0)) + 0.15
 	if has_guion("g_iv"): e.power = float(e.get("power", 0.0)) + 0.1 + 0.6 * max(0.0, float(stats.get("speed", 1.0)) - 1.0)
 	return e
 
@@ -136,6 +142,7 @@ func guion_damage() -> float:
 	var k := 1.0
 	if has_guion("g_xvi") and stats.has("hp_max"): k *= 1.0 + 0.6 * (1.0 - clampf(hp / float(stats.hp_max), 0.0, 1.0))
 	if has_guion("g_xix"): k *= 1.0 + kills * 0.0001
+	if montage_t > 0.0: k *= 1.2
 	return k
 
 func offer_guion() -> void:
@@ -161,6 +168,27 @@ func pick_guion(id: String) -> void:
 		state = "play"
 		hud.hide_panels()
 	announce(Loc.t("guion_on", [Data.guiones.filter(func(g): return g.id == id)[0].name]))
+
+## Small explosion at a point (El Mentor, El Gran Discurso, Los Créditos Finales). Never chains.
+func burst(at: Vector2, r: float, dmg: float) -> void:
+	if _bursting: return
+	_bursting = true
+	for i in enemies.query_circle(at.x, at.y, r, _q):
+		damage_enemy(i, dmg, (Vector2(enemies.x[i], enemies.y[i]) - at).normalized() * 120.0, null)
+	_bursting = false
+	fx_ring(at, r, Color("ffb347"))
+
+func _update_guiones(dt: float) -> void:
+	montage_t = max(0.0, montage_t - dt)
+	if has_guion("g_vi"):   # Cámara Lenta: the horde near you moves at half speed
+		for i in enemies.query_circle(player_pos.x, player_pos.y, 170.0, _q): enemies.slow[i] = max(enemies.slow[i], 0.5)
+	if letters.is_empty(): return
+	var keep: Array = []
+	for l in letters:
+		l.t -= dt
+		if l.t <= 0.0: burst(Vector2(l.x, l.y), 55.0, 20.0 + level * 2.0)
+		else: keep.append(l)
+	letters = keep
 
 ## Explosion around the player (El Héroe Reticente on level-up).
 func blast(r: float, dmg: float) -> void:
@@ -352,6 +380,7 @@ func damage_enemy(i: int, amount: float, kb: Vector2, w) -> void:
 	amount *= guion_damage()
 	var crit := randf() < float(stats.crit)
 	if crit: amount *= 2.0
+	if crit and has_guion("g_viii") and not _bursting: burst(Vector2(enemies.x[i], enemies.y[i]), 70.0, amount * 0.4)
 	if t == T.BOSS or t == T.GUEST or t == T.STAR: amount *= float(stats.boss_damage)
 	enemies.hp[i] -= amount
 	enemies.flash[i] = 0.09
@@ -375,6 +404,8 @@ func kill(i: int, drops := true) -> void:
 		weapons.on_kill()
 		if float(stats.lifesteal) > 0.0: heal(float(stats.lifesteal) * 2.0)
 		if int(d.xp) > 0: drop_gem(at, float(d.xp))
+		if has_guion("g_xxi") and randf() < 0.06 and letters.size() < 40:
+			letters.append({"x": at.x + randf_range(-40, 40), "y": at.y + randf_range(-40, 40), "t": 0.7, "c": "ABCDEFGHIJKLMNOPRSTUVZ"[randi() % 22]})
 		if d.has("chest"): pickups.append({"k": "chest", "x": at.x, "y": at.y, "boss": d.get("boss", false)})
 		if d.get("boss", false) or t == T.GUEST:
 			bosses_killed += 1
@@ -561,6 +592,7 @@ func step(dt: float) -> void:
 	if has_mod("imprevistos_de_rodaje"): _update_events(dt)
 	if has_mod("guiones"):
 		if guion_offers == 0 and time > 1.0: offer_guion()
+		_update_guiones(dt)
 		if has_guion("g_xx"):
 			guion_t -= dt
 			if guion_t <= 0.0:   # El Juicio de la Crítica: a lata, better the more you killed
@@ -613,16 +645,19 @@ func _bot_dir() -> Vector2:
 	for i in enemies.query_circle(player_pos.x, player_pos.y, 110.0, _q):
 		var d := player_pos - Vector2(enemies.x[i], enemies.y[i])
 		push += d.normalized() / max(16.0, d.length())
-	if push.length() > 0.004: return push.normalized()
 	var best = null
 	var bd := 380.0 * 380.0
 	for p in pickups:
 		if p.k == "food" and hp > stats.hp_max * 0.7: continue
 		var dd := Vector2(p.x, p.y).distance_squared_to(player_pos)
+		if p.get("vip", false) or p.k == "chest": dd *= 0.1   # worth a detour
 		if dd < bd:
 			bd = dd
 			best = p
-	if best != null: return (Vector2(best.x, best.y) - player_pos).normalized()
+	var to_best := (Vector2(best.x, best.y) - player_pos).normalized() if best != null else Vector2.ZERO
+	# dodge first, but keep drifting towards tickets so the bot levels up inside a big horde
+	if push.length() > 0.004: return (push.normalized() + to_best * 0.55).normalized()
+	if best != null: return to_best
 	var e := enemies.nearest(player_pos.x, player_pos.y, 900.0)
 	if e >= 0:
 		var to := Vector2(enemies.x[e], enemies.y[e]) - player_pos
@@ -715,6 +750,7 @@ func _collect(p: Dictionary) -> void:
 			if p == vip_gem: vip_gem = null
 			xp += float(p.v) * float(stats.growth)
 			if has_guion("g_xvii"): add_coins(0.04 * float(p.v))
+			if has_guion("g_vii"): montage_t = 2.5
 			Sfx.play("pickup", randf_range(1.0, 1.3))
 		"coin":
 			add_coins(float(p.v))
@@ -850,6 +886,8 @@ func _draw() -> void:
 			var s := tx.get_size() * (0.6 if p.k in ["magnet", "cut", "freeze"] else 1.0)
 			var bob := sin(time * 4.0 + p.x) * 2.0 if p.k != "xp" else 0.0
 			draw_texture_rect(tx, Rect2(Vector2(p.x, p.y + bob) - s / 2.0, s), false)
+	for l in letters:   # Los Créditos Finales
+		draw_string(font, Vector2(l.x - 8.0, l.y - l.t * 260.0), l.c, HORIZONTAL_ALIGNMENT_LEFT, -1, 22, Color("f2b83b"))
 	# corpses
 	for c in corpses: _draw_corpse(c)
 	# y-sorted: props, enemies, player

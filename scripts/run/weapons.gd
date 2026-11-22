@@ -250,6 +250,7 @@ func _update_shots(dt: float) -> void:
 			if s.boomerang and not s.back:
 				s.back = true; s.life = 3.0; s.hits.clear()
 			elif p.has("splash") and not s.boomerang: _splash(w, Vector2(s.x, s.y))
+			elif run.has_guion("g_ii") and not s.boomerang: run.burst(Vector2(s.x, s.y), 50.0, float(p.damage) * 0.5)
 			if not (s.boomerang and s.back and s.life > 0.0): continue
 		if s.boomerang and s.back and Vector2(s.x, s.y).distance_to(pl) < 24.0: continue
 		var dead := false

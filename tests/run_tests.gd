@@ -245,6 +245,14 @@ func t_modifiers() -> void:
 	r3.pick_guion("g_x")
 	ok(r3.weapon_cap(r3.weapons.list[0]) == 9, "La Secuela: one level more")
 	for g in Data.guiones: ok(ResourceLoader.exists("res://assets/sprites/guiones/%s.png" % g.id), "card art " + g.id)
+	r3.guiones = Run.GUION_READY.duplicate()
+	r3.guion_offers = 3
+	r3.rebuild_stats()
+	var t0 := Time.get_ticks_msec()
+	while r3.time < 240.0:
+		r3.step(0.05)
+		r3.hp = max(r3.hp, 50.0)
+	ok(r3.kills > 50 and r3.state != "over", "4 min with every Guion at once (%d kills, %d ms)" % [r3.kills, Time.get_ticks_msec() - t0])
 	r3.queue_free()
 	await get_tree().process_frame
 	Save.data.mods_on = ["negativo"]
