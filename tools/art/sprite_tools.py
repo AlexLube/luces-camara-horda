@@ -8,8 +8,9 @@ Gemini draws on a flat magenta (#FF00FF) or plain background. This tool:
   4. scales the strip to the target frame height the game expects.
 
 Commands
-  sheet  IMG OUT.png --height 84 [--frames 8] [--inset 0] [--by-row]
-         animation strip; --frames checks the count; --inset trims cell borders Gemini sometimes draws
+  sheet  IMG OUT.png --height 84 [--frames 8] [--inset 0] [--by-row] [--grid 2x4] [--first 8]
+         animation strip; --frames checks the count; --inset trims cell borders Gemini sometimes draws;
+         --grid RxC erases the cell lines Gemini draws between frames; --first N keeps only the first N figures
   props  IMG OUTDIR --names tree:170,bush:80,stump:56
          cut separate props, each scaled to its height in pixels
   ground IMG OUT.jpg [--size 256] [--crop 512] [--brightness 1.0] [--seam]
@@ -38,7 +39,8 @@ def key(path, tol=90, speck=150, shadows=False, open_px=0):
     open_px: morphological opening that erases thin grid lines between frames."""
     im = np.array(Image.open(path).convert("RGB")).astype(int)
     border = np.concatenate([im[:5].reshape(-1, 3), im[-5:].reshape(-1, 3), im[:, :5].reshape(-1, 3), im[:, -5:].reshape(-1, 3)])
-    bg = np.median(border, axis=0)
+    bright = border[border.sum(-1) > 250]  # ignore dark frame lines Gemini draws around the image
+    bg = np.median(bright if len(bright) > len(border) // 4 else border, axis=0)
     dist = np.sqrt(((im - bg) ** 2).sum(-1))
     mag = (im[..., 0] > 150) & (im[..., 2] > 150) & (im[..., 1] < 130) & ((im[..., 0] + im[..., 2]) / 2 - im[..., 1] > 90)
     alpha = np.where((dist < tol) | mag, 0, 255).astype(np.uint8)
@@ -93,10 +95,39 @@ def strip(frames, height):
 
 
 def cmd_sheet(a):
-    rgba = key(a.img, shadows=a.shadows, open_px=a.open)
+    rgba = key(a.img, tol=a.tol, shadows=a.shadows, open_px=a.open)
     if a.inset:
         rgba[:a.inset] = 0; rgba[-a.inset:] = 0; rgba[:, :a.inset] = 0; rgba[:, -a.inset:] = 0
-    ps = parts(rgba, minarea=a.minarea, by_row=a.by_row)
+    if a.grid and a.grid_lines:
+        # thin lines between frames that figures may touch: erase bands on the lines, then find figures
+        r, c = (int(x) for x in a.grid.lower().split("x"))
+        H, W = rgba.shape[:2]
+        b = a.grid_px
+        for k in range(1, r):
+            y = k * H // r; rgba[max(0, y - b):y + b, :, 3] = 0
+        for k in range(1, c):
+            x = k * W // c; rgba[:, max(0, x - b):x + b, 3] = 0
+        ps = parts(rgba, minarea=a.minarea, merge=a.merge, by_row=True, row_gap=a.row_gap)
+    elif a.grid:
+        # one frame per drawn cell: drop the cell border and anything still touching it (grid lines)
+        r, c = (int(x) for x in a.grid.lower().split("x"))
+        H, W = rgba.shape[:2]
+        b = a.grid_px
+        ps = []
+        for i in range(r):
+            for j in range(c):
+                cell = rgba[i * H // r + b:(i + 1) * H // r - b, j * W // c + b:(j + 1) * W // c - b].copy()
+                lab, n = ndimage.label(cell[..., 3] > 0)
+                edge = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+                for e in edge:
+                    cell[lab == e, 3] = 0
+                ys, xs = np.where(cell[..., 3] > 0)
+                if len(ys) >= a.minarea:
+                    ps.append(((i, j), cell[ys.min():ys.max() + 1, xs.min():xs.max() + 1]))
+    else:
+        ps = parts(rgba, minarea=a.minarea, merge=a.merge, by_row=a.by_row, row_gap=a.row_gap)
+    if a.first:
+        ps = ps[:a.first]
     frames = [Image.fromarray(p[1]) for p in ps]
     if a.frames and len(frames) != a.frames:
         print(f"warning: found {len(frames)} figures, expected {a.frames} (try --inset or --minarea)")
@@ -114,8 +145,8 @@ def cmd_sheet(a):
 
 
 def cmd_props(a):
-    rgba = key(a.img)
-    ps = parts(rgba, minarea=a.minarea, by_row=True)
+    rgba = key(a.img, shadows=a.shadows)
+    ps = sorted(parts(rgba, minarea=a.minarea), key=lambda o: o[0][1])  # one row, left to right
     names = [x.split(":") for x in a.names.split(",")]
     os.makedirs(a.outdir, exist_ok=True)
     for (pos, sub), (name, h) in zip(ps, names):
@@ -197,9 +228,14 @@ def main():
     s.add_argument("--frames", type=int); s.add_argument("--inset", type=int, default=0); s.add_argument("--minarea", type=int, default=1500)
     s.add_argument("--by-row", action="store_true"); s.add_argument("--shadows", action="store_true", help="remove floor shadows")
     s.add_argument("--open", type=int, default=0, help="erase thin grid lines (px)"); s.add_argument("--idle", help="also write a 4-frame idle strip here")
+    s.add_argument("--grid", help="RxC cell grid drawn by Gemini, e.g. 2x4"); s.add_argument("--grid-px", type=int, default=7)
+    s.add_argument("--first", type=int, help="keep only the first N figures"); s.add_argument("--row-gap", type=int, default=250)
+    s.add_argument("--grid-lines", action="store_true", help="with --grid: erase only the lines (figures may touch them)")
+    s.add_argument("--tol", type=int, default=90, help="background colour tolerance (lower keeps pinks/purples)")
+    s.add_argument("--merge", type=int, default=12, help="join pieces closer than this (px)")
     s.set_defaults(f=cmd_sheet)
     s = sub.add_parser("props"); s.add_argument("img"); s.add_argument("outdir"); s.add_argument("--names", required=True)
-    s.add_argument("--minarea", type=int, default=1500); s.set_defaults(f=cmd_props)
+    s.add_argument("--minarea", type=int, default=1500); s.add_argument("--shadows", action="store_true"); s.set_defaults(f=cmd_props)
     s = sub.add_parser("ground"); s.add_argument("img"); s.add_argument("out"); s.add_argument("--size", type=int, default=256)
     s.add_argument("--crop", type=int, default=512); s.add_argument("--brightness", type=float, default=1.0); s.add_argument("--seam", action="store_true")
     s.set_defaults(f=cmd_ground)
