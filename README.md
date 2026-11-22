@@ -2,7 +2,7 @@
 
 *Lights, Camera, Horde!* en inglés. Antes se llamaba «Reel Survivors» (nombre de trabajo).
 
-Survivor-like de cine de Macacaweke Studio. Este proyecto es la **base técnica** (fases P0.5 y B1–B15 del plan de desarrollo): todo el juego funciona de principio a fin con los 5 platós que ya tienen arte, y el resto del catálogo (54 armas, 26 objetos, 96 personajes, 34 platós, 22 cláusulas, 134 premios) está cargado como datos.
+Survivor-like de cine de Macacaweke Studio. Este proyecto es la **base técnica** (fases P0.5 y B1–B15 del plan de desarrollo): todo el juego funciona de principio a fin con los 12 platós que ya tienen arte, y el resto del catálogo (54 armas, 26 objetos, 96 personajes, 34 platós, 22 cláusulas, 134 premios) está cargado como datos.
 
 - Motor: **Godot 4.3**, renderizador *Compatibility* (funciona en PC, Mac, móvil y web).
 - Abrir: Godot 4.3 → *Importar* → `project.godot` → F5.
@@ -42,6 +42,6 @@ Survivor-like de cine de Macacaweke Studio. Este proyecto es la **base técnica*
 
 ## Pendiente para fases siguientes
 
-- Arte de los 29 platós restantes (usan el bosque de forma provisional), iconos de las 54 armas y animaciones de jefes.
+- Arte de los 22 platós restantes (usan el bosque de forma provisional) y animaciones de ataque de jefes.
 - Música (fase 5), reliquias, guiones y modificadores (fase 3), equilibrado fino (Q).
 - Exportar: las plantillas de exportación se instalan desde el editor (*Editor → Gestionar plantillas*); los presets de Windows, Mac, Linux y Web ya están en `export_presets.cfg`.

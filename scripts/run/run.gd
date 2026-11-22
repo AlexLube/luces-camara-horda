@@ -146,6 +146,7 @@ func _load_sheets() -> void:
 	sheets.enemy = _sheet(base + "enemy.png", int(art.enemy))
 	sheets.tank = _sheet(base + "tank.png", int(art.tank))
 	sheets.boss = _sheet(base + "boss.png", int(art.boss))
+	sheets.productor = _sheet("res://assets/sprites/productor/productor.png", 6)
 	if art.has("die"): sheets.die = _sheet(base + art.die + ".png", int(art.die_frames))
 	var cdir := "res://assets/sprites/characters/%s/" % character.get("id", "")
 	sheets.run = _sheet(cdir + "run.png", 8) if ResourceLoader.exists(cdir + "run.png") else _sheet("res://assets/sprites/player/player_run.png", 8)

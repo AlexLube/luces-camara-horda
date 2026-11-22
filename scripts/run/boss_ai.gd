@@ -12,6 +12,13 @@ const SETS := {
 	"station": ["spiral", "charge"],   # coloso de cromo: espiral láser y embestida
 	"noir": ["fan", "summon"],         # el capo: abanico de balas y matones
 	"jungle": ["slam", "spiral"],      # el ídolo: pisotón y espiral de dardos
+	"broadway": ["fan", "ring"],       # la diva: abanico de notas y círculo de focos
+	"kaiju": ["slam", "charge"],       # El Lagarto Atómico: pisotón y embestida
+	"drivein": ["spiral", "summon"],   # El Cerebro de Venus: espiral de rayos y hombres-pez
+	"school": ["charge", "fan"],       # El Enmascarado del Baile: embestida y tijeretazo en abanico
+	"galleon": ["ring", "charge"],     # El Capitán Sin Barba: andanada en círculo y abordaje
+	"mansion": ["summon", "spiral"],   # La Viuda del Ático: fantasmas y espiral de lamentos
+	"lab": ["ring", "slam"],           # La Novia Galvánica: descarga en círculo y golpe eléctrico
 }
 const ALL := ["charge", "slam", "ring", "summon", "spiral", "fan"]
 

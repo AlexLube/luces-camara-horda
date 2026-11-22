@@ -15,7 +15,7 @@ const TYPES := {
 	T.STAR:      {"sprite": "tank",  "hp": 300.0, "sp": 50.0,  "dmg": 18.0, "r": 28.0, "sc": 0.95, "xp": 30, "tint": Color(1, 1, 1), "spot": true, "chest": 3},
 	T.GUEST:     {"sprite": "tank",  "hp": 900.0, "sp": 56.0,  "dmg": 22.0, "r": 32.0, "sc": 1.15, "xp": 50, "tint": Color(1, 0.95, 0.8), "spot": true, "chest": 3},
 	T.BOSS:      {"sprite": "boss",  "hp": 4000.0,"sp": 64.0,  "dmg": 25.0, "r": 46.0, "sc": 1.0,  "xp": 100,"tint": Color(1, 1, 1), "chest": 5, "boss": true},
-	T.PRODUCTOR: {"sprite": "boss",  "hp": 655350.0,"sp": 70.0,"dmg": 99999.0,"r": 60.0,"sc": 1.45,"xp": 0, "tint": Color(0.35, 0.3, 0.25), "boss": true},
+	T.PRODUCTOR: {"sprite": "productor", "hp": 655350.0,"sp": 70.0,"dmg": 99999.0,"r": 60.0,"sc": 1.3,"xp": 0, "tint": Color(1, 1, 1), "boss": true},
 	T.WALL:      {"sprite": "enemy", "hp": 12.0,  "sp": 50.0,  "dmg": 8.0,  "r": 16.0, "sc": 0.82, "xp": 1,  "tint": Color(0.95, 0.95, 0.8)},
 }
 const MAX := 1600

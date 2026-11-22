@@ -51,6 +51,18 @@ func t_data() -> void:
 		ok(int(w.max_level) == 8 and w.levels.size() == 7, "8 levels: " + w.id)
 		ok(Data.passives.has(w.evolution.requires) or w.evolution.requires == "", "evolution passive exists: " + w.id)
 	for s in Data.stages: ok(Data.art_sets.has(s.get("art", "")), "art set for " + s.id)
+	var with_art := 0
+	for k in Data.art_sets:
+		var a: Dictionary = Data.art_sets[k]
+		var base := "res://assets/sprites/stages/%s/" % k
+		var files := ["enemy.png", "tank.png", "boss.png", "ground.jpg", str(a.get("land", "")) + ".png"]
+		for p in a.props: files.append(str(p[0]) + ".png")
+		var all_ok := true
+		for f in files: all_ok = all_ok and ResourceLoader.exists(base + f)
+		ok(all_ok, "all sprites for art set " + k)
+	for s in Data.stages: if s.get("art", "forest") != "forest" or s.num == 1: with_art += 1
+	ok(with_art >= 12, "stages 1-12 have their own art (%d)" % with_art)
+	ok(ResourceLoader.exists("res://assets/sprites/productor/productor.png"), "productor sprite")
 	for id in weapons_and_items(): ok(Data.icon_for(id) != null, "icon for " + id)
 	for c in Data.characters.slice(0, 12): ok(ResourceLoader.exists("res://assets/sprites/characters/%s/run.png" % c.id) or c.id == "max_rios", "sprite for " + c.id)
 	for k in Loc._s: ok(Loc._s[k].has("en") and Loc._s[k].has("es"), "ES/EN string " + k)

@@ -75,7 +75,7 @@
   "kind": "bonus",
   "minutes": 20,
   "id": "broadway_en_llamas",
-  "art": "forest"
+  "art": "broadway"
  },
  {
   "num": 7,
@@ -88,7 +88,7 @@
   "kind": "bonus",
   "minutes": 20,
   "id": "metropolis_kaiju",
-  "art": "forest"
+  "art": "kaiju"
  },
  {
   "num": 8,
@@ -101,7 +101,7 @@
   "kind": "bonus",
   "minutes": 20,
   "id": "autocine_abandonado",
-  "art": "forest"
+  "art": "drivein"
  },
  {
   "num": 9,
@@ -114,7 +114,7 @@
   "kind": "bonus",
   "minutes": 20,
   "id": "instituto_de_medianoche",
-  "art": "forest"
+  "art": "school"
  },
  {
   "num": 10,
@@ -127,7 +127,7 @@
   "kind": "bonus",
   "minutes": 20,
   "id": "galeon_maldito",
-  "art": "forest"
+  "art": "galleon"
  },
  {
   "num": 11,
@@ -140,7 +140,7 @@
   "kind": "bonus",
   "minutes": 20,
   "id": "mansion_victoriana",
-  "art": "forest"
+  "art": "mansion"
  },
  {
   "num": 12,
@@ -153,7 +153,7 @@
   "kind": "bonus",
   "minutes": 20,
   "id": "laboratorio_del_doctor_loco",
-  "art": "forest"
+  "art": "lab"
  },
  {
   "num": 13,
