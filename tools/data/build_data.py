@@ -212,8 +212,10 @@ for r in [ [c.strip() for c in l.split(' | ')] for l in L[idx[1]+1:] if ' | ' in
     stages.append({'num':int(r[0]),'name':r[1],'genre':r[2],'mechanic':r[3],'enemies':r[4],'boss':r[5],'unlock':r[6],'kind':'bonus','minutes':20})
 for r in table('# | Escenario | Género | Regla'):
     stages.append({'num':int(r[0]),'name':r[1],'genre':r[2],'mechanic':r[3],'enemies':r[4],'boss':r[5],'unlock':r[6],'kind':'desafio'})
+# special stages have no boss in the catalogue; these are the ones their art was drawn for
+SPECIAL_BOSS = {22: 'El Crítico Implacable', 23: 'El Director de Casting'}
 for r in table('# | Escenario | Tipo'):
-    stages.append({'num':int(r[0]),'name':r[1],'genre':r[2],'mechanic':r[3],'enemies':'','boss':'','unlock':r[4],'kind':'especial'})
+    stages.append({'num':int(r[0]),'name':r[1],'genre':r[2],'mechanic':r[3],'enemies':'','boss':SPECIAL_BOSS.get(int(r[0]),''),'unlock':r[4],'kind':'especial'})
 for r in table('# | Escenario | Descripción'):
     stages.append({'num':int(r[0]),'name':r[1],'genre':'Oculto','mechanic':r[2],'enemies':'','boss':'El Montador','unlock':r[3],'kind':'oculto'})
 for r in table('# | Escenario | Festival'):
@@ -221,7 +223,7 @@ for r in table('# | Escenario | Festival'):
 for s in stages:
     s['id'] = slug(s['name']); s.setdefault('minutes', 30)
 # art sets that exist today (from the web prototype); others fall back to the forest set
-ART = {1:'forest',2:'west',3:'station',4:'noir',5:'jungle',6:'broadway',7:'kaiju',8:'drivein',9:'school',10:'galleon',11:'mansion',12:'lab',13:'silent',14:'colosseum',15:'wasteland',16:'dojo',17:'train',18:'telenovela'}
+ART = {1:'forest',2:'west',3:'station',4:'noir',5:'jungle',6:'broadway',7:'kaiju',8:'drivein',9:'school',10:'galleon',11:'mansion',12:'lab',13:'silent',14:'colosseum',15:'wasteland',16:'dojo',17:'train',18:'telenovela',19:'toon',20:'bunker',21:'neon',22:'carpet',23:'casting',24:'montage'}
 for s in stages: s['art'] = ART.get(s['num'], 'forest')
 out['stages'] = stages
 
