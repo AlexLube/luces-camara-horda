@@ -322,7 +322,7 @@
   "kind": "festival",
   "id": "aldea_de_los_espiritus",
   "minutes": 30,
-  "art": "forest"
+  "art": "spirit"
  },
  {
   "num": 26,
@@ -335,7 +335,7 @@
   "kind": "festival",
   "id": "hotel_del_pasillo_infinito",
   "minutes": 30,
-  "art": "forest"
+  "art": "hotel"
  },
  {
   "num": 27,
@@ -348,7 +348,7 @@
   "kind": "festival",
   "id": "isla_prehistorica",
   "minutes": 30,
-  "art": "forest"
+  "art": "dino"
  },
  {
   "num": 28,
@@ -361,7 +361,7 @@
   "kind": "festival",
   "id": "fin_del_mundo_s_a",
   "minutes": 30,
-  "art": "forest"
+  "art": "doom"
  },
  {
   "num": 29,
@@ -374,7 +374,7 @@
   "kind": "festival",
   "id": "playa_del_desembarco",
   "minutes": 30,
-  "art": "forest"
+  "art": "beach"
  },
  {
   "num": 30,
@@ -387,7 +387,7 @@
   "kind": "festival",
   "id": "jungla_del_helicoptero",
   "minutes": 30,
-  "art": "forest"
+  "art": "heli"
  },
  {
   "num": 31,
