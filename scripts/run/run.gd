@@ -73,7 +73,7 @@ var guion_t := 300.0                # El Juicio de la Crítica: next verdict
 var montage_t := 0.0                # El Montaje de Entrenamiento: buff after picking a ticket
 var letters: Array = []             # Los Créditos Finales: letters falling on the horde
 var _bursting := false
-const GUION_READY := ["g_i", "g_ii", "g_vi", "g_vii", "g_viii", "g_xxi", "g_iii", "g_iv", "g_v", "g_x", "g_xi", "g_xii", "g_xiii", "g_xvi", "g_xvii", "g_xix", "g_xx"]
+const GUION_READY := ["g_i", "g_ii", "g_vi", "g_vii", "g_viii", "g_xviii", "g_xxi", "g_iii", "g_iv", "g_v", "g_x", "g_xi", "g_xii", "g_xiii", "g_xvi", "g_xvii", "g_xix", "g_xx"]
 var dmg_by_weapon := {}
 
 # --- world objects ---
@@ -182,6 +182,9 @@ func _update_guiones(dt: float) -> void:
 	montage_t = max(0.0, montage_t - dt)
 	if has_guion("g_vi"):   # Cámara Lenta: the horde near you moves at half speed
 		for i in enemies.query_circle(player_pos.x, player_pos.y, 170.0, _q): enemies.slow[i] = max(enemies.slow[i], 0.5)
+	if has_guion("g_xviii"):   # Noche Americana: the horde far away loses track of you
+		for i in enemies.n:
+			if enemies.alive[i] == 1 and absf(enemies.x[i] - player_pos.x) + absf(enemies.y[i] - player_pos.y) > 700.0: enemies.slow[i] = max(enemies.slow[i], 0.6)
 	if letters.is_empty(): return
 	var keep: Array = []
 	for l in letters:
@@ -379,7 +382,7 @@ func damage_enemy(i: int, amount: float, kb: Vector2, w) -> void:
 	var t := enemies.type[i]
 	amount *= guion_damage()
 	var crit := randf() < float(stats.crit)
-	if crit: amount *= 2.0
+	if crit: amount *= 2.6 if has_guion("g_xviii") else 2.0
 	if crit and has_guion("g_viii") and not _bursting: burst(Vector2(enemies.x[i], enemies.y[i]), 70.0, amount * 0.4)
 	if t == T.BOSS or t == T.GUEST or t == T.STAR: amount *= float(stats.boss_damage)
 	enemies.hp[i] -= amount
