@@ -1343,5 +1343,185 @@
    ]
   ],
   "land_scale": 1.0
+ },
+ "dragon": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "gold",
+    0.25
+   ],
+   [
+    "banner",
+    0.25
+   ],
+   [
+    "catapult",
+    0.25
+   ],
+   [
+    "haycart",
+    0.25
+   ]
+  ],
+  "land": "tower",
+  "glow": "ffc040",
+  "fog": "8a7a60",
+  "blood": "b02020",
+  "start": [
+   [
+    "tower",
+    230,
+    -160
+   ],
+   [
+    "banner",
+    -250,
+    -170
+   ],
+   [
+    "haycart",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "tower": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "cauldron",
+    0.25
+   ],
+   [
+    "lectern",
+    0.25
+   ],
+   [
+    "candles",
+    0.25
+   ],
+   [
+    "crystal",
+    0.25
+   ]
+  ],
+  "land": "shelf",
+  "glow": "a060ff",
+  "fog": "40306a",
+  "blood": "80c040",
+  "start": [
+   [
+    "shelf",
+    230,
+    -160
+   ],
+   [
+    "cauldron",
+    -250,
+    -170
+   ],
+   [
+    "candles",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "clay": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "house",
+    0.25
+   ],
+   [
+    "mushroom",
+    0.25
+   ],
+   [
+    "cloud",
+    0.25
+   ],
+   [
+    "snowman",
+    0.25
+   ]
+  ],
+  "land": "tree",
+  "glow": "ffe070",
+  "fog": "a0b0d0",
+  "blood": "e04040",
+  "start": [
+   [
+    "tree",
+    230,
+    -160
+   ],
+   [
+    "mushroom",
+    -250,
+    -170
+   ],
+   [
+    "snowman",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "count": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "coffin",
+    0.25
+   ],
+   [
+    "pew",
+    0.25
+   ],
+   [
+    "candelabra",
+    0.25
+   ],
+   [
+    "angel",
+    0.25
+   ]
+  ],
+  "land": "organ",
+  "glow": "ff9040",
+  "fog": "302040",
+  "blood": "a01010",
+  "start": [
+   [
+    "organ",
+    230,
+    -160
+   ],
+   [
+    "coffin",
+    -250,
+    -170
+   ],
+   [
+    "candelabra",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
  }
 }
