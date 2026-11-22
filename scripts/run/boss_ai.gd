@@ -25,6 +25,12 @@ const SETS := {
 	"dojo": ["fan", "slam"],           # el gran maestro: abanico de shuriken y golpe de palma
 	"train": ["spiral", "summon"],     # el revisor sin rostro: espiral de billetes y pasajeros
 	"telenovela": ["ring", "fan"],     # la villana del culebrón: círculo de lágrimas y bofetadas
+	"toon": ["summon", "slam"],        # el animador borrado: dibuja secuaces y yunque que cae
+	"bunker": ["ring", "spiral"],      # el genio del volcán: láseres en círculo y espiral
+	"neon": ["spiral", "fan"],         # la IA del rascacielos: espiral de datos y abanico láser
+	"carpet": ["fan", "summon"],       # el crítico implacable: abanico de tinta y paparazzi
+	"casting": ["summon", "ring"],     # el director de casting: aspirantes y grito de megáfono
+	"montage": ["charge", "spiral"],   # el montador: corte en embestida y espiral de fotogramas
 }
 const ALL := ["charge", "slam", "ring", "summon", "spiral", "fan"]
 

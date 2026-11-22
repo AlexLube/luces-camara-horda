@@ -807,5 +807,275 @@
    ]
   ],
   "land_scale": 1.0
+ },
+ "toon": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "anvil",
+    0.25
+   ],
+   [
+    "dynamite",
+    0.25
+   ],
+   [
+    "hydrant",
+    0.25
+   ],
+   [
+    "pie",
+    0.25
+   ]
+  ],
+  "land": "tree",
+  "glow": "fff080",
+  "fog": "a0d0ff",
+  "blood": "ffffff",
+  "start": [
+   [
+    "tree",
+    230,
+    -160
+   ],
+   [
+    "hydrant",
+    -250,
+    -170
+   ],
+   [
+    "pie",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "bunker": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "console",
+    0.25
+   ],
+   [
+    "missile",
+    0.25
+   ],
+   [
+    "barrels",
+    0.25
+   ],
+   [
+    "globe",
+    0.25
+   ]
+  ],
+  "land": "radar",
+  "glow": "ff5040",
+  "fog": "8090a0",
+  "blood": "ff6050",
+  "start": [
+   [
+    "radar",
+    230,
+    -160
+   ],
+   [
+    "console",
+    -250,
+    -170
+   ],
+   [
+    "barrels",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "neon": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "vending",
+    0.25
+   ],
+   [
+    "bins",
+    0.25
+   ],
+   [
+    "bike",
+    0.25
+   ],
+   [
+    "holo",
+    0.25
+   ]
+  ],
+  "land": "neonsign",
+  "glow": "40f0ff",
+  "fog": "a060c0",
+  "blood": "40ffd0",
+  "start": [
+   [
+    "neonsign",
+    230,
+    -170
+   ],
+   [
+    "vending",
+    -250,
+    -170
+   ],
+   [
+    "bins",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "carpet": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "rope",
+    0.25
+   ],
+   [
+    "spotlight",
+    0.25
+   ],
+   [
+    "star",
+    0.25
+   ],
+   [
+    "photocall",
+    0.25
+   ]
+  ],
+  "land": "limo",
+  "glow": "ffd860",
+  "fog": "c08080",
+  "blood": "ffe080",
+  "start": [
+   [
+    "limo",
+    230,
+    -150
+   ],
+   [
+    "photocall",
+    -250,
+    -170
+   ],
+   [
+    "rope",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "casting": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "chair",
+    0.25
+   ],
+   [
+    "rack",
+    0.25
+   ],
+   [
+    "clapper",
+    0.25
+   ],
+   [
+    "lamp",
+    0.25
+   ]
+  ],
+  "land": "mirror",
+  "glow": "fff0c0",
+  "fog": "c0b090",
+  "blood": "ff8060",
+  "start": [
+   [
+    "mirror",
+    230,
+    -160
+   ],
+   [
+    "rack",
+    -250,
+    -170
+   ],
+   [
+    "chair",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "montage": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "reel",
+    0.25
+   ],
+   [
+    "bin",
+    0.25
+   ],
+   [
+    "scissors",
+    0.25
+   ],
+   [
+    "desklamp",
+    0.25
+   ]
+  ],
+  "land": "moviola",
+  "glow": "ffc070",
+  "fog": "907060",
+  "blood": "e0c090",
+  "start": [
+   [
+    "moviola",
+    230,
+    -160
+   ],
+   [
+    "reel",
+    -250,
+    -170
+   ],
+   [
+    "bin",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
  }
 }

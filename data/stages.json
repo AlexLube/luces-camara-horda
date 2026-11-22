@@ -244,7 +244,7 @@
   "kind": "desafio",
   "id": "barrio_animado",
   "minutes": 30,
-  "art": "forest"
+  "art": "toon"
  },
  {
   "num": 20,
@@ -257,7 +257,7 @@
   "kind": "desafio",
   "id": "bunker_rojo",
   "minutes": 30,
-  "art": "forest"
+  "art": "bunker"
  },
  {
   "num": 21,
@@ -270,7 +270,7 @@
   "kind": "desafio",
   "id": "neon_2099",
   "minutes": 30,
-  "art": "forest"
+  "art": "neon"
  },
  {
   "num": 22,
@@ -278,12 +278,12 @@
   "genre": "Boss rush",
   "mechanic": "Un desfile de jefes uno tras otro mientras los paparazzi ciegan con flashes",
   "enemies": "",
-  "boss": "",
+  "boss": "El Crítico Implacable",
   "unlock": "Derrotar a 10 jefes distintos",
   "kind": "especial",
   "id": "la_alfombra_roja",
   "minutes": 30,
-  "art": "forest"
+  "art": "carpet"
  },
  {
   "num": 23,
@@ -291,12 +291,12 @@
   "genre": "Práctica",
   "mechanic": "Eliges armas, pasivos y nivel libremente para probar combinaciones",
   "enemies": "",
-  "boss": "",
+  "boss": "El Director de Casting",
   "unlock": "Desbloquear 20 armas",
   "kind": "especial",
   "id": "sala_de_casting",
   "minutes": 30,
-  "art": "forest"
+  "art": "casting"
  },
  {
   "num": 24,
@@ -309,7 +309,7 @@
   "kind": "oculto",
   "id": "la_sala_de_montaje",
   "minutes": 30,
-  "art": "forest"
+  "art": "montage"
  },
  {
   "num": 25,
