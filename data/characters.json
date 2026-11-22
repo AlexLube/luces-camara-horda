@@ -1,0 +1,1218 @@
+[
+ {
+  "id": "max_rios",
+  "num": 1,
+  "name": "Max Ríos",
+  "title": "El Doble de Acción",
+  "weapon": "claqueta",
+  "bonus": "+20 % vida máx. y +1 armadura",
+  "unlock": "Inicial",
+  "group": "base",
+  "mods": {
+   "max_hp": 0.2,
+   "armor": 1.0
+  }
+ },
+ {
+  "id": "vera_lys",
+  "num": 2,
+  "name": "Vera Lys",
+  "title": "La Scream Queen",
+  "weapon": "pertiga_de_sonido",
+  "bonus": "Su grito aturde 1 s a los cercanos cada 10 niveles",
+  "unlock": "Inicial",
+  "group": "base",
+  "mods": {}
+ },
+ {
+  "id": "dolly_ray",
+  "num": 3,
+  "name": "Dolly Ray",
+  "title": "La Cowgirl",
+  "weapon": "revolver_de_atrezo",
+  "bonus": "−10 % enfriamiento",
+  "unlock": "Inicial",
+  "group": "base",
+  "mods": {
+   "cooldown": -0.1
+  }
+ },
+ {
+  "id": "hugo_brandt",
+  "num": 4,
+  "name": "Hugo Brandt",
+  "title": "El Director",
+  "weapon": "megafono_del_director",
+  "bonus": "+20 % duración",
+  "unlock": "Sobrevivir 10 min",
+  "group": "base",
+  "mods": {
+   "duration": 0.2
+  }
+ },
+ {
+  "id": "otto_pirotecnia",
+  "num": 5,
+  "name": "Otto Pirotecnia",
+  "title": "El Mago de Efectos",
+  "weapon": "rayo_de_efectos_especiales",
+  "bonus": "+10 % área",
+  "unlock": "Evolucionar un arma",
+  "group": "base",
+  "mods": {
+   "area": 0.1
+  }
+ },
+ {
+  "id": "margot_pell",
+  "num": 6,
+  "name": "Margot Pell",
+  "title": "La Crítica",
+  "weapon": "estatuilla_dorada",
+  "bonus": "+50 % daño a jefes",
+  "unlock": "Derrotar 20 jefes",
+  "group": "base",
+  "mods": {
+   "boss_damage": 0.5
+  }
+ },
+ {
+  "id": "rex_calloway",
+  "num": 7,
+  "name": "Rex Calloway",
+  "title": "El Explorador",
+  "weapon": "latigo_del_explorador",
+  "bonus": "+10 % suerte",
+  "unlock": "Llegar al Templo de la Selva",
+  "group": "base",
+  "mods": {
+   "luck": 0.1
+  }
+ },
+ {
+  "id": "bruno_hacha",
+  "num": 8,
+  "name": "Bruno Hacha",
+  "title": "El Campista Superviviente",
+  "weapon": "motosierra_de_atrezo",
+  "bonus": "+0,5 vida/s",
+  "unlock": "15 min en el Bosque de la Cabaña",
+  "group": "base",
+  "mods": {
+   "regen": 0.5
+  }
+ },
+ {
+  "id": "lina_nova",
+  "num": 9,
+  "name": "Lina Nova",
+  "title": "La Astronauta",
+  "weapon": "pistola_de_rayos",
+  "bonus": "+20 % velocidad de proyectil",
+  "unlock": "Llegar a la Estación Orbital",
+  "group": "base",
+  "mods": {
+   "proj_speed": 0.2
+  }
+ },
+ {
+  "id": "sam_shade",
+  "num": 10,
+  "name": "Sam Shade",
+  "title": "El Detective Noir",
+  "weapon": "camara_de_flash",
+  "bonus": "+1 cantidad cada 20 niveles",
+  "unlock": "Encontrar la gabardina en Ciudad Noir",
+  "group": "base",
+  "mods": {
+   "amount": 1.0
+  }
+ },
+ {
+  "id": "pippo",
+  "num": 11,
+  "name": "Pippo",
+  "title": "El Payaso de Cine Mudo",
+  "weapon": "tarta_de_crema",
+  "bonus": "+20 % velocidad, −20 % vida",
+  "unlock": "10 min en el Archivo de Cine Mudo",
+  "group": "base",
+  "mods": {
+   "speed": 0.2,
+   "max_hp": -0.2
+  }
+ },
+ {
+  "id": "coco_banana",
+  "num": 12,
+  "name": "Coco Banana",
+  "title": "La Comediante",
+  "weapon": "piel_de_platano",
+  "bonus": "+10 % suerte y velocidad",
+  "unlock": "Hacer tropezar a 1.000 enemigos",
+  "group": "base",
+  "mods": {
+   "luck": 0.1
+  }
+ },
+ {
+  "id": "kenji_arata",
+  "num": 13,
+  "name": "Kenji Arata",
+  "title": "El Maestro de Artes Marciales",
+  "weapon": "nunchakus_de_goma",
+  "bonus": "+1 % poder por cada 100 kills (máx. +50 %)",
+  "unlock": "Llegar al Dojo de la Montaña",
+  "group": "base",
+  "mods": {
+   "power": 0.01
+  }
+ },
+ {
+  "id": "luz_marina",
+  "num": 14,
+  "name": "Luz Marina",
+  "title": "La Bailarina",
+  "weapon": "baston_de_claque",
+  "bonus": "+10 % velocidad de movimiento",
+  "unlock": "Completar Broadway en Llamas",
+  "group": "base",
+  "mods": {
+   "speed": 0.1
+  }
+ },
+ {
+  "id": "bella_sombrilla",
+  "num": 15,
+  "name": "Bella Sombrilla",
+  "title": "La Estrella del Musical Clásico",
+  "weapon": "paraguas_de_musical",
+  "bonus": "Bloquea 1 proyectil cada 5 s",
+  "unlock": "Evolucionar el Paraguas",
+  "group": "base",
+  "mods": {}
+ },
+ {
+  "id": "padre_gil",
+  "num": 16,
+  "name": "Padre Gil",
+  "title": "El Exorcista",
+  "weapon": "crucifijo_de_utileria",
+  "bonus": "+30 % daño a no-muertos",
+  "unlock": "20 min en la Mansión Victoriana",
+  "group": "base",
+  "mods": {}
+ },
+ {
+  "id": "dra_volta",
+  "num": 17,
+  "name": "Dra. Volta",
+  "title": "La Científica Loca",
+  "weapon": "maquina_de_humo",
+  "bonus": "+10 % área y duración",
+  "unlock": "Completar el Laboratorio",
+  "group": "base",
+  "mods": {
+   "area": 0.1
+  }
+ },
+ {
+  "id": "jack_nitro",
+  "num": 18,
+  "name": "Jack Nitro",
+  "title": "El Piloto de Persecuciones",
+  "weapon": "coche_de_persecucion",
+  "bonus": "+20 % velocidad",
+  "unlock": "Recorrer 50 km en total",
+  "group": "base",
+  "mods": {
+   "speed": 0.2
+  }
+ },
+ {
+  "id": "tex_lariat",
+  "num": 19,
+  "name": "Tex Lariat",
+  "title": "El Vaquero Veterano",
+  "weapon": "lazo_del_vaquero",
+  "bonus": "+50 % atracción",
+  "unlock": "Completar el Pueblo Polvoriento",
+  "group": "base",
+  "mods": {
+   "magnet": 0.5
+  }
+ },
+ {
+  "id": "mona_glam",
+  "num": 20,
+  "name": "Mona Glam",
+  "title": "La Diva de Hollywood",
+  "weapon": "ovacion_del_publico",
+  "bonus": "+20 % Taquilla",
+  "unlock": "Acumular 50.000 de Taquilla",
+  "group": "base",
+  "mods": {
+   "greed": 0.2
+  }
+ },
+ {
+  "id": "cutter_vega",
+  "num": 21,
+  "name": "Cutter Vega",
+  "title": "La Montadora",
+  "weapon": "tijeras_de_montaje",
+  "bonus": "+1 cantidad",
+  "unlock": "Encontrar unas tijeras en la Ciudad Noir",
+  "group": "base",
+  "mods": {
+   "amount": 1.0
+  }
+ },
+ {
+  "id": "sully_pluma",
+  "num": 22,
+  "name": "Sully Pluma",
+  "title": "El Guionista",
+  "weapon": "guion_volador",
+  "bonus": "+10 % experiencia",
+  "unlock": "Leer 5 guiones (cofres) en una partida",
+  "group": "base",
+  "mods": {
+   "growth": 0.1
+  }
+ },
+ {
+  "id": "grip_martinez",
+  "num": 23,
+  "name": "Grip Martínez",
+  "title": "El Maquinista",
+  "weapon": "grua_de_camara",
+  "bonus": "+2 armadura, −10 % velocidad",
+  "unlock": "Mover 100 cajas del escenario",
+  "group": "base",
+  "mods": {
+   "armor": 2.0,
+   "speed": -0.1
+  }
+ },
+ {
+  "id": "dron_e",
+  "num": 24,
+  "name": "Dron-E",
+  "title": "El Robot de Rodaje",
+  "weapon": "dron_de_rodaje",
+  "bonus": "Inmune a congelación y lentitud",
+  "unlock": "Completar la Estación Orbital",
+  "group": "base",
+  "mods": {}
+ },
+ {
+  "id": "gafas_moreno",
+  "num": 25,
+  "name": "Gafas Moreno",
+  "title": "El Proyeccionista",
+  "weapon": "proyector_portatil",
+  "bonus": "+15 % duración",
+  "unlock": "Llegar al Autocine Abandonado",
+  "group": "base",
+  "mods": {
+   "duration": 0.15
+  }
+ },
+ {
+  "id": "bill_mecha",
+  "num": 26,
+  "name": "Bill Mecha",
+  "title": "El Artificiero",
+  "weapon": "dinamita_de_mecha",
+  "bonus": "+15 % área, −10 % vida",
+  "unlock": "Destruir 500 barriles",
+  "group": "base",
+  "mods": {
+   "area": 0.15,
+   "max_hp": -0.1
+  }
+ },
+ {
+  "id": "ana_ventura",
+  "num": 27,
+  "name": "Ana Ventura",
+  "title": "La Directora de Fotografía",
+  "weapon": "foco",
+  "bonus": "+10 % área y poder de luz",
+  "unlock": "Evolucionar el Foco",
+  "group": "base",
+  "mods": {
+   "area": 0.1
+  }
+ },
+ {
+  "id": "rosi_maiz",
+  "num": 28,
+  "name": "Rosi Maíz",
+  "title": "La Vendedora de Palomitas",
+  "weapon": "palomitas",
+  "bonus": "+30 % Taquilla",
+  "unlock": "Recoger 1.000 monedas",
+  "group": "base",
+  "mods": {
+   "greed": 0.3
+  }
+ },
+ {
+  "id": "archie_polvo",
+  "num": 29,
+  "name": "Archie Polvo",
+  "title": "El Archivista de Filmoteca",
+  "weapon": "bobina_rota",
+  "bonus": "+20 % duración",
+  "unlock": "Encontrar 3 bobinas perdidas",
+  "group": "base",
+  "mods": {
+   "duration": 0.2
+  }
+ },
+ {
+  "id": "nina_flash",
+  "num": 30,
+  "name": "Nina Flash",
+  "title": "La Paparazzi",
+  "weapon": "confeti_de_estreno",
+  "bonus": "+10 % velocidad y suerte",
+  "unlock": "Llegar a La Alfombra Roja",
+  "group": "base",
+  "mods": {
+   "speed": 0.1
+  }
+ },
+ {
+  "id": "ventura_torres",
+  "num": 31,
+  "name": "Ventura Torres",
+  "title": "La Técnica de Efectos Atmosféricos",
+  "weapon": "ventilador_gigante",
+  "bonus": "+20 % área de empuje",
+  "unlock": "Completar Metrópolis Kaiju",
+  "group": "base",
+  "mods": {
+   "area": 0.2
+  }
+ },
+ {
+  "id": "carmilla_roja",
+  "num": 32,
+  "name": "Carmilla Roja",
+  "title": "La Maquilladora de Terror",
+  "weapon": "sangre_falsa",
+  "bonus": "+0,3 vida/s",
+  "unlock": "Completar el Instituto de Medianoche",
+  "group": "base",
+  "mods": {
+   "regen": 0.3
+  }
+ },
+ {
+  "id": "kid_piston",
+  "num": 33,
+  "name": "Kid Pistón",
+  "title": "El Niño Prodigio",
+  "weapon": "yunque_de_dibujos",
+  "bonus": "+5 % crecimiento por nivel",
+  "unlock": "Llegar al Barrio Animado",
+  "group": "base",
+  "mods": {
+   "growth": 0.05
+  }
+ },
+ {
+  "id": "sir_reginald",
+  "num": 34,
+  "name": "Sir Reginald",
+  "title": "El Actor Shakespeariano",
+  "weapon": "rollo_de_pelicula",
+  "bonus": "+30 % vida máx.",
+  "unlock": "Sobrevivir 30 min con Max",
+  "group": "base",
+  "mods": {
+   "max_hp": 0.3
+  }
+ },
+ {
+  "id": "kai_zen",
+  "num": 35,
+  "name": "Kai Zen",
+  "title": "El Caballero Espacial",
+  "weapon": "sable_de_neon",
+  "bonus": "+10 % poder y velocidad de ataque",
+  "unlock": "Evolucionar la Pistola de Rayos",
+  "group": "base",
+  "mods": {
+   "power": 0.1
+  }
+ },
+ {
+  "id": "toni_nitrato",
+  "num": 36,
+  "name": "Toni Nitrato",
+  "title": "El Bombero de Plató",
+  "weapon": "celuloide_en_llamas",
+  "bonus": "Inmune a quemaduras",
+  "unlock": "Apagar 100 incendios",
+  "group": "base",
+  "mods": {}
+ },
+ {
+  "id": "toro_mendez",
+  "num": 37,
+  "name": "Toro Méndez",
+  "title": "El Boxeador",
+  "weapon": "nunchakus_de_goma",
+  "bonus": "+30 % poder, −10 % velocidad",
+  "unlock": "Completar el Coliseo de Péplum",
+  "group": "base",
+  "mods": {
+   "power": 0.3,
+   "speed": -0.1
+  }
+ },
+ {
+  "id": "sor_melodia",
+  "num": 38,
+  "name": "Sor Melodía",
+  "title": "La Monja Cantante",
+  "weapon": "crucifijo_de_utileria",
+  "bonus": "+1 revivir",
+  "unlock": "Completar Broadway en Llamas sin recibir daño 5 min",
+  "group": "base",
+  "mods": {
+   "revival": 1.0
+  }
+ },
+ {
+  "id": "agente_gris",
+  "num": 39,
+  "name": "Agente Gris",
+  "title": "El Hombre de Negro",
+  "weapon": "pistola_de_rayos",
+  "bonus": "+1 cantidad, −10 % área",
+  "unlock": "Completar el Búnker Rojo",
+  "group": "base",
+  "mods": {
+   "amount": 1.0,
+   "area": -0.1
+  }
+ },
+ {
+  "id": "abuela_rosa",
+  "num": 40,
+  "name": "Abuela Rosa",
+  "title": "La Abuela de Comedia Familiar",
+  "weapon": "tarta_de_crema",
+  "bonus": "+0,5 vida/s y +20 % catering",
+  "unlock": "Comer 300 donuts",
+  "group": "base",
+  "mods": {
+   "regen": 0.5
+  }
+ },
+ {
+  "id": "el_extra",
+  "num": 41,
+  "name": "El Extra",
+  "title": "Un figurante sin nombre",
+  "weapon": "random",
+  "bonus": "Sin bonificaciones, pero +100 % experiencia",
+  "unlock": "Morir en los 10 primeros segundos 3 veces",
+  "group": "secreto",
+  "mods": {
+   "growth": 1.0
+  }
+ },
+ {
+  "id": "el_montador",
+  "num": 42,
+  "name": "El Montador",
+  "title": "Jefe de la Sala de Montaje",
+  "weapon": "tijeras_de_montaje",
+  "bonus": "Cada 60 s se teletransporta (\"corta\") a otra zona",
+  "unlock": "Derrotarlo en la Sala de Montaje",
+  "group": "secreto",
+  "mods": {}
+ },
+ {
+  "id": "el_productor_ejecutivo",
+  "num": 43,
+  "name": "El Productor Ejecutivo",
+  "title": "El enemigo final",
+  "weapon": "random",
+  "bonus": "Daño enorme, muy lento",
+  "unlock": "Derrotarlo al minuto 31",
+  "group": "secreto",
+  "mods": {}
+ },
+ {
+  "id": "claqui",
+  "num": 44,
+  "name": "Claqui",
+  "title": "Una claqueta con ojos",
+  "weapon": "claqueta",
+  "bonus": "Cada golpe cuenta como \"toma\" y suma daño",
+  "unlock": "Código de claqueta",
+  "group": "secreto",
+  "mods": {}
+ },
+ {
+  "id": "michi_del_estudio",
+  "num": 45,
+  "name": "Michi del Estudio",
+  "title": "El gato que vive en el plató",
+  "weapon": "random",
+  "bonus": "Atrae todas las entradas de la pantalla",
+  "unlock": "Acariciarlo 10 veces en el menú",
+  "group": "secreto",
+  "mods": {}
+ },
+ {
+  "id": "el_doble_del_doble",
+  "num": 46,
+  "name": "El Doble del Doble",
+  "title": "Copia barata de Max",
+  "weapon": "claqueta",
+  "bonus": "Copia las estadísticas del personaje anterior",
+  "unlock": "Completar 10 partidas con Max",
+  "group": "secreto",
+  "mods": {}
+ },
+ {
+  "id": "el_cinefilo",
+  "num": 47,
+  "name": "El Cinéfilo",
+  "title": "Sabe todo de cine",
+  "weapon": "random",
+  "bonus": "Los cofres siempre revelan evoluciones disponibles",
+  "unlock": "Completar el Catálogo (bestiario)",
+  "group": "secreto",
+  "mods": {}
+ },
+ {
+  "id": "fotograma_0",
+  "num": 48,
+  "name": "Fotograma 0",
+  "title": "Un error de película",
+  "weapon": "random",
+  "bonus": "Sus estadísticas cambian cada minuto",
+  "unlock": "Encontrar la bobina 0 en la Sala de Montaje",
+  "group": "secreto",
+  "mods": {}
+ },
+ {
+  "id": "yuki",
+  "num": 49,
+  "name": "Yuki",
+  "title": "la Niña Fantasma",
+  "weapon": "cabello_maldito",
+  "weapon_name": "Cabello Maldito",
+  "bonus": "",
+  "unlock": "Festival del Miedo Oriental",
+  "group": "Festival del Miedo Oriental",
+  "mods": {}
+ },
+ {
+  "id": "daisuke",
+  "num": 50,
+  "name": "Daisuke",
+  "title": "el Cazador de Espíritus",
+  "weapon": "talisman_de_papel",
+  "weapon_name": "Talismán de Papel",
+  "bonus": "",
+  "unlock": "Festival del Miedo Oriental",
+  "group": "Festival del Miedo Oriental",
+  "mods": {}
+ },
+ {
+  "id": "la_recepcionista_insomne",
+  "num": 51,
+  "name": "La Recepcionista Insomne",
+  "title": "",
+  "weapon": "cabello_maldito",
+  "weapon_name": "Llave del 404",
+  "bonus": "",
+  "unlock": "Festival del Miedo Oriental",
+  "group": "Festival del Miedo Oriental",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "hana",
+  "num": 52,
+  "name": "Hana",
+  "title": "la Estudiante Maldita",
+  "weapon": "talisman_de_papel",
+  "weapon_name": "Cinta de Vídeo",
+  "bonus": "",
+  "unlock": "Festival del Miedo Oriental",
+  "group": "Festival del Miedo Oriental",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_monje_del_templo",
+  "num": 53,
+  "name": "El Monje del Templo",
+  "title": "",
+  "weapon": "cinta_de_video_maldita",
+  "weapon_name": "Campana",
+  "bonus": "",
+  "unlock": "Festival del Miedo Oriental",
+  "group": "Festival del Miedo Oriental",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "rin",
+  "num": 54,
+  "name": "Rin",
+  "title": "la Kitsune",
+  "weapon": "cabello_maldito",
+  "weapon_name": "Fuego Fatuo",
+  "bonus": "",
+  "unlock": "Festival del Miedo Oriental",
+  "group": "Festival del Miedo Oriental",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_taxista_nocturno",
+  "num": 55,
+  "name": "El Taxista Nocturno",
+  "title": "",
+  "weapon": "talisman_de_papel",
+  "weapon_name": "Faros",
+  "bonus": "",
+  "unlock": "Festival del Miedo Oriental",
+  "group": "Festival del Miedo Oriental",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "abuela_kuchi",
+  "num": 56,
+  "name": "Abuela Kuchi",
+  "title": "",
+  "weapon": "cinta_de_video_maldita",
+  "weapon_name": "Tijeras Rituales",
+  "bonus": "",
+  "unlock": "Festival del Miedo Oriental",
+  "group": "Festival del Miedo Oriental",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "dra_fosil",
+  "num": 57,
+  "name": "Dra. Fosil",
+  "title": "la Paleontóloga",
+  "weapon": "dardos_tranquilizantes",
+  "weapon_name": "Pincel de Excavar",
+  "bonus": "",
+  "unlock": "Festival Blockbuster",
+  "group": "Festival Blockbuster",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "rocco",
+  "num": 58,
+  "name": "Rocco",
+  "title": "el Guarda del Parque",
+  "weapon": "dardos_tranquilizantes",
+  "weapon_name": "Dardos Tranquilizantes",
+  "bonus": "",
+  "unlock": "Festival Blockbuster",
+  "group": "Festival Blockbuster",
+  "mods": {}
+ },
+ {
+  "id": "comandante_steel",
+  "num": 59,
+  "name": "Comandante Steel",
+  "title": "el Presidente Héroe",
+  "weapon": "rayo_de_tormenta",
+  "weapon_name": "Discurso",
+  "bonus": "",
+  "unlock": "Festival Blockbuster",
+  "group": "Festival Blockbuster",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "skye",
+  "num": 60,
+  "name": "Skye",
+  "title": "la Científica del Clima",
+  "weapon": "rayo_de_tormenta",
+  "weapon_name": "Rayo de Tormenta",
+  "bonus": "",
+  "unlock": "Festival Blockbuster",
+  "group": "Festival Blockbuster",
+  "mods": {}
+ },
+ {
+  "id": "hank",
+  "num": 61,
+  "name": "Hank",
+  "title": "el Perforador",
+  "weapon": "taladro_de_perforacion",
+  "weapon_name": "Taladro",
+  "bonus": "",
+  "unlock": "Festival Blockbuster",
+  "group": "Festival Blockbuster",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "la_nina_perdida",
+  "num": 62,
+  "name": "La Niña Perdida",
+  "title": "",
+  "weapon": "dardos_tranquilizantes",
+  "weapon_name": "Globo",
+  "bonus": "",
+  "unlock": "Festival Blockbuster",
+  "group": "Festival Blockbuster",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_superviviente_con_perro",
+  "num": 63,
+  "name": "El Superviviente con Perro",
+  "title": "",
+  "weapon": "rayo_de_tormenta",
+  "weapon_name": "Ladrido",
+  "bonus": "",
+  "unlock": "Festival Blockbuster",
+  "group": "Festival Blockbuster",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "raptor_cria",
+  "num": 64,
+  "name": "Raptor Cría",
+  "title": "mascota",
+  "weapon": "taladro_de_perforacion",
+  "weapon_name": "Mordisco",
+  "bonus": "",
+  "unlock": "Festival Blockbuster",
+  "group": "Festival Blockbuster",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "sargento_rocas",
+  "num": 65,
+  "name": "Sargento Rocas",
+  "title": "el Veterano",
+  "weapon": "granadas",
+  "weapon_name": "Granadas",
+  "bonus": "",
+  "unlock": "Festival Bélico",
+  "group": "Festival Bélico",
+  "mods": {}
+ },
+ {
+  "id": "cabo_luna",
+  "num": 66,
+  "name": "Cabo Luna",
+  "title": "la Francotiradora",
+  "weapon": "rifle_de_mira",
+  "weapon_name": "Rifle de Mira",
+  "bonus": "",
+  "unlock": "Festival Bélico",
+  "group": "Festival Bélico",
+  "mods": {}
+ },
+ {
+  "id": "doc_garza",
+  "num": 67,
+  "name": "Doc Garza",
+  "title": "el Médico de Campaña",
+  "weapon": "granadas",
+  "weapon_name": "Botiquín",
+  "bonus": "",
+  "unlock": "Festival Bélico",
+  "group": "Festival Bélico",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "radio_pepe",
+  "num": 68,
+  "name": "Radio Pepe",
+  "title": "el Operador",
+  "weapon": "llamada_de_artilleria",
+  "weapon_name": "Llamada de Artillería",
+  "bonus": "",
+  "unlock": "Festival Bélico",
+  "group": "Festival Bélico",
+  "mods": {}
+ },
+ {
+  "id": "el_piloto_derribado",
+  "num": 69,
+  "name": "El Piloto Derribado",
+  "title": "",
+  "weapon": "rifle_de_mira",
+  "weapon_name": "Bengala",
+  "bonus": "",
+  "unlock": "Festival Bélico",
+  "group": "Festival Bélico",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "la_corresponsal",
+  "num": 70,
+  "name": "La Corresponsal",
+  "title": "",
+  "weapon": "llamada_de_artilleria",
+  "weapon_name": "Cámara de Guerra",
+  "bonus": "",
+  "unlock": "Festival Bélico",
+  "group": "Festival Bélico",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_soldado_perdido",
+  "num": 71,
+  "name": "El Soldado Perdido",
+  "title": "",
+  "weapon": "granadas",
+  "weapon_name": "Bayoneta",
+  "bonus": "",
+  "unlock": "Festival Bélico",
+  "group": "Festival Bélico",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "coronel_bigotes",
+  "num": 72,
+  "name": "Coronel Bigotes",
+  "title": "",
+  "weapon": "rifle_de_mira",
+  "weapon_name": "Mapa Táctico",
+  "bonus": "",
+  "unlock": "Festival Bélico",
+  "group": "Festival Bélico",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "brann",
+  "num": 73,
+  "name": "Brann",
+  "title": "el Bárbaro",
+  "weapon": "hacha_doble",
+  "weapon_name": "Hacha Doble",
+  "bonus": "",
+  "unlock": "Festival de Fantasía Épica",
+  "group": "Festival de Fantasía Épica",
+  "mods": {}
+ },
+ {
+  "id": "elowen",
+  "num": 74,
+  "name": "Elowen",
+  "title": "la Arquera del Bosque",
+  "weapon": "arco_largo",
+  "weapon_name": "Arco Largo",
+  "bonus": "",
+  "unlock": "Festival de Fantasía Épica",
+  "group": "Festival de Fantasía Épica",
+  "mods": {}
+ },
+ {
+  "id": "thorgrim",
+  "num": 75,
+  "name": "Thorgrim",
+  "title": "el Herrero Enano",
+  "weapon": "baculo_del_peregrino",
+  "weapon_name": "Martillo",
+  "bonus": "",
+  "unlock": "Festival de Fantasía Épica",
+  "group": "Festival de Fantasía Épica",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "melisandra",
+  "num": 76,
+  "name": "Melisandra",
+  "title": "la Hechicera",
+  "weapon": "hacha_doble",
+  "weapon_name": "Orbe Arcano",
+  "bonus": "",
+  "unlock": "Festival de Fantasía Épica",
+  "group": "Festival de Fantasía Épica",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_mediano_ladron",
+  "num": 77,
+  "name": "El Mediano Ladrón",
+  "title": "",
+  "weapon": "arco_largo",
+  "weapon_name": "Daga Corta",
+  "bonus": "",
+  "unlock": "Festival de Fantasía Épica",
+  "group": "Festival de Fantasía Épica",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "sir_pomposo",
+  "num": 78,
+  "name": "Sir Pomposo",
+  "title": "el Caballero",
+  "weapon": "baculo_del_peregrino",
+  "weapon_name": "Lanza",
+  "bonus": "",
+  "unlock": "Festival de Fantasía Épica",
+  "group": "Festival de Fantasía Épica",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "la_bruja_del_pantano",
+  "num": 79,
+  "name": "La Bruja del Pantano",
+  "title": "",
+  "weapon": "hacha_doble",
+  "weapon_name": "Caldero",
+  "bonus": "",
+  "unlock": "Festival de Fantasía Épica",
+  "group": "Festival de Fantasía Épica",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_mago_errante",
+  "num": 80,
+  "name": "El Mago Errante",
+  "title": "",
+  "weapon": "baculo_del_peregrino",
+  "weapon_name": "Báculo del Peregrino",
+  "bonus": "",
+  "unlock": "Festival de Fantasía Épica",
+  "group": "Festival de Fantasía Épica",
+  "mods": {}
+ },
+ {
+  "id": "plasticin",
+  "num": 81,
+  "name": "Plasticín",
+  "title": "el Hombre de Plastilina",
+  "weapon": "bola_de_arcilla",
+  "weapon_name": "Bola de Arcilla",
+  "bonus": "",
+  "unlock": "Festival Stop-Motion",
+  "group": "Festival Stop-Motion",
+  "mods": {}
+ },
+ {
+  "id": "botones",
+  "num": 82,
+  "name": "Botones",
+  "title": "la Muñeca de Trapo",
+  "weapon": "agujas_de_costura",
+  "weapon_name": "Aguja",
+  "bonus": "",
+  "unlock": "Festival Stop-Motion",
+  "group": "Festival Stop-Motion",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "calabacin",
+  "num": 83,
+  "name": "Calabacín",
+  "title": "el Espantapájaros",
+  "weapon": "calabaza",
+  "weapon_name": "Calabaza",
+  "bonus": "",
+  "unlock": "Festival Stop-Motion",
+  "group": "Festival Stop-Motion",
+  "mods": {}
+ },
+ {
+  "id": "doble_hilo",
+  "num": 84,
+  "name": "Doble Hilo",
+  "title": "la Marioneta",
+  "weapon": "calabaza",
+  "weapon_name": "Cuerdas",
+  "bonus": "",
+  "unlock": "Festival Stop-Motion",
+  "group": "Festival Stop-Motion",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "la_oveja_inventora",
+  "num": 85,
+  "name": "La Oveja Inventora",
+  "title": "",
+  "weapon": "bola_de_arcilla",
+  "weapon_name": "Inventos",
+  "bonus": "",
+  "unlock": "Festival Stop-Motion",
+  "group": "Festival Stop-Motion",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "pato_mensajero",
+  "num": 86,
+  "name": "Pato Mensajero",
+  "title": "",
+  "weapon": "agujas_de_costura",
+  "weapon_name": "Huevo",
+  "bonus": "",
+  "unlock": "Festival Stop-Motion",
+  "group": "Festival Stop-Motion",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_topo_elegante",
+  "num": 87,
+  "name": "El Topo Elegante",
+  "title": "",
+  "weapon": "calabaza",
+  "weapon_name": "Bastón",
+  "bonus": "",
+  "unlock": "Festival Stop-Motion",
+  "group": "Festival Stop-Motion",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "dedal",
+  "num": 88,
+  "name": "Dedal",
+  "title": "la Costurera Siniestra",
+  "weapon": "bola_de_arcilla",
+  "weapon_name": "Tijeras de Costura",
+  "bonus": "",
+  "unlock": "Festival Stop-Motion",
+  "group": "Festival Stop-Motion",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_conde_de_la_capa",
+  "num": 89,
+  "name": "El Conde de la Capa",
+  "title": "",
+  "weapon": "murcielagos",
+  "weapon_name": "Murciélagos",
+  "bonus": "",
+  "unlock": "Festival Gótico Eterno",
+  "group": "Festival Gótico Eterno",
+  "mods": {}
+ },
+ {
+  "id": "la_novia_vampira",
+  "num": 90,
+  "name": "La Novia Vampira",
+  "title": "",
+  "weapon": "copa_de_vino",
+  "weapon_name": "Copa de Vino",
+  "bonus": "",
+  "unlock": "Festival Gótico Eterno",
+  "group": "Festival Gótico Eterno",
+  "mods": {}
+ },
+ {
+  "id": "van_hellstein",
+  "num": 91,
+  "name": "Van Hellstein",
+  "title": "el Cazador",
+  "weapon": "ballesta_de_estacas",
+  "weapon_name": "Ballesta",
+  "bonus": "",
+  "unlock": "Festival Gótico Eterno",
+  "group": "Festival Gótico Eterno",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_hombre_lobo_de_plato",
+  "num": 92,
+  "name": "El Hombre Lobo de Plató",
+  "title": "",
+  "weapon": "copa_de_vino",
+  "weapon_name": "Garras",
+  "bonus": "",
+  "unlock": "Festival Gótico Eterno",
+  "group": "Festival Gótico Eterno",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "la_momia_de_celuloide",
+  "num": 93,
+  "name": "La Momia de Celuloide",
+  "title": "",
+  "weapon": "murcielagos",
+  "weapon_name": "Vendas",
+  "bonus": "",
+  "unlock": "Festival Gótico Eterno",
+  "group": "Festival Gótico Eterno",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_hombre_invisible",
+  "num": 94,
+  "name": "El Hombre Invisible",
+  "title": "",
+  "weapon": "ballesta_de_estacas",
+  "weapon_name": "Gafas Oscuras",
+  "bonus": "",
+  "unlock": "Festival Gótico Eterno",
+  "group": "Festival Gótico Eterno",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "el_jorobado_de_la_campana",
+  "num": 95,
+  "name": "El Jorobado de la Campana",
+  "title": "",
+  "weapon": "copa_de_vino",
+  "weapon_name": "Campanada",
+  "bonus": "",
+  "unlock": "Festival Gótico Eterno",
+  "group": "Festival Gótico Eterno",
+  "mods": {},
+  "weapon_exclusive": true
+ },
+ {
+  "id": "lady_fantasma",
+  "num": 96,
+  "name": "Lady Fantasma",
+  "title": "",
+  "weapon": "murcielagos",
+  "weapon_name": "Velo",
+  "bonus": "",
+  "unlock": "Festival Gótico Eterno",
+  "group": "Festival Gótico Eterno",
+  "mods": {},
+  "weapon_exclusive": true
+ }
+]

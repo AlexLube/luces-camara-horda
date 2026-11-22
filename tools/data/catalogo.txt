@@ -1,0 +1,438 @@
+Reel Survivors · Catálogo completo de diseño
+·
+Concepto y objetivo de escala
+Reel Survivors es un survivor-like donde una estrella de cine queda atrapada dentro de películas que se han vuelto locas. Cada partida es un "rodaje" de 30 minutos: si aguantas hasta que entran los créditos, la toma vale. Todo el contenido es original: arquetipos de géneros de cine, sin personajes, logotipos ni nombres de películas con derechos.
+El catálogo iguala o supera en cantidad al género de referencia, tomando como base las cifras actuales de su wiki (Stages, Arcanas).
+Bloque | Objetivo (referencia) | Reel Survivors
+Escenarios principales | 30 (20 base + 10 expansiones) | 34 (24 base + 10 expansiones)
+Escenarios con modo Aventura | 81 | 85 (34 + 51 del modo Saga)
+Personajes | ~90 entre base y expansiones | 96 (48 base + 48 de expansiones)
+Armas base | ~50 con expansiones | 54 (36 base + 18 de expansiones)
+Evoluciones y uniones | ~60 | 62 (54 evoluciones + 8 uniones)
+Objetos pasivos | ~25 | 26
+Reliquias | ~30 | 32
+Mejoras permanentes | 22 | 22
+Cartas | 22 Arcanas + 12 Darkanas | 22 Guiones + 12 Guiones Malditos
+Modificadores de partida | Hyper, Hurry, Arcanas, Limitless, Inverse, Endless, Random Events | 8 modificadores equivalentes
+Expansiones | 6 | 6 "Festivales"
+Reglas básicas (glosario temático)
+Concepto del género | En Reel Survivors | Cómo funciona
+Gemas de experiencia | Entradas de cine | Azul (1), verde (10), roja (100); se fusionan en una "Entrada VIP" si hay demasiadas.
+Oro | Taquilla (dólares de recaudación) | Moneda permanente para mejoras y personajes.
+Cofres | Latas de película | Dan 1, 3 o 5 mejoras; si un arma está lista, revela su evolución ("montaje final").
+Pollo / comida | Catering (donut, café, bocadillo de rodaje) | Cura vida.
+Imán | Megáfono | Atrae todas las entradas de la pantalla.
+Rosario / limpieza | ¡Corten! | Elimina a todos los enemigos visibles.
+Reloj de congelar | Pausa del proyector | Congela a los enemigos 10 s.
+Muerte del jugador | Pantalla "¡CORTEN! Toma fallida" | Muestra el tiempo, kills y la "recaudación".
+Victoria | Créditos finales | A los 30:00 llega El Productor Ejecutivo (enemigo invencible, ver Enemigos).
+Desbloqueos: se empieza solo con el primer escenario y 3 personajes. Los escenarios se abren cumpliendo logros (sobrevivir X minutos, evolucionar un arma concreta), nunca pagando. Los personajes se abren con logros y después se "contratan" con Taquilla.
+Escenarios
+Hay 34 escenarios principales (24 en el juego base y 10 en expansiones) y 51 fases del modo Saga, 85 en total. Así se cubren las categorías de la referencia (5 normales, 7 de bonificación, 9 de desafío, 2 especiales y 1 oculto) y se supera su total de 81.
+Juego base: normales (5)
+Mapas largos de 30 minutos con jefes cada 5 minutos. Son la columna vertebral del juego.
+# | Escenario | Género | Mecánica propia | Enemigos | Jefe | Desbloqueo
+1 | Bosque de la Cabaña | Terror de serie B | Niebla que reduce la visión de noche cada 5 min | Zombis lentos, murciélagos de goma, campistas poseídos, raíces | El Leñador Sin Rostro | Inicial
+2 | Pueblo Polvoriento | Western | Estampidas de ganado que cruzan la pantalla | Forajidos, buitres, rodadoras, vaqueros fantasma | El Sheriff Ahorcado | Sobrevivir 10 min en el 1
+3 | Estación Orbital Zeta | Ciencia ficción | Gravedad baja (inercia al moverse) y conductos que escupen enemigos | Larvas alienígenas, androides, sondas, astronautas infectados | La Reina Colmena | Llegar a nivel 40
+4 | Ciudad Noir | Cine negro en blanco y negro | Farolas: fuera de su luz los enemigos son invisibles | Gánsteres, sombras, policías corruptos, coches con metralleta | El Padrino de la Lluvia | Sobrevivir 15 min en el 2
+5 | Templo de la Selva | Aventuras | Trampas de pinchos y rocas rodantes | Momias, serpientes, ladrones de tumbas, ídolos vivos | El Faraón Despierto | Evolucionar cualquier arma
+Juego base: bonificación (7)
+Mapas más cortos (15 a 20 minutos) con más Taquilla y objetos.
+# | Escenario | Género | Mecánica propia | Enemigos | Jefe | Desbloqueo
+6 | Broadway en Llamas | Musical | Los enemigos se mueven a ritmo; atacar en el compás da +20 % de daño | Bailarines de claqué, coristas, tramoyistas | La Diva del Telón | Encontrar el Gramofón en el 4
+7 | Metrópolis Kaiju | Monstruos gigantes | Pisadas gigantes que aplastan zonas marcadas | Soldados en pánico, tanques, polillas gigantes | El Lagarto Atómico | Derrotar 5.000 enemigos
+8 | Autocine Abandonado | Serie B años 50 | Las pantallas proyectan enemigos que salen de ellas | Platillos volantes, hombres-pez, cerebros flotantes | El Cerebro de Venus | Sobrevivir 20 min con cualquier personaje
+9 | Instituto de Medianoche | Slasher adolescente | Taquillas que esconden objetos o enemigos | Animadoras poseídas, mascotas del equipo, profesores zombi | El Enmascarado del Baile | Morir 10 veces
+10 | Galeón Maldito | Piratas | El barco se balancea y desplaza al jugador | Piratas esqueleto, loros, krakens pequeños | El Capitán Sin Barba | Recoger 50 cofres
+11 | Mansión Victoriana | Gótico | Cuadros cuyos ojos disparan | Fantasmas, mayordomos, muñecas, candelabros vivos | La Viuda del Ático | Sobrevivir 25 min en el 1
+12 | Laboratorio del Doctor Loco | Terror clásico | Rayos eléctricos que se activan en cadena | Criaturas cosidas, cerebros en frasco, jorobados | La Novia Galvánica | Evolucionar el Foco
+Juego base: desafío (9)
+Mapas difíciles con reglas propias; dan los mejores premios y personajes ocultos.
+# | Escenario | Género | Regla de desafío | Enemigos | Jefe | Desbloqueo
+13 | Archivo de Cine Mudo | Cine mudo | Sin sonido; los ataques se avisan con intertítulos | Vagabundos, policías con porra, villanos con bigote | El Villano de la Vía | Completar el 4
+14 | Coliseo de Péplum | Cine de romanos | Arena cerrada que se encoge | Gladiadores, leones, cuadrigas, legionarios | El Emperador Pulgar | Completar el 5
+15 | Carretera del Fin | Postapocalíptico | Scroll automático: la pantalla avanza sola | Moteros, coches pincho, mutantes | El Señor de la Gasolina | Completar el 2
+16 | Dojo de la Montaña | Artes marciales | Los enemigos bloquean y contraatacan | Ninjas, monjes, estatuas de jade | El Maestro de las Mil Palmas | Completar el 3
+17 | Expreso de Medianoche | Thriller en tren | Mapa en línea recta; vagones que se desenganchan | Espías, revisores, asesinos con maleta | El Inspector Doble | Completar el 8
+18 | Plató de Telenovela | Melodrama | Giros de guion aleatorios cada 2 min (cambian las estadísticas) | Gemelos malvados, amnésicos, abuelas con secretos | La Matriarca | Completar el 11
+19 | Barrio Animado | Dibujos animados | Gravedad de dibujos: caer de un borde no mata hasta mirar abajo | Yunques, conejos locos, coyotes, bombas con mecha | El Animador Borrado | Completar el 6
+20 | Búnker Rojo | Espías de la Guerra Fría | Láseres de seguridad que se mueven | Agentes, perros robot, científicos, satélites | El Genio del Volcán Hueco | Completar el 17
+21 | Neón 2099 | Cyberpunk | Lluvia ácida que hace daño fuera de los toldos | Replicantes, drones, hackers, motos de luz | La IA del Rascacielos | Completar el 3 en modo Director's Cut
+Juego base: especiales (2)
+# | Escenario | Tipo | Descripción | Desbloqueo
+22 | La Alfombra Roja | Boss rush | Un desfile de jefes uno tras otro mientras los paparazzi ciegan con flashes | Derrotar a 10 jefes distintos
+23 | Sala de Casting | Práctica | Eliges armas, pasivos y nivel libremente para probar combinaciones | Desbloquear 20 armas
+Juego base: oculto (1)
+# | Escenario | Descripción | Cómo encontrarlo
+24 | La Sala de Montaje | El mapa está hecho de trozos de todos los demás y se "corta" cada 60 s, saltando de escena. Aquí vive el jefe secreto, El Montador. | Recoger las 7 bobinas perdidas repartidas por los escenarios desafiantes
+Expansiones (10)
+# | Escenario | Festival (expansión) | Género | Mecánica propia | Jefe
+25 | Aldea de los Espíritus | Festival del Miedo Oriental | Terror oriental | Pozos de los que salen espíritus | La Niña del Pozo
+26 | Hotel del Pasillo Infinito | Festival del Miedo Oriental | Terror psicológico | Pasillos que se repiten en bucle | El Huésped de la Habitación Cerrada
+27 | Isla Prehistórica | Festival Blockbuster | Dinosaurios | Vallas eléctricas que se apagan | El Rex Alfa
+28 | Fin del Mundo S.A. | Festival Blockbuster | Cine de catástrofes | Meteoritos, tsunamis y tornados alternos | El Asteroide Consciente
+29 | Playa del Desembarco | Festival Bélico | Bélico | Trincheras que dan cobertura | El General de Hierro
+30 | Jungla del Helicóptero | Festival Bélico | Bélico | Napalm que quema zonas al azar | El Coronel del Río
+31 | Reino del Dragón | Festival de Fantasía Épica | Fantasía | Castillos que se pueden tomar para curarse | El Dragón del Tesoro Dormido
+32 | Torre del Hechicero | Festival de Fantasía Épica | Fantasía oscura | Pisos que suben cada 5 minutos | El Señor del Ojo
+33 | Mundo de Plastilina | Festival Stop-Motion | Animación artesanal | El escenario se mueve a 12 fotogramas por segundo | El Rey de Arcilla
+34 | Catedral del Conde | Festival Gótico Eterno | Vampiros clásicos de cine | Vitrales que dañan a los no-muertos con la luz | El Conde de la Capa
+Modo Saga (51 fases)
+El modo Saga equivale al modo Aventura: cada saga es una "franquicia" con personajes, armas y reglas propias, y se juega fase a fase.
+Saga | Inspiración | Fases | Regla especial | Recompensa
+La Trilogía del Enmascarado | Slashers de los 80 | 6 | Cada fase es una secuela más absurda | Personaje: La Última Chica
+Ópera Galáctica | Ópera espacial | 6 | Batallas de naves en scroll | Arma: Espada de Plasma
+Liga de Héroes de Barrio | Superhéroes genéricos | 6 | Cada fase da un superpoder temporal | Personaje: El Vigilante Enmascarado
+Leyenda del Puño | Kung-fu clásico | 5 | Combos: matar seguido sube el daño | Reliquia: Cinturón Negro
+Agente 00-Nadie | Espías | 6 | Sigilo: menos enemigos si no te ven | Personaje: El Agente con Esmoquin
+La Odisea del Anillo Roto | Fantasía épica | 6 | Grupo: llevas 3 personajes y cambias entre ellos | Arma: Báculo del Peregrino
+Nitro y Familia | Coches rápidos | 5 | Siempre vas en coche (velocidad alta, giro lento) | Pasivo: Turbo
+Día de Desastre | Catástrofes | 5 | El mapa se destruye mientras juegas | Reliquia: Casco de Rescate
+Retrospectiva del Director | Metacine | 6 | Mezcla las reglas de todas las sagas | Personaje secreto: El Director Fantasma
+Total |  | 51 |  | 
+Personajes
+Hay 96 personajes: 40 del juego base, 8 secretos y 48 de expansiones (8 por Festival). Cada uno es un arquetipo de cine con nombre propio, un arma inicial y una bonificación que crece con el nivel. Se desbloquean con logros y después se contratan con Taquilla.
+Juego base (40)
+# | Personaje | Arquetipo | Arma inicial | Bonificación | Desbloqueo
+1 | Max Ríos | El Doble de Acción | Claqueta | +20 % vida máx. y +1 armadura | Inicial
+2 | Vera Lys | La Scream Queen | Pértiga de Sonido | Su grito aturde 1 s a los cercanos cada 10 niveles | Inicial
+3 | Dolly Ray | La Cowgirl | Revólver de Atrezo | −10 % enfriamiento | Inicial
+4 | Hugo Brandt | El Director | Megáfono del Director | +20 % duración | Sobrevivir 10 min
+5 | Otto Pirotecnia | El Mago de Efectos | Rayo de Efectos Especiales | +10 % área | Evolucionar un arma
+6 | Margot Pell | La Crítica | Estatuilla Dorada | +50 % daño a jefes | Derrotar 20 jefes
+7 | Rex Calloway | El Explorador | Látigo del Explorador | +10 % suerte | Llegar al Templo de la Selva
+8 | Bruno Hacha | El Campista Superviviente | Motosierra de Atrezo | +0,5 vida/s | 15 min en el Bosque de la Cabaña
+9 | Lina Nova | La Astronauta | Pistola de Rayos | +20 % velocidad de proyectil | Llegar a la Estación Orbital
+10 | Sam Shade | El Detective Noir | Cámara de Flash | +1 cantidad cada 20 niveles | Encontrar la gabardina en Ciudad Noir
+11 | Pippo | El Payaso de Cine Mudo | Tarta de Crema | +20 % velocidad, −20 % vida | 10 min en el Archivo de Cine Mudo
+12 | Coco Banana | La Comediante | Piel de Plátano | +10 % suerte y velocidad | Hacer tropezar a 1.000 enemigos
+13 | Kenji Arata | El Maestro de Artes Marciales | Nunchakus de Goma | +1 % poder por cada 100 kills (máx. +50 %) | Llegar al Dojo de la Montaña
+14 | Luz Marina | La Bailarina | Bastón de Claqué | +10 % velocidad de movimiento | Completar Broadway en Llamas
+15 | Bella Sombrilla | La Estrella del Musical Clásico | Paraguas de Musical | Bloquea 1 proyectil cada 5 s | Evolucionar el Paraguas
+16 | Padre Gil | El Exorcista | Crucifijo de Utilería | +30 % daño a no-muertos | 20 min en la Mansión Victoriana
+17 | Dra. Volta | La Científica Loca | Máquina de Humo | +10 % área y duración | Completar el Laboratorio
+18 | Jack Nitro | El Piloto de Persecuciones | Coche de Persecución | +20 % velocidad | Recorrer 50 km en total
+19 | Tex Lariat | El Vaquero Veterano | Lazo del Vaquero | +50 % atracción | Completar el Pueblo Polvoriento
+20 | Mona Glam | La Diva de Hollywood | Ovación del Público | +20 % Taquilla | Acumular 50.000 de Taquilla
+21 | Cutter Vega | La Montadora | Tijeras de Montaje | +1 cantidad | Encontrar unas tijeras en la Ciudad Noir
+22 | Sully Pluma | El Guionista | Guion Volador | +10 % experiencia | Leer 5 guiones (cofres) en una partida
+23 | Grip Martínez | El Maquinista | Grúa de Cámara | +2 armadura, −10 % velocidad | Mover 100 cajas del escenario
+24 | Dron-E | El Robot de Rodaje | Dron de Rodaje | Inmune a congelación y lentitud | Completar la Estación Orbital
+25 | Gafas Moreno | El Proyeccionista | Proyector Portátil | +15 % duración | Llegar al Autocine Abandonado
+26 | Bill Mecha | El Artificiero | Dinamita de Mecha | +15 % área, −10 % vida | Destruir 500 barriles
+27 | Ana Ventura | La Directora de Fotografía | Foco | +10 % área y poder de luz | Evolucionar el Foco
+28 | Rosi Maíz | La Vendedora de Palomitas | Palomitas | +30 % Taquilla | Recoger 1.000 monedas
+29 | Archie Polvo | El Archivista de Filmoteca | Bobina Rota | +20 % duración | Encontrar 3 bobinas perdidas
+30 | Nina Flash | La Paparazzi | Confeti de Estreno | +10 % velocidad y suerte | Llegar a La Alfombra Roja
+31 | Ventura Torres | La Técnica de Efectos Atmosféricos | Ventilador Gigante | +20 % área de empuje | Completar Metrópolis Kaiju
+32 | Carmilla Roja | La Maquilladora de Terror | Sangre Falsa | +0,3 vida/s | Completar el Instituto de Medianoche
+33 | Kid Pistón | El Niño Prodigio | Yunque de Dibujos | +5 % crecimiento por nivel | Llegar al Barrio Animado
+34 | Sir Reginald | El Actor Shakespeariano | Rollo de Película | +30 % vida máx. | Sobrevivir 30 min con Max
+35 | Kai Zen | El Caballero Espacial | Sable de Neón | +10 % poder y velocidad de ataque | Evolucionar la Pistola de Rayos
+36 | Toni Nitrato | El Bombero de Plató | Celuloide en Llamas | Inmune a quemaduras | Apagar 100 incendios
+37 | Toro Méndez | El Boxeador | Nunchakus de Goma | +30 % poder, −10 % velocidad | Completar el Coliseo de Péplum
+38 | Sor Melodía | La Monja Cantante | Crucifijo de Utilería | +1 revivir | Completar Broadway en Llamas sin recibir daño 5 min
+39 | Agente Gris | El Hombre de Negro | Pistola de Rayos | +1 cantidad, −10 % área | Completar el Búnker Rojo
+40 | Abuela Rosa | La Abuela de Comedia Familiar | Tarta de Crema | +0,5 vida/s y +20 % catering | Comer 300 donuts
+Secretos (8)
+Se desbloquean con códigos de claqueta (combinaciones que se introducen en el menú) o con hazañas ocultas.
+# | Personaje | Qué es | Arma inicial | Rasgo | Desbloqueo
+41 | El Extra | Un figurante sin nombre | Al azar | Sin bonificaciones, pero +100 % experiencia | Morir en los 10 primeros segundos 3 veces
+42 | El Montador | Jefe de la Sala de Montaje | Tijeras de Montaje evolucionadas | Cada 60 s se teletransporta ("corta") a otra zona | Derrotarlo en la Sala de Montaje
+43 | El Productor Ejecutivo | El enemigo final | Chequera Infinita (exclusiva) | Daño enorme, muy lento | Derrotarlo al minuto 31
+44 | Claqui | Una claqueta con ojos | Claqueta | Cada golpe cuenta como "toma" y suma daño | Código de claqueta
+45 | Michi del Estudio | El gato que vive en el plató | Ninguna | Atrae todas las entradas de la pantalla | Acariciarlo 10 veces en el menú
+46 | El Doble del Doble | Copia barata de Max | Claqueta | Copia las estadísticas del personaje anterior | Completar 10 partidas con Max
+47 | El Cinéfilo | Sabe todo de cine | Al azar | Los cofres siempre revelan evoluciones disponibles | Completar el Catálogo (bestiario)
+48 | Fotograma 0 | Un error de película | Al azar cada partida | Sus estadísticas cambian cada minuto | Encontrar la bobina 0 en la Sala de Montaje
+Expansiones (48)
+Festival | Personajes (arquetipo y arma inicial)
+Festival del Miedo Oriental | Yuki (la Niña Fantasma, Cabello Maldito) · Daisuke (el Cazador de Espíritus, Talismán de Papel) · La Recepcionista Insomne (Llave del 404) · Hana (la Estudiante Maldita, Cinta de Vídeo) · El Monje del Templo (Campana) · Rin (la Kitsune, Fuego Fatuo) · El Taxista Nocturno (Faros) · Abuela Kuchi (Tijeras Rituales)
+Festival Blockbuster | Dra. Fosil (la Paleontóloga, Pincel de Excavar) · Rocco (el Guarda del Parque, Dardos Tranquilizantes) · Comandante Steel (el Presidente Héroe, Discurso) · Skye (la Científica del Clima, Rayo de Tormenta) · Hank (el Perforador, Taladro) · La Niña Perdida (Globo) · El Superviviente con Perro (Ladrido) · Raptor Cría (mascota, Mordisco)
+Festival Bélico | Sargento Rocas (el Veterano, Granadas) · Cabo Luna (la Francotiradora, Rifle de Mira) · Doc Garza (el Médico de Campaña, Botiquín) · Radio Pepe (el Operador, Llamada de Artillería) · El Piloto Derribado (Bengala) · La Corresponsal (Cámara de Guerra) · El Soldado Perdido (Bayoneta) · Coronel Bigotes (Mapa Táctico)
+Festival de Fantasía Épica | Brann (el Bárbaro, Hacha Doble) · Elowen (la Arquera del Bosque, Arco Largo) · Thorgrim (el Herrero Enano, Martillo) · Melisandra (la Hechicera, Orbe Arcano) · El Mediano Ladrón (Daga Corta) · Sir Pomposo (el Caballero, Lanza) · La Bruja del Pantano (Caldero) · El Mago Errante (Báculo del Peregrino)
+Festival Stop-Motion | Plasticín (el Hombre de Plastilina, Bola de Arcilla) · Botones (la Muñeca de Trapo, Aguja) · Calabacín (el Espantapájaros, Calabaza) · Doble Hilo (la Marioneta, Cuerdas) · La Oveja Inventora (Inventos) · Pato Mensajero (Huevo) · El Topo Elegante (Bastón) · Dedal (la Costurera Siniestra, Tijeras de Costura)
+Festival Gótico Eterno | El Conde de la Capa (Murciélagos) · La Novia Vampira (Copa de Vino) · Van Hellstein (el Cazador, Ballesta) · El Hombre Lobo de Plató (Garras) · La Momia de Celuloide (Vendas) · El Hombre Invisible (Gafas Oscuras) · El Jorobado de la Campana (Campanada) · Lady Fantasma (Velo)
+Armas, evoluciones y uniones
+Hay 54 armas (36 base y 18 de expansiones), cada una con su evolución, más 8 uniones: 62 formas evolucionadas en total. La regla es la del género: sube el arma a nivel 8, ten el pasivo indicado y abre una lata de película después del minuto 10. En pantalla aparece el "montaje final": la animación de la evolución como si fuera un tráiler.
+Armas base y sus evoluciones (36)
+# | Arma | Cómo ataca | Pasivo necesario | Evolución | Qué hace la evolución
+1 | Claqueta | Golpe en arco delante | Guion Anotado | Toma Final | Un corte que cruza toda la pantalla; cura 1 por cada kill
+2 | Rollo de Película | Gira a tu alrededor | Copia de Seguridad | Cine Circular | 6 rollos que nunca desaparecen
+3 | Foco | Rayo que quema al más cercano | Lente Gran Angular | Alfombra Roja | Láser continuo que rebota entre enemigos
+4 | Palomitas | Metralla en todas direcciones | Mantequilla | Cubo XXL | Explosiones pegajosas que ralentizan
+5 | Pértiga de Sonido | Barrido largo horizontal | Micrófono Inalámbrico | Sonido Envolvente | Barrido de 360° que atrae entradas
+6 | Estatuilla Dorada | Bumerán | Ego de Estrella | Premio a Toda una Carrera | Lluvia de estatuillas sobre la pantalla
+7 | Cámara de Flash | Ciega a los enemigos visibles | Filtro Sepia | Exposición Total | Congela la pantalla 3 s y hace daño a todo
+8 | Bobina Rota | Deja trampas en el suelo | Galleta de la Suerte | Bobina del Destino | Las trampas se multiplican al activarse
+9 | Megáfono del Director | Onda en cono | Contrato de Estrella | ¡Corten y Acción! | Cada onda repite el último ataque de todas tus armas
+10 | Revólver de Atrezo | Dispara al más cercano | Café Solo | Duelo al Amanecer | Ráfagas de 6 balas, crítico garantizado
+11 | Látigo del Explorador | Latigazo horizontal | Batido de Proteínas | Látigo del Ídolo de Oro | Roba vida en cada golpe
+12 | Motosierra de Atrezo | Daño continuo cuerpo a cuerpo | Chaleco de Especialista | Motor Sin Fin | Doble alcance; aterroriza (los enemigos huyen)
+13 | Pistola de Rayos | Láser que atraviesa | Cámara Rápida | Desintegrador | Atraviesa todo y borra a los enemigos débiles
+14 | Sable de Neón | Tajos rápidos en cruz | Filtro Infrarrojo | Sable del Maestro | Refleja los proyectiles enemigos
+15 | Crucifijo de Utilería | Se lanza y vuelve; extra a no-muertos | Doble de Cuerpo | Reliquia Sagrada del Plató | Elimina al instante a los no-muertos débiles
+16 | Tarta de Crema | Proyectil que salpica | Gafas de Productor | Guerra de Tartas | Salpicaduras en cadena; da Taquilla
+17 | Piel de Plátano | Hace tropezar | Zapatillas de Claqué | Resbalón Infinito | Los enemigos caídos derriban a los demás
+18 | Yunque de Dibujos | Cae del cielo | Mala Crítica | Piano de Cola | Un piano que aplasta una zona enorme
+19 | Dinamita de Mecha | Explota tras un retardo | Caja de Atrezo Maldita | Barril de Pólvora Animado | Explosiones en cadena por toda la pantalla
+20 | Lazo del Vaquero | Atrae y ata | Zapatillas de Claqué | Rodeo Imparable | Arrastra grupos enteros y los estampa
+21 | Máquina de Humo | Aura de daño | Batido de Proteínas | Niebla del Terror | Aura enorme que ralentiza un 30 %
+22 | Rayo de Efectos Especiales | Rayos al azar | Copia de Seguridad | Tormenta de Pantalla Verde | Rayos constantes que buscan grupos
+23 | Ventilador Gigante | Empuja enemigos | Café Solo | Huracán de Plató | Tornado que recorre el mapa
+24 | Sangre Falsa | Charcos de daño | Lente Gran Angular | Baño de Serie B | Los charcos te siguen y se juntan
+25 | Tijeras de Montaje | Proyectil hacia donde miras | Cámara Rápida | Corte Final | Tijeras infinitas sin enfriamiento
+26 | Guion Volador | Teledirigido al más cercano | Contrato de Estrella | Guion Ganador | 5 guiones que se reparten objetivos
+27 | Confeti de Estreno | Disparos al azar | Galleta de la Suerte | Fuegos del Estreno | Fuegos artificiales que explotan en área
+28 | Proyector Portátil | Cono de luz giratorio | Guion Anotado | Sesión Doble | Dos conos opuestos permanentes
+29 | Grúa de Cámara | Golpe lento y enorme | Ego de Estrella | Plano Cenital | Golpe desde arriba en toda una zona
+30 | Celuloide en Llamas | Rastro de fuego | Mala Crítica | Incendio del Nitrato | El fuego se extiende solo
+31 | Dron de Rodaje | Compañero que dispara | Copia de Seguridad | Escuadrón de Drones | 4 drones que te rodean
+32 | Nunchakus de Goma | Giros rápidos cercanos | Chaleco de Especialista | Puño de las Mil Palmas | Ráfagas de golpes que empujan
+33 | Coche de Persecución | Un coche cruza la pantalla | Cámara Rápida | Persecución Sin Frenos | Varios coches y explosiones al chocar
+34 | Paraguas de Musical | Escudo giratorio que bloquea | Cartel de Estreno | Tormenta Musical | Lluvia que daña y bloquea todo proyectil
+35 | Bastón de Claqué | Onda al ritmo a tu alrededor | Zapatillas de Claqué | Número Final | Ondas dobles; más daño si te mueves
+36 | Ovación del Público | Ondas que crecen con las kills | Gafas de Productor | Ovación de Pie | Ondas que no dejan de crecer en toda la partida
+Armas de expansión (18)
+Cada Festival trae 3 armas con su evolución. Las demás armas iniciales de sus personajes son versiones exclusivas de estas.
+Festival | Arma | Cómo ataca | Pasivo necesario | Evolución
+Miedo Oriental | Cabello Maldito | Latigazo largo que atrapa | Batido de Proteínas | Melena Infinita
+Miedo Oriental | Talismán de Papel | Orbita y sella enemigos | Guion Anotado | Muro de Sellos
+Miedo Oriental | Cinta de Vídeo Maldita | Marca enemigos que mueren a los 7 s | Mala Crítica | Siete Días
+Blockbuster | Dardos Tranquilizantes | Dardos que duermen | Cámara Rápida | Safari Nocturno
+Blockbuster | Rayo de Tormenta | Relámpagos en línea | Lente Gran Angular | Supercélula
+Blockbuster | Taladro de Perforación | Perfora en línea recta | Chaleco de Especialista | Núcleo del Planeta
+Bélico | Granadas | Lanzamiento en parábola | Caja de Atrezo Maldita | Bombardeo de Saturación
+Bélico | Rifle de Mira | Un disparo lejano muy fuerte | Filtro Infrarrojo | Bala Que Nunca Falla
+Bélico | Llamada de Artillería | Marca zonas que luego explotan | Pase de Prensa | Ataque Aéreo
+Fantasía Épica | Hacha Doble | Giro con hacha | Ego de Estrella | Hacha del Rey Bárbaro
+Fantasía Épica | Arco Largo | Flechas que perforan | Copia de Seguridad | Lluvia de Flechas
+Fantasía Épica | Báculo del Peregrino | Luz que repele | Doble de Cuerpo | Báculo Blanco
+Stop-Motion | Bola de Arcilla | Rebota y cambia de forma | Contrato de Estrella | Escultura Viviente
+Stop-Motion | Agujas de Costura | Cose enemigos entre sí | Galleta de la Suerte | Remiendo Total
+Stop-Motion | Calabaza | Explota en semillas | Mantequilla | Noche de Calabazas
+Gótico Eterno | Murciélagos | Enjambre que persigue | Micrófono Inalámbrico | Nube de la Noche
+Gótico Eterno | Ballesta de Estacas | Estacas que atraviesan | Cartel de Estreno | Amanecer
+Gótico Eterno | Copa de Vino | Roba vida en área | Maquillaje | Banquete Eterno
+Uniones (8)
+Una unión fusiona dos o tres objetos al máximo en un arma nueva y libera una casilla.
+Unión | Ingredientes | Efecto
+Set de Iluminación | Foco + Cámara de Flash | Focos que siguen a los enemigos y los ciegan
+Primer Día de Rodaje | Claqueta + Megáfono del Director | Cada "¡Acción!" multiplica el daño de la siguiente toma
+Leyenda del Oeste | Revólver de Atrezo + Lazo del Vaquero | Atrapa a los enemigos y los acribilla
+Paladín Galáctico | Pistola de Rayos + Sable de Neón | Sable que dispara láseres en cada tajo
+Slapstick Total | Tarta de Crema + Piel de Plátano | Persecución cómica que derriba a toda la pantalla
+Caos Animado | Yunque de Dibujos + Dinamita de Mecha | Lluvia de objetos de dibujos que explotan
+Fama Eterna | Cámara de Flash + Gafas de Sol + Collar de Diva | Reduce a la mitad la vida de todo lo que hay en pantalla cada 60 s
+Rebobinar | Paraguas de Musical + Botón Rec + Botón Play | Cura y anula el último golpe recibido cada 30 s
+Objetos pasivos y reliquias
+Hay 26 objetos pasivos (mejoran estadísticas durante la partida y desbloquean evoluciones) y 32 reliquias (objetos únicos que se encuentran una vez en el mapa y desbloquean funciones para siempre).
+Objetos pasivos (26)
+# | Pasivo | Efecto por nivel | Niveles
+1 | Ego de Estrella | +10 % poder | 5
+2 | Chaleco de Especialista | +1 armadura | 5
+3 | Batido de Proteínas | +20 % vida máxima | 5
+4 | Mantequilla | +0,2 vida/s | 5
+5 | Café Solo | −8 % enfriamiento | 5
+6 | Lente Gran Angular | +10 % área | 5
+7 | Zapatillas de Claqué | +10 % velocidad de movimiento | 5
+8 | Guion Anotado | +10 % duración | 5
+9 | Copia de Seguridad | +1 proyectil | 2
+10 | Micrófono Inalámbrico | +25 % atracción de entradas | 5
+11 | Galleta de la Suerte | +10 % suerte | 5
+12 | Contrato de Estrella | +8 % experiencia | 5
+13 | Gafas de Productor | +10 % Taquilla | 5
+14 | Mala Crítica | +10 % maldición (más enemigos y más rápidos) | 5
+15 | Cámara Rápida | +10 % velocidad de proyectil | 5
+16 | Doble de Cuerpo | +1 revivir | 1
+17 | Maquillaje | +1 % robo de vida | 5
+18 | Filtro Sepia | +10 % duración de congelación y ceguera | 5
+19 | Filtro Infrarrojo | +5 % crítico; ves enemigos invisibles | 5
+20 | Cartel de Estreno | Escudo que absorbe 1 golpe cada 30 s (−3 s por nivel) | 5
+21 | Pase de Prensa | +1 rehacer y +1 saltar en la partida | 5
+22 | Gafas de Sol | Sube con el nivel del jugador; parte de la unión Fama Eterna | 9
+23 | Collar de Diva | Sube con el nivel del jugador; parte de la unión Fama Eterna | 9
+24 | Botón Rec | +1 % vida máx. por cada nivel del jugador; parte de Rebobinar | 9
+25 | Botón Play | +1 % recuperación por cada nivel del jugador; parte de Rebobinar | 9
+26 | Caja de Atrezo Maldita | Niveles 1–7 suben todo; del 8 al 9 sube la maldición | 9
+Reliquias (32)
+# | Reliquia | Qué desbloquea | Dónde
+1 | Mapa de Localizaciones | Muestra los objetos del escenario en el mapa | Bosque de la Cabaña
+2 | Libro de Montaje | Muestra los requisitos de evolución en el menú | Ciudad Noir
+3 | Claqueta de Oro | Modificador Toma Rápida | Pueblo Polvoriento
+4 | Reloj de Rodaje | Modificador Fuera de Plazo | Estación Orbital Zeta
+5 | Baraja del Guionista | Las 22 cartas de Guion | Templo de la Selva
+6 | Baraja Maldita | Los 12 Guiones Malditos | Sala de Montaje
+7 | Llave del Cine Infinito | Modificador Sin Límite | Laboratorio del Doctor Loco
+8 | Espejo de Camerino | Modificador Negativo | Mansión Victoriana
+9 | Dado del Productor | Modificador Imprevistos de Rodaje | Autocine Abandonado
+10 | Silla del Director | Modo Director's Cut | Completar 5 escenarios
+11 | Gafas 3D | Ver enemigos invisibles en todos los mapas | Neón 2099
+12 | Tarjeta del Sindicato | Sellar objetos para que no salgan en las mejoras | Plató de Telenovela
+13 | Gramófono | Abre Broadway en Llamas | Ciudad Noir
+14 | Gabardina | Desbloquea a Sam Shade | Ciudad Noir
+15 | Tijeras de Plata | Desbloquea a Cutter Vega | Ciudad Noir
+16–22 | Las 7 Bobinas Perdidas | Juntas abren la Sala de Montaje | Una en cada escenario de desafío del 13 al 19
+23 | Bobina 0 | Desbloquea a Fotograma 0 | Sala de Montaje
+24 | Código de Claqueta | Menú de códigos secretos | Búnker Rojo
+25 | Llave del Archivo | Abre el Catálogo (bestiario) | Archivo de Cine Mudo
+26 | Cintas de Música | Sala de música para escuchar la banda sonora | Broadway en Llamas
+27 | Mando de Pantalla Dividida | Cooperativo local hasta 4 jugadores | Barrio Animado
+28 | Entrada Dorada | Bonus de Taquilla al terminar | Alfombra Roja
+29 | Carrete de Tomas Falsas | Aspectos alternativos de personajes | Plató de Telenovela
+30 | Bobina Dorada | Abre el modo Saga | Completar 10 escenarios
+31 | Cinturón Negro | +1 cantidad a las armas cuerpo a cuerpo | Saga Leyenda del Puño
+32 | Casco de Rescate | +1 revivir permanente | Saga Día de Desastre
+Enemigos y jefes
+Cada escenario tiene entre 6 y 10 enemigos propios (ver la tabla de Escenarios) más variantes de élite, así que el Catálogo (bestiario) llega a unas 320 fichas. Todos los enemigos se agrupan en 10 familias de comportamiento, para que el diseño sea coherente entre géneros.
+Familias de comportamiento
+Familia | Comportamiento | Ejemplos por género
+Horda | Lentos, en masa, van directos hacia ti | Zombis, figurantes, momias, soldados en pánico
+Enjambre | Muy rápidos y débiles, en grupos | Paparazzi, murciélagos, larvas, drones
+Muro | Forman una línea o un círculo que se cierra | Coristas en fila, legionarios, policías antidisturbios
+Tirador | Disparan desde lejos | Forajidos, gánsteres, androides, francotiradores
+Tanque | Mucha vida, lentos, empujan | Criaturas cosidas, gladiadores, robots
+Saltador | Desaparecen y aparecen a tu lado | Ninjas, fantasmas, sombras
+Kamikaze | Corren y explotan | Coches pincho, bombas con mecha, críticos furiosos
+Invocador | Generan más enemigos | Brujas, científicos, directores de casting
+Atracción de escenario | Peligros que no se matan | Rocas rodantes, estampidas, pisadas de kaiju
+Ladrón | Roban entradas o latas y huyen | Ladrones de tumbas, mapaches, revendedores
+Variantes
+Variante | Aspecto | Cambio
+Extra | Normal | Base
+Secundario | Contorno dorado | ×2 vida, suelta una lata pequeña
+Protagonista | Foco que lo sigue | ×5 vida, suelta lata de 3 mejoras
+Estrella invitada | Nombre en pantalla | Mini-jefe con ataque propio
+Doble malvado | Colores invertidos | Solo en el modificador Negativo
+Calendario de jefes en una partida de 30 minutos
+Minuto | Qué aparece
+5 | Estrella invitada del escenario
+10 | Primer jefe (versión débil)
+15 | Oleada especial (por ejemplo, una estampida o un desfile)
+20 | Jefe del escenario
+25 | Dos estrellas invitadas a la vez
+28 | Jefe del escenario en su forma final
+30 | El Productor Ejecutivo: entra para cancelar la película. Es casi invencible y mata de un golpe; si sobrevives, ruedan los créditos
+Jefes especiales
+Jefe | Dónde | Rasgo
+El Productor Ejecutivo | Todos los escenarios, minuto 30 | Cada minuto que sigues vivo aparece otro más; derrotarlo desbloquea al personaje
+El Montador | Sala de Montaje | Corta la pantalla en trozos y los reordena
+El Censor | Aparece si usas el modificador Negativo | Tapa tus armas con barras negras durante unos segundos
+La Crítica Implacable | Alfombra Roja (final) | Puntua cada golpe; si la nota baja de 5, se cura
+El Director Fantasma | Final del modo Saga | Copia las armas que llevas
+Mejoras permanentes
+Hay 22 mejoras permanentes, las "Cláusulas del Contrato", que se compran con Taquilla en el menú. Su precio sube con cada compra (como en el género), se pueden reembolsar enteras y, una vez al máximo, desactivar para ajustar una partida.
+# | Cláusula | Equivale a | Efecto por nivel | Niveles
+1 | Caché de Estrella | Poder | +5 % daño | 5
+2 | Seguro de Rodaje | Armadura | +1 armadura | 3
+3 | Dieta de Rodaje | Vida máxima | +10 % vida | 3
+4 | Caravana Privada | Recuperación | +0,1 vida/s | 5
+5 | Horario Flexible | Enfriamiento | −2,5 % enfriamiento | 2
+6 | Plano General | Área | +5 % área | 2
+7 | Efectos Digitales | Velocidad de proyectil | +10 % | 2
+8 | Montaje Largo | Duración | +15 % | 2
+9 | Segunda Unidad | Cantidad | +1 proyectil | 1
+10 | Carrito de Travelling | Velocidad de movimiento | +5 % | 2
+11 | Representante | Atracción | +25 % | 2
+12 | Talismán de Camerino | Suerte | +10 % | 3
+13 | Escuela de Interpretación | Crecimiento | +3 % experiencia | 5
+14 | Porcentaje de Taquilla | Codicia | +10 % Taquilla | 5
+15 | Mal Estreno | Maldición | +10 % enemigos y velocidad | 5
+16 | Doble de Riesgo | Revivir | +1 revivir | 1
+17 | Otra Toma | Rehacer | +1 rehacer las mejoras | 5
+18 | Descarte | Saltar | +1 saltar una mejora | 5
+19 | Cortar Escena | Desterrar | +1 eliminar una opción de la partida | 5
+20 | Fama | Encanto (más enemigos) | +20 enemigos por oleada | 5
+21 | Doblaje | Enemigos inofensivos | +1 % de enemigos que no hacen daño | 5
+22 | Censura | Sellar | +1 objeto sellado desde el menú | 5
+Cartas: Guiones y Guiones Malditos
+Hay 22 Guiones (0 a XXI) y 12 Guiones Malditos (I a XII), igual que Arcanas y Darkanas. Cada Guion es un recurso narrativo del cine que cambia las reglas de la partida. Con el modificador de cartas activo eliges 1 Guion al empezar y otros 2 en los jefes de los minutos 11 y 21.
+Guiones (22)
+Se activan con la reliquia Baraja del Guionista; cada carta se desbloquea con un logro.
+N.º | Guion | Efecto
+0 | Plano Secuencia | Los ataques con duración no terminan mientras sigas moviéndote
+I | El Héroe Reticente | Al subir de nivel lanzas una explosión que crece con tu nivel
+II | El Mentor | Los proyectiles explotan al desaparecer
+III | Giro de Guion | Moverte reduce el enfriamiento de todas las armas
+IV | La Persecución | Cuanta más velocidad llevas, más daño haces
+V | El Pacto con el Diablo | Sacrificas un 20 % de vida máx. y ganas +40 % poder
+VI | Cámara Lenta | Los enemigos cerca de ti van a cámara lenta; tus proyectiles, más lentos y más fuertes
+VII | El Montaje de Entrenamiento | Cada entrada recogida da un bonus temporal de estadísticas
+VIII | El Gran Discurso | Los golpes críticos provocan explosiones
+IX | El Cameo | Cada minuto aparece un personaje al azar que lucha a tu lado 10 s
+X | La Secuela | Las armas al máximo ganan un nivel extra
+XI | El Villano Carismático | +50 % daño a jefes y élites; te curas al dañarlos
+XII | El Final Alternativo | La primera vez que mueres, la partida retrocede 10 segundos
+XIII | La Escena Poscréditos | Cada jefe derrotado suelta una lata extra
+XIV | Efectos Prácticos | Las armas físicas queman a los enemigos
+XV | El Doble Malvado | Un doble tuyo repite tus ataques con el 50 % de daño
+XVI | El Cliffhanger | Cuanta menos vida tienes, más daño haces
+XVII | Estreno Mundial | Las entradas explotan al recogerlas y dan Taquilla
+XVIII | Noche Americana | Los enemigos lejanos no te ven; críticos ×2 de noche
+XIX | La Estrella | Cada kill suma +0,01 % de poder durante la partida
+XX | El Juicio de la Crítica | Cada 5 minutos se puntúa tu partida y recibes un premio según la nota
+XXI | Los Créditos Finales | Los enemigos muertos sueltan letras que caen y hacen daño
+Guiones Malditos (12)
+Se activan con la reliquia Baraja Maldita. Son más fuertes y siempre tienen un precio.
+N.º | Guion Maldito | Efecto | Cómo se consigue
+I | La Película Perdida | Tus armas cambian al azar cada minuto, con ×2 daño | Encontrar la Baraja Maldita
+II | El Rodaje Maldito | Al recibir daño liberas fantasmas que atacan | Morir 50 veces
+III | El Corte del Censor | Cada objeto que destierras da +5 % poder en la partida | Desterrar 100 objetos
+IV | El Fracaso de Taquilla | No ganas Taquilla, pero +30 % a todas las estadísticas | Terminar una partida con 0 de Taquilla
+V | El Actor Poseído | Algunos enemigos muertos se vuelven aliados | Derrotar a La Viuda del Ático
+VI | El Metraje Encontrado | Ves menos, pero los enemigos que no ves reciben ×3 daño | Completar el Bosque de la Cabaña con Toma Rápida
+VII | El Remake Innecesario | Las evoluciones pueden evolucionar otra vez (versión remasterizada) | Evolucionar 30 armas
+VIII | Infierno de Producción | Cada minuto pierdes un nivel de un pasivo y ganas uno en un arma | Completar el Plató de Telenovela
+IX | El Final Cortado | La partida dura 15 minutos y las recompensas son dobles | Completar 5 escenarios con Fuera de Plazo
+X | El Doblaje Mudo | Sin sonido; tus armas atacan al ritmo de la música con ×3 daño | Completar el Archivo de Cine Mudo
+XI | Fiebre del Estreno | Las latas se abren solas al aparecer, pero los enemigos van más rápido | Abrir 500 latas
+XII | El Productor Ejecutivo | Aparece al minuto 15; si lo derrotas, recompensa máxima | Derrotar al Productor Ejecutivo
+Modos de juego y modificadores
+Hay 7 modos de juego y 8 modificadores que se combinan antes de empezar un escenario. Los modificadores se desbloquean con reliquias y suben la recompensa de Taquilla.
+Modos de juego
+Modo | Qué es | Equivale a
+Rodaje | Partida normal de 30 minutos en un escenario | Modo normal
+Modo Saga | Fases encadenadas con reglas y personajes propios (51 fases) | Modo Aventura
+Director's Cut | Enemigos más fuertes y mejor botín; versión más difícil de cada mapa | Dificultad avanzada
+Maratón de Cine | Escenarios encadenados sin descanso; vence el que aguante más | Modo sin fin
+Sala de Casting | Práctica libre con armas y pasivos a elección | Escenario de práctica
+Cooperativo de Sofá | Hasta 4 jugadores en la misma pantalla | Cooperativo local
+Estreno Semanal | Un escenario con reglas fijas cada semana y tabla de puntuaciones | Reto semanal (nuevo)
+Modificadores
+Modificador | Equivale a | Efecto | Recompensa | Reliquia
+Toma Rápida | Hyper | Todo va más rápido: jugador, enemigos y proyectiles | +50 % Taquilla | Claqueta de Oro
+Fuera de Plazo | Hurry | El reloj corre el doble; la partida dura 15 minutos reales | +50 % Taquilla | Reloj de Rodaje
+Guiones | Arcanas | Activa las cartas de Guion | Cartas en la partida | Baraja del Guionista
+Sin Límite | Limitless | Las armas siguen subiendo de nivel sin tope | +50 % Taquilla | Llave del Cine Infinito
+Negativo | Inverse | Mapa con colores invertidos y enemigos más fuertes; aparece El Censor | +100 % Taquilla | Espejo de Camerino
+Maratón | Endless | Al llegar a los créditos empieza otro ciclo más difícil | +x por ciclo | Superar 30 min en el modo Director's Cut
+Imprevistos de Rodaje | Random Events | Eventos al azar: huelga de extras, lluvia artificial, apagón, visita del productor | Eventos con premio | Dado del Productor
+Cine Mudo | Nuevo | Blanco y negro, sin sonido y más velocidad | +30 % Taquilla | Completar el Archivo de Cine Mudo
+Expansiones y progresión
+Las 6 expansiones son "Festivales de cine", cada uno dedicado a un género. Igual que en el género de referencia, cada una añade escenarios, personajes, armas y logros propios.
+Festivales (expansiones)
+Festival | Escenarios | Personajes | Armas | Extra
+Festival del Miedo Oriental | 2 (25–26) | 8 | 3 | Mecánica de maldiciones con temporizador
+Festival Blockbuster | 2 (27–28) | 8 | 3 | Catástrofes de escenario
+Festival Bélico | 2 (29–30) | 8 | 3 | Armas de fuego con recarga
+Festival de Fantasía Épica | 2 (31–32) | 8 | 3 | Grupo de 3 héroes intercambiables
+Festival Stop-Motion | 1 (33) | 8 | 3 | Estilo visual a 12 fotogramas por segundo
+Festival Gótico Eterno | 1 (34) | 8 | 3 | Homenaje a los monstruos clásicos de dominio público
+Total | 10 | 48 | 18 | 
+Progresión de una cuenta
+Empiezas con el Bosque de la Cabaña y 3 personajes (Max, Vera y Dolly).
+Cada partida da Taquilla para las 22 Cláusulas del Contrato y para contratar personajes.
+Los escenarios y las reliquias se abren con logros, nunca con dinero.
+A partir del quinto escenario aparece la Silla del Director (modo Director's Cut) y, después, las reliquias de modificadores.
+Las 7 Bobinas Perdidas abren la Sala de Montaje, el Montador y la Baraja Maldita.
+Derrotar al Productor Ejecutivo cierra la "historia" y lo desbloquea como personaje.
+Unos 240 logros ("Premios de la Academia del Juego") marcan el 100 %.
+Toques de ambientación
+Al subir de nivel suena un "¡Acción!" y la pantalla se congela como un fotograma.
+Las latas de película se abren con una cuenta atrás de proyector (3, 2, 1).
+La pantalla de muerte es "¡CORTEN! Toma fallida", con un rollo de tomas falsas de la partida.
+La de victoria son los créditos con los nombres de los enemigos que mataste.
+El menú principal es la taquilla de un cine; el Catálogo es una filmoteca.
+Fuentes
+Cifras de referencia tomadas de la wiki del género: Stages, Arcanas, Evolution y PowerUps. Todos los nombres, personajes y efectos de este documento son originales.

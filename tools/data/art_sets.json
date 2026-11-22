@@ -1,0 +1,7 @@
+{
+ "forest":  {"enemy":7,"tank":8,"boss":6,"die":"enemy_die","die_frames":6,"props":[["tree",0.55],["bush",0.23],["stump",0.22]],"land":"cabin","land_scale":1.25,"glow":"ffbe50","fog":"788caa","blood":"7fb05c","start":[["cabin",230,-150],["tree",-260,-210],["stump",-150,140]]},
+ "west":    {"enemy":8,"tank":8,"boss":6,"props":[["cactus",0.4],["barrel",0.22],["rock",0.26],["wagon",0.12]],"land":"saloon","land_scale":1.0,"glow":"ffb45a","fog":"dc965a","blood":"d9c9a0","start":[["saloon",240,-140],["cactus",-250,-190],["barrel",-140,150]]},
+ "station": {"enemy":8,"tank":8,"boss":6,"props":[["crate",0.3],["cables",0.3],["pod",0.2],["console",0.2]],"land":"reactor","land_scale":1.0,"glow":"5adcff","fog":"5ac8ff","blood":"7fe0ff","start":[["reactor",230,-150],["console",-250,-200],["crate",-150,150]]},
+ "noir":    {"enemy":8,"tank":8,"boss":6,"props":[["bin",0.3],["hydrant",0.25],["car",0.25],["kiosk",0.2]],"land":"lamp","land_scale":1.0,"glow":"ebebdc","fog":"c8c8d2","blood":"d8d8d8","rain":true,"start":[["lamp",220,-150],["car",-250,-170],["bin",-140,150]]},
+ "jungle":  {"enemy":8,"tank":8,"boss":6,"props":[["fern",0.4],["palm",0.25],["column",0.2],["statue",0.15]],"land":"brazier","land_scale":1.0,"glow":"ff963c","fog":"78c878","blood":"e8dcb0","start":[["statue",230,-150],["palm",-250,-200],["brazier",-150,150]]}
+}

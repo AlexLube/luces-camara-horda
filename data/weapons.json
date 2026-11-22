@@ -1,0 +1,2678 @@
+[
+ {
+  "id": "claqueta",
+  "name": "Claqueta",
+  "desc": "Golpe en arco delante",
+  "archetype": "arc",
+  "base": {
+   "damage": 12,
+   "cooldown": 1.1,
+   "area": 95,
+   "amount": 1,
+   "knockback": 160
+  },
+  "levels": [
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "toma_final",
+   "name": "Toma Final",
+   "desc": "Un corte que cruza toda la pantalla; cura 1 por cada kill",
+   "requires": "guion_anotado",
+   "mods": {
+    "heal_on_kill": 1,
+    "area": 2.5,
+    "damage": 1.6
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "rollo_de_pelicula",
+  "name": "Rollo de Película",
+  "desc": "Gira a tu alrededor",
+  "archetype": "orbit",
+  "base": {
+   "damage": 8,
+   "cooldown": 0.3,
+   "area": 95,
+   "amount": 1,
+   "duration": 3.5,
+   "pause": 2.5,
+   "speed": 3.2,
+   "size": 18
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.5
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "cine_circular",
+   "name": "Cine Circular",
+   "desc": "6 rollos que nunca desaparecen",
+   "requires": "copia_de_seguridad",
+   "mods": {
+    "duration_inf": true,
+    "amount_add": 2
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "foco",
+  "name": "Foco",
+  "desc": "Rayo que quema al más cercano",
+  "archetype": "beam",
+  "base": {
+   "damage": 16,
+   "cooldown": 1.3,
+   "area": 360,
+   "amount": 1,
+   "width": 10
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 6
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "damage": 8
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "alfombra_roja",
+   "name": "Alfombra Roja",
+   "desc": "Láser continuo que rebota entre enemigos",
+   "requires": "lente_gran_angular",
+   "mods": {
+    "chain": 4,
+    "cooldown": 0.5
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "palomitas",
+  "name": "Palomitas",
+  "desc": "Metralla en todas direcciones",
+  "archetype": "projectile",
+  "base": {
+   "mode": "radial",
+   "damage": 7,
+   "cooldown": 1.9,
+   "amount": 8,
+   "speed": 420,
+   "range": 300,
+   "size": 8
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "cubo_xxl",
+   "name": "Cubo XXL",
+   "desc": "Explosiones pegajosas que ralentizan",
+   "requires": "mantequilla",
+   "mods": {
+    "slow": 0.4,
+    "splash": 50
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "pertiga_de_sonido",
+  "name": "Pértiga de Sonido",
+  "desc": "Barrido largo horizontal",
+  "archetype": "arc",
+  "base": {
+   "damage": 14,
+   "cooldown": 1.4,
+   "area": 150,
+   "amount": 2,
+   "shape": "horizontal",
+   "knockback": 80
+  },
+  "levels": [
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "sonido_envolvente",
+   "name": "Sonido Envolvente",
+   "desc": "Barrido de 360° que atrae entradas",
+   "requires": "microfono_inalambrico",
+   "mods": {
+    "shape": "spin",
+    "magnet_pulse": true
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "estatuilla_dorada",
+  "name": "Estatuilla Dorada",
+  "desc": "Bumerán",
+  "archetype": "projectile",
+  "base": {
+   "mode": "nearest",
+   "boomerang": true,
+   "damage": 14,
+   "cooldown": 1.6,
+   "amount": 1,
+   "speed": 380,
+   "range": 330,
+   "pierce": 99,
+   "size": 14
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "premio_a_toda_una_carrera",
+   "name": "Premio a Toda una Carrera",
+   "desc": "Lluvia de estatuillas sobre la pantalla",
+   "requires": "ego_de_estrella",
+   "mods": {
+    "mode": "rain",
+    "amount_add": 4
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "camara_de_flash",
+  "name": "Cámara de Flash",
+  "desc": "Ciega a los enemigos visibles",
+  "archetype": "screen",
+  "base": {
+   "damage": 10,
+   "cooldown": 5.5,
+   "stun": 1.0
+  },
+  "levels": [
+   {
+    "damage": 5
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "stun": 0.3
+   },
+   {
+    "damage": 6
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "stun": 0.3
+   },
+   {
+    "damage": 10
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "exposicion_total",
+   "name": "Exposición Total",
+   "desc": "Congela la pantalla 3 s y hace daño a todo",
+   "requires": "filtro_sepia",
+   "mods": {
+    "freeze": 3.0,
+    "damage": 2.0
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "bobina_rota",
+  "name": "Bobina Rota",
+  "desc": "Deja trampas en el suelo",
+  "archetype": "zone",
+  "base": {
+   "place": "under_player",
+   "damage": 9,
+   "cooldown": 2.4,
+   "area": 40,
+   "duration": 6,
+   "tick": 0.5,
+   "amount": 1
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.2
+   },
+   {
+    "damage": 5
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "bobina_del_destino",
+   "name": "Bobina del Destino",
+   "desc": "Las trampas se multiplican al activarse",
+   "requires": "galleta_de_la_suerte",
+   "mods": {
+    "multiply": true,
+    "amount_add": 2
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "megafono_del_director",
+  "name": "Megáfono del Director",
+  "desc": "Onda en cono",
+  "archetype": "cone",
+  "base": {
+   "damage": 11,
+   "cooldown": 1.8,
+   "area": 170,
+   "angle": 0.8,
+   "knockback": 120
+  },
+  "levels": [
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "corten_y_accion",
+   "name": "¡Corten y Acción!",
+   "desc": "Cada onda repite el último ataque de todas tus armas",
+   "requires": "contrato_de_estrella",
+   "mods": {
+    "echo": true,
+    "damage": 1.5
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "revolver_de_atrezo",
+  "name": "Revólver de Atrezo",
+  "desc": "Dispara al más cercano",
+  "archetype": "projectile",
+  "base": {
+   "mode": "nearest",
+   "damage": 10,
+   "cooldown": 0.9,
+   "amount": 1,
+   "speed": 700,
+   "range": 520,
+   "size": 5,
+   "burst_gap": 0.08
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "duelo_al_amanecer",
+   "name": "Duelo al Amanecer",
+   "desc": "Ráfagas de 6 balas, crítico garantizado",
+   "requires": "cafe_solo",
+   "mods": {
+    "burst": 6,
+    "crit": 1.0
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "latigo_del_explorador",
+  "name": "Látigo del Explorador",
+  "desc": "Latigazo horizontal",
+  "archetype": "arc",
+  "base": {
+   "damage": 13,
+   "cooldown": 1.2,
+   "area": 170,
+   "amount": 1,
+   "shape": "horizontal",
+   "knockback": 60
+  },
+  "levels": [
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "latigo_del_idolo_de_oro",
+   "name": "Látigo del Ídolo de Oro",
+   "desc": "Roba vida en cada golpe",
+   "requires": "batido_de_proteinas",
+   "mods": {
+    "lifesteal": 0.08,
+    "damage": 1.5
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "motosierra_de_atrezo",
+  "name": "Motosierra de Atrezo",
+  "desc": "Daño continuo cuerpo a cuerpo",
+  "archetype": "aura",
+  "base": {
+   "damage": 5,
+   "cooldown": 0.25,
+   "area": 58,
+   "knockback": 20
+  },
+  "levels": [
+   {
+    "damage": 2
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 4
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "motor_sin_fin",
+   "name": "Motor Sin Fin",
+   "desc": "Doble alcance; aterroriza (los enemigos huyen)",
+   "requires": "chaleco_de_especialista",
+   "mods": {
+    "area": 2.0,
+    "fear": true
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "pistola_de_rayos",
+  "name": "Pistola de Rayos",
+  "desc": "Láser que atraviesa",
+  "archetype": "projectile",
+  "base": {
+   "mode": "facing",
+   "damage": 12,
+   "cooldown": 1.2,
+   "amount": 1,
+   "speed": 900,
+   "range": 700,
+   "pierce": 5,
+   "size": 4
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "desintegrador",
+   "name": "Desintegrador",
+   "desc": "Atraviesa todo y borra a los enemigos débiles",
+   "requires": "camara_rapida",
+   "mods": {
+    "pierce": 999,
+    "execute": 0.15
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "sable_de_neon",
+  "name": "Sable de Neón",
+  "desc": "Tajos rápidos en cruz",
+  "archetype": "arc",
+  "base": {
+   "damage": 9,
+   "cooldown": 0.7,
+   "area": 80,
+   "amount": 2,
+   "shape": "cross"
+  },
+  "levels": [
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "sable_del_maestro",
+   "name": "Sable del Maestro",
+   "desc": "Refleja los proyectiles enemigos",
+   "requires": "filtro_infrarrojo",
+   "mods": {
+    "reflect": true,
+    "amount_add": 2
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "crucifijo_de_utileria",
+  "name": "Crucifijo de Utilería",
+  "desc": "Se lanza y vuelve; extra a no-muertos",
+  "archetype": "projectile",
+  "base": {
+   "mode": "facing",
+   "boomerang": true,
+   "damage": 12,
+   "cooldown": 1.5,
+   "amount": 1,
+   "speed": 420,
+   "range": 300,
+   "pierce": 99,
+   "size": 12,
+   "undead_bonus": 0.5
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "reliquia_sagrada_del_plato",
+   "name": "Reliquia Sagrada del Plató",
+   "desc": "Elimina al instante a los no-muertos débiles",
+   "requires": "doble_de_cuerpo",
+   "mods": {
+    "execute_undead": 0.3
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "tarta_de_crema",
+  "name": "Tarta de Crema",
+  "desc": "Proyectil que salpica",
+  "archetype": "projectile",
+  "base": {
+   "mode": "nearest",
+   "damage": 10,
+   "cooldown": 1.4,
+   "amount": 1,
+   "speed": 360,
+   "range": 400,
+   "splash": 60,
+   "size": 12
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "guerra_de_tartas",
+   "name": "Guerra de Tartas",
+   "desc": "Salpicaduras en cadena; da Taquilla",
+   "requires": "gafas_de_productor",
+   "mods": {
+    "chain": 3,
+    "greed_on_hit": 1
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "piel_de_platano",
+  "name": "Piel de Plátano",
+  "desc": "Hace tropezar",
+  "archetype": "zone",
+  "base": {
+   "place": "random_near",
+   "damage": 4,
+   "cooldown": 2.0,
+   "area": 34,
+   "duration": 8,
+   "tick": 0.6,
+   "amount": 2,
+   "slow": 0.6
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.2
+   },
+   {
+    "damage": 5
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "resbalon_infinito",
+   "name": "Resbalón Infinito",
+   "desc": "Los enemigos caídos derriban a los demás",
+   "requires": "zapatillas_de_claque",
+   "mods": {
+    "topple": true,
+    "amount_add": 3
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "yunque_de_dibujos",
+  "name": "Yunque de Dibujos",
+  "desc": "Cae del cielo",
+  "archetype": "zone",
+  "base": {
+   "place": "nearest_enemy",
+   "damage": 28,
+   "cooldown": 2.2,
+   "area": 55,
+   "duration": 0.25,
+   "tick": 1,
+   "amount": 1,
+   "delay": 0.5
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.2
+   },
+   {
+    "damage": 5
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "piano_de_cola",
+   "name": "Piano de Cola",
+   "desc": "Un piano que aplasta una zona enorme",
+   "requires": "mala_critica",
+   "mods": {
+    "area": 3.0,
+    "damage": 2.0
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "dinamita_de_mecha",
+  "name": "Dinamita de Mecha",
+  "desc": "Explota tras un retardo",
+  "archetype": "zone",
+  "base": {
+   "place": "random_near",
+   "damage": 26,
+   "cooldown": 2.6,
+   "area": 80,
+   "duration": 0.25,
+   "tick": 1,
+   "amount": 1,
+   "delay": 1.2
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.2
+   },
+   {
+    "damage": 5
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "barril_de_polvora_animado",
+   "name": "Barril de Pólvora Animado",
+   "desc": "Explosiones en cadena por toda la pantalla",
+   "requires": "caja_de_atrezo_maldita",
+   "mods": {
+    "chain": 5,
+    "amount_add": 2
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "lazo_del_vaquero",
+  "name": "Lazo del Vaquero",
+  "desc": "Atrae y ata",
+  "archetype": "cone",
+  "base": {
+   "damage": 6,
+   "cooldown": 2.2,
+   "area": 220,
+   "angle": 0.35,
+   "pull": 260
+  },
+  "levels": [
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "rodeo_imparable",
+   "name": "Rodeo Imparable",
+   "desc": "Arrastra grupos enteros y los estampa",
+   "requires": "zapatillas_de_claque",
+   "mods": {
+    "pull": 2.0,
+    "damage": 2.0
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "maquina_de_humo",
+  "name": "Máquina de Humo",
+  "desc": "Aura de daño",
+  "archetype": "aura",
+  "base": {
+   "damage": 3,
+   "cooldown": 0.5,
+   "area": 90,
+   "slow": 0.15
+  },
+  "levels": [
+   {
+    "damage": 2
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 4
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "niebla_del_terror",
+   "name": "Niebla del Terror",
+   "desc": "Aura enorme que ralentiza un 30 %",
+   "requires": "batido_de_proteinas",
+   "mods": {
+    "area": 2.2,
+    "slow": 0.3
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "rayo_de_efectos_especiales",
+  "name": "Rayo de Efectos Especiales",
+  "desc": "Rayos al azar",
+  "archetype": "zone",
+  "base": {
+   "place": "random_enemy",
+   "damage": 18,
+   "cooldown": 1.6,
+   "area": 30,
+   "duration": 0.2,
+   "tick": 1,
+   "amount": 2
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.2
+   },
+   {
+    "damage": 5
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "tormenta_de_pantalla_verde",
+   "name": "Tormenta de Pantalla Verde",
+   "desc": "Rayos constantes que buscan grupos",
+   "requires": "copia_de_seguridad",
+   "mods": {
+    "cooldown": 0.4,
+    "amount_add": 3
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "ventilador_gigante",
+  "name": "Ventilador Gigante",
+  "desc": "Empuja enemigos",
+  "archetype": "cone",
+  "base": {
+   "damage": 3,
+   "cooldown": 1.0,
+   "area": 200,
+   "angle": 0.6,
+   "knockback": 340
+  },
+  "levels": [
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "huracan_de_plato",
+   "name": "Huracán de Plató",
+   "desc": "Tornado que recorre el mapa",
+   "requires": "cafe_solo",
+   "mods": {
+    "tornado": true,
+    "damage": 2.0
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "sangre_falsa",
+  "name": "Sangre Falsa",
+  "desc": "Charcos de daño",
+  "archetype": "zone",
+  "base": {
+   "place": "random_near",
+   "damage": 5,
+   "cooldown": 2.2,
+   "area": 50,
+   "duration": 4,
+   "tick": 0.5,
+   "amount": 1
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.2
+   },
+   {
+    "damage": 5
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "bano_de_serie_b",
+   "name": "Baño de Serie B",
+   "desc": "Los charcos te siguen y se juntan",
+   "requires": "lente_gran_angular",
+   "mods": {
+    "follow": true,
+    "area": 1.6
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "tijeras_de_montaje",
+  "name": "Tijeras de Montaje",
+  "desc": "Proyectil hacia donde miras",
+  "archetype": "projectile",
+  "base": {
+   "mode": "facing",
+   "damage": 9,
+   "cooldown": 0.55,
+   "amount": 1,
+   "speed": 650,
+   "range": 480,
+   "pierce": 1,
+   "size": 8
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "corte_final",
+   "name": "Corte Final",
+   "desc": "Tijeras infinitas sin enfriamiento",
+   "requires": "camara_rapida",
+   "mods": {
+    "cooldown": 0.15
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "guion_volador",
+  "name": "Guion Volador",
+  "desc": "Teledirigido al más cercano",
+  "archetype": "projectile",
+  "base": {
+   "mode": "homing",
+   "damage": 11,
+   "cooldown": 1.5,
+   "amount": 1,
+   "speed": 330,
+   "range": 800,
+   "size": 9
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "guion_ganador",
+   "name": "Guion Ganador",
+   "desc": "5 guiones que se reparten objetivos",
+   "requires": "contrato_de_estrella",
+   "mods": {
+    "amount_add": 4
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "confeti_de_estreno",
+  "name": "Confeti de Estreno",
+  "desc": "Disparos al azar",
+  "archetype": "projectile",
+  "base": {
+   "mode": "random",
+   "damage": 6,
+   "cooldown": 0.6,
+   "amount": 2,
+   "speed": 450,
+   "range": 380,
+   "size": 5
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "fuegos_del_estreno",
+   "name": "Fuegos del Estreno",
+   "desc": "Fuegos artificiales que explotan en área",
+   "requires": "galleta_de_la_suerte",
+   "mods": {
+    "splash": 70,
+    "damage": 1.6
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "proyector_portatil",
+  "name": "Proyector Portátil",
+  "desc": "Cono de luz giratorio",
+  "archetype": "cone",
+  "base": {
+   "damage": 4,
+   "cooldown": 0.3,
+   "area": 190,
+   "angle": 0.45,
+   "rotate": 1.6
+  },
+  "levels": [
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "sesion_doble",
+   "name": "Sesión Doble",
+   "desc": "Dos conos opuestos permanentes",
+   "requires": "guion_anotado",
+   "mods": {
+    "double": true,
+    "duration_inf": true
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "grua_de_camara",
+  "name": "Grúa de Cámara",
+  "desc": "Golpe lento y enorme",
+  "archetype": "arc",
+  "base": {
+   "damage": 30,
+   "cooldown": 2.6,
+   "area": 130,
+   "amount": 1,
+   "shape": "slam",
+   "knockback": 200
+  },
+  "levels": [
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "plano_cenital",
+   "name": "Plano Cenital",
+   "desc": "Golpe desde arriba en toda una zona",
+   "requires": "ego_de_estrella",
+   "mods": {
+    "area": 2.5,
+    "damage": 1.5
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "celuloide_en_llamas",
+  "name": "Celuloide en Llamas",
+  "desc": "Rastro de fuego",
+  "archetype": "zone",
+  "base": {
+   "place": "trail",
+   "damage": 4,
+   "cooldown": 0.35,
+   "area": 26,
+   "duration": 2.5,
+   "tick": 0.5,
+   "amount": 1
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.2
+   },
+   {
+    "damage": 5
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "incendio_del_nitrato",
+   "name": "Incendio del Nitrato",
+   "desc": "El fuego se extiende solo",
+   "requires": "mala_critica",
+   "mods": {
+    "spread": true,
+    "duration": 2.0
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "dron_de_rodaje",
+  "name": "Dron de Rodaje",
+  "desc": "Compañero que dispara",
+  "archetype": "companion",
+  "base": {
+   "damage": 8,
+   "cooldown": 0.9,
+   "amount": 1,
+   "speed": 600,
+   "range": 450,
+   "size": 5
+  },
+  "levels": [
+   {
+    "damage": 3
+   },
+   {
+    "amount": 1
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "escuadron_de_drones",
+   "name": "Escuadrón de Drones",
+   "desc": "4 drones que te rodean",
+   "requires": "copia_de_seguridad",
+   "mods": {
+    "amount_add": 3
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "nunchakus_de_goma",
+  "name": "Nunchakus de Goma",
+  "desc": "Giros rápidos cercanos",
+  "archetype": "aura",
+  "base": {
+   "damage": 8,
+   "cooldown": 0.45,
+   "area": 70,
+   "knockback": 140
+  },
+  "levels": [
+   {
+    "damage": 2
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 4
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "puno_de_las_mil_palmas",
+   "name": "Puño de las Mil Palmas",
+   "desc": "Ráfagas de golpes que empujan",
+   "requires": "chaleco_de_especialista",
+   "mods": {
+    "cooldown": 0.4,
+    "knockback": 2.0
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "coche_de_persecucion",
+  "name": "Coche de Persecución",
+  "desc": "Un coche cruza la pantalla",
+  "archetype": "car",
+  "base": {
+   "damage": 30,
+   "cooldown": 4.0,
+   "amount": 1,
+   "speed": 900,
+   "size": 40
+  },
+  "levels": [
+   {
+    "damage": 10
+   },
+   {
+    "amount": 1
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 10
+   },
+   {
+    "amount": 1
+   },
+   {
+    "size": 0.2
+   },
+   {
+    "damage": 15
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "persecucion_sin_frenos",
+   "name": "Persecución Sin Frenos",
+   "desc": "Varios coches y explosiones al chocar",
+   "requires": "camara_rapida",
+   "mods": {
+    "amount_add": 3,
+    "splash": 90
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "paraguas_de_musical",
+  "name": "Paraguas de Musical",
+  "desc": "Escudo giratorio que bloquea",
+  "archetype": "orbit",
+  "base": {
+   "damage": 5,
+   "cooldown": 0.3,
+   "area": 60,
+   "amount": 1,
+   "duration": 99,
+   "pause": 0,
+   "speed": 2.4,
+   "size": 22,
+   "block": true
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.5
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "tormenta_musical",
+   "name": "Tormenta Musical",
+   "desc": "Lluvia que daña y bloquea todo proyectil",
+   "requires": "cartel_de_estreno",
+   "mods": {
+    "block_all": true,
+    "area": 1.8
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "baston_de_claque",
+  "name": "Bastón de Claqué",
+  "desc": "Onda al ritmo a tu alrededor",
+  "archetype": "aura",
+  "base": {
+   "damage": 9,
+   "cooldown": 1.2,
+   "area": 110,
+   "pulse": true
+  },
+  "levels": [
+   {
+    "damage": 2
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 4
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "numero_final",
+   "name": "Número Final",
+   "desc": "Ondas dobles; más daño si te mueves",
+   "requires": "zapatillas_de_claque",
+   "mods": {
+    "double": true,
+    "move_bonus": 0.5
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "ovacion_del_publico",
+  "name": "Ovación del Público",
+  "desc": "Ondas que crecen con las kills",
+  "archetype": "aura",
+  "base": {
+   "damage": 7,
+   "cooldown": 1.6,
+   "area": 80,
+   "pulse": true,
+   "grow_on_kill": 0.002
+  },
+  "levels": [
+   {
+    "damage": 2
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 4
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "ovacion_de_pie",
+   "name": "Ovación de Pie",
+   "desc": "Ondas que no dejan de crecer en toda la partida",
+   "requires": "gafas_de_productor",
+   "mods": {
+    "grow_forever": true
+   }
+  },
+  "source": "base"
+ },
+ {
+  "id": "cabello_maldito",
+  "name": "Cabello Maldito",
+  "desc": "Latigazo largo que atrapa",
+  "archetype": "arc",
+  "base": {
+   "damage": 12,
+   "cooldown": 1.3,
+   "area": 200,
+   "amount": 1,
+   "shape": "horizontal",
+   "slow": 0.3
+  },
+  "levels": [
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "melena_infinita",
+   "name": "Melena Infinita",
+   "desc": "",
+   "requires": "batido_de_proteinas",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Miedo Oriental"
+ },
+ {
+  "id": "talisman_de_papel",
+  "name": "Talismán de Papel",
+  "desc": "Orbita y sella enemigos",
+  "archetype": "orbit",
+  "base": {
+   "damage": 7,
+   "cooldown": 0.3,
+   "area": 110,
+   "amount": 2,
+   "duration": 4,
+   "pause": 2,
+   "speed": 2.6,
+   "size": 14,
+   "stun": 0.4
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.5
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "muro_de_sellos",
+   "name": "Muro de Sellos",
+   "desc": "",
+   "requires": "guion_anotado",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Miedo Oriental"
+ },
+ {
+  "id": "cinta_de_video_maldita",
+  "name": "Cinta de Vídeo Maldita",
+  "desc": "Marca enemigos que mueren a los 7 s",
+  "archetype": "mark",
+  "base": {
+   "damage": 60,
+   "cooldown": 2.5,
+   "amount": 2,
+   "delay": 7
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 20
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 25
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 40
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "siete_dias",
+   "name": "Siete Días",
+   "desc": "",
+   "requires": "mala_critica",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Miedo Oriental"
+ },
+ {
+  "id": "dardos_tranquilizantes",
+  "name": "Dardos Tranquilizantes",
+  "desc": "Dardos que duermen",
+  "archetype": "projectile",
+  "base": {
+   "mode": "nearest",
+   "damage": 6,
+   "cooldown": 0.9,
+   "amount": 2,
+   "speed": 600,
+   "range": 500,
+   "size": 5,
+   "stun": 0.8
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "safari_nocturno",
+   "name": "Safari Nocturno",
+   "desc": "",
+   "requires": "camara_rapida",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Blockbuster"
+ },
+ {
+  "id": "rayo_de_tormenta",
+  "name": "Rayo de Tormenta",
+  "desc": "Relámpagos en línea",
+  "archetype": "beam",
+  "base": {
+   "damage": 14,
+   "cooldown": 1.5,
+   "area": 420,
+   "amount": 1,
+   "width": 16,
+   "direction": "facing"
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 6
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "damage": 8
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "supercelula",
+   "name": "Supercélula",
+   "desc": "",
+   "requires": "lente_gran_angular",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Blockbuster"
+ },
+ {
+  "id": "taladro_de_perforacion",
+  "name": "Taladro de Perforación",
+  "desc": "Perfora en línea recta",
+  "archetype": "projectile",
+  "base": {
+   "mode": "facing",
+   "damage": 10,
+   "cooldown": 1.8,
+   "amount": 1,
+   "speed": 300,
+   "range": 600,
+   "pierce": 99,
+   "size": 16
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "nucleo_del_planeta",
+   "name": "Núcleo del Planeta",
+   "desc": "",
+   "requires": "chaleco_de_especialista",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Blockbuster"
+ },
+ {
+  "id": "granadas",
+  "name": "Granadas",
+  "desc": "Lanzamiento en parábola",
+  "archetype": "zone",
+  "base": {
+   "place": "nearest_enemy",
+   "damage": 22,
+   "cooldown": 2.0,
+   "area": 70,
+   "duration": 0.25,
+   "tick": 1,
+   "amount": 1,
+   "delay": 0.8
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.2
+   },
+   {
+    "damage": 5
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "bombardeo_de_saturacion",
+   "name": "Bombardeo de Saturación",
+   "desc": "",
+   "requires": "caja_de_atrezo_maldita",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Bélico"
+ },
+ {
+  "id": "rifle_de_mira",
+  "name": "Rifle de Mira",
+  "desc": "Un disparo lejano muy fuerte",
+  "archetype": "projectile",
+  "base": {
+   "mode": "nearest",
+   "damage": 45,
+   "cooldown": 2.4,
+   "amount": 1,
+   "speed": 1400,
+   "range": 900,
+   "pierce": 3,
+   "size": 4
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "bala_que_nunca_falla",
+   "name": "Bala Que Nunca Falla",
+   "desc": "",
+   "requires": "filtro_infrarrojo",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Bélico"
+ },
+ {
+  "id": "llamada_de_artilleria",
+  "name": "Llamada de Artillería",
+  "desc": "Marca zonas que luego explotan",
+  "archetype": "zone",
+  "base": {
+   "place": "random_enemy",
+   "damage": 30,
+   "cooldown": 3.0,
+   "area": 90,
+   "duration": 0.25,
+   "tick": 1,
+   "amount": 2,
+   "delay": 1.5
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "amount": 1
+   },
+   {
+    "duration": 0.2
+   },
+   {
+    "damage": 5
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "ataque_aereo",
+   "name": "Ataque Aéreo",
+   "desc": "",
+   "requires": "pase_de_prensa",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Bélico"
+ },
+ {
+  "id": "hacha_doble",
+  "name": "Hacha Doble",
+  "desc": "Giro con hacha",
+  "archetype": "arc",
+  "base": {
+   "damage": 16,
+   "cooldown": 1.6,
+   "area": 100,
+   "amount": 1,
+   "shape": "spin",
+   "knockback": 120
+  },
+  "levels": [
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.1
+   },
+   {
+    "damage": 6
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "hacha_del_rey_barbaro",
+   "name": "Hacha del Rey Bárbaro",
+   "desc": "",
+   "requires": "ego_de_estrella",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Fantasía Épica"
+ },
+ {
+  "id": "arco_largo",
+  "name": "Arco Largo",
+  "desc": "Flechas que perforan",
+  "archetype": "projectile",
+  "base": {
+   "mode": "nearest",
+   "damage": 12,
+   "cooldown": 1.0,
+   "amount": 1,
+   "speed": 800,
+   "range": 650,
+   "pierce": 3,
+   "size": 5
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "lluvia_de_flechas",
+   "name": "Lluvia de Flechas",
+   "desc": "",
+   "requires": "copia_de_seguridad",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Fantasía Épica"
+ },
+ {
+  "id": "baculo_del_peregrino",
+  "name": "Báculo del Peregrino",
+  "desc": "Luz que repele",
+  "archetype": "aura",
+  "base": {
+   "damage": 4,
+   "cooldown": 0.6,
+   "area": 100,
+   "knockback": 220
+  },
+  "levels": [
+   {
+    "damage": 2
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 4
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "baculo_blanco",
+   "name": "Báculo Blanco",
+   "desc": "",
+   "requires": "doble_de_cuerpo",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Fantasía Épica"
+ },
+ {
+  "id": "bola_de_arcilla",
+  "name": "Bola de Arcilla",
+  "desc": "Rebota y cambia de forma",
+  "archetype": "projectile",
+  "base": {
+   "mode": "nearest",
+   "damage": 12,
+   "cooldown": 1.6,
+   "amount": 1,
+   "speed": 380,
+   "range": 900,
+   "bounce": 4,
+   "size": 12
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "escultura_viviente",
+   "name": "Escultura Viviente",
+   "desc": "",
+   "requires": "contrato_de_estrella",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Stop-Motion"
+ },
+ {
+  "id": "agujas_de_costura",
+  "name": "Agujas de Costura",
+  "desc": "Cose enemigos entre sí",
+  "archetype": "projectile",
+  "base": {
+   "mode": "random",
+   "damage": 7,
+   "cooldown": 0.7,
+   "amount": 3,
+   "speed": 700,
+   "range": 400,
+   "pierce": 2,
+   "size": 4,
+   "stun": 0.3
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "remiendo_total",
+   "name": "Remiendo Total",
+   "desc": "",
+   "requires": "galleta_de_la_suerte",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Stop-Motion"
+ },
+ {
+  "id": "calabaza",
+  "name": "Calabaza",
+  "desc": "Explota en semillas",
+  "archetype": "projectile",
+  "base": {
+   "mode": "nearest",
+   "damage": 14,
+   "cooldown": 2.0,
+   "amount": 1,
+   "speed": 300,
+   "range": 300,
+   "splash": 70,
+   "size": 14,
+   "shards": 6
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "noche_de_calabazas",
+   "name": "Noche de Calabazas",
+   "desc": "",
+   "requires": "mantequilla",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Stop-Motion"
+ },
+ {
+  "id": "murcielagos",
+  "name": "Murciélagos",
+  "desc": "Enjambre que persigue",
+  "archetype": "projectile",
+  "base": {
+   "mode": "homing",
+   "damage": 5,
+   "cooldown": 1.0,
+   "amount": 3,
+   "speed": 380,
+   "range": 700,
+   "size": 6
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "nube_de_la_noche",
+   "name": "Nube de la Noche",
+   "desc": "",
+   "requires": "microfono_inalambrico",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Gótico Eterno"
+ },
+ {
+  "id": "ballesta_de_estacas",
+  "name": "Ballesta de Estacas",
+  "desc": "Estacas que atraviesan",
+  "archetype": "projectile",
+  "base": {
+   "mode": "facing",
+   "damage": 15,
+   "cooldown": 1.3,
+   "amount": 1,
+   "speed": 850,
+   "range": 700,
+   "pierce": 4,
+   "size": 6,
+   "undead_bonus": 0.5
+  },
+  "levels": [
+   {
+    "amount": 1
+   },
+   {
+    "damage": 4
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "amount": 1
+   },
+   {
+    "damage": 5
+   },
+   {
+    "pierce": 1
+   },
+   {
+    "amount": 1
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "amanecer",
+   "name": "Amanecer",
+   "desc": "",
+   "requires": "cartel_de_estreno",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Gótico Eterno"
+ },
+ {
+  "id": "copa_de_vino",
+  "name": "Copa de Vino",
+  "desc": "Roba vida en área",
+  "archetype": "aura",
+  "base": {
+   "damage": 4,
+   "cooldown": 0.6,
+   "area": 85,
+   "lifesteal": 0.15
+  },
+  "levels": [
+   {
+    "damage": 2
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 3
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.08
+   },
+   {
+    "damage": 4
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "banquete_eterno",
+   "name": "Banquete Eterno",
+   "desc": "",
+   "requires": "maquillaje",
+   "mods": {
+    "damage": 1.8,
+    "amount_add": 1
+   }
+  },
+  "source": "Festival Gótico Eterno"
+ }
+]

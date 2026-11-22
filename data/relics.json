@@ -1,0 +1,226 @@
+[
+ {
+  "id": "mapa_de_localizaciones",
+  "num": "1",
+  "name": "Mapa de Localizaciones",
+  "unlocks": "Muestra los objetos del escenario en el mapa",
+  "where": "Bosque de la Cabaña"
+ },
+ {
+  "id": "libro_de_montaje",
+  "num": "2",
+  "name": "Libro de Montaje",
+  "unlocks": "Muestra los requisitos de evolución en el menú",
+  "where": "Ciudad Noir"
+ },
+ {
+  "id": "claqueta_de_oro",
+  "num": "3",
+  "name": "Claqueta de Oro",
+  "unlocks": "Modificador Toma Rápida",
+  "where": "Pueblo Polvoriento"
+ },
+ {
+  "id": "reloj_de_rodaje",
+  "num": "4",
+  "name": "Reloj de Rodaje",
+  "unlocks": "Modificador Fuera de Plazo",
+  "where": "Estación Orbital Zeta"
+ },
+ {
+  "id": "baraja_del_guionista",
+  "num": "5",
+  "name": "Baraja del Guionista",
+  "unlocks": "Las 22 cartas de Guion",
+  "where": "Templo de la Selva"
+ },
+ {
+  "id": "baraja_maldita",
+  "num": "6",
+  "name": "Baraja Maldita",
+  "unlocks": "Los 12 Guiones Malditos",
+  "where": "Sala de Montaje"
+ },
+ {
+  "id": "llave_del_cine_infinito",
+  "num": "7",
+  "name": "Llave del Cine Infinito",
+  "unlocks": "Modificador Sin Límite",
+  "where": "Laboratorio del Doctor Loco"
+ },
+ {
+  "id": "espejo_de_camerino",
+  "num": "8",
+  "name": "Espejo de Camerino",
+  "unlocks": "Modificador Negativo",
+  "where": "Mansión Victoriana"
+ },
+ {
+  "id": "dado_del_productor",
+  "num": "9",
+  "name": "Dado del Productor",
+  "unlocks": "Modificador Imprevistos de Rodaje",
+  "where": "Autocine Abandonado"
+ },
+ {
+  "id": "silla_del_director",
+  "num": "10",
+  "name": "Silla del Director",
+  "unlocks": "Modo Director's Cut",
+  "where": "Completar 5 escenarios"
+ },
+ {
+  "id": "gafas_3d",
+  "num": "11",
+  "name": "Gafas 3D",
+  "unlocks": "Ver enemigos invisibles en todos los mapas",
+  "where": "Neón 2099"
+ },
+ {
+  "id": "tarjeta_del_sindicato",
+  "num": "12",
+  "name": "Tarjeta del Sindicato",
+  "unlocks": "Sellar objetos para que no salgan en las mejoras",
+  "where": "Plató de Telenovela"
+ },
+ {
+  "id": "gramofono",
+  "num": "13",
+  "name": "Gramófono",
+  "unlocks": "Abre Broadway en Llamas",
+  "where": "Ciudad Noir"
+ },
+ {
+  "id": "gabardina",
+  "num": "14",
+  "name": "Gabardina",
+  "unlocks": "Desbloquea a Sam Shade",
+  "where": "Ciudad Noir"
+ },
+ {
+  "id": "tijeras_de_plata",
+  "num": "15",
+  "name": "Tijeras de Plata",
+  "unlocks": "Desbloquea a Cutter Vega",
+  "where": "Ciudad Noir"
+ },
+ {
+  "id": "bobina_perdida_1",
+  "num": "16",
+  "name": "Bobina Perdida 1",
+  "unlocks": "Juntas abren la Sala de Montaje",
+  "where": "Escenario de desafío 13"
+ },
+ {
+  "id": "bobina_perdida_2",
+  "num": "17",
+  "name": "Bobina Perdida 2",
+  "unlocks": "Juntas abren la Sala de Montaje",
+  "where": "Escenario de desafío 14"
+ },
+ {
+  "id": "bobina_perdida_3",
+  "num": "18",
+  "name": "Bobina Perdida 3",
+  "unlocks": "Juntas abren la Sala de Montaje",
+  "where": "Escenario de desafío 15"
+ },
+ {
+  "id": "bobina_perdida_4",
+  "num": "19",
+  "name": "Bobina Perdida 4",
+  "unlocks": "Juntas abren la Sala de Montaje",
+  "where": "Escenario de desafío 16"
+ },
+ {
+  "id": "bobina_perdida_5",
+  "num": "20",
+  "name": "Bobina Perdida 5",
+  "unlocks": "Juntas abren la Sala de Montaje",
+  "where": "Escenario de desafío 17"
+ },
+ {
+  "id": "bobina_perdida_6",
+  "num": "21",
+  "name": "Bobina Perdida 6",
+  "unlocks": "Juntas abren la Sala de Montaje",
+  "where": "Escenario de desafío 18"
+ },
+ {
+  "id": "bobina_perdida_7",
+  "num": "22",
+  "name": "Bobina Perdida 7",
+  "unlocks": "Juntas abren la Sala de Montaje",
+  "where": "Escenario de desafío 19"
+ },
+ {
+  "id": "bobina_0",
+  "num": "23",
+  "name": "Bobina 0",
+  "unlocks": "Desbloquea a Fotograma 0",
+  "where": "Sala de Montaje"
+ },
+ {
+  "id": "codigo_de_claqueta",
+  "num": "24",
+  "name": "Código de Claqueta",
+  "unlocks": "Menú de códigos secretos",
+  "where": "Búnker Rojo"
+ },
+ {
+  "id": "llave_del_archivo",
+  "num": "25",
+  "name": "Llave del Archivo",
+  "unlocks": "Abre el Catálogo (bestiario)",
+  "where": "Archivo de Cine Mudo"
+ },
+ {
+  "id": "cintas_de_musica",
+  "num": "26",
+  "name": "Cintas de Música",
+  "unlocks": "Sala de música para escuchar la banda sonora",
+  "where": "Broadway en Llamas"
+ },
+ {
+  "id": "mando_de_pantalla_dividida",
+  "num": "27",
+  "name": "Mando de Pantalla Dividida",
+  "unlocks": "Cooperativo local hasta 4 jugadores",
+  "where": "Barrio Animado"
+ },
+ {
+  "id": "entrada_dorada",
+  "num": "28",
+  "name": "Entrada Dorada",
+  "unlocks": "Bonus de Taquilla al terminar",
+  "where": "Alfombra Roja"
+ },
+ {
+  "id": "carrete_de_tomas_falsas",
+  "num": "29",
+  "name": "Carrete de Tomas Falsas",
+  "unlocks": "Aspectos alternativos de personajes",
+  "where": "Plató de Telenovela"
+ },
+ {
+  "id": "bobina_dorada",
+  "num": "30",
+  "name": "Bobina Dorada",
+  "unlocks": "Abre el modo Saga",
+  "where": "Completar 10 escenarios"
+ },
+ {
+  "id": "cinturon_negro",
+  "num": "31",
+  "name": "Cinturón Negro",
+  "unlocks": "+1 cantidad a las armas cuerpo a cuerpo",
+  "where": "Saga Leyenda del Puño"
+ },
+ {
+  "id": "casco_de_rescate",
+  "num": "32",
+  "name": "Casco de Rescate",
+  "unlocks": "+1 revivir permanente",
+  "where": "Saga Día de Desastre"
+ }
+]

@@ -1,0 +1,1491 @@
+[
+ {
+  "id": "unlock_max_rios",
+  "name": "Fichaje: Max Ríos",
+  "desc": "Inicial",
+  "cond": {
+   "type": "initial"
+  },
+  "reward": {
+   "character": "max_rios"
+  }
+ },
+ {
+  "id": "unlock_vera_lys",
+  "name": "Fichaje: Vera Lys",
+  "desc": "Inicial",
+  "cond": {
+   "type": "initial"
+  },
+  "reward": {
+   "character": "vera_lys"
+  }
+ },
+ {
+  "id": "unlock_dolly_ray",
+  "name": "Fichaje: Dolly Ray",
+  "desc": "Inicial",
+  "cond": {
+   "type": "initial"
+  },
+  "reward": {
+   "character": "dolly_ray"
+  }
+ },
+ {
+  "id": "unlock_hugo_brandt",
+  "name": "Fichaje: Hugo Brandt",
+  "desc": "Sobrevivir 10 min",
+  "cond": {
+   "type": "survive",
+   "minutes": 10,
+   "stage": null
+  },
+  "reward": {
+   "character": "hugo_brandt"
+  }
+ },
+ {
+  "id": "unlock_otto_pirotecnia",
+  "name": "Fichaje: Otto Pirotecnia",
+  "desc": "Evolucionar un arma",
+  "cond": {
+   "type": "evolutions",
+   "value": 1
+  },
+  "reward": {
+   "character": "otto_pirotecnia"
+  }
+ },
+ {
+  "id": "unlock_margot_pell",
+  "name": "Fichaje: Margot Pell",
+  "desc": "Derrotar 20 jefes",
+  "cond": {
+   "type": "bosses",
+   "value": 20
+  },
+  "reward": {
+   "character": "margot_pell"
+  }
+ },
+ {
+  "id": "unlock_rex_calloway",
+  "name": "Fichaje: Rex Calloway",
+  "desc": "Llegar al Templo de la Selva",
+  "cond": {
+   "type": "play",
+   "stage": "templo_de_la_selva"
+  },
+  "reward": {
+   "character": "rex_calloway"
+  }
+ },
+ {
+  "id": "unlock_bruno_hacha",
+  "name": "Fichaje: Bruno Hacha",
+  "desc": "15 min en el Bosque de la Cabaña",
+  "cond": {
+   "type": "survive",
+   "minutes": 15,
+   "stage": "bosque_de_la_cabana"
+  },
+  "reward": {
+   "character": "bruno_hacha"
+  }
+ },
+ {
+  "id": "unlock_lina_nova",
+  "name": "Fichaje: Lina Nova",
+  "desc": "Llegar a la Estación Orbital",
+  "cond": {
+   "type": "play",
+   "stage": "estacion_orbital_zeta"
+  },
+  "reward": {
+   "character": "lina_nova"
+  }
+ },
+ {
+  "id": "unlock_sam_shade",
+  "name": "Fichaje: Sam Shade",
+  "desc": "Encontrar la gabardina en Ciudad Noir",
+  "cond": {
+   "type": "manual",
+   "text": "Encontrar la gabardina en Ciudad Noir"
+  },
+  "reward": {
+   "character": "sam_shade"
+  }
+ },
+ {
+  "id": "unlock_pippo",
+  "name": "Fichaje: Pippo",
+  "desc": "10 min en el Archivo de Cine Mudo",
+  "cond": {
+   "type": "survive",
+   "minutes": 10,
+   "stage": "archivo_de_cine_mudo"
+  },
+  "reward": {
+   "character": "pippo"
+  }
+ },
+ {
+  "id": "unlock_coco_banana",
+  "name": "Fichaje: Coco Banana",
+  "desc": "Hacer tropezar a 1.000 enemigos",
+  "cond": {
+   "type": "manual",
+   "text": "Hacer tropezar a 1.000 enemigos"
+  },
+  "reward": {
+   "character": "coco_banana"
+  }
+ },
+ {
+  "id": "unlock_kenji_arata",
+  "name": "Fichaje: Kenji Arata",
+  "desc": "Llegar al Dojo de la Montaña",
+  "cond": {
+   "type": "play",
+   "stage": "dojo_de_la_montana"
+  },
+  "reward": {
+   "character": "kenji_arata"
+  }
+ },
+ {
+  "id": "unlock_luz_marina",
+  "name": "Fichaje: Luz Marina",
+  "desc": "Completar Broadway en Llamas",
+  "cond": {
+   "type": "complete",
+   "stage": "broadway_en_llamas"
+  },
+  "reward": {
+   "character": "luz_marina"
+  }
+ },
+ {
+  "id": "unlock_bella_sombrilla",
+  "name": "Fichaje: Bella Sombrilla",
+  "desc": "Evolucionar el Paraguas",
+  "cond": {
+   "type": "evolve",
+   "weapon": "paraguas_de_musical"
+  },
+  "reward": {
+   "character": "bella_sombrilla"
+  }
+ },
+ {
+  "id": "unlock_padre_gil",
+  "name": "Fichaje: Padre Gil",
+  "desc": "20 min en la Mansión Victoriana",
+  "cond": {
+   "type": "survive",
+   "minutes": 20,
+   "stage": "mansion_victoriana"
+  },
+  "reward": {
+   "character": "padre_gil"
+  }
+ },
+ {
+  "id": "unlock_dra_volta",
+  "name": "Fichaje: Dra. Volta",
+  "desc": "Completar el Laboratorio",
+  "cond": {
+   "type": "complete",
+   "stage": "laboratorio_del_doctor_loco"
+  },
+  "reward": {
+   "character": "dra_volta"
+  }
+ },
+ {
+  "id": "unlock_jack_nitro",
+  "name": "Fichaje: Jack Nitro",
+  "desc": "Recorrer 50 km en total",
+  "cond": {
+   "type": "manual",
+   "text": "Recorrer 50 km en total"
+  },
+  "reward": {
+   "character": "jack_nitro"
+  }
+ },
+ {
+  "id": "unlock_tex_lariat",
+  "name": "Fichaje: Tex Lariat",
+  "desc": "Completar el Pueblo Polvoriento",
+  "cond": {
+   "type": "complete",
+   "stage": "pueblo_polvoriento"
+  },
+  "reward": {
+   "character": "tex_lariat"
+  }
+ },
+ {
+  "id": "unlock_mona_glam",
+  "name": "Fichaje: Mona Glam",
+  "desc": "Acumular 50.000 de Taquilla",
+  "cond": {
+   "type": "taquilla_total",
+   "value": 50000
+  },
+  "reward": {
+   "character": "mona_glam"
+  }
+ },
+ {
+  "id": "unlock_cutter_vega",
+  "name": "Fichaje: Cutter Vega",
+  "desc": "Encontrar unas tijeras en la Ciudad Noir",
+  "cond": {
+   "type": "manual",
+   "text": "Encontrar unas tijeras en la Ciudad Noir"
+  },
+  "reward": {
+   "character": "cutter_vega"
+  }
+ },
+ {
+  "id": "unlock_sully_pluma",
+  "name": "Fichaje: Sully Pluma",
+  "desc": "Leer 5 guiones (cofres) en una partida",
+  "cond": {
+   "type": "manual",
+   "text": "Leer 5 guiones (cofres) en una partida"
+  },
+  "reward": {
+   "character": "sully_pluma"
+  }
+ },
+ {
+  "id": "unlock_grip_martinez",
+  "name": "Fichaje: Grip Martínez",
+  "desc": "Mover 100 cajas del escenario",
+  "cond": {
+   "type": "manual",
+   "text": "Mover 100 cajas del escenario"
+  },
+  "reward": {
+   "character": "grip_martinez"
+  }
+ },
+ {
+  "id": "unlock_dron_e",
+  "name": "Fichaje: Dron-E",
+  "desc": "Completar la Estación Orbital",
+  "cond": {
+   "type": "complete",
+   "stage": "estacion_orbital_zeta"
+  },
+  "reward": {
+   "character": "dron_e"
+  }
+ },
+ {
+  "id": "unlock_gafas_moreno",
+  "name": "Fichaje: Gafas Moreno",
+  "desc": "Llegar al Autocine Abandonado",
+  "cond": {
+   "type": "play",
+   "stage": "autocine_abandonado"
+  },
+  "reward": {
+   "character": "gafas_moreno"
+  }
+ },
+ {
+  "id": "unlock_bill_mecha",
+  "name": "Fichaje: Bill Mecha",
+  "desc": "Destruir 500 barriles",
+  "cond": {
+   "type": "manual",
+   "text": "Destruir 500 barriles"
+  },
+  "reward": {
+   "character": "bill_mecha"
+  }
+ },
+ {
+  "id": "unlock_ana_ventura",
+  "name": "Fichaje: Ana Ventura",
+  "desc": "Evolucionar el Foco",
+  "cond": {
+   "type": "evolve",
+   "weapon": "foco"
+  },
+  "reward": {
+   "character": "ana_ventura"
+  }
+ },
+ {
+  "id": "unlock_rosi_maiz",
+  "name": "Fichaje: Rosi Maíz",
+  "desc": "Recoger 1.000 monedas",
+  "cond": {
+   "type": "coins",
+   "value": 1000
+  },
+  "reward": {
+   "character": "rosi_maiz"
+  }
+ },
+ {
+  "id": "unlock_archie_polvo",
+  "name": "Fichaje: Archie Polvo",
+  "desc": "Encontrar 3 bobinas perdidas",
+  "cond": {
+   "type": "manual",
+   "text": "Encontrar 3 bobinas perdidas"
+  },
+  "reward": {
+   "character": "archie_polvo"
+  }
+ },
+ {
+  "id": "unlock_nina_flash",
+  "name": "Fichaje: Nina Flash",
+  "desc": "Llegar a La Alfombra Roja",
+  "cond": {
+   "type": "play",
+   "stage": "la_alfombra_roja"
+  },
+  "reward": {
+   "character": "nina_flash"
+  }
+ },
+ {
+  "id": "unlock_ventura_torres",
+  "name": "Fichaje: Ventura Torres",
+  "desc": "Completar Metrópolis Kaiju",
+  "cond": {
+   "type": "complete",
+   "stage": "metropolis_kaiju"
+  },
+  "reward": {
+   "character": "ventura_torres"
+  }
+ },
+ {
+  "id": "unlock_carmilla_roja",
+  "name": "Fichaje: Carmilla Roja",
+  "desc": "Completar el Instituto de Medianoche",
+  "cond": {
+   "type": "complete",
+   "stage": "instituto_de_medianoche"
+  },
+  "reward": {
+   "character": "carmilla_roja"
+  }
+ },
+ {
+  "id": "unlock_kid_piston",
+  "name": "Fichaje: Kid Pistón",
+  "desc": "Llegar al Barrio Animado",
+  "cond": {
+   "type": "play",
+   "stage": "barrio_animado"
+  },
+  "reward": {
+   "character": "kid_piston"
+  }
+ },
+ {
+  "id": "unlock_sir_reginald",
+  "name": "Fichaje: Sir Reginald",
+  "desc": "Sobrevivir 30 min con Max",
+  "cond": {
+   "type": "survive",
+   "minutes": 30,
+   "stage": null
+  },
+  "reward": {
+   "character": "sir_reginald"
+  }
+ },
+ {
+  "id": "unlock_kai_zen",
+  "name": "Fichaje: Kai Zen",
+  "desc": "Evolucionar la Pistola de Rayos",
+  "cond": {
+   "type": "evolve",
+   "weapon": "pistola_de_rayos"
+  },
+  "reward": {
+   "character": "kai_zen"
+  }
+ },
+ {
+  "id": "unlock_toni_nitrato",
+  "name": "Fichaje: Toni Nitrato",
+  "desc": "Apagar 100 incendios",
+  "cond": {
+   "type": "manual",
+   "text": "Apagar 100 incendios"
+  },
+  "reward": {
+   "character": "toni_nitrato"
+  }
+ },
+ {
+  "id": "unlock_toro_mendez",
+  "name": "Fichaje: Toro Méndez",
+  "desc": "Completar el Coliseo de Péplum",
+  "cond": {
+   "type": "complete",
+   "stage": "coliseo_de_peplum"
+  },
+  "reward": {
+   "character": "toro_mendez"
+  }
+ },
+ {
+  "id": "unlock_sor_melodia",
+  "name": "Fichaje: Sor Melodía",
+  "desc": "Completar Broadway en Llamas sin recibir daño 5 min",
+  "cond": {
+   "type": "manual",
+   "text": "Completar Broadway en Llamas sin recibir daño 5 min"
+  },
+  "reward": {
+   "character": "sor_melodia"
+  }
+ },
+ {
+  "id": "unlock_agente_gris",
+  "name": "Fichaje: Agente Gris",
+  "desc": "Completar el Búnker Rojo",
+  "cond": {
+   "type": "complete",
+   "stage": "bunker_rojo"
+  },
+  "reward": {
+   "character": "agente_gris"
+  }
+ },
+ {
+  "id": "unlock_abuela_rosa",
+  "name": "Fichaje: Abuela Rosa",
+  "desc": "Comer 300 donuts",
+  "cond": {
+   "type": "food",
+   "value": 300
+  },
+  "reward": {
+   "character": "abuela_rosa"
+  }
+ },
+ {
+  "id": "unlock_el_extra",
+  "name": "Fichaje: El Extra",
+  "desc": "Morir en los 10 primeros segundos 3 veces",
+  "cond": {
+   "type": "manual",
+   "text": "Morir en los 10 primeros segundos 3 veces"
+  },
+  "reward": {
+   "character": "el_extra"
+  }
+ },
+ {
+  "id": "unlock_el_montador",
+  "name": "Fichaje: El Montador",
+  "desc": "Derrotarlo en la Sala de Montaje",
+  "cond": {
+   "type": "manual",
+   "text": "Derrotarlo en la Sala de Montaje"
+  },
+  "reward": {
+   "character": "el_montador"
+  }
+ },
+ {
+  "id": "unlock_el_productor_ejecutivo",
+  "name": "Fichaje: El Productor Ejecutivo",
+  "desc": "Derrotarlo al minuto 31",
+  "cond": {
+   "type": "productor"
+  },
+  "reward": {
+   "character": "el_productor_ejecutivo"
+  }
+ },
+ {
+  "id": "unlock_claqui",
+  "name": "Fichaje: Claqui",
+  "desc": "Código de claqueta",
+  "cond": {
+   "type": "manual",
+   "text": "Código de claqueta"
+  },
+  "reward": {
+   "character": "claqui"
+  }
+ },
+ {
+  "id": "unlock_michi_del_estudio",
+  "name": "Fichaje: Michi del Estudio",
+  "desc": "Acariciarlo 10 veces en el menú",
+  "cond": {
+   "type": "manual",
+   "text": "Acariciarlo 10 veces en el menú"
+  },
+  "reward": {
+   "character": "michi_del_estudio"
+  }
+ },
+ {
+  "id": "unlock_el_doble_del_doble",
+  "name": "Fichaje: El Doble del Doble",
+  "desc": "Completar 10 partidas con Max",
+  "cond": {
+   "type": "manual",
+   "text": "Completar 10 partidas con Max"
+  },
+  "reward": {
+   "character": "el_doble_del_doble"
+  }
+ },
+ {
+  "id": "unlock_el_cinefilo",
+  "name": "Fichaje: El Cinéfilo",
+  "desc": "Completar el Catálogo (bestiario)",
+  "cond": {
+   "type": "manual",
+   "text": "Completar el Catálogo (bestiario)"
+  },
+  "reward": {
+   "character": "el_cinefilo"
+  }
+ },
+ {
+  "id": "unlock_fotograma_0",
+  "name": "Fichaje: Fotograma 0",
+  "desc": "Encontrar la bobina 0 en la Sala de Montaje",
+  "cond": {
+   "type": "manual",
+   "text": "Encontrar la bobina 0 en la Sala de Montaje"
+  },
+  "reward": {
+   "character": "fotograma_0"
+  }
+ },
+ {
+  "id": "unlock_bosque_de_la_cabana",
+  "name": "Estreno: Bosque de la Cabaña",
+  "desc": "Inicial",
+  "cond": {
+   "type": "initial"
+  },
+  "reward": {
+   "stage": "bosque_de_la_cabana"
+  }
+ },
+ {
+  "id": "unlock_pueblo_polvoriento",
+  "name": "Estreno: Pueblo Polvoriento",
+  "desc": "Sobrevivir 10 min en el 1",
+  "cond": {
+   "type": "survive",
+   "minutes": 10,
+   "stage": "bosque_de_la_cabana"
+  },
+  "reward": {
+   "stage": "pueblo_polvoriento"
+  }
+ },
+ {
+  "id": "unlock_estacion_orbital_zeta",
+  "name": "Estreno: Estación Orbital Zeta",
+  "desc": "Llegar a nivel 40",
+  "cond": {
+   "type": "level",
+   "value": 40
+  },
+  "reward": {
+   "stage": "estacion_orbital_zeta"
+  }
+ },
+ {
+  "id": "unlock_ciudad_noir",
+  "name": "Estreno: Ciudad Noir",
+  "desc": "Sobrevivir 15 min en el 2",
+  "cond": {
+   "type": "survive",
+   "minutes": 15,
+   "stage": "pueblo_polvoriento"
+  },
+  "reward": {
+   "stage": "ciudad_noir"
+  }
+ },
+ {
+  "id": "unlock_templo_de_la_selva",
+  "name": "Estreno: Templo de la Selva",
+  "desc": "Evolucionar cualquier arma",
+  "cond": {
+   "type": "evolutions",
+   "value": 1
+  },
+  "reward": {
+   "stage": "templo_de_la_selva"
+  }
+ },
+ {
+  "id": "unlock_broadway_en_llamas",
+  "name": "Estreno: Broadway en Llamas",
+  "desc": "Encontrar el Gramofón en el 4",
+  "cond": {
+   "type": "manual",
+   "text": "Encontrar el Gramofón en el 4"
+  },
+  "reward": {
+   "stage": "broadway_en_llamas"
+  }
+ },
+ {
+  "id": "unlock_metropolis_kaiju",
+  "name": "Estreno: Metrópolis Kaiju",
+  "desc": "Derrotar 5.000 enemigos",
+  "cond": {
+   "type": "kills",
+   "value": 5000
+  },
+  "reward": {
+   "stage": "metropolis_kaiju"
+  }
+ },
+ {
+  "id": "unlock_autocine_abandonado",
+  "name": "Estreno: Autocine Abandonado",
+  "desc": "Sobrevivir 20 min con cualquier personaje",
+  "cond": {
+   "type": "survive",
+   "minutes": 20,
+   "stage": null
+  },
+  "reward": {
+   "stage": "autocine_abandonado"
+  }
+ },
+ {
+  "id": "unlock_instituto_de_medianoche",
+  "name": "Estreno: Instituto de Medianoche",
+  "desc": "Morir 10 veces",
+  "cond": {
+   "type": "deaths",
+   "value": 10
+  },
+  "reward": {
+   "stage": "instituto_de_medianoche"
+  }
+ },
+ {
+  "id": "unlock_galeon_maldito",
+  "name": "Estreno: Galeón Maldito",
+  "desc": "Recoger 50 cofres",
+  "cond": {
+   "type": "chests",
+   "value": 50
+  },
+  "reward": {
+   "stage": "galeon_maldito"
+  }
+ },
+ {
+  "id": "unlock_mansion_victoriana",
+  "name": "Estreno: Mansión Victoriana",
+  "desc": "Sobrevivir 25 min en el 1",
+  "cond": {
+   "type": "survive",
+   "minutes": 25,
+   "stage": "bosque_de_la_cabana"
+  },
+  "reward": {
+   "stage": "mansion_victoriana"
+  }
+ },
+ {
+  "id": "unlock_laboratorio_del_doctor_loco",
+  "name": "Estreno: Laboratorio del Doctor Loco",
+  "desc": "Evolucionar el Foco",
+  "cond": {
+   "type": "evolve",
+   "weapon": "foco"
+  },
+  "reward": {
+   "stage": "laboratorio_del_doctor_loco"
+  }
+ },
+ {
+  "id": "unlock_archivo_de_cine_mudo",
+  "name": "Estreno: Archivo de Cine Mudo",
+  "desc": "Completar el 4",
+  "cond": {
+   "type": "complete",
+   "stage": "ciudad_noir"
+  },
+  "reward": {
+   "stage": "archivo_de_cine_mudo"
+  }
+ },
+ {
+  "id": "unlock_coliseo_de_peplum",
+  "name": "Estreno: Coliseo de Péplum",
+  "desc": "Completar el 5",
+  "cond": {
+   "type": "complete",
+   "stage": "templo_de_la_selva"
+  },
+  "reward": {
+   "stage": "coliseo_de_peplum"
+  }
+ },
+ {
+  "id": "unlock_carretera_del_fin",
+  "name": "Estreno: Carretera del Fin",
+  "desc": "Completar el 2",
+  "cond": {
+   "type": "complete",
+   "stage": "pueblo_polvoriento"
+  },
+  "reward": {
+   "stage": "carretera_del_fin"
+  }
+ },
+ {
+  "id": "unlock_dojo_de_la_montana",
+  "name": "Estreno: Dojo de la Montaña",
+  "desc": "Completar el 3",
+  "cond": {
+   "type": "complete",
+   "stage": "estacion_orbital_zeta"
+  },
+  "reward": {
+   "stage": "dojo_de_la_montana"
+  }
+ },
+ {
+  "id": "unlock_expreso_de_medianoche",
+  "name": "Estreno: Expreso de Medianoche",
+  "desc": "Completar el 8",
+  "cond": {
+   "type": "complete",
+   "stage": "autocine_abandonado"
+  },
+  "reward": {
+   "stage": "expreso_de_medianoche"
+  }
+ },
+ {
+  "id": "unlock_plato_de_telenovela",
+  "name": "Estreno: Plató de Telenovela",
+  "desc": "Completar el 11",
+  "cond": {
+   "type": "complete",
+   "stage": "mansion_victoriana"
+  },
+  "reward": {
+   "stage": "plato_de_telenovela"
+  }
+ },
+ {
+  "id": "unlock_barrio_animado",
+  "name": "Estreno: Barrio Animado",
+  "desc": "Completar el 6",
+  "cond": {
+   "type": "complete",
+   "stage": "broadway_en_llamas"
+  },
+  "reward": {
+   "stage": "barrio_animado"
+  }
+ },
+ {
+  "id": "unlock_bunker_rojo",
+  "name": "Estreno: Búnker Rojo",
+  "desc": "Completar el 17",
+  "cond": {
+   "type": "complete",
+   "stage": "expreso_de_medianoche"
+  },
+  "reward": {
+   "stage": "bunker_rojo"
+  }
+ },
+ {
+  "id": "unlock_neon_2099",
+  "name": "Estreno: Neón 2099",
+  "desc": "Completar el 3 en modo Director's Cut",
+  "cond": {
+   "type": "manual",
+   "text": "Completar el 3 en modo Director's Cut"
+  },
+  "reward": {
+   "stage": "neon_2099"
+  }
+ },
+ {
+  "id": "unlock_la_alfombra_roja",
+  "name": "Estreno: La Alfombra Roja",
+  "desc": "Derrotar a 10 jefes distintos",
+  "cond": {
+   "type": "bosses",
+   "value": 10
+  },
+  "reward": {
+   "stage": "la_alfombra_roja"
+  }
+ },
+ {
+  "id": "unlock_sala_de_casting",
+  "name": "Estreno: Sala de Casting",
+  "desc": "Desbloquear 20 armas",
+  "cond": {
+   "type": "weapons_unlocked",
+   "value": 20
+  },
+  "reward": {
+   "stage": "sala_de_casting"
+  }
+ },
+ {
+  "id": "unlock_la_sala_de_montaje",
+  "name": "Estreno: La Sala de Montaje",
+  "desc": "Recoger las 7 bobinas perdidas repartidas por los escenarios desafiantes",
+  "cond": {
+   "type": "manual",
+   "text": "Recoger las 7 bobinas perdidas repartidas por los escenarios desafiantes"
+  },
+  "reward": {
+   "stage": "la_sala_de_montaje"
+  }
+ },
+ {
+  "id": "kills_100",
+  "name": "Figurantes caídos: 100",
+  "desc": "Derrotar 100 enemigos",
+  "cond": {
+   "type": "kills",
+   "value": 100
+  },
+  "reward": {}
+ },
+ {
+  "id": "kills_1000",
+  "name": "Figurantes caídos: 1000",
+  "desc": "Derrotar 1000 enemigos",
+  "cond": {
+   "type": "kills",
+   "value": 1000
+  },
+  "reward": {}
+ },
+ {
+  "id": "kills_10000",
+  "name": "Figurantes caídos: 10000",
+  "desc": "Derrotar 10000 enemigos",
+  "cond": {
+   "type": "kills",
+   "value": 10000
+  },
+  "reward": {}
+ },
+ {
+  "id": "kills_100000",
+  "name": "Figurantes caídos: 100000",
+  "desc": "Derrotar 100000 enemigos",
+  "cond": {
+   "type": "kills",
+   "value": 100000
+  },
+  "reward": {}
+ },
+ {
+  "id": "evo_1",
+  "name": "Montaje final ×1",
+  "desc": "Evolucionar 1 armas",
+  "cond": {
+   "type": "evolutions",
+   "value": 1
+  },
+  "reward": {}
+ },
+ {
+  "id": "evo_10",
+  "name": "Montaje final ×10",
+  "desc": "Evolucionar 10 armas",
+  "cond": {
+   "type": "evolutions",
+   "value": 10
+  },
+  "reward": {}
+ },
+ {
+  "id": "evo_30",
+  "name": "Montaje final ×30",
+  "desc": "Evolucionar 30 armas",
+  "cond": {
+   "type": "evolutions",
+   "value": 30
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_claqueta",
+  "name": "Toma Final",
+  "desc": "Evolucionar Claqueta",
+  "cond": {
+   "type": "evolve",
+   "weapon": "claqueta"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_rollo_de_pelicula",
+  "name": "Cine Circular",
+  "desc": "Evolucionar Rollo de Película",
+  "cond": {
+   "type": "evolve",
+   "weapon": "rollo_de_pelicula"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_foco",
+  "name": "Alfombra Roja",
+  "desc": "Evolucionar Foco",
+  "cond": {
+   "type": "evolve",
+   "weapon": "foco"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_palomitas",
+  "name": "Cubo XXL",
+  "desc": "Evolucionar Palomitas",
+  "cond": {
+   "type": "evolve",
+   "weapon": "palomitas"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_pertiga_de_sonido",
+  "name": "Sonido Envolvente",
+  "desc": "Evolucionar Pértiga de Sonido",
+  "cond": {
+   "type": "evolve",
+   "weapon": "pertiga_de_sonido"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_estatuilla_dorada",
+  "name": "Premio a Toda una Carrera",
+  "desc": "Evolucionar Estatuilla Dorada",
+  "cond": {
+   "type": "evolve",
+   "weapon": "estatuilla_dorada"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_camara_de_flash",
+  "name": "Exposición Total",
+  "desc": "Evolucionar Cámara de Flash",
+  "cond": {
+   "type": "evolve",
+   "weapon": "camara_de_flash"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_bobina_rota",
+  "name": "Bobina del Destino",
+  "desc": "Evolucionar Bobina Rota",
+  "cond": {
+   "type": "evolve",
+   "weapon": "bobina_rota"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_megafono_del_director",
+  "name": "¡Corten y Acción!",
+  "desc": "Evolucionar Megáfono del Director",
+  "cond": {
+   "type": "evolve",
+   "weapon": "megafono_del_director"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_revolver_de_atrezo",
+  "name": "Duelo al Amanecer",
+  "desc": "Evolucionar Revólver de Atrezo",
+  "cond": {
+   "type": "evolve",
+   "weapon": "revolver_de_atrezo"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_latigo_del_explorador",
+  "name": "Látigo del Ídolo de Oro",
+  "desc": "Evolucionar Látigo del Explorador",
+  "cond": {
+   "type": "evolve",
+   "weapon": "latigo_del_explorador"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_motosierra_de_atrezo",
+  "name": "Motor Sin Fin",
+  "desc": "Evolucionar Motosierra de Atrezo",
+  "cond": {
+   "type": "evolve",
+   "weapon": "motosierra_de_atrezo"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_pistola_de_rayos",
+  "name": "Desintegrador",
+  "desc": "Evolucionar Pistola de Rayos",
+  "cond": {
+   "type": "evolve",
+   "weapon": "pistola_de_rayos"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_sable_de_neon",
+  "name": "Sable del Maestro",
+  "desc": "Evolucionar Sable de Neón",
+  "cond": {
+   "type": "evolve",
+   "weapon": "sable_de_neon"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_crucifijo_de_utileria",
+  "name": "Reliquia Sagrada del Plató",
+  "desc": "Evolucionar Crucifijo de Utilería",
+  "cond": {
+   "type": "evolve",
+   "weapon": "crucifijo_de_utileria"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_tarta_de_crema",
+  "name": "Guerra de Tartas",
+  "desc": "Evolucionar Tarta de Crema",
+  "cond": {
+   "type": "evolve",
+   "weapon": "tarta_de_crema"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_piel_de_platano",
+  "name": "Resbalón Infinito",
+  "desc": "Evolucionar Piel de Plátano",
+  "cond": {
+   "type": "evolve",
+   "weapon": "piel_de_platano"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_yunque_de_dibujos",
+  "name": "Piano de Cola",
+  "desc": "Evolucionar Yunque de Dibujos",
+  "cond": {
+   "type": "evolve",
+   "weapon": "yunque_de_dibujos"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_dinamita_de_mecha",
+  "name": "Barril de Pólvora Animado",
+  "desc": "Evolucionar Dinamita de Mecha",
+  "cond": {
+   "type": "evolve",
+   "weapon": "dinamita_de_mecha"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_lazo_del_vaquero",
+  "name": "Rodeo Imparable",
+  "desc": "Evolucionar Lazo del Vaquero",
+  "cond": {
+   "type": "evolve",
+   "weapon": "lazo_del_vaquero"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_maquina_de_humo",
+  "name": "Niebla del Terror",
+  "desc": "Evolucionar Máquina de Humo",
+  "cond": {
+   "type": "evolve",
+   "weapon": "maquina_de_humo"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_rayo_de_efectos_especiales",
+  "name": "Tormenta de Pantalla Verde",
+  "desc": "Evolucionar Rayo de Efectos Especiales",
+  "cond": {
+   "type": "evolve",
+   "weapon": "rayo_de_efectos_especiales"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_ventilador_gigante",
+  "name": "Huracán de Plató",
+  "desc": "Evolucionar Ventilador Gigante",
+  "cond": {
+   "type": "evolve",
+   "weapon": "ventilador_gigante"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_sangre_falsa",
+  "name": "Baño de Serie B",
+  "desc": "Evolucionar Sangre Falsa",
+  "cond": {
+   "type": "evolve",
+   "weapon": "sangre_falsa"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_tijeras_de_montaje",
+  "name": "Corte Final",
+  "desc": "Evolucionar Tijeras de Montaje",
+  "cond": {
+   "type": "evolve",
+   "weapon": "tijeras_de_montaje"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_guion_volador",
+  "name": "Guion Ganador",
+  "desc": "Evolucionar Guion Volador",
+  "cond": {
+   "type": "evolve",
+   "weapon": "guion_volador"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_confeti_de_estreno",
+  "name": "Fuegos del Estreno",
+  "desc": "Evolucionar Confeti de Estreno",
+  "cond": {
+   "type": "evolve",
+   "weapon": "confeti_de_estreno"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_proyector_portatil",
+  "name": "Sesión Doble",
+  "desc": "Evolucionar Proyector Portátil",
+  "cond": {
+   "type": "evolve",
+   "weapon": "proyector_portatil"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_grua_de_camara",
+  "name": "Plano Cenital",
+  "desc": "Evolucionar Grúa de Cámara",
+  "cond": {
+   "type": "evolve",
+   "weapon": "grua_de_camara"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_celuloide_en_llamas",
+  "name": "Incendio del Nitrato",
+  "desc": "Evolucionar Celuloide en Llamas",
+  "cond": {
+   "type": "evolve",
+   "weapon": "celuloide_en_llamas"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_dron_de_rodaje",
+  "name": "Escuadrón de Drones",
+  "desc": "Evolucionar Dron de Rodaje",
+  "cond": {
+   "type": "evolve",
+   "weapon": "dron_de_rodaje"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_nunchakus_de_goma",
+  "name": "Puño de las Mil Palmas",
+  "desc": "Evolucionar Nunchakus de Goma",
+  "cond": {
+   "type": "evolve",
+   "weapon": "nunchakus_de_goma"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_coche_de_persecucion",
+  "name": "Persecución Sin Frenos",
+  "desc": "Evolucionar Coche de Persecución",
+  "cond": {
+   "type": "evolve",
+   "weapon": "coche_de_persecucion"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_paraguas_de_musical",
+  "name": "Tormenta Musical",
+  "desc": "Evolucionar Paraguas de Musical",
+  "cond": {
+   "type": "evolve",
+   "weapon": "paraguas_de_musical"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_baston_de_claque",
+  "name": "Número Final",
+  "desc": "Evolucionar Bastón de Claqué",
+  "cond": {
+   "type": "evolve",
+   "weapon": "baston_de_claque"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_ovacion_del_publico",
+  "name": "Ovación de Pie",
+  "desc": "Evolucionar Ovación del Público",
+  "cond": {
+   "type": "evolve",
+   "weapon": "ovacion_del_publico"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_cabello_maldito",
+  "name": "Melena Infinita",
+  "desc": "Evolucionar Cabello Maldito",
+  "cond": {
+   "type": "evolve",
+   "weapon": "cabello_maldito"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_talisman_de_papel",
+  "name": "Muro de Sellos",
+  "desc": "Evolucionar Talismán de Papel",
+  "cond": {
+   "type": "evolve",
+   "weapon": "talisman_de_papel"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_cinta_de_video_maldita",
+  "name": "Siete Días",
+  "desc": "Evolucionar Cinta de Vídeo Maldita",
+  "cond": {
+   "type": "evolve",
+   "weapon": "cinta_de_video_maldita"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_dardos_tranquilizantes",
+  "name": "Safari Nocturno",
+  "desc": "Evolucionar Dardos Tranquilizantes",
+  "cond": {
+   "type": "evolve",
+   "weapon": "dardos_tranquilizantes"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_rayo_de_tormenta",
+  "name": "Supercélula",
+  "desc": "Evolucionar Rayo de Tormenta",
+  "cond": {
+   "type": "evolve",
+   "weapon": "rayo_de_tormenta"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_taladro_de_perforacion",
+  "name": "Núcleo del Planeta",
+  "desc": "Evolucionar Taladro de Perforación",
+  "cond": {
+   "type": "evolve",
+   "weapon": "taladro_de_perforacion"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_granadas",
+  "name": "Bombardeo de Saturación",
+  "desc": "Evolucionar Granadas",
+  "cond": {
+   "type": "evolve",
+   "weapon": "granadas"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_rifle_de_mira",
+  "name": "Bala Que Nunca Falla",
+  "desc": "Evolucionar Rifle de Mira",
+  "cond": {
+   "type": "evolve",
+   "weapon": "rifle_de_mira"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_llamada_de_artilleria",
+  "name": "Ataque Aéreo",
+  "desc": "Evolucionar Llamada de Artillería",
+  "cond": {
+   "type": "evolve",
+   "weapon": "llamada_de_artilleria"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_hacha_doble",
+  "name": "Hacha del Rey Bárbaro",
+  "desc": "Evolucionar Hacha Doble",
+  "cond": {
+   "type": "evolve",
+   "weapon": "hacha_doble"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_arco_largo",
+  "name": "Lluvia de Flechas",
+  "desc": "Evolucionar Arco Largo",
+  "cond": {
+   "type": "evolve",
+   "weapon": "arco_largo"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_baculo_del_peregrino",
+  "name": "Báculo Blanco",
+  "desc": "Evolucionar Báculo del Peregrino",
+  "cond": {
+   "type": "evolve",
+   "weapon": "baculo_del_peregrino"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_bola_de_arcilla",
+  "name": "Escultura Viviente",
+  "desc": "Evolucionar Bola de Arcilla",
+  "cond": {
+   "type": "evolve",
+   "weapon": "bola_de_arcilla"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_agujas_de_costura",
+  "name": "Remiendo Total",
+  "desc": "Evolucionar Agujas de Costura",
+  "cond": {
+   "type": "evolve",
+   "weapon": "agujas_de_costura"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_calabaza",
+  "name": "Noche de Calabazas",
+  "desc": "Evolucionar Calabaza",
+  "cond": {
+   "type": "evolve",
+   "weapon": "calabaza"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_murcielagos",
+  "name": "Nube de la Noche",
+  "desc": "Evolucionar Murciélagos",
+  "cond": {
+   "type": "evolve",
+   "weapon": "murcielagos"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_ballesta_de_estacas",
+  "name": "Amanecer",
+  "desc": "Evolucionar Ballesta de Estacas",
+  "cond": {
+   "type": "evolve",
+   "weapon": "ballesta_de_estacas"
+  },
+  "reward": {}
+ },
+ {
+  "id": "evolve_copa_de_vino",
+  "name": "Banquete Eterno",
+  "desc": "Evolucionar Copa de Vino",
+  "cond": {
+   "type": "evolve",
+   "weapon": "copa_de_vino"
+  },
+  "reward": {}
+ },
+ {
+  "id": "productor",
+  "name": "Película cancelada",
+  "desc": "Derrotar al Productor Ejecutivo",
+  "cond": {
+   "type": "productor"
+  },
+  "reward": {
+   "character": "el_productor_ejecutivo"
+  }
+ }
+]

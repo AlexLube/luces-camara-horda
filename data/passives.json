@@ -1,0 +1,210 @@
+[
+ {
+  "id": "ego_de_estrella",
+  "name": "Ego de Estrella",
+  "desc": "+10 % poder",
+  "max_level": 5,
+  "stat": "power",
+  "per_level": 0.1
+ },
+ {
+  "id": "chaleco_de_especialista",
+  "name": "Chaleco de Especialista",
+  "desc": "+1 armadura",
+  "max_level": 5,
+  "stat": "armor",
+  "per_level": 1.0
+ },
+ {
+  "id": "batido_de_proteinas",
+  "name": "Batido de Proteínas",
+  "desc": "+20 % vida máxima",
+  "max_level": 5,
+  "stat": "max_hp",
+  "per_level": 0.2
+ },
+ {
+  "id": "mantequilla",
+  "name": "Mantequilla",
+  "desc": "+0,2 vida/s",
+  "max_level": 5,
+  "stat": "regen",
+  "per_level": 0.2
+ },
+ {
+  "id": "cafe_solo",
+  "name": "Café Solo",
+  "desc": "−8 % enfriamiento",
+  "max_level": 5,
+  "stat": "cooldown",
+  "per_level": -0.08
+ },
+ {
+  "id": "lente_gran_angular",
+  "name": "Lente Gran Angular",
+  "desc": "+10 % área",
+  "max_level": 5,
+  "stat": "area",
+  "per_level": 0.1
+ },
+ {
+  "id": "zapatillas_de_claque",
+  "name": "Zapatillas de Claqué",
+  "desc": "+10 % velocidad de movimiento",
+  "max_level": 5,
+  "stat": "speed",
+  "per_level": 0.1
+ },
+ {
+  "id": "guion_anotado",
+  "name": "Guion Anotado",
+  "desc": "+10 % duración",
+  "max_level": 5,
+  "stat": "duration",
+  "per_level": 0.1
+ },
+ {
+  "id": "copia_de_seguridad",
+  "name": "Copia de Seguridad",
+  "desc": "+1 proyectil",
+  "max_level": 2,
+  "stat": "amount",
+  "per_level": 1.0
+ },
+ {
+  "id": "microfono_inalambrico",
+  "name": "Micrófono Inalámbrico",
+  "desc": "+25 % atracción de entradas",
+  "max_level": 5,
+  "stat": "magnet",
+  "per_level": 0.25
+ },
+ {
+  "id": "galleta_de_la_suerte",
+  "name": "Galleta de la Suerte",
+  "desc": "+10 % suerte",
+  "max_level": 5,
+  "stat": "luck",
+  "per_level": 0.1
+ },
+ {
+  "id": "contrato_de_estrella",
+  "name": "Contrato de Estrella",
+  "desc": "+8 % experiencia",
+  "max_level": 5,
+  "stat": "growth",
+  "per_level": 0.08
+ },
+ {
+  "id": "gafas_de_productor",
+  "name": "Gafas de Productor",
+  "desc": "+10 % Taquilla",
+  "max_level": 5,
+  "stat": "greed",
+  "per_level": 0.1
+ },
+ {
+  "id": "mala_critica",
+  "name": "Mala Crítica",
+  "desc": "+10 % maldición (más enemigos y más rápidos)",
+  "max_level": 5,
+  "stat": "curse",
+  "per_level": 0.1
+ },
+ {
+  "id": "camara_rapida",
+  "name": "Cámara Rápida",
+  "desc": "+10 % velocidad de proyectil",
+  "max_level": 5,
+  "stat": "proj_speed",
+  "per_level": 0.1
+ },
+ {
+  "id": "doble_de_cuerpo",
+  "name": "Doble de Cuerpo",
+  "desc": "+1 revivir",
+  "max_level": 1,
+  "stat": "revival",
+  "per_level": 1.0
+ },
+ {
+  "id": "maquillaje",
+  "name": "Maquillaje",
+  "desc": "+1 % robo de vida",
+  "max_level": 5,
+  "stat": "lifesteal",
+  "per_level": 0.01
+ },
+ {
+  "id": "filtro_sepia",
+  "name": "Filtro Sepia",
+  "desc": "+10 % duración de congelación y ceguera",
+  "max_level": 5,
+  "stat": "freeze_time",
+  "per_level": 0.1
+ },
+ {
+  "id": "filtro_infrarrojo",
+  "name": "Filtro Infrarrojo",
+  "desc": "+5 % crítico; ves enemigos invisibles",
+  "max_level": 5,
+  "stat": "crit",
+  "per_level": 0.05
+ },
+ {
+  "id": "cartel_de_estreno",
+  "name": "Cartel de Estreno",
+  "desc": "Escudo que absorbe 1 golpe cada 30 s (−3 s por nivel)",
+  "max_level": 5,
+  "stat": "shield",
+  "per_level": null
+ },
+ {
+  "id": "pase_de_prensa",
+  "name": "Pase de Prensa",
+  "desc": "+1 rehacer y +1 saltar en la partida",
+  "max_level": 5,
+  "stat": "rerolls_skips",
+  "per_level": null
+ },
+ {
+  "id": "gafas_de_sol",
+  "name": "Gafas de Sol",
+  "desc": "Sube con el nivel del jugador; parte de la unión Fama Eterna",
+  "max_level": 9,
+  "stat": "union_part",
+  "per_level": null
+ },
+ {
+  "id": "collar_de_diva",
+  "name": "Collar de Diva",
+  "desc": "Sube con el nivel del jugador; parte de la unión Fama Eterna",
+  "max_level": 9,
+  "stat": "union_part",
+  "per_level": null
+ },
+ {
+  "id": "boton_rec",
+  "name": "Botón Rec",
+  "desc": "+1 % vida máx. por cada nivel del jugador; parte de Rebobinar",
+  "max_level": 9,
+  "stat": "max_hp_per_level",
+  "per_level": null
+ },
+ {
+  "id": "boton_play",
+  "name": "Botón Play",
+  "desc": "+1 % recuperación por cada nivel del jugador; parte de Rebobinar",
+  "max_level": 9,
+  "stat": "regen_per_level",
+  "per_level": null
+ },
+ {
+  "id": "caja_de_atrezo_maldita",
+  "name": "Caja de Atrezo Maldita",
+  "desc": "Niveles 1–7 suben todo; del 8 al 9 sube la maldición",
+  "max_level": 9,
+  "stat": "all_then_curse",
+  "per_level": null
+ }
+]

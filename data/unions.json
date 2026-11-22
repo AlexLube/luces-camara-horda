@@ -1,0 +1,86 @@
+[
+ {
+  "id": "set_de_iluminacion",
+  "name": "Set de Iluminación",
+  "desc": "Focos que siguen a los enemigos y los ciegan",
+  "weapons": [
+   "foco",
+   "camara_de_flash"
+  ],
+  "passives": []
+ },
+ {
+  "id": "primer_dia_de_rodaje",
+  "name": "Primer Día de Rodaje",
+  "desc": "Cada \"¡Acción!\" multiplica el daño de la siguiente toma",
+  "weapons": [
+   "claqueta",
+   "megafono_del_director"
+  ],
+  "passives": []
+ },
+ {
+  "id": "leyenda_del_oeste",
+  "name": "Leyenda del Oeste",
+  "desc": "Atrapa a los enemigos y los acribilla",
+  "weapons": [
+   "revolver_de_atrezo",
+   "lazo_del_vaquero"
+  ],
+  "passives": []
+ },
+ {
+  "id": "paladin_galactico",
+  "name": "Paladín Galáctico",
+  "desc": "Sable que dispara láseres en cada tajo",
+  "weapons": [
+   "pistola_de_rayos",
+   "sable_de_neon"
+  ],
+  "passives": []
+ },
+ {
+  "id": "slapstick_total",
+  "name": "Slapstick Total",
+  "desc": "Persecución cómica que derriba a toda la pantalla",
+  "weapons": [
+   "tarta_de_crema",
+   "piel_de_platano"
+  ],
+  "passives": []
+ },
+ {
+  "id": "caos_animado",
+  "name": "Caos Animado",
+  "desc": "Lluvia de objetos de dibujos que explotan",
+  "weapons": [
+   "yunque_de_dibujos",
+   "dinamita_de_mecha"
+  ],
+  "passives": []
+ },
+ {
+  "id": "fama_eterna",
+  "name": "Fama Eterna",
+  "desc": "Reduce a la mitad la vida de todo lo que hay en pantalla cada 60 s",
+  "weapons": [
+   "camara_de_flash"
+  ],
+  "passives": [
+   "gafas_de_sol",
+   "collar_de_diva"
+  ]
+ },
+ {
+  "id": "rebobinar",
+  "name": "Rebobinar",
+  "desc": "Cura y anula el último golpe recibido cada 30 s",
+  "weapons": [
+   "paraguas_de_musical"
+  ],
+  "passives": [
+   "boton_rec",
+   "boton_play"
+  ]
+ }
+]
