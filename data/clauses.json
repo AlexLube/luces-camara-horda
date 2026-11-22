@@ -1,0 +1,200 @@
+[
+ {
+  "id": "cache_de_estrella",
+  "name": "Caché de Estrella",
+  "stat": "power",
+  "desc": "+5 % daño",
+  "per_level": 0.05,
+  "max_level": 5,
+  "base_price": 200
+ },
+ {
+  "id": "seguro_de_rodaje",
+  "name": "Seguro de Rodaje",
+  "stat": "armor",
+  "desc": "+1 armadura",
+  "per_level": 1.0,
+  "max_level": 3,
+  "base_price": 600
+ },
+ {
+  "id": "dieta_de_rodaje",
+  "name": "Dieta de Rodaje",
+  "stat": "max_hp",
+  "desc": "+10 % vida",
+  "per_level": 0.1,
+  "max_level": 3,
+  "base_price": 300
+ },
+ {
+  "id": "caravana_privada",
+  "name": "Caravana Privada",
+  "stat": "regen",
+  "desc": "+0,1 vida/s",
+  "per_level": 0.1,
+  "max_level": 5,
+  "base_price": 200
+ },
+ {
+  "id": "horario_flexible",
+  "name": "Horario Flexible",
+  "stat": "cooldown",
+  "desc": "−2,5 % enfriamiento",
+  "per_level": -0.025,
+  "max_level": 2,
+  "base_price": 900
+ },
+ {
+  "id": "plano_general",
+  "name": "Plano General",
+  "stat": "area",
+  "desc": "+5 % área",
+  "per_level": 0.05,
+  "max_level": 2,
+  "base_price": 300
+ },
+ {
+  "id": "efectos_digitales",
+  "name": "Efectos Digitales",
+  "stat": "proj_speed",
+  "desc": "+10 %",
+  "per_level": 0.1,
+  "max_level": 2,
+  "base_price": 300
+ },
+ {
+  "id": "montaje_largo",
+  "name": "Montaje Largo",
+  "stat": "duration",
+  "desc": "+15 %",
+  "per_level": 0.15,
+  "max_level": 2,
+  "base_price": 300
+ },
+ {
+  "id": "segunda_unidad",
+  "name": "Segunda Unidad",
+  "stat": "amount",
+  "desc": "+1 proyectil",
+  "per_level": 1.0,
+  "max_level": 1,
+  "base_price": 5000
+ },
+ {
+  "id": "carrito_de_travelling",
+  "name": "Carrito de Travelling",
+  "stat": "speed",
+  "desc": "+5 %",
+  "per_level": 0.05,
+  "max_level": 2,
+  "base_price": 300
+ },
+ {
+  "id": "representante",
+  "name": "Representante",
+  "stat": "magnet",
+  "desc": "+25 %",
+  "per_level": 0.25,
+  "max_level": 2,
+  "base_price": 300
+ },
+ {
+  "id": "talisman_de_camerino",
+  "name": "Talismán de Camerino",
+  "stat": "luck",
+  "desc": "+10 %",
+  "per_level": 0.1,
+  "max_level": 3,
+  "base_price": 600
+ },
+ {
+  "id": "escuela_de_interpretacion",
+  "name": "Escuela de Interpretación",
+  "stat": "growth",
+  "desc": "+3 % experiencia",
+  "per_level": 0.03,
+  "max_level": 5,
+  "base_price": 900
+ },
+ {
+  "id": "porcentaje_de_taquilla",
+  "name": "Porcentaje de Taquilla",
+  "stat": "greed",
+  "desc": "+10 % Taquilla",
+  "per_level": 0.1,
+  "max_level": 5,
+  "base_price": 200
+ },
+ {
+  "id": "mal_estreno",
+  "name": "Mal Estreno",
+  "stat": "curse",
+  "desc": "+10 % enemigos y velocidad",
+  "per_level": 0.1,
+  "max_level": 5,
+  "base_price": 1666
+ },
+ {
+  "id": "doble_de_riesgo",
+  "name": "Doble de Riesgo",
+  "stat": "revival",
+  "desc": "+1 revivir",
+  "per_level": 1.0,
+  "max_level": 1,
+  "base_price": 10000
+ },
+ {
+  "id": "otra_toma",
+  "name": "Otra Toma",
+  "stat": "rerolls",
+  "desc": "+1 rehacer las mejoras",
+  "per_level": 1.0,
+  "max_level": 5,
+  "base_price": 500
+ },
+ {
+  "id": "descarte",
+  "name": "Descarte",
+  "stat": "skips",
+  "desc": "+1 saltar una mejora",
+  "per_level": 1.0,
+  "max_level": 5,
+  "base_price": 300
+ },
+ {
+  "id": "cortar_escena",
+  "name": "Cortar Escena",
+  "stat": "banishes",
+  "desc": "+1 eliminar una opción de la partida",
+  "per_level": 1.0,
+  "max_level": 5,
+  "base_price": 500
+ },
+ {
+  "id": "fama",
+  "name": "Fama",
+  "stat": "charm",
+  "desc": "+20 enemigos por oleada",
+  "per_level": 20.0,
+  "max_level": 5,
+  "base_price": 500
+ },
+ {
+  "id": "doblaje",
+  "name": "Doblaje",
+  "stat": "harmless",
+  "desc": "+1 % de enemigos que no hacen daño",
+  "per_level": 0.01,
+  "max_level": 5,
+  "base_price": 1000
+ },
+ {
+  "id": "censura",
+  "name": "Censura",
+  "stat": "seals",
+  "desc": "+1 objeto sellado desde el menú",
+  "per_level": 1.0,
+  "max_level": 5,
+  "base_price": 500
+ }
+]

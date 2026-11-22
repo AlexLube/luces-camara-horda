@@ -1,0 +1,252 @@
+[
+ {
+  "id": "g_0",
+  "num": "0",
+  "name": "Plano Secuencia",
+  "desc": "Los ataques con duración no terminan mientras sigas moviéndote",
+  "cursed": false
+ },
+ {
+  "id": "g_i",
+  "num": "I",
+  "name": "El Héroe Reticente",
+  "desc": "Al subir de nivel lanzas una explosión que crece con tu nivel",
+  "cursed": false
+ },
+ {
+  "id": "g_ii",
+  "num": "II",
+  "name": "El Mentor",
+  "desc": "Los proyectiles explotan al desaparecer",
+  "cursed": false
+ },
+ {
+  "id": "g_iii",
+  "num": "III",
+  "name": "Giro de Guion",
+  "desc": "Moverte reduce el enfriamiento de todas las armas",
+  "cursed": false
+ },
+ {
+  "id": "g_iv",
+  "num": "IV",
+  "name": "La Persecución",
+  "desc": "Cuanta más velocidad llevas, más daño haces",
+  "cursed": false
+ },
+ {
+  "id": "g_v",
+  "num": "V",
+  "name": "El Pacto con el Diablo",
+  "desc": "Sacrificas un 20 % de vida máx. y ganas +40 % poder",
+  "cursed": false
+ },
+ {
+  "id": "g_vi",
+  "num": "VI",
+  "name": "Cámara Lenta",
+  "desc": "Los enemigos cerca de ti van a cámara lenta; tus proyectiles, más lentos y más fuertes",
+  "cursed": false
+ },
+ {
+  "id": "g_vii",
+  "num": "VII",
+  "name": "El Montaje de Entrenamiento",
+  "desc": "Cada entrada recogida da un bonus temporal de estadísticas",
+  "cursed": false
+ },
+ {
+  "id": "g_viii",
+  "num": "VIII",
+  "name": "El Gran Discurso",
+  "desc": "Los golpes críticos provocan explosiones",
+  "cursed": false
+ },
+ {
+  "id": "g_ix",
+  "num": "IX",
+  "name": "El Cameo",
+  "desc": "Cada minuto aparece un personaje al azar que lucha a tu lado 10 s",
+  "cursed": false
+ },
+ {
+  "id": "g_x",
+  "num": "X",
+  "name": "La Secuela",
+  "desc": "Las armas al máximo ganan un nivel extra",
+  "cursed": false
+ },
+ {
+  "id": "g_xi",
+  "num": "XI",
+  "name": "El Villano Carismático",
+  "desc": "+50 % daño a jefes y élites; te curas al dañarlos",
+  "cursed": false
+ },
+ {
+  "id": "g_xii",
+  "num": "XII",
+  "name": "El Final Alternativo",
+  "desc": "La primera vez que mueres, la partida retrocede 10 segundos",
+  "cursed": false
+ },
+ {
+  "id": "g_xiii",
+  "num": "XIII",
+  "name": "La Escena Poscréditos",
+  "desc": "Cada jefe derrotado suelta una lata extra",
+  "cursed": false
+ },
+ {
+  "id": "g_xiv",
+  "num": "XIV",
+  "name": "Efectos Prácticos",
+  "desc": "Las armas físicas queman a los enemigos",
+  "cursed": false
+ },
+ {
+  "id": "g_xv",
+  "num": "XV",
+  "name": "El Doble Malvado",
+  "desc": "Un doble tuyo repite tus ataques con el 50 % de daño",
+  "cursed": false
+ },
+ {
+  "id": "g_xvi",
+  "num": "XVI",
+  "name": "El Cliffhanger",
+  "desc": "Cuanta menos vida tienes, más daño haces",
+  "cursed": false
+ },
+ {
+  "id": "g_xvii",
+  "num": "XVII",
+  "name": "Estreno Mundial",
+  "desc": "Las entradas explotan al recogerlas y dan Taquilla",
+  "cursed": false
+ },
+ {
+  "id": "g_xviii",
+  "num": "XVIII",
+  "name": "Noche Americana",
+  "desc": "Los enemigos lejanos no te ven; críticos ×2 de noche",
+  "cursed": false
+ },
+ {
+  "id": "g_xix",
+  "num": "XIX",
+  "name": "La Estrella",
+  "desc": "Cada kill suma +0,01 % de poder durante la partida",
+  "cursed": false
+ },
+ {
+  "id": "g_xx",
+  "num": "XX",
+  "name": "El Juicio de la Crítica",
+  "desc": "Cada 5 minutos se puntúa tu partida y recibes un premio según la nota",
+  "cursed": false
+ },
+ {
+  "id": "g_xxi",
+  "num": "XXI",
+  "name": "Los Créditos Finales",
+  "desc": "Los enemigos muertos sueltan letras que caen y hacen daño",
+  "cursed": false
+ },
+ {
+  "id": "gm_i",
+  "num": "I",
+  "name": "La Película Perdida",
+  "desc": "Tus armas cambian al azar cada minuto, con ×2 daño",
+  "how": "Encontrar la Baraja Maldita",
+  "cursed": true
+ },
+ {
+  "id": "gm_ii",
+  "num": "II",
+  "name": "El Rodaje Maldito",
+  "desc": "Al recibir daño liberas fantasmas que atacan",
+  "how": "Morir 50 veces",
+  "cursed": true
+ },
+ {
+  "id": "gm_iii",
+  "num": "III",
+  "name": "El Corte del Censor",
+  "desc": "Cada objeto que destierras da +5 % poder en la partida",
+  "how": "Desterrar 100 objetos",
+  "cursed": true
+ },
+ {
+  "id": "gm_iv",
+  "num": "IV",
+  "name": "El Fracaso de Taquilla",
+  "desc": "No ganas Taquilla, pero +30 % a todas las estadísticas",
+  "how": "Terminar una partida con 0 de Taquilla",
+  "cursed": true
+ },
+ {
+  "id": "gm_v",
+  "num": "V",
+  "name": "El Actor Poseído",
+  "desc": "Algunos enemigos muertos se vuelven aliados",
+  "how": "Derrotar a La Viuda del Ático",
+  "cursed": true
+ },
+ {
+  "id": "gm_vi",
+  "num": "VI",
+  "name": "El Metraje Encontrado",
+  "desc": "Ves menos, pero los enemigos que no ves reciben ×3 daño",
+  "how": "Completar el Bosque de la Cabaña con Toma Rápida",
+  "cursed": true
+ },
+ {
+  "id": "gm_vii",
+  "num": "VII",
+  "name": "El Remake Innecesario",
+  "desc": "Las evoluciones pueden evolucionar otra vez (versión remasterizada)",
+  "how": "Evolucionar 30 armas",
+  "cursed": true
+ },
+ {
+  "id": "gm_viii",
+  "num": "VIII",
+  "name": "Infierno de Producción",
+  "desc": "Cada minuto pierdes un nivel de un pasivo y ganas uno en un arma",
+  "how": "Completar el Plató de Telenovela",
+  "cursed": true
+ },
+ {
+  "id": "gm_ix",
+  "num": "IX",
+  "name": "El Final Cortado",
+  "desc": "La partida dura 15 minutos y las recompensas son dobles",
+  "how": "Completar 5 escenarios con Fuera de Plazo",
+  "cursed": true
+ },
+ {
+  "id": "gm_x",
+  "num": "X",
+  "name": "El Doblaje Mudo",
+  "desc": "Sin sonido; tus armas atacan al ritmo de la música con ×3 daño",
+  "how": "Completar el Archivo de Cine Mudo",
+  "cursed": true
+ },
+ {
+  "id": "gm_xi",
+  "num": "XI",
+  "name": "Fiebre del Estreno",
+  "desc": "Las latas se abren solas al aparecer, pero los enemigos van más rápido",
+  "how": "Abrir 500 latas",
+  "cursed": true
+ },
+ {
+  "id": "gm_xii",
+  "num": "XII",
+  "name": "El Productor Ejecutivo",
+  "desc": "Aparece al minuto 15; si lo derrotas, recompensa máxima",
+  "how": "Derrotar al Productor Ejecutivo",
+  "cursed": true
+ }
+]

@@ -1,0 +1,390 @@
+{
+ "lvl_n": {
+  "es": "Nv. %d",
+  "en": "Lv. %d"
+ },
+ "new": {
+  "es": "¡Nuevo!",
+  "en": "New!"
+ },
+ "opt_heal": {
+  "es": "Catering",
+  "en": "Catering"
+ },
+ "opt_heal_d": {
+  "es": "Recupera 30 de vida",
+  "en": "Restores 30 health"
+ },
+ "opt_coins": {
+  "es": "Bolsa de taquilla",
+  "en": "Box-office bag"
+ },
+ "opt_coins_d": {
+  "es": "+25 monedas",
+  "en": "+25 coins"
+ },
+ "star": {
+  "es": "Estrella del reparto",
+  "en": "Cast star"
+ },
+ "guest": {
+  "es": "Estrella Invitada",
+  "en": "Guest Star"
+ },
+ "ev_guest": {
+  "es": "¡Llega una Estrella Invitada!",
+  "en": "A Guest Star arrives!"
+ },
+ "ev_guests": {
+  "es": "¡Dos Estrellas Invitadas!",
+  "en": "Two Guest Stars!"
+ },
+ "ev_boss": {
+  "es": "¡%s entra en escena!",
+  "en": "%s enters the scene!"
+ },
+ "final_cut": {
+  "es": "montaje final",
+  "en": "final cut"
+ },
+ "ev_final": {
+  "es": "Último acto: %s",
+  "en": "Final act: %s"
+ },
+ "ev_wave": {
+  "es": "¡Todos los figurantes a escena!",
+  "en": "All extras on set!"
+ },
+ "productor": {
+  "es": "El Productor Ejecutivo",
+  "en": "The Executive Producer"
+ },
+ "ev_productor": {
+  "es": "Se acabó el presupuesto. Llega El Productor Ejecutivo.",
+  "en": "Budget's over. The Executive Producer is here."
+ },
+ "revive": {
+  "es": "¡Doble de cuerpo! Otra toma",
+  "en": "Body double! Another take"
+ },
+ "cut": {
+  "es": "¡CORTEN!",
+  "en": "CUT!"
+ },
+ "freeze": {
+  "es": "Pausa del proyector",
+  "en": "Projector pause"
+ },
+ "level_up": {
+  "es": "¡Subes de nivel!",
+  "en": "Level up!"
+ },
+ "reroll": {
+  "es": "Otra toma (%d)",
+  "en": "Reroll (%d)"
+ },
+ "skip": {
+  "es": "Descarte (%d)",
+  "en": "Skip (%d)"
+ },
+ "banish": {
+  "es": "Cortar escena (%d)",
+  "en": "Banish (%d)"
+ },
+ "banish_pick": {
+  "es": "Elige qué cortar…",
+  "en": "Pick one to cut…"
+ },
+ "chest_title": {
+  "es": "Lata de película: %d",
+  "en": "Film can: %d"
+ },
+ "evolved": {
+  "es": "¡Evolución!",
+  "en": "Evolution!"
+ },
+ "union": {
+  "es": "¡Unión!",
+  "en": "Union!"
+ },
+ "continue": {
+  "es": "Continuar",
+  "en": "Continue"
+ },
+ "paused": {
+  "es": "Pausa",
+  "en": "Paused"
+ },
+ "st_power": {
+  "es": "Poder",
+  "en": "Might"
+ },
+ "st_armor": {
+  "es": "Armadura",
+  "en": "Armor"
+ },
+ "st_max_hp": {
+  "es": "Vida máx.",
+  "en": "Max HP"
+ },
+ "st_regen": {
+  "es": "Regeneración",
+  "en": "Recovery"
+ },
+ "st_cooldown": {
+  "es": "Enfriamiento",
+  "en": "Cooldown"
+ },
+ "st_area": {
+  "es": "Área",
+  "en": "Area"
+ },
+ "st_speed": {
+  "es": "Velocidad",
+  "en": "Speed"
+ },
+ "st_duration": {
+  "es": "Duración",
+  "en": "Duration"
+ },
+ "st_amount": {
+  "es": "Cantidad",
+  "en": "Amount"
+ },
+ "st_magnet": {
+  "es": "Atracción",
+  "en": "Magnet"
+ },
+ "st_luck": {
+  "es": "Suerte",
+  "en": "Luck"
+ },
+ "st_growth": {
+  "es": "Crecimiento",
+  "en": "Growth"
+ },
+ "st_greed": {
+  "es": "Codicia",
+  "en": "Greed"
+ },
+ "st_curse": {
+  "es": "Maldición",
+  "en": "Curse"
+ },
+ "st_revival": {
+  "es": "Resurrección",
+  "en": "Revival"
+ },
+ "st_crit": {
+  "es": "Crítico",
+  "en": "Crit"
+ },
+ "resume": {
+  "es": "Seguir rodando",
+  "en": "Keep rolling"
+ },
+ "give_up": {
+  "es": "Abandonar el rodaje",
+  "en": "Quit the shoot"
+ },
+ "wrap": {
+  "es": "¡Es un wrap!",
+  "en": "That's a wrap!"
+ },
+ "cut_fail": {
+  "es": "¡CORTEN! Toma fallida",
+  "en": "CUT! Bad take"
+ },
+ "r_time": {
+  "es": "Tiempo",
+  "en": "Time"
+ },
+ "r_kills": {
+  "es": "Enemigos",
+  "en": "Kills"
+ },
+ "r_level": {
+  "es": "Nivel",
+  "en": "Level"
+ },
+ "r_coins": {
+  "es": "Monedas",
+  "en": "Coins"
+ },
+ "r_taquilla": {
+  "es": "Taquilla",
+  "en": "Box office"
+ },
+ "r_damage": {
+  "es": "Daño por arma",
+  "en": "Damage by weapon"
+ },
+ "retry": {
+  "es": "Otra toma",
+  "en": "Retry"
+ },
+ "to_menu": {
+  "es": "Al menú",
+  "en": "Main menu"
+ },
+ "back": {
+  "es": "Atrás",
+  "en": "Back"
+ },
+ "play": {
+  "es": "Rodar",
+  "en": "Play"
+ },
+ "clauses": {
+  "es": "Cláusulas",
+  "en": "Contract"
+ },
+ "awards": {
+  "es": "Premios",
+  "en": "Awards"
+ },
+ "options": {
+  "es": "Opciones",
+  "en": "Options"
+ },
+ "credits": {
+  "es": "Créditos",
+  "en": "Credits"
+ },
+ "quit": {
+  "es": "Salir",
+  "en": "Quit"
+ },
+ "casting": {
+  "es": "Casting",
+  "en": "Casting"
+ },
+ "unlock_by": {
+  "es": "Se desbloquea: %s",
+  "en": "Unlock: %s"
+ },
+ "stages": {
+  "es": "Platós",
+  "en": "Sets"
+ },
+ "boss_is": {
+  "es": "Jefe: %s",
+  "en": "Boss: %s"
+ },
+ "on": {
+  "es": "Sí",
+  "en": "On"
+ },
+ "off": {
+  "es": "Desactivada",
+  "en": "Off"
+ },
+ "maxed": {
+  "es": "Al máximo (pulsa para desactivar)",
+  "en": "Maxed (press to switch off)"
+ },
+ "refund": {
+  "es": "Devolver todo",
+  "en": "Refund all"
+ },
+ "clause_help": {
+  "es": "Las cláusulas al máximo se pueden desactivar.",
+  "en": "Maxed clauses can be switched off."
+ },
+ "language": {
+  "es": "Idioma",
+  "en": "Language"
+ },
+ "vol_sfx": {
+  "es": "Efectos",
+  "en": "Sound effects"
+ },
+ "vol_music": {
+  "es": "Música",
+  "en": "Music"
+ },
+ "opt_fullscreen": {
+  "es": "Pantalla completa",
+  "en": "Fullscreen"
+ },
+ "opt_shake": {
+  "es": "Temblor de cámara",
+  "en": "Screen shake"
+ },
+ "opt_flashes": {
+  "es": "Destellos",
+  "en": "Flashes"
+ },
+ "opt_damage_numbers": {
+  "es": "Números de daño",
+  "en": "Damage numbers"
+ },
+ "controls": {
+  "es": "Controles",
+  "en": "Controls"
+ },
+ "pad_touch": {
+  "es": "Mando: stick/cruceta, A elegir, Y otra toma, X descarte, LB cortar. Táctil: arrastra en pantalla.",
+  "en": "Pad: stick/d-pad, A pick, Y reroll, X skip, LB banish. Touch: drag on screen."
+ },
+ "act_move_up": {
+  "es": "Arriba",
+  "en": "Up"
+ },
+ "act_move_down": {
+  "es": "Abajo",
+  "en": "Down"
+ },
+ "act_move_left": {
+  "es": "Izquierda",
+  "en": "Left"
+ },
+ "act_move_right": {
+  "es": "Derecha",
+  "en": "Right"
+ },
+ "act_pause": {
+  "es": "Pausa",
+  "en": "Pause"
+ },
+ "act_reroll": {
+  "es": "Otra toma",
+  "en": "Reroll"
+ },
+ "act_skip": {
+  "es": "Descarte",
+  "en": "Skip"
+ },
+ "act_banish": {
+  "es": "Cortar escena",
+  "en": "Banish"
+ },
+ "press_key": {
+  "es": "Pulsa una tecla…",
+  "en": "Press a key…"
+ },
+ "reset_keys": {
+  "es": "Restaurar teclas",
+  "en": "Reset keys"
+ },
+ "credits_text": {
+  "es": "LUCES, CÁMARA, HORDA\n\nUn juego de Macacaweke Studio\n\nDirección y diseño: Alex\nProgramación y producción: Claude\nArte: generado con Gemini y retocado a mano\n\nFuentes: Limelight, Press Start 2P y Archivo Narrow (SIL Open Font License)\nMotor: Godot Engine 4 (licencia MIT)\n\nGracias por quedarte hasta los créditos.",
+  "en": "LIGHTS, CAMERA, HORDE!\n\nA Macacaweke Studio game\n\nDirection and design: Alex\nProgramming and production: Claude\nArt: generated with Gemini and touched up by hand\n\nFonts: Limelight, Press Start 2P and Archivo Narrow (SIL Open Font License)\nEngine: Godot Engine 4 (MIT license)\n\nThanks for staying for the credits."
+ },
+ "boss_phase": {
+  "es": "¡%s se pone serio!",
+  "en": "%s gets serious!"
+ },
+ "productor_tp": {
+  "es": "El Productor ha movido tu horario…",
+  "en": "The Producer rescheduled you…"
+ },
+ "presents": {
+  "es": "presenta",
+  "en": "presents"
+ },
+ "game_title": {
+  "es": "LUCES, CÁMARA, HORDA",
+  "en": "LIGHTS, CAMERA, HORDE!"
+ }
+}

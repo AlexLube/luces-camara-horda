@@ -1,0 +1,58 @@
+[
+ {
+  "id": "toma_rapida",
+  "name": "Toma Rápida",
+  "desc": "Todo va más rápido: jugador, enemigos y proyectiles",
+  "reward": "+50 % Taquilla",
+  "relic": "Claqueta de Oro"
+ },
+ {
+  "id": "fuera_de_plazo",
+  "name": "Fuera de Plazo",
+  "desc": "El reloj corre el doble; la partida dura 15 minutos reales",
+  "reward": "+50 % Taquilla",
+  "relic": "Reloj de Rodaje"
+ },
+ {
+  "id": "guiones",
+  "name": "Guiones",
+  "desc": "Activa las cartas de Guion",
+  "reward": "Cartas en la partida",
+  "relic": "Baraja del Guionista"
+ },
+ {
+  "id": "sin_limite",
+  "name": "Sin Límite",
+  "desc": "Las armas siguen subiendo de nivel sin tope",
+  "reward": "+50 % Taquilla",
+  "relic": "Llave del Cine Infinito"
+ },
+ {
+  "id": "negativo",
+  "name": "Negativo",
+  "desc": "Mapa con colores invertidos y enemigos más fuertes; aparece El Censor",
+  "reward": "+100 % Taquilla",
+  "relic": "Espejo de Camerino"
+ },
+ {
+  "id": "maraton",
+  "name": "Maratón",
+  "desc": "Al llegar a los créditos empieza otro ciclo más difícil",
+  "reward": "+x por ciclo",
+  "relic": "Superar 30 min en el modo Director's Cut"
+ },
+ {
+  "id": "imprevistos_de_rodaje",
+  "name": "Imprevistos de Rodaje",
+  "desc": "Eventos al azar: huelga de extras, lluvia artificial, apagón, visita del productor",
+  "reward": "Eventos con premio",
+  "relic": "Dado del Productor"
+ },
+ {
+  "id": "cine_mudo",
+  "name": "Cine Mudo",
+  "desc": "Blanco y negro, sin sonido y más velocidad",
+  "reward": "+30 % Taquilla",
+  "relic": "Completar el Archivo de Cine Mudo"
+ }
+]
