@@ -537,5 +537,275 @@
    ]
   ],
   "land_scale": 1.0
+ },
+ "silent": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "camera",
+    0.25
+   ],
+   [
+    "piano",
+    0.25
+   ],
+   [
+    "bench",
+    0.25
+   ],
+   [
+    "intertitle",
+    0.25
+   ]
+  ],
+  "land": "lamppost",
+  "glow": "e8e4d8",
+  "fog": "b8b4aa",
+  "blood": "d0d0d0",
+  "start": [
+   [
+    "lamppost",
+    230,
+    -150
+   ],
+   [
+    "piano",
+    -250,
+    -180
+   ],
+   [
+    "bench",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "colosseum": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "shield",
+    0.25
+   ],
+   [
+    "statue",
+    0.25
+   ],
+   [
+    "brazier",
+    0.25
+   ],
+   [
+    "amphorae",
+    0.25
+   ]
+  ],
+  "land": "column",
+  "glow": "ffc060",
+  "fog": "d8b080",
+  "blood": "ff6050",
+  "start": [
+   [
+    "column",
+    230,
+    -160
+   ],
+   [
+    "statue",
+    -250,
+    -180
+   ],
+   [
+    "amphorae",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "wasteland": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "car",
+    0.25
+   ],
+   [
+    "jerrycan",
+    0.25
+   ],
+   [
+    "tires",
+    0.25
+   ],
+   [
+    "cactus",
+    0.25
+   ]
+  ],
+  "land": "sign",
+  "glow": "ff9040",
+  "fog": "c09060",
+  "blood": "ff7040",
+  "start": [
+   [
+    "sign",
+    230,
+    -150
+   ],
+   [
+    "car",
+    -250,
+    -170
+   ],
+   [
+    "tires",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "dojo": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "dummy",
+    0.25
+   ],
+   [
+    "gong",
+    0.25
+   ],
+   [
+    "bonsai",
+    0.25
+   ],
+   [
+    "rack",
+    0.25
+   ]
+  ],
+  "land": "lantern",
+  "glow": "ffb060",
+  "fog": "a0b0a0",
+  "blood": "ff5060",
+  "start": [
+   [
+    "lantern",
+    230,
+    -150
+   ],
+   [
+    "gong",
+    -250,
+    -180
+   ],
+   [
+    "bonsai",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "train": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "armchair",
+    0.25
+   ],
+   [
+    "lamp",
+    0.25
+   ],
+   [
+    "luggage",
+    0.25
+   ],
+   [
+    "cart",
+    0.25
+   ]
+  ],
+  "land": "palm",
+  "glow": "ffd080",
+  "fog": "806070",
+  "blood": "e06080",
+  "start": [
+   [
+    "palm",
+    230,
+    -150
+   ],
+   [
+    "armchair",
+    -250,
+    -170
+   ],
+   [
+    "luggage",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "telenovela": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "sofa",
+    0.25
+   ],
+   [
+    "roses",
+    0.25
+   ],
+   [
+    "portrait",
+    0.25
+   ],
+   [
+    "chandelier",
+    0.25
+   ]
+  ],
+  "land": "stairs",
+  "glow": "ff80b0",
+  "fog": "d090b0",
+  "blood": "ff4080",
+  "start": [
+   [
+    "stairs",
+    230,
+    -160
+   ],
+   [
+    "sofa",
+    -250,
+    -170
+   ],
+   [
+    "roses",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
  }
 }

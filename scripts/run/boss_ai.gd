@@ -19,6 +19,12 @@ const SETS := {
 	"galleon": ["ring", "charge"],     # El Capitán Sin Barba: andanada en círculo y abordaje
 	"mansion": ["summon", "spiral"],   # La Viuda del Ático: fantasmas y espiral de lamentos
 	"lab": ["ring", "slam"],           # La Novia Galvánica: descarga en círculo y golpe eléctrico
+	"silent": ["fan", "charge"],      # el villano de bigote: abanico de pianolas y embestida
+	"colosseum": ["charge", "ring"],   # el campeón de la arena: embestida y círculo de lanzas
+	"wasteland": ["charge", "summon"], # el señor de la carretera: embestida y saqueadores
+	"dojo": ["fan", "slam"],           # el gran maestro: abanico de shuriken y golpe de palma
+	"train": ["spiral", "summon"],     # el revisor sin rostro: espiral de billetes y pasajeros
+	"telenovela": ["ring", "fan"],     # la villana del culebrón: círculo de lágrimas y bofetadas
 }
 const ALL := ["charge", "slam", "ring", "summon", "spiral", "fan"]
 
