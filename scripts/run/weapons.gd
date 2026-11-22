@@ -36,7 +36,7 @@ func add(id: String) -> Dictionary:
 
 func level_up(id: String) -> void:
 	var w = get_w(id)
-	if w and w.level < int(w.data.max_level):
+	if w and w.level < run.weapon_cap(w):
 		w.level += 1
 		recompute(w)
 

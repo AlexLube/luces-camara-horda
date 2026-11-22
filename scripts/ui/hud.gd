@@ -54,6 +54,19 @@ func _draw_overlay() -> void:
 	if run.art_key == "forest":
 		var night := _night_amount()
 		if night > 0.0: overlay.draw_texture_rect(vignette, Rect2(Vector2(-size.x * 0.25, -size.y * 0.6), Vector2(size.x * 1.5, size.y * 2.2)), false, Color(1, 1, 1, night * 0.92))
+	# Imprevistos de Rodaje: blackout (only light around the player) and artificial rain
+	if run.event_active("blackout"):
+		var lit := Rect2(size / 2.0 - Vector2(340, 340), Vector2(680, 680))
+		overlay.draw_texture_rect(vignette, lit, false, Color.WHITE)
+		for r in [Rect2(0, 0, size.x, lit.position.y), Rect2(0, lit.end.y, size.x, size.y), Rect2(0, 0, lit.position.x, size.y), Rect2(lit.end.x, 0, size.x, size.y)]:
+			overlay.draw_rect(r, Color.BLACK)
+	if run.event_active("rain"):
+		var t: float = run.time
+		for k in 140:
+			var x := fmod(k * 97.31 + t * 260.0, size.x + 80.0) - 40.0
+			var y := fmod(k * 53.7 + t * 900.0 + k * 13.0, size.y + 60.0) - 30.0
+			overlay.draw_line(Vector2(x, y), Vector2(x - 6, y + 18), Color(0.7, 0.8, 1.0, 0.45), 1.5)
+		overlay.draw_rect(Rect2(Vector2.ZERO, size), Color(0.2, 0.3, 0.5, 0.12))
 	if run.hurt_flash > 0.0:
 		overlay.draw_texture_rect(vignette, Rect2(Vector2.ZERO, size), false, Color(1, 0.1, 0.1, run.hurt_flash * 0.5))
 	if run.flash > 0.0: overlay.draw_rect(Rect2(Vector2.ZERO, size), Color(1, 1, 0.95, min(0.8, run.flash)))

@@ -426,5 +426,37 @@
  "col_hint": {
   "es": "Pista: %s",
   "en": "Hint: %s"
+ },
+ "ev_strike": {
+  "es": "¡Huelga de extras! No entra nadie nuevo durante 20 s",
+  "en": "Extras on strike! Nobody new for 20 s"
+ },
+ "ev_rain": {
+  "es": "¡Lluvia artificial! La horda va más lenta",
+  "en": "Artificial rain! The horde slows down"
+ },
+ "ev_blackout": {
+  "es": "¡Apagón en el plató!",
+  "en": "Blackout on set!"
+ },
+ "ev_visit": {
+  "es": "¡Visita del productor! Llegan sus guardaespaldas",
+  "en": "The producer visits! Here come the bodyguards"
+ },
+ "ev_over": {
+  "es": "Imprevisto superado: ¡una lata de regalo!",
+  "en": "Mishap over: a free film can!"
+ },
+ "modifiers": {
+  "es": "Modificadores",
+  "en": "Modifiers"
+ },
+ "mod_soon": {
+  "es": "Próximamente",
+  "en": "Coming soon"
+ },
+ "mod_locked": {
+  "es": "Se desbloquea con: %s",
+  "en": "Unlocked by: %s"
  }
 }

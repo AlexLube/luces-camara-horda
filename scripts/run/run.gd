@@ -62,6 +62,11 @@ var evolutions := 0
 var evolved_ids: Array = []
 var productor_killed := false
 var found_relics: Array = []        # relic ids picked up this run
+var mods: Array = []                # modifiers on for this run (see Data.MOD_BONUS)
+var event_t := 120.0                # Imprevistos de Rodaje: next event
+var event_name := ""
+var event_left := 0.0
+var _filter: ColorRect
 var dmg_by_weapon := {}
 
 # --- world objects ---
@@ -99,6 +104,21 @@ func setup(char_data: Dictionary, stage_data: Dictionary) -> void:
 	art_key = stage.get("art", "forest")
 	if not Data.art_sets.has(art_key): art_key = "forest"
 	duration = float(stage.get("minutes", 30)) * 60.0
+	mods.clear()
+	for m in Data.modifiers:
+		if m.id in Save.data.get("mods_on", []) and Data.modifier_ready(m) and Data.modifier_unlocked(m): mods.append(m.id)
+
+func has_mod(id: String) -> bool:
+	return id in mods
+
+func weapon_cap(w: Dictionary) -> int:
+	return 99 if has_mod("sin_limite") and w.data.source != "union" else int(w.data.max_level)
+
+## Extra Taquilla for the modifiers of this run (0.5 = +50 %).
+func mod_bonus() -> float:
+	var b := 0.0
+	for id in mods: b += float(Data.MOD_BONUS.get(id, 0.0))
+	return b
 
 func _ready() -> void:
 	texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
@@ -122,8 +142,62 @@ func _ready() -> void:
 	hud.run = self
 	add_child(hud)
 	_place_relics()
+	_make_filter()
+	if has_mod("cine_mudo"): Sfx.volume = 0.0
 	for p in art.get("start", []):
 		props[Vector2i(99999, 0)] = props.get(Vector2i(99999, 0), []) + [[p[0], float(p[1]), float(p[2]), art.get("land_scale", 1.0) if p[0] == art.get("land", "") else 0.8]]
+
+## Imprevistos de Rodaje: every two minutes something happens on set for 20 s; it ends with a lata.
+func _update_events(dt: float) -> void:
+	if event_left > 0.0:
+		event_left -= dt
+		if event_left <= 0.0:
+			event_name = ""
+			var at := player_pos + Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * 120.0
+			pickups.append({"k": "chest", "x": at.x, "y": at.y})
+			announce(Loc.t("ev_over"))
+		return
+	event_t -= dt
+	if event_t > 0.0: return
+	event_t = 120.0
+	event_name = ["strike", "rain", "blackout", "visit"][randi() % 4]
+	event_left = 20.0
+	announce(Loc.t("ev_" + event_name))
+	if event_name == "visit":
+		for k in 3: director.spawn(EnemyPool.T.ELITE)
+
+## Darker screen during the blackout; slower horde in the rain; no new extras during the strike.
+func event_active(name: String) -> bool:
+	return event_name == name and event_left > 0.0
+
+## Negativo and Cine Mudo: a full-screen filter over the world (the HUD stays on top).
+func _make_filter() -> void:
+	var mode := 1 if has_mod("negativo") else (2 if has_mod("cine_mudo") else 0)
+	if mode == 0: return
+	var layer := CanvasLayer.new()
+	layer.layer = 4
+	add_child(layer)
+	_filter = ColorRect.new()
+	_filter.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_filter.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var sh := Shader.new()
+	sh.code = """shader_type canvas_item;
+uniform sampler2D screen: hint_screen_texture, filter_linear;
+uniform int mode = 1;
+void fragment() {
+	vec3 c = texture(screen, SCREEN_UV).rgb;
+	if (mode == 1) { c = vec3(1.0) - c; }
+	else { float g = dot(c, vec3(0.3, 0.59, 0.11)); c = vec3(g * 1.05 + 0.02); }
+	COLOR = vec4(c, 1.0);
+}"""
+	var mat := ShaderMaterial.new()
+	mat.shader = sh
+	mat.set_shader_parameter("mode", mode)
+	_filter.material = mat
+	layer.add_child(_filter)
+
+func _exit_tree() -> void:
+	if has_mod("cine_mudo"): Sfx.volume = float(Save.data.options.sfx)
 
 ## Relics of this stage not found yet lie far from the start, each in its own fixed direction.
 func _place_relics() -> void:
@@ -382,7 +456,7 @@ func finish(won: bool) -> void:
 ## Write this run into the profile and check achievements. Returns the summary for the results screen.
 func record() -> Dictionary:
 	var s: Dictionary = Save.data.stats
-	var earned := int(round(coins)) + (300 if completed else 0) + kills / 50
+	var earned := int(round((int(round(coins)) + (300 if completed else 0) + kills / 50) * (1.0 + mod_bonus())))
 	s.kills += kills
 	s.deaths += 0 if completed else 1
 	s.runs += 1
@@ -420,11 +494,13 @@ func _process(delta: float) -> void:
 	if state == "over":
 		queue_redraw()
 		return
-	step(min(delta, 1.0 / 20.0))
+	var k := 1.3 if has_mod("toma_rapida") else (1.15 if has_mod("cine_mudo") else 1.0)
+	step(min(delta, 1.0 / 20.0) * k)
 	queue_redraw()
 
 func step(dt: float) -> void:
-	time += dt
+	time += dt * (2.0 if has_mod("fuera_de_plazo") else 1.0)
+	if has_mod("imprevistos_de_rodaje"): _update_events(dt)
 	_hit_sfx_t -= dt
 	freeze_t = max(0.0, freeze_t - dt)
 	flash = max(0.0, flash - dt * 2.0)
@@ -436,7 +512,7 @@ func step(dt: float) -> void:
 	if float(stats.regen) > 0.0: heal(float(stats.regen) * dt)
 	director.update(dt)
 	enemies.rebuild_grid()
-	var hurt := enemies.update(dt, player_pos.x, player_pos.y, PLAYER_R, freeze_t > 0.0, _enemy_shoot, _enemy_explode)
+	var hurt := enemies.update(dt * (0.6 if event_active("rain") else 1.0), player_pos.x, player_pos.y, PLAYER_R, freeze_t > 0.0, _enemy_shoot, _enemy_explode)
 	enemies.separate(dt)
 	boss_ai.update(dt)
 	weapons.orbiters.clear()

@@ -62,6 +62,18 @@ func _make_union_weapons() -> void:
 			"evolution": {"id": u.id, "name": u.name, "desc": u.desc, "requires": "", "mods": mods}}
 		weapons[u.id] = w
 
+## Taquilla bonus of each modifier (fraction), the ones that can be switched on, and what unlocks each.
+const MOD_BONUS := {"toma_rapida": 0.5, "fuera_de_plazo": 0.5, "sin_limite": 0.5, "negativo": 1.0, "imprevistos_de_rodaje": 0.25, "cine_mudo": 0.3}
+
+func modifier_ready(m: Dictionary) -> bool:
+	return MOD_BONUS.has(m.id)
+
+func modifier_unlocked(m: Dictionary) -> bool:
+	if m.id == "cine_mudo": return "archivo_de_cine_mudo" in Save.data.stats.completed
+	for r in relics:
+		if r.name == m.relic: return Save.is_unlocked("relics", r.id)
+	return false
+
 ## Relics hidden in a stage (their "where" is the stage name).
 func relics_at(stage: Dictionary) -> Array:
 	var out: Array = []

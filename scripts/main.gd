@@ -50,6 +50,9 @@ func _shot(path: String, wait: float, panel: String) -> void:
 	if run and panel == "boss":
 		var b := run.enemies.spawn(EnemyPool.T.BOSS, run.player_pos.x + 260.0, run.player_pos.y - 40.0, 30.0)
 		run.enemies.names[b] = run.stage.boss
+	if run and panel.begins_with("ev_"):   # show an Imprevisto (blackout, rain...)
+		run.event_name = panel.trim_prefix("ev_")
+		run.event_left = 20.0
 	if run and panel == "relic" and not run.relic_pickups().is_empty():
 		var rp: Dictionary = run.relic_pickups()[0]
 		run.player_pos = Vector2(rp.x - 300.0, rp.y + 60.0)
@@ -237,7 +240,33 @@ func show_stages() -> void:
 		b.mouse_entered.connect(func(): info.text = b.tooltip_text)
 		grid.add_child(b)
 	v.add_child(info)
+	_modifier_row(v)
 	UIKit.focus_first(grid)
+
+## Modificadores: switches for the next run, each unlocked by a relic.
+func _modifier_row(v: VBoxContainer) -> void:
+	var row := HFlowContainer.new()
+	row.add_theme_constant_override("h_separation", 6)
+	row.add_theme_constant_override("v_separation", 6)
+	v.add_child(row)
+	row.add_child(UIKit.label(Loc.t("modifiers") + ":", 20, UIKit.GOLD))
+	var on: Array = Save.data.mods_on
+	for m in Data.modifiers:
+		var ready := Data.modifier_ready(m) and Data.modifier_unlocked(m)
+		var is_on: bool = ready and m.id in on
+		var bonus := "  +%d %%" % roundi(Data.MOD_BONUS.get(m.id, 0.0) * 100.0) if Data.MOD_BONUS.get(m.id, 0.0) > 0.0 else ""
+		var b := UIKit.button(("✔ " if is_on else "") + (m.name + bonus if ready else "🔒 " + m.name), _toggle_mod.bind(m.id), 200)
+		b.disabled = not ready
+		if is_on: b.modulate = UIKit.GOLD.lightened(0.4)
+		b.tooltip_text = m.desc + "\n" + (m.reward if ready else (Loc.t("mod_soon") if not Data.modifier_ready(m) else Loc.t("mod_locked", [m.relic])))
+		row.add_child(b)
+
+func _toggle_mod(id: String) -> void:
+	var on: Array = Save.data.mods_on
+	if id in on: on.erase(id)
+	else: on.append(id)
+	Save.save_game()
+	show_stages()
 
 func _on_stage(s: Dictionary) -> void:
 	sel_stage = s.id
@@ -357,6 +386,7 @@ func show_collection(tab := "weapons") -> void:
 ## One entry of the Colección: icon (a dark silhouette while undiscovered), name and text.
 func _col_card(icon: Texture2D, name: String, desc: String, known: bool, tag := "") -> Control:
 	var c := UIKit.card(icon, name, tag, desc, func(): pass, 600)
+	c.custom_minimum_size.y = 104
 	c.focus_mode = Control.FOCUS_NONE
 	if not known:
 		for n in c.find_children("*", "TextureRect", true, false): n.modulate = Color(0.05, 0.03, 0.08, 0.9)

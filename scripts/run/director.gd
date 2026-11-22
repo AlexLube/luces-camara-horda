@@ -23,7 +23,8 @@ func minute() -> float:
 
 ## Health multiplier for normal enemies: grows with time and Maldición.
 func hp_mult() -> float:
-	return (1.0 + minute() * 0.11 + pow(minute() / 10.0, 2.0) * 0.6) * (0.5 + 0.5 * float(run.stats.curse))
+	var neg := 1.5 if run.has_mod("negativo") else 1.0
+	return (1.0 + minute() * 0.11 + pow(minute() / 10.0, 2.0) * 0.6) * (0.5 + 0.5 * float(run.stats.curse)) * neg
 
 func target_count() -> int:
 	var m := minute()
@@ -60,7 +61,7 @@ func spawn(t: int, at := Vector2.INF, hp_k := 1.0) -> int:
 	return run.enemies.spawn(t, at.x, at.y, hp_mult() * hp_k, minute() * 0.8)
 
 func update(dt: float) -> void:
-	if run.freeze_t > 0.0: return
+	if run.freeze_t > 0.0 or run.event_active("strike"): return
 	var m := minute()
 	acc += dt * (5.0 + m * 2.6) * float(run.stats.curse)
 	var want := target_count()

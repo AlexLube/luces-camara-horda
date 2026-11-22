@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -209,6 +209,33 @@ func t_relics() -> void:
 	ok(r2.relic_pickups().size() == 1, "found relics are not placed again (bot run still places its own)")
 	r2.queue_free()
 	await get_tree().process_frame
+	Save.data.unlocked.relics.clear()
+
+func t_modifiers() -> void:
+	var toma: Dictionary = Data.modifiers.filter(func(m): return m.id == "toma_rapida")[0]
+	ok(not Data.modifier_unlocked(toma), "Toma Rápida locked without its relic")
+	Save.data.unlocked.relics.append_array(["claqueta_de_oro", "llave_del_cine_infinito", "dado_del_productor", "espejo_de_camerino"])
+	ok(Data.modifier_unlocked(toma), "Claqueta de Oro unlocks Toma Rápida")
+	Save.data.mods_on = ["sin_limite", "imprevistos_de_rodaje", "fuera_de_plazo"]
+	var r := new_run()
+	ok(r.has_mod("sin_limite") and r.has_mod("imprevistos_de_rodaje") and not r.has_mod("fuera_de_plazo"), "only unlocked modifiers apply")
+	var w: Dictionary = r.weapons.list[0]
+	for l in 12: r.weapons.level_up(w.id)
+	ok(w.level == 13, "Sin Límite: weapons go past level 8 (got %d)" % w.level)
+	ok(absf(r.mod_bonus() - 0.75) < 0.001, "taquilla bonus adds up")
+	r._update_events(121.0)
+	ok(r.event_left > 0.0 and r.event_name != "", "an Imprevisto starts after two minutes")
+	var chests_before: int = r.pickups.filter(func(p): return p.k == "chest").size()
+	r._update_events(21.0)
+	ok(r.pickups.filter(func(p): return p.k == "chest").size() == chests_before + 1, "an Imprevisto ends with a lata")
+	r.queue_free()
+	await get_tree().process_frame
+	Save.data.mods_on = ["negativo"]
+	var r2 := new_run()
+	ok(r2.has_mod("negativo") and r2._filter != null, "Negativo puts a filter over the world")
+	r2.queue_free()
+	await get_tree().process_frame
+	Save.data.mods_on = []
 	Save.data.unlocked.relics.clear()
 
 func t_achievements() -> void:
