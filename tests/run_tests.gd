@@ -64,7 +64,7 @@ func t_data() -> void:
 	ok(with_art >= 12, "stages 1-12 have their own art (%d)" % with_art)
 	ok(ResourceLoader.exists("res://assets/sprites/productor/productor.png"), "productor sprite")
 	for id in weapons_and_items(): ok(Data.icon_for(id) != null, "icon for " + id)
-	for c in Data.characters.slice(0, 72): ok(ResourceLoader.exists("res://assets/sprites/characters/%s/run.png" % c.id) or c.id == "max_rios", "sprite for " + c.id)
+	for c in Data.characters.slice(0, 96): ok(ResourceLoader.exists("res://assets/sprites/characters/%s/run.png" % c.id) or c.id == "max_rios", "sprite for " + c.id)
 	for k in Loc._s: ok(Loc._s[k].has("en") and Loc._s[k].has("es"), "ES/EN string " + k)
 
 func weapons_and_items() -> Array:
