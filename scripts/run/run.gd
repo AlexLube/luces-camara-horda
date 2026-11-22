@@ -211,6 +211,7 @@ func _ready() -> void:
 	font = load("res://assets/fonts/PressStart2P-Regular.ttf")
 	if character.is_empty(): setup(Data.characters[0], Data.stages[0])
 	_load_sheets()
+	Music.play(Music.track_for(stage))
 	cam = Camera2D.new()
 	add_child(cam)
 	cam.make_current()
@@ -410,6 +411,7 @@ func kill(i: int, drops := true) -> void:
 		if has_guion("g_xxi") and randf() < 0.06 and letters.size() < 40:
 			letters.append({"x": at.x + randf_range(-40, 40), "y": at.y + randf_range(-40, 40), "t": 0.7, "c": "ABCDEFGHIJKLMNOPRSTUVZ"[randi() % 22]})
 		if d.has("chest"): pickups.append({"k": "chest", "x": at.x, "y": at.y, "boss": d.get("boss", false)})
+		if t == T.BOSS: _boss_music_after(i)
 		if d.get("boss", false) or t == T.GUEST:
 			bosses_killed += 1
 			if has_guion("g_xiii"): pickups.append({"k": "chest", "x": at.x + 40.0, "y": at.y})
@@ -432,6 +434,12 @@ func kill(i: int, drops := true) -> void:
 	elif d.sprite != "enemy":
 		fx.append({"k": "smoke", "x": at.x, "y": at.y - 20.0, "t": 0.0, "life": 0.6, "s": enemies.sc[i] * 1.4})
 	enemies.remove(i)
+
+## Back to the stage theme once the last jefe on screen falls.
+func _boss_music_after(dead: int) -> void:
+	for j in enemies.n:
+		if j != dead and enemies.alive[j] == 1 and enemies.type[j] == T.BOSS: return
+	Music.play(Music.track_for(stage))
 
 func drop_gem(at: Vector2, v: float) -> void:
 	if gem_count >= MAX_GEMS:

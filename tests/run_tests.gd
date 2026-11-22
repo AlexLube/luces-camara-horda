@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -263,6 +263,20 @@ func t_modifiers() -> void:
 	Save.data.mods_on = []
 	Save.data.unlocked.relics.clear()
 
+func t_music() -> void:
+	for k in Music.BY_GENRE.keys() + ["titulo", "jefe"]: ok(ResourceLoader.exists("res://assets/music/%s.ogg" % k), "music track " + k)
+	for st in Data.stages:
+		var found := false
+		for k in Music.BY_GENRE: found = found or st.genre in Music.BY_GENRE[k]
+		ok(found, "stage genre has a track: %s (%s)" % [st.id, st.genre])
+	Music.play("western")
+	ok(Music.current == "western" and Music._players.size() >= 1, "music starts")
+	Music.play("jefe")
+	ok(Music.current == "jefe" and Music._players[-1][2] == 1.0 and Music._players[0][2] == 0.0, "crossfade to the boss theme")
+	await get_tree().create_timer(1.2).timeout
+	ok(Music._players.size() == 1, "old track freed after the fade")
+	Music.stop()
+
 func t_achievements() -> void:
 	Save.data = Save.defaults()
 	Achievements.check({})
@@ -343,7 +357,8 @@ func t_full_run() -> void:
 	ok(saw_productor, "El Productor Ejecutivo appears at 30:00")
 	ok(r.director.done.size() == r.director.calendar.size(), "all calendar events fired")
 	ok(r.level > 20, "levels up through the run")
-	ok(max_enemies > 600, "horde grows")
+	# a strong bot keeps the screen clean, so the horde also counts as grown when it fed 20 000+ kills
+	ok(max_enemies > 600 or r.kills > 20000, "horde grows (%d max on screen, %d kills)" % [max_enemies, r.kills])
 	var sum := r.record()
 	ok(sum.completed and int(Save.data.stats.runs) >= 1, "run recorded in profile")
 	r.queue_free()

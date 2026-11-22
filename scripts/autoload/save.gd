@@ -59,6 +59,7 @@ func apply_options() -> void:
 	var o: Dictionary = data.options
 	Loc.set_lang(o.lang)
 	Sfx.volume = o.sfx
+	Music.volume = o.music
 	if not OS.has_feature("web") and DisplayServer.get_name() != "headless":
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if o.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 

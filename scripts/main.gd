@@ -148,6 +148,7 @@ func _end_splash() -> void:
 
 # ---------- title ----------
 func show_title() -> void:
+	Music.play("titulo")
 	var v := _clear()
 	var art := TextureRect.new()
 	art.texture = Data.tex("res://assets/ui/keyart.jpg")

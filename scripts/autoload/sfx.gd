@@ -1,5 +1,5 @@
 extends Node
-## Small pool of players for the placeholder sound effects (assets/sfx). Music arrives in phase 5.
+## Small pool of players for the placeholder sound effects (assets/sfx). Music lives in music.gd.
 
 var _players: Array[AudioStreamPlayer] = []
 var _streams := {}

@@ -14,6 +14,7 @@ Loc="*res://scripts/autoload/loc.gd"
 Save="*res://scripts/autoload/save.gd"
 Controls="*res://scripts/autoload/controls.gd"
 Sfx="*res://scripts/autoload/sfx.gd"
+Music="*res://scripts/autoload/music.gd"
 Achievements="*res://scripts/autoload/achievements.gd"
 
 [display]
