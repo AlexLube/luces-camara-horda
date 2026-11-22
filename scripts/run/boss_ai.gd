@@ -31,6 +31,16 @@ const SETS := {
 	"carpet": ["fan", "summon"],       # el crítico implacable: abanico de tinta y paparazzi
 	"casting": ["summon", "ring"],     # el director de casting: aspirantes y grito de megáfono
 	"montage": ["charge", "spiral"],   # el montador: corte en embestida y espiral de fotogramas
+	"spirit": ["summon", "spiral"],    # la niña del pozo: espíritus y espiral de fuegos fatuos
+	"hotel": ["charge", "summon"],     # el huésped: embestida por el pasillo y botones fantasma
+	"dino": ["charge", "slam"],        # el rex alfa: embestida y pisotón
+	"doom": ["slam", "ring"],          # el asteroide: impacto y lluvia de rocas en círculo
+	"beach": ["fan", "ring"],          # el general de hierro: abanico de cañonazos y bombardeo
+	"heli": ["fan", "charge"],         # el coronel del río: abanico de bengalas y embestida
+	"dragon": ["fan", "slam"],         # el señor del dragón: aliento en abanico y pisotón
+	"tower": ["spiral", "summon"],     # el hechicero de la torre: espiral arcana y aprendices
+	"clay": ["slam", "charge"],        # el gigante de plastilina: aplastón y rodada
+	"count": ["ring", "summon"],       # el conde empolvado: anillo de murciélagos y sirvientes
 }
 const ALL := ["charge", "slam", "ring", "summon", "spiral", "fan"]
 

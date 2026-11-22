@@ -1077,5 +1077,451 @@
    ]
   ],
   "land_scale": 1.0
+ },
+ "spirit": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "well",
+    0.25
+   ],
+   [
+    "lantern",
+    0.25
+   ],
+   [
+    "shrine",
+    0.25
+   ],
+   [
+    "stonelamp",
+    0.25
+   ]
+  ],
+  "land": "deadtree",
+  "glow": "80e0ff",
+  "fog": "7080b0",
+  "blood": "c0f0ff",
+  "start": [
+   [
+    "deadtree",
+    230,
+    -160
+   ],
+   [
+    "shrine",
+    -250,
+    -170
+   ],
+   [
+    "well",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "hotel": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "cart",
+    0.25
+   ],
+   [
+    "phone",
+    0.25
+   ],
+   [
+    "elevator",
+    0.25
+   ],
+   [
+    "plant",
+    0.25
+   ]
+  ],
+  "land": "clock",
+  "glow": "ffd890",
+  "fog": "806050",
+  "blood": "a02030",
+  "start": [
+   [
+    "clock",
+    230,
+    -160
+   ],
+   [
+    "elevator",
+    -250,
+    -170
+   ],
+   [
+    "cart",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "dino": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "fence",
+    0.25
+   ],
+   [
+    "nest",
+    0.25
+   ],
+   [
+    "fern",
+    0.25
+   ],
+   [
+    "jeep",
+    0.25
+   ]
+  ],
+  "land": "fossil",
+  "glow": "fff0a0",
+  "fog": "80a070",
+  "blood": "70c040",
+  "start": [
+   [
+    "fossil",
+    230,
+    -150
+   ],
+   [
+    "jeep",
+    -250,
+    -170
+   ],
+   [
+    "nest",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "doom": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "wreck",
+    0.25
+   ],
+   [
+    "trafficlight",
+    0.25
+   ],
+   [
+    "crater",
+    0.25
+   ],
+   [
+    "sign",
+    0.25
+   ]
+  ],
+  "land": "tower",
+  "glow": "ff8030",
+  "fog": "a08070",
+  "blood": "ff6020",
+  "start": [
+   [
+    "tower",
+    230,
+    -160
+   ],
+   [
+    "wreck",
+    -250,
+    -170
+   ],
+   [
+    "crater",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "beach": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "hedgehog",
+    0.33
+   ],
+   [
+    "sandbags",
+    0.33
+   ],
+   [
+    "boat",
+    0.33
+   ]
+  ],
+  "land": "bunker",
+  "glow": "fff0c0",
+  "fog": "c0c0b0",
+  "blood": "d04030",
+  "start": [
+   [
+    "bunker",
+    230,
+    -150
+   ],
+   [
+    "boat",
+    -250,
+    -170
+   ],
+   [
+    "sandbags",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "heli": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "crates",
+    0.25
+   ],
+   [
+    "drum",
+    0.25
+   ],
+   [
+    "palm",
+    0.25
+   ],
+   [
+    "radio",
+    0.25
+   ]
+  ],
+  "land": "heli",
+  "glow": "ffb040",
+  "fog": "60806a",
+  "blood": "c04020",
+  "start": [
+   [
+    "heli",
+    230,
+    -150
+   ],
+   [
+    "palm",
+    -250,
+    -180
+   ],
+   [
+    "crates",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "dragon": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "gold",
+    0.25
+   ],
+   [
+    "banner",
+    0.25
+   ],
+   [
+    "catapult",
+    0.25
+   ],
+   [
+    "haycart",
+    0.25
+   ]
+  ],
+  "land": "tower",
+  "glow": "ffc040",
+  "fog": "8a7a60",
+  "blood": "b02020",
+  "start": [
+   [
+    "tower",
+    230,
+    -160
+   ],
+   [
+    "banner",
+    -250,
+    -170
+   ],
+   [
+    "haycart",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "tower": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "cauldron",
+    0.25
+   ],
+   [
+    "lectern",
+    0.25
+   ],
+   [
+    "candles",
+    0.25
+   ],
+   [
+    "crystal",
+    0.25
+   ]
+  ],
+  "land": "shelf",
+  "glow": "a060ff",
+  "fog": "40306a",
+  "blood": "80c040",
+  "start": [
+   [
+    "shelf",
+    230,
+    -160
+   ],
+   [
+    "cauldron",
+    -250,
+    -170
+   ],
+   [
+    "candles",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "clay": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "house",
+    0.25
+   ],
+   [
+    "mushroom",
+    0.25
+   ],
+   [
+    "cloud",
+    0.25
+   ],
+   [
+    "snowman",
+    0.25
+   ]
+  ],
+  "land": "tree",
+  "glow": "ffe070",
+  "fog": "a0b0d0",
+  "blood": "e04040",
+  "start": [
+   [
+    "tree",
+    230,
+    -160
+   ],
+   [
+    "mushroom",
+    -250,
+    -170
+   ],
+   [
+    "snowman",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
+ },
+ "count": {
+  "enemy": 8,
+  "tank": 8,
+  "boss": 6,
+  "props": [
+   [
+    "coffin",
+    0.25
+   ],
+   [
+    "pew",
+    0.25
+   ],
+   [
+    "candelabra",
+    0.25
+   ],
+   [
+    "angel",
+    0.25
+   ]
+  ],
+  "land": "organ",
+  "glow": "ff9040",
+  "fog": "302040",
+  "blood": "a01010",
+  "start": [
+   [
+    "organ",
+    230,
+    -160
+   ],
+   [
+    "coffin",
+    -250,
+    -170
+   ],
+   [
+    "candelabra",
+    -150,
+    140
+   ]
+  ],
+  "land_scale": 1.0
  }
 }
