@@ -46,6 +46,10 @@ func _met(c: Dictionary, run: Dictionary) -> bool:
 		"play": return c.stage in s.played
 		"weapons_unlocked": return Save.data.unlocked.weapons.size() >= c.value
 		"productor": return int(s.productor) > 0
+	if c.type == "manual" and String(c.get("text", "")).begins_with("Recoger las 7 bobinas perdidas"):
+		for k in range(1, 8):
+			if not Save.is_unlocked("relics", "bobina_perdida_%d" % k): return false
+		return true
 	return false  # "manual": needs content from later phases (relics, secrets)
 
 func _steam(id: String) -> void:

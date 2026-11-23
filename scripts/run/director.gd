@@ -13,6 +13,10 @@ var calendar: Array = []   # [second, event]
 
 func _init(r) -> void:
 	run = r
+	build_calendar()
+
+## The stage calendar for the run's length (rebuilt when El Final Cortado shortens the run).
+func build_calendar() -> void:
 	var total: float = run.duration
 	calendar = [[300.0, "guest"], [600.0, "boss_weak"], [900.0, "wave"], [1200.0, "boss"], [1500.0, "guests"], [total - 120.0, "boss_final"], [total, "productor"]]
 	if total < 1800.0:  # bonus stages (20 min): compressed calendar

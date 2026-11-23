@@ -60,6 +60,12 @@ func _draw_overlay() -> void:
 		overlay.draw_texture_rect(vignette, lit, false, Color.WHITE)
 		for r in [Rect2(0, 0, size.x, lit.position.y), Rect2(0, lit.end.y, size.x, size.y), Rect2(0, 0, lit.position.x, size.y), Rect2(lit.end.x, 0, size.x, size.y)]:
 			overlay.draw_rect(r, Color.BLACK)
+	if run.curse and run.has_guion("gm_vi"):   # El Metraje Encontrado: only a small circle is seen
+		var r2 := CursedGuiones.SIGHT
+		var lit2 := Rect2(size / 2.0 - Vector2(r2, r2) * 1.15, Vector2(r2, r2) * 2.3)
+		overlay.draw_texture_rect(vignette, lit2, false, Color(1, 1, 1, 0.97))
+		for r in [Rect2(0, 0, size.x, lit2.position.y), Rect2(0, lit2.end.y, size.x, size.y), Rect2(0, 0, lit2.position.x, size.y), Rect2(lit2.end.x, 0, size.x, size.y)]:
+			overlay.draw_rect(r, Color(0, 0, 0, 0.97))
 	if run.event_active("rain"):
 		var t: float = run.time
 		for k in 140:
@@ -215,8 +221,9 @@ func show_guion(opts: Array) -> void:
 	var v := UIKit.centered_panel(panel_root, Vector2(640, 0))
 	v.add_child(UIKit.title(Loc.t("guion_pick"), 42))
 	for g in opts:
-		var c := UIKit.card(Data.guion_icon(g.id), g.name, g.num, g.desc, run.pick_guion.bind(g.id), 600)
+		var c := UIKit.card(Data.guion_icon(g.id), g.name, ("☠ " + Loc.t("gm_curse_tag") + " " if g.cursed else "") + g.num, g.desc, run.pick_guion.bind(g.id), 600)
 		c.custom_minimum_size.y = 100
+		if g.cursed: c.modulate = Color(1.0, 0.82, 0.85)
 		v.add_child(c)
 	UIKit.focus_first(v)
 

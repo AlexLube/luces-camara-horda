@@ -86,7 +86,9 @@ func guion_icon(id: String) -> Texture2D:
 func relics_at(stage: Dictionary) -> Array:
 	var out: Array = []
 	for r in relics:
-		if r.where == stage.get("name", ""): out.append(r)
+		var nm: String = stage.get("name", "")
+		if r.where == nm or r.where == nm.trim_prefix("La ").trim_prefix("El "): out.append(r)
+		elif r.where == "Escenario de desafío %d" % int(stage.get("num", 0)): out.append(r)   # the 7 lost reels
 	return out
 
 ## Relics earned by finishing a number of stages ("Completar N escenarios").

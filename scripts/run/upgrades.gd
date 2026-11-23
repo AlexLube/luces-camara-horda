@@ -133,6 +133,13 @@ static func open_chest(run, n: int) -> Array:
 				evolved = true
 				break
 		if evolved: continue
+		if run.curse:
+			for w in run.weapons.list:
+				if run.curse.remaster(w):
+					got.append({"kind": "evolve", "id": w.id, "icon": w.data.evolution.id, "name": Loc.t("gm_remaster", [w.data.evolution.name]), "desc": Loc.t("gm_remaster_desc")})
+					evolved = true
+					break
+		if evolved: continue
 		var ups: Array = []
 		for w in run.weapons.list:
 			if w.level < run.weapon_cap(w): ups.append({"kind": "weapon_up", "id": w.id, "name": w.data.name, "desc": describe_up(w.data, w.level + 1)})

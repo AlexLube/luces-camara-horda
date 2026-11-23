@@ -81,6 +81,7 @@ var _bursting := false
 var burns: Array = []               # Efectos Prácticos: [enemy index, seconds left, tick]
 var cameo := {}                     # El Cameo: {"sheet", "t", "hit"} while a guest star helps
 var cameo_t := 60.0
+var curse: CursedGuiones              # Guiones Malditos in play (null until one is picked)
 var saga := {}                      # Modo Saga: the saga of this run (empty otherwise)
 var saga_phase := 0
 var saga_rules: SagaRules
@@ -157,6 +158,7 @@ func _guion_stats() -> Dictionary:
 		e.power = float(e.get("power", 0.0)) + 0.15
 	if has_guion("g_iv"): e.power = float(e.get("power", 0.0)) + 0.1 + 0.6 * max(0.0, float(stats.get("speed", 1.0)) - 1.0)
 	if Save.is_unlocked("relics", "casco_de_rescate"): e.revival = float(e.get("revival", 0.0)) + 1.0   # saga reward
+	if curse: curse.stats(e)
 	return e
 
 ## Damage multiplier that changes during the run (El Cliffhanger, La Estrella).
@@ -165,6 +167,7 @@ func guion_damage() -> float:
 	if has_guion("g_xvi") and stats.has("hp_max"): k *= 1.0 + 0.6 * (1.0 - clampf(hp / float(stats.hp_max), 0.0, 1.0))
 	if has_guion("g_xix"): k *= 1.0 + kills * 0.0001
 	if montage_t > 0.0: k *= 1.2
+	if curse and has_guion("gm_i"): k *= 2.0   # La Película Perdida
 	if saga_rules: k *= saga_rules.damage_mult()
 	return k
 
@@ -173,8 +176,13 @@ func offer_guion() -> void:
 	if pool.is_empty() or guion_offers >= 3: return
 	guion_offers += 1
 	pool.shuffle()
+	var ids: Array = pool.slice(0, 3)
+	# La Baraja Maldita: one slot may hold a Guion Maldito
+	var cursed: Array = CursedGuiones.READY.filter(func(id): return id not in guiones)
+	if Save.is_unlocked("relics", "baraja_maldita") and not cursed.is_empty() and randf() < 0.35:
+		ids[ids.size() - 1] = cursed[randi() % cursed.size()]
 	var opts: Array = []
-	for id in pool.slice(0, 3):
+	for id in ids:
 		for g in Data.guiones:
 			if g.id == id: opts.append(g)
 	if bot:
@@ -186,6 +194,9 @@ func offer_guion() -> void:
 
 func pick_guion(id: String) -> void:
 	guiones.append(id)
+	if id.begins_with("gm_"):
+		if curse == null: curse = CursedGuiones.new(self)
+		curse.on_pick(id)
 	rebuild_stats()
 	if state == "guion":
 		state = "play"
@@ -353,7 +364,7 @@ void fragment() {
 	layer.add_child(_filter)
 
 func _exit_tree() -> void:
-	if has_mod("cine_mudo"): Sfx.volume = float(Save.data.options.sfx)
+	if has_mod("cine_mudo") or has_guion("gm_x"): Sfx.volume = float(Save.data.options.sfx)
 
 ## Relics of this stage not found yet lie far from the start, each in its own fixed direction.
 func _place_relics() -> void:
@@ -451,6 +462,7 @@ func damage_enemy(i: int, amount: float, kb: Vector2, w) -> void:
 	if enemies.alive[i] == 0: return
 	var t := enemies.type[i]
 	amount *= guion_damage()
+	if curse and has_guion("gm_vi") and Vector2(enemies.x[i], enemies.y[i]).distance_to(player_pos) > CursedGuiones.SIGHT: amount *= 3.0
 	if w != null and has_guion("g_xiv") and burns.size() < 200 and randf() < 0.2: burns.append([i, 3.0, 0.5])
 	var crit := randf() < float(stats.crit)
 	if crit: amount *= 2.6 if has_guion("g_xviii") else 2.0
@@ -476,6 +488,7 @@ func kill(i: int, drops := true) -> void:
 	if drops:
 		kills += 1
 		if saga_rules: saga_rules.on_kill()
+		if curse: curse.on_kill(at, d.get("boss", false) or t >= T.STAR)
 		beasts[d.sprite] = int(beasts.get(d.sprite, 0)) + 1
 		weapons.on_kill()
 		if float(stats.lifesteal) > 0.0: heal(float(stats.lifesteal) * 2.0)
@@ -490,6 +503,13 @@ func kill(i: int, drops := true) -> void:
 			if has_mod("guiones") and t == T.BOSS: offer_guion()
 			shake = 0.5
 			Sfx.play("explode", 0.7)
+		if t == T.PRODUCTOR and curse and has_guion("gm_xii") and not completed:
+			productor_killed = true   # El Productor Ejecutivo (Guion Maldito): beaten at minute 15, the run goes on
+			enemies.remove(i)
+			for k in 3: pickups.append({"k": "chest", "x": at.x + 50.0 * (k - 1), "y": at.y, "boss": true})
+			add_coins(500.0)
+			announce(Loc.t("gm_productor_down"))
+			return
 		if t == T.PRODUCTOR:
 			productor_killed = true
 			enemies.remove(i)
@@ -640,7 +660,7 @@ func finish(won: bool) -> void:
 ## Write this run into the profile and check achievements. Returns the summary for the results screen.
 func record() -> Dictionary:
 	var s: Dictionary = Save.data.stats
-	var earned := int(round((int(round(coins)) + (300 if completed else 0) + kills / 50) * (1.0 + mod_bonus())))
+	var earned := int(round((int(round(coins)) + (300 if completed else 0) + kills / 50) * (1.0 + mod_bonus()) * (curse.taquilla_mult() if curse else 1.0)))
 	s.kills += kills
 	s.deaths += 0 if completed else 1
 	s.runs += 1
@@ -727,9 +747,10 @@ func step(dt: float) -> void:
 	_move_player(dt)
 	if float(stats.regen) > 0.0: heal(float(stats.regen) * dt)
 	if saga_rules: saga_rules.update(dt)
+	if curse: curse.update(dt)
 	director.update(dt)
 	enemies.rebuild_grid()
-	var hurt := enemies.update(dt * (0.6 if event_active("rain") else 1.0), player_pos.x, player_pos.y, PLAYER_R, freeze_t > 0.0, _enemy_shoot, _enemy_explode)
+	var hurt := enemies.update(dt * (0.6 if event_active("rain") else 1.0) * (curse.enemy_speed() if curse else 1.0), player_pos.x, player_pos.y, PLAYER_R, freeze_t > 0.0, _enemy_shoot, _enemy_explode)
 	enemies.separate(dt)
 	boss_ai.update(dt)
 	weapons.orbiters.clear()
@@ -804,6 +825,7 @@ func take_damage(amount: float, burst: bool) -> void:
 		hurt_from = (player_pos - Vector2(enemies.x[e], enemies.y[e])).normalized() if e >= 0 else -facing
 	hurt_flash = 1.0
 	if burst:
+		if curse: curse.on_hurt()
 		iframes = 0.4
 		shake = 0.25
 		Sfx.play("hurt")
@@ -1035,6 +1057,7 @@ func _draw() -> void:
 				draw_arc(Vector2(z.x, z.y), z.r, 0, TAU, 32, Color(col, 0.6), 2.0)
 	boss_ai.draw(self)
 	if saga_rules: saga_rules.draw_world(self)
+	if curse: curse.draw_world(self)
 	# pickups
 	for p in pickups:
 		if not vr.has_point(Vector2(p.x, p.y)): continue
