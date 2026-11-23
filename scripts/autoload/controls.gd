@@ -14,8 +14,9 @@ const ACTIONS := {
 	"reroll":     {"keys": [KEY_R], "pad_btn": [JOY_BUTTON_Y]},
 	"skip":       {"keys": [KEY_X], "pad_btn": [JOY_BUTTON_X]},
 	"banish":     {"keys": [KEY_B], "pad_btn": [JOY_BUTTON_LEFT_SHOULDER]},
+	"swap":       {"keys": [KEY_Q, KEY_TAB], "pad_btn": [JOY_BUTTON_RIGHT_SHOULDER]},
 }
-const REBINDABLE := ["move_up", "move_down", "move_left", "move_right", "pause", "reroll", "skip", "banish"]
+const REBINDABLE := ["move_up", "move_down", "move_left", "move_right", "pause", "reroll", "skip", "banish", "swap"]
 
 func _ready() -> void:
 	for a in ACTIONS:

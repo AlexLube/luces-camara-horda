@@ -7,6 +7,8 @@ var root: Control
 var run: Run
 var sel_char := ""
 var sel_stage := ""
+var sel_saga := ""                 # Modo Saga: saga id and phase picked before the casting
+var sel_phase := 0
 var waiting_bind := ""
 
 func _ready() -> void:
@@ -24,6 +26,9 @@ func _ready() -> void:
 		opt[kv[0]] = kv[1] if kv.size() > 1 else ""
 	if opt.has("char"): sel_char = opt.char
 	if opt.has("stage"): sel_stage = opt.stage
+	if opt.has("saga"):
+		sel_saga = opt.saga
+		sel_phase = int(opt.get("phase", "0"))
 	if opt.has("demo"):
 		start_run(true)
 		# fast-forward the simulation (for screenshots and soak tests)
@@ -41,6 +46,8 @@ func _ready() -> void:
 			"awards": show_achievements()
 			"credits": show_credits()
 			"collection": show_collection(opt.get("tab", "weapons"))
+			"sagas": show_sagas()
+			"saga": show_saga(Data.saga_by_id.get(sel_saga, Data.sagas[0]))
 			"splash": show_splash()
 			_: show_title() if opt.has("screen") or opt.has("shot") else show_splash()
 	if opt.has("shot"): _shot(opt.shot, float(opt.get("wait", "1.5")), opt.get("panel", ""))
@@ -175,7 +182,10 @@ func show_title() -> void:
 	var row1 := HBoxContainer.new()
 	row1.add_theme_constant_override("separation", 8)
 	col.add_child(row1)
-	row1.add_child(UIKit.button(Loc.t("play"), show_characters, 240))
+	row1.add_child(UIKit.button(Loc.t("play"), func(): sel_saga = ""; show_characters(), 240))
+	var sb := UIKit.button(Loc.t("saga_mode") if Data.saga_mode_open() else "🔒 " + Loc.t("saga_mode"), show_sagas, 240)
+	sb.tooltip_text = "" if Data.saga_mode_open() else Loc.t("saga_locked")
+	row1.add_child(sb)
 	row1.add_child(UIKit.button(Loc.t("clauses"), show_clauses, 240))
 	row1.add_child(UIKit.button(Loc.t("awards"), show_achievements, 240))
 	var row2 := HBoxContainer.new()
@@ -236,7 +246,8 @@ func _on_char(c: Dictionary) -> void:
 		if not Save.hire(c):
 			return
 	sel_char = c.id
-	show_stages()
+	if sel_saga != "": start_run()
+	else: show_stages()
 
 # ---------- stages ----------
 func show_stages() -> void:
@@ -298,7 +309,10 @@ func start_run(demo := false) -> void:
 	run = Run.new()
 	var c: Dictionary = Data.char_by_id.get(sel_char, Data.characters[0])
 	var s: Dictionary = Data.stage_by_id.get(sel_stage, Data.stages[0])
+	var sg: Dictionary = Data.saga_by_id.get(sel_saga, {})
+	if not sg.is_empty(): s = Data.stage_by_id[sg.phases[sel_phase].stage]
 	run.setup(c, s)
+	if not sg.is_empty(): run.setup_saga(sg, sel_phase)
 	run.bot = demo
 	run.exit_to_menu.connect(_end_run.bind(false))
 	run.retry.connect(_end_run.bind(true))
@@ -308,7 +322,67 @@ func _end_run(again: bool) -> void:
 	run.queue_free()
 	run = null
 	if again: start_run()
+	elif sel_saga != "": show_saga(Data.saga_by_id[sel_saga])
 	else: show_title()
+
+# ---------- Modo Saga ----------
+func show_sagas() -> void:
+	var v := _clear()
+	_header(v, Loc.t("saga_mode"))
+	if not Data.saga_mode_open():
+		var l := UIKit.label(Loc.t("saga_locked"), 24, UIKit.GOLD)
+		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		v.add_child(l)
+	var grid := GridContainer.new()
+	grid.columns = 3
+	grid.add_theme_constant_override("h_separation", 8)
+	grid.add_theme_constant_override("v_separation", 8)
+	_scroll(v).add_child(grid)
+	for sg in Data.sagas:
+		var open := Data.saga_open(sg)
+		var done := Data.saga_progress(sg)
+		var n: int = sg.phases.size()
+		var reward: String = Loc.t("saga_reward", [sg.reward.name]) + ("" if sg.reward.kind == "relic" else " " + Loc.t("saga_reward_soon"))
+		var desc := "%s\n%s" % [sg.rule_desc, reward] if open else (Loc.t("saga_mezcla_locked") if Data.saga_mode_open() else Loc.t("saga_locked"))
+		var card := UIKit.card(Data.portrait(_saga_face(sg)), sg.name if open else "🔒 " + sg.name, ("★ " if done >= n else "") + Loc.t("saga_progress", [done, n]), desc, show_saga.bind(sg), 400)
+		card.disabled = not open
+		card.custom_minimum_size.y = 178
+		(card.get_child(0).get_child(0) as TextureRect).custom_minimum_size = Vector2(90, 120)
+		grid.add_child(card)
+	UIKit.focus_first(grid)
+
+## A face for each saga card: a character that fits its genre.
+func _saga_face(sg: Dictionary) -> String:
+	var faces := {"secuela": "vera_lys", "naves": "lina_nova", "superpoder": "kid_piston", "combo": "kenji_arata", "sigilo": "agente_gris", "grupo": "brann", "coche": "jack_nitro", "desastre": "toni_nitrato", "mezcla": "hugo_brandt"}
+	return faces.get(sg.rule, "max_rios")
+
+func show_saga(sg: Dictionary) -> void:
+	var v := _clear()
+	_header(v, sg.name)
+	var info := UIKit.label("%s · %s\n%s" % [sg.genre, sg.rule_desc, Loc.t("saga_reward", [sg.reward.name])], 20)
+	info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	v.add_child(info)
+	var list := VBoxContainer.new()
+	list.add_theme_constant_override("separation", 8)
+	_scroll(v).add_child(list)
+	var done := Data.saga_progress(sg)
+	for k in sg.phases.size():
+		var ph: Dictionary = sg.phases[k]
+		var st: Dictionary = Data.stage_by_id[ph.stage]
+		var label: String = Loc.t("saga_phase", [k + 1, ph.title]) + "  ·  " + st.name
+		if ph.has("rule"):
+			var other: Array = Data.sagas.filter(func(o): return o.rule == ph.rule)
+			if not other.is_empty(): label += "  ·  " + other[0].name
+		var b := UIKit.button(("✔ " if k < done else "") + label, _on_phase.bind(sg, k), 900)
+		b.disabled = k > done
+		list.add_child(b)
+	UIKit.focus_first(list)
+
+func _on_phase(sg: Dictionary, k: int) -> void:
+	sel_saga = sg.id
+	sel_phase = k
+	show_characters()
 
 # ---------- Cláusulas del Contrato ----------
 func show_clauses() -> void:

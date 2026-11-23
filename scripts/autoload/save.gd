@@ -25,6 +25,8 @@ func defaults() -> Dictionary:
 			"bosses": 0, "max_level": 0, "taquilla_total": 0, "time": 0.0, "survived": {}, "completed": [], "played": [], "productor": 0},
 		"achievements": [],
 		"mods_on": [],          # modifiers switched on for the next run
+		"saga": {},             # Modo Saga: saga id -> phases completed
+		"saga_rewards": [],     # rewards won in the Modo Saga (characters, weapons, passives still to come are kept here)
 		"options": {"lang": "es", "sfx": 0.8, "music": 0.7, "fullscreen": false, "shake": true, "flashes": true, "damage_numbers": true, "binds": {}},
 		"last": {"character": chars[0] if chars.size() > 0 else "max_rios", "stage": Data.stages[0].id},
 	}

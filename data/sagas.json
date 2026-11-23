@@ -1,0 +1,348 @@
+[
+ {
+  "id": "trilogia_enmascarado",
+  "name": "La Trilogía del Enmascarado",
+  "genre": "Slashers de los 80",
+  "rule": "secuela",
+  "rule_desc": "Cada fase es una secuela más absurda: la horda es más dura y más rápida en cada una.",
+  "reward": {
+   "kind": "character",
+   "id": "la_ultima_chica",
+   "name": "La Última Chica"
+  },
+  "phases": [
+   {
+    "stage": "bosque_de_la_cabana",
+    "title": "La Noche del Enmascarado"
+   },
+   {
+    "stage": "instituto_de_medianoche",
+    "title": "El Enmascarado Vuelve a Clase"
+   },
+   {
+    "stage": "autocine_abandonado",
+    "title": "Enmascarado III: Ahora es Personal"
+   },
+   {
+    "stage": "estacion_orbital_zeta",
+    "title": "Enmascarado IV: En el Espacio"
+   },
+   {
+    "stage": "isla_prehistorica",
+    "title": "Enmascarado V: Contra el Cocodrilo Jurásico"
+   },
+   {
+    "stage": "archivo_de_cine_mudo",
+    "title": "Enmascarado VI: La Precuela del Origen"
+   }
+  ]
+ },
+ {
+  "id": "opera_galactica",
+  "name": "Ópera Galáctica",
+  "genre": "Ópera espacial",
+  "rule": "naves",
+  "rule_desc": "Batalla en scroll: la pantalla avanza sola y quedarse atrás quema.",
+  "reward": {
+   "kind": "weapon",
+   "id": "espada_de_plasma",
+   "name": "Espada de Plasma"
+  },
+  "phases": [
+   {
+    "stage": "estacion_orbital_zeta",
+    "title": "Episodio I: Una Factura Lejana"
+   },
+   {
+    "stage": "neon_2099",
+    "title": "Episodio II: El Imperio Contrataca a Hacienda"
+   },
+   {
+    "stage": "estacion_orbital_zeta",
+    "title": "Episodio III: El Regreso del Becario"
+   },
+   {
+    "stage": "carretera_del_fin",
+    "title": "Episodio IV: El Desierto de los Dos Soles de Atrezo"
+   },
+   {
+    "stage": "neon_2099",
+    "title": "Episodio V: La Venganza del Merchandising"
+   },
+   {
+    "stage": "estacion_orbital_zeta",
+    "title": "Episodio VI: El Último Remake"
+   }
+  ]
+ },
+ {
+  "id": "liga_heroes_barrio",
+  "name": "Liga de Héroes de Barrio",
+  "genre": "Superhéroes genéricos",
+  "rule": "superpoder",
+  "rule_desc": "Cada minuto te cae un superpoder temporal al azar.",
+  "reward": {
+   "kind": "character",
+   "id": "el_vigilante_enmascarado",
+   "name": "El Vigilante Enmascarado"
+  },
+  "phases": [
+   {
+    "stage": "metropolis_kaiju",
+    "title": "Origen: Me Picó una Paloma Radiactiva"
+   },
+   {
+    "stage": "barrio_animado",
+    "title": "La Liga se Reúne (en el Bar)"
+   },
+   {
+    "stage": "neon_2099",
+    "title": "El Multiverso de los Cameos"
+   },
+   {
+    "stage": "metropolis_kaiju",
+    "title": "Guerra Civil de la Comunidad de Vecinos"
+   },
+   {
+    "stage": "bunker_rojo",
+    "title": "El Villano Tenía Razón"
+   },
+   {
+    "stage": "la_alfombra_roja",
+    "title": "Fin de Fase Cuatro"
+   }
+  ]
+ },
+ {
+  "id": "leyenda_del_puno",
+  "name": "Leyenda del Puño",
+  "genre": "Kung-fu clásico",
+  "rule": "combo",
+  "rule_desc": "Combos: cada 25 bajas seguidas sube el daño. Si te golpean, el combo se rompe.",
+  "reward": {
+   "kind": "relic",
+   "id": "cinturon_negro",
+   "name": "Cinturón Negro"
+  },
+  "phases": [
+   {
+    "stage": "dojo_de_la_montana",
+    "title": "El Discípulo Torpe"
+   },
+   {
+    "stage": "templo_de_la_selva",
+    "title": "La Garra del Tigre de Peluche"
+   },
+   {
+    "stage": "aldea_de_los_espiritus",
+    "title": "El Maestro Borracho de Horchata"
+   },
+   {
+    "stage": "dojo_de_la_montana",
+    "title": "El Torneo del Puño Dorado"
+   },
+   {
+    "stage": "dojo_de_la_montana",
+    "title": "La Última Patada Voladora"
+   }
+  ]
+ },
+ {
+  "id": "agente_00_nadie",
+  "name": "Agente 00-Nadie",
+  "genre": "Espías",
+  "rule": "sigilo",
+  "rule_desc": "Sigilo: si no te tocan, llegan menos enemigos. Un golpe da la alarma 15 s.",
+  "reward": {
+   "kind": "character",
+   "id": "el_agente_con_esmoquin",
+   "name": "El Agente con Esmoquin"
+  },
+  "phases": [
+   {
+    "stage": "bunker_rojo",
+    "title": "Licencia para Aparcar"
+   },
+   {
+    "stage": "expreso_de_medianoche",
+    "title": "Desde Albacete con Amor"
+   },
+   {
+    "stage": "ciudad_noir",
+    "title": "Agitado, No Revuelto, Más Bien Tibio"
+   },
+   {
+    "stage": "neon_2099",
+    "title": "Muere Otro Martes"
+   },
+   {
+    "stage": "galeon_maldito",
+    "title": "El Espía que me Dejó en Visto"
+   },
+   {
+    "stage": "bunker_rojo",
+    "title": "Solo se Vive Dos Veces y Media"
+   }
+  ]
+ },
+ {
+  "id": "odisea_anillo_roto",
+  "name": "La Odisea del Anillo Roto",
+  "genre": "Fantasía épica",
+  "rule": "grupo",
+  "rule_desc": "Grupo: llevas a 3 personajes con su propia vida y cambias entre ellos (Q o Tab).",
+  "reward": {
+   "kind": "weapon",
+   "id": "baculo_del_peregrino",
+   "name": "Báculo del Peregrino"
+  },
+  "party": [
+   "brann",
+   "elowen",
+   "thorgrim"
+  ],
+  "phases": [
+   {
+    "stage": "reino_del_dragon",
+    "title": "La Comunidad del Anillo Roto"
+   },
+   {
+    "stage": "torre_del_hechicero",
+    "title": "Las Dos Torres de Pisos"
+   },
+   {
+    "stage": "templo_de_la_selva",
+    "title": "El Retorno del Rey (de Copas)"
+   },
+   {
+    "stage": "mansion_victoriana",
+    "title": "La Desolación de la Fianza"
+   },
+   {
+    "stage": "reino_del_dragon",
+    "title": "La Batalla de los Cinco Extras"
+   },
+   {
+    "stage": "torre_del_hechicero",
+    "title": "Un Viaje Inesperado al Baño"
+   }
+  ]
+ },
+ {
+  "id": "nitro_y_familia",
+  "name": "Nitro y Familia",
+  "genre": "Coches rápidos",
+  "rule": "coche",
+  "rule_desc": "Siempre vas en coche: muy rápido, gira despacio y atropella a la horda.",
+  "reward": {
+   "kind": "passive",
+   "id": "turbo",
+   "name": "Turbo"
+  },
+  "phases": [
+   {
+    "stage": "carretera_del_fin",
+    "title": "A Todo Gas"
+   },
+   {
+    "stage": "ciudad_noir",
+    "title": "A Todo Gas 2: Más Gas"
+   },
+   {
+    "stage": "pueblo_polvoriento",
+    "title": "Rápidos y Familiares"
+   },
+   {
+    "stage": "neon_2099",
+    "title": "Nitro en Tokio de Cartón"
+   },
+   {
+    "stage": "carretera_del_fin",
+    "title": "La Familia Siempre Derrapa"
+   }
+  ]
+ },
+ {
+  "id": "dia_de_desastre",
+  "name": "Día de Desastre",
+  "genre": "Catástrofes",
+  "rule": "desastre",
+  "rule_desc": "El mapa se destruye mientras juegas: zonas marcadas revientan y dañan a todos.",
+  "reward": {
+   "kind": "relic",
+   "id": "casco_de_rescate",
+   "name": "Casco de Rescate"
+  },
+  "phases": [
+   {
+    "stage": "fin_del_mundo_s_a",
+    "title": "Terremoto en la Calle Mayor"
+   },
+   {
+    "stage": "broadway_en_llamas",
+    "title": "El Coloso en Llamas de Cartón"
+   },
+   {
+    "stage": "galeon_maldito",
+    "title": "Maremoto en la Bañera"
+   },
+   {
+    "stage": "metropolis_kaiju",
+    "title": "El Meteorito Tiene Prisa"
+   },
+   {
+    "stage": "fin_del_mundo_s_a",
+    "title": "El Día Después del Día Después"
+   }
+  ]
+ },
+ {
+  "id": "retrospectiva_director",
+  "name": "Retrospectiva del Director",
+  "genre": "Metacine",
+  "rule": "mezcla",
+  "rule_desc": "Mezcla las reglas de todas las sagas, una distinta en cada fase.",
+  "reward": {
+   "kind": "character",
+   "id": "el_director_fantasma",
+   "name": "El Director Fantasma"
+  },
+  "party": [
+   "max_rios",
+   "vera_lys",
+   "dolly_ray"
+  ],
+  "phases": [
+   {
+    "stage": "sala_de_casting",
+    "title": "El Primer Corto",
+    "rule": "secuela"
+   },
+   {
+    "stage": "la_alfombra_roja",
+    "title": "La Ópera Prima",
+    "rule": "combo"
+   },
+   {
+    "stage": "plato_de_telenovela",
+    "title": "El Éxito Inesperado",
+    "rule": "superpoder"
+   },
+   {
+    "stage": "hotel_del_pasillo_infinito",
+    "title": "La Crisis Creativa",
+    "rule": "naves"
+   },
+   {
+    "stage": "carretera_del_fin",
+    "title": "El Fracaso de Taquilla",
+    "rule": "coche"
+   },
+   {
+    "stage": "la_sala_de_montaje",
+    "title": "El Montaje del Director",
+    "rule": "desastre"
+   }
+  ]
+ }
+]
