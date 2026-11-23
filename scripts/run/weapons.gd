@@ -45,6 +45,7 @@ func evolve(id: String) -> void:
 	if w:
 		w.evolved = true
 		recompute(w)
+		Sfx.play("evolve")
 
 func recompute_all() -> void:
 	for w in list: recompute(w)

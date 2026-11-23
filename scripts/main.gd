@@ -726,6 +726,14 @@ func show_options() -> void:
 	for k in ["fullscreen", "shake", "flashes", "damage_numbers"]:
 		grid.add_child(UIKit.label(Loc.t("opt_" + k), 22))
 		grid.add_child(UIKit.button(Loc.t("on") if o[k] else Loc.t("off"), func(): o[k] = not o[k]; _save_opts(); show_options()))
+	grid.add_child(UIKit.label(Loc.t("accessibility"), 24, UIKit.GOLD))
+	grid.add_child(UIKit.label("", 10))
+	grid.add_child(UIKit.label(Loc.t("opt_colorblind"), 22))
+	grid.add_child(UIKit.button(Loc.t("cb_" + String(o.colorblind)), func(): o.colorblind = Access.cycle(Access.MODES, o.colorblind); _save_opts(); show_options()))
+	grid.add_child(UIKit.label(Loc.t("opt_text_size"), 22))
+	grid.add_child(UIKit.button("%d %%" % roundi(float(o.text_size) * 100.0), func(): o.text_size = Access.cycle(Access.TEXT_SIZES, float(o.text_size)); _save_opts(); show_options()))
+	grid.add_child(UIKit.label(Loc.t("opt_game_speed"), 22))
+	grid.add_child(UIKit.button("%d %%" % roundi(float(o.game_speed) * 100.0), func(): o.game_speed = Access.cycle(Access.SPEEDS, float(o.game_speed)); _save_opts(); show_options()))
 	grid.add_child(UIKit.label(Loc.t("controls"), 24, UIKit.GOLD))
 	grid.add_child(UIKit.label(Loc.t("pad_touch"), 18))
 	for a in Controls.REBINDABLE:

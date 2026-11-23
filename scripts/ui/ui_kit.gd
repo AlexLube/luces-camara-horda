@@ -9,6 +9,7 @@ const DARK := Color("140a0e")
 const CREAM := Color("f6ead2")
 
 static var _theme: Theme
+static var text_scale := 1.0      # accessibility: bigger menu text
 static var title_font: Font
 static var pixel_font: Font
 
@@ -18,7 +19,7 @@ static func theme() -> Theme:
 	pixel_font = load("res://assets/fonts/PressStart2P-Regular.ttf")
 	var t := Theme.new()
 	t.default_font = load("res://assets/fonts/ArchivoNarrow.ttf")
-	t.default_font_size = 22
+	t.default_font_size = int(round(22 * text_scale))
 	var normal := _box(Color(0.24, 0.05, 0.09, 0.95), GOLD.darkened(0.45), 2)
 	var hover := _box(Color(0.42, 0.08, 0.14, 0.98), GOLD, 3)
 	var pressed := _box(Color(0.55, 0.1, 0.16, 1.0), GOLD.lightened(0.3), 3)
@@ -39,6 +40,10 @@ static func theme() -> Theme:
 	_theme = t
 	return t
 
+static func set_text_scale(k: float) -> void:
+	text_scale = k
+	if _theme: _theme.default_font_size = int(round(22 * k))
+
 static func _box(bg: Color, border: Color, bw: int, pad := 10) -> StyleBoxFlat:
 	var b := StyleBoxFlat.new()
 	b.bg_color = bg
@@ -54,7 +59,7 @@ static func _box(bg: Color, border: Color, bw: int, pad := 10) -> StyleBoxFlat:
 static func label(text: String, size := 22, color := CREAM, font: Font = null) -> Label:
 	var l := Label.new()
 	l.text = text
-	l.add_theme_font_size_override("font_size", size)
+	l.add_theme_font_size_override("font_size", int(round(size * text_scale)))
 	l.add_theme_color_override("font_color", color)
 	if font: l.add_theme_font_override("font", font)
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -74,6 +79,7 @@ static func button(text: String, cb: Callable, min_w := 280.0) -> Button:
 	b.text = text
 	b.custom_minimum_size = Vector2(min_w, 48)
 	b.pressed.connect(func(): Sfx.play("select"); cb.call())
+	b.focus_entered.connect(func(): Sfx.play("ui_move"))
 	return b
 
 ## A wide card button: icon, title line, level tag and a description underneath.
