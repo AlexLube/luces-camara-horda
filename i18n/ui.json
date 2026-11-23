@@ -606,5 +606,33 @@
  "col_saga_hint": {
   "es": "Recompensa del Modo Saga",
   "en": "Saga Mode reward"
+ },
+ "gm_productor": {
+  "es": "¡El Productor Ejecutivo se presenta en el rodaje!",
+  "en": "The Executive Producer shows up on set!"
+ },
+ "gm_productor_down": {
+  "es": "¡Productor derrotado! Recompensa máxima",
+  "en": "Producer defeated! Top reward"
+ },
+ "gm_swap": {
+  "es": "Película Perdida: %s se cambia por %s",
+  "en": "Lost Film: %s becomes %s"
+ },
+ "gm_hell": {
+  "es": "Infierno de Producción: un pasivo baja, un arma sube",
+  "en": "Production Hell: a passive drops, a weapon rises"
+ },
+ "gm_remaster": {
+  "es": "%s (Remasterizada)",
+  "en": "%s (Remastered)"
+ },
+ "gm_remaster_desc": {
+  "es": "El Remake Innecesario: +50 % daño, +20 % área y +1 proyectil",
+  "en": "The Needless Remake: +50 % damage, +20 % area and +1 projectile"
+ },
+ "gm_curse_tag": {
+  "es": "Guion Maldito",
+  "en": "Cursed Script"
  }
 }

@@ -75,6 +75,17 @@ func _shot(path: String, wait: float, panel: String) -> void:
 		run.cameo_t = 0.0
 		run.step(0.05)
 		run.step(0.05)
+	elif run and panel == "guion_cursed":   # an offer with a Guion Maldito
+		run.bot = false
+		run.state = "guion"
+		var ids := ["g_iii", "g_xvi", "gm_vi"]
+		run.hud.show_guion(Data.guiones.filter(func(g): return g.id in ids))
+	elif run and panel == "found_footage":   # El Metraje Encontrado + El Rodaje Maldito in play
+		run.guion_offers = 3
+		run.pick_guion("gm_vi")
+		run.pick_guion("gm_ii")
+		run.curse.on_hurt()
+		run.step(0.1)
 	elif run and panel == "guion":
 		run.bot = false
 		run.guion_offers = 0
@@ -475,9 +486,9 @@ func show_collection(tab := "weapons") -> void:
 		"guiones":
 			var deck := Save.is_unlocked("relics", "baraja_del_guionista")
 			for g in Data.guiones:
-				var playable: bool = g.id in Run.GUION_READY
-				var known: bool = deck and not g.cursed
-				var text: String = g.desc if known else (Loc.t("col_hint", [g.get("how", Data.relic_by_id.baraja_del_guionista.name)]))
+				var playable: bool = g.id in Run.GUION_READY or g.id in CursedGuiones.READY
+				var known: bool = (deck and not g.cursed) or (g.cursed and Save.is_unlocked("relics", "baraja_maldita"))
+				var text: String = g.desc if known else (Loc.t("col_hint", [g.get("how", Data.relic_by_id.baraja_maldita.name if g.cursed else Data.relic_by_id.baraja_del_guionista.name)]))
 				if known and not playable: text += "  (" + Loc.t("mod_soon") + ")"
 				grid.add_child(_col_card(Data.guion_icon(g.id), g.name if known else "???", text, known, ("☠ " if g.cursed else "") + g.num))
 		"bestiary":

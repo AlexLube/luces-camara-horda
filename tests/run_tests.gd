@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_cursed", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -440,6 +440,61 @@ func t_saga() -> void:
 	var arc: Array = w.weapons.list.filter(func(x): return x.data.archetype in ["arc", "cone"])
 	ok(arc.is_empty() or int(arc[0].p.amount) >= 2, "Cinturón Negro: +1 to melee weapons")
 	w.queue_free()
+	await get_tree().process_frame
+	Save.data = Save.defaults()
+
+func t_cursed() -> void:
+	Save.data = Save.defaults()
+	ok(CursedGuiones.READY.size() == 12 and Data.guiones.filter(func(g): return g.cursed).size() == 12, "12 Guiones Malditos")
+	ok(Data.relics_at(Data.stage_by_id.archivo_de_cine_mudo).any(func(r): return r.id == "bobina_perdida_1"), "lost reel 1 hides in challenge stage 13")
+	for k in range(1, 8): Save.unlock("relics", "bobina_perdida_%d" % k)
+	Achievements.check({})
+	ok(Save.is_unlocked("stages", "la_sala_de_montaje"), "the 7 lost reels open the Sala de Montaje")
+	ok(Data.relics_at(Data.stage_by_id.la_sala_de_montaje).any(func(r): return r.id == "baraja_maldita"), "the Baraja Maldita hides in the Sala de Montaje")
+	# without the deck no cursed card is offered
+	var r0 := new_run()
+	r0.mods = ["guiones"]
+	for k in 20:
+		r0.guion_offers = 0
+		r0.guiones.clear()
+		r0.offer_guion()
+	ok(not r0.guiones.any(func(id): return id.begins_with("gm_")), "no cursed cards before the Baraja Maldita")
+	r0.queue_free()
+	Save.unlock("relics", "baraja_maldita")
+	# every cursed card plays for a minute
+	for id in CursedGuiones.READY:
+		var r := new_run()
+		r.mods = ["guiones"]
+		r.guion_offers = 3
+		r.pick_guion(id)
+		for k in 600: r.step(0.1)
+		ok(r.time >= 59.0 and r.curse != null, "cursed %s plays (%d kills)" % [id, r.kills])
+		r.queue_free()
+		await get_tree().process_frame
+	var a := new_run()
+	a.guion_offers = 3
+	var p0: float = a.stats.power
+	a.pick_guion("gm_iv")
+	ok(a.stats.power > p0 + 0.25 and a.curse.taquilla_mult() == 0.0, "El Fracaso de Taquilla: +30 % but no Taquilla")
+	a.pick_guion("gm_ix")
+	ok(a.duration == 900.0 and a.director.calendar[-1][0] == 900.0, "El Final Cortado: 15-minute run")
+	a.curse.on_hurt()
+	ok(a.curse.ghosts.is_empty(), "no ghosts without El Rodaje Maldito")
+	a.pick_guion("gm_ii")
+	a.curse.on_hurt()
+	ok(a.curse.ghosts.size() == 3, "El Rodaje Maldito: three ghosts on a hit")
+	a.pick_guion("gm_i")
+	var w0: String = a.weapons.list[0].id
+	a.curse.swap_t = 0.0
+	a.curse.update(0.1)
+	ok(a.weapons.list.size() == 1 and a.weapons.list[0].id != w0 and a.guion_damage() >= 2.0, "La Película Perdida: the weapon changes, ×2 damage")
+	a.pick_guion("gm_vii")
+	var w: Dictionary = a.weapons.list[0]
+	w.evolved = true
+	a.weapons.recompute(w)
+	var dmg0: float = w.p.damage
+	ok(a.curse.remaster(w) and w.p.damage > dmg0 * 1.4, "El Remake Innecesario remasters an evolution")
+	a.queue_free()
 	await get_tree().process_frame
 	Save.data = Save.defaults()
 

@@ -68,6 +68,10 @@ func recompute(w: Dictionary) -> void:
 		p.amount += int(m.get("amount_add", 0))
 		for k in m:
 			if k not in ["damage", "area", "cooldown", "amount_add"]: p[k] = m[k]
+	if w.get("remastered", false):   # El Remake Innecesario
+		p.damage *= 1.5
+		p.area *= 1.2
+		p.amount += 1
 	var s: Dictionary = run.stats
 	p.damage *= s.power
 	p.cooldown = max(0.08, p.cooldown * s.cooldown)
