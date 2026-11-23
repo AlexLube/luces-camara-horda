@@ -709,6 +709,7 @@ func finish(won: bool) -> void:
 func record() -> Dictionary:
 	var s: Dictionary = Save.data.stats
 	var earned := int(round((int(round(coins)) + (300 if completed else 0) + kills / 50) * (1.0 + mod_bonus()) * (curse.taquilla_mult() if curse else 1.0)))
+	if Save.is_unlocked("relics", "entrada_dorada"): earned = int(round(earned * Data.GOLDEN_TICKET))
 	s.kills += kills
 	s.deaths += 0 if completed else 1
 	s.runs += 1
@@ -1206,6 +1207,9 @@ func _draw() -> void:
 	for b in ebullets:
 		draw_circle(Vector2(b.x, b.y), 6.0, Color("ff4a5a"))
 		draw_circle(Vector2(b.x, b.y), 3.0, Color.WHITE)
+	if art_key == "noir" and not sees_invisible():   # Ciudad Noir: only your streetlight shows the horde
+		for k in 4: draw_arc(player_pos, LIGHT_R + 15.0 + k * 22.0, 0, TAU, 64, Color(0, 0, 0.04, 0.16), 22.0)
+		draw_arc(player_pos, LIGHT_R + 1100.0, 0, TAU, 96, Color(0, 0, 0.04, 0.62), 2000.0)
 	_draw_fx()
 	if Save.data.options.damage_numbers:
 		for n in numbers:
@@ -1251,11 +1255,31 @@ func _draw_enemy(i: int) -> void:
 		for o in [Vector2(-3, 0), Vector2(3, 0), Vector2(0, -3), Vector2(0, 3)]:
 			_draw_sheet(sh, fi, pos + o, sc, face, Color("f2b83b"), true)
 	var mod: Color = d.tint
+	var seen := visibility(i)
+	if seen <= 0.02: return
+	mod.a *= seen
 	if enemies.mark[i] > 0.0: mod = mod * Color(0.85, 0.7, 1.0)
 	if freeze_t > 0.0: mod = mod * Color(0.6, 0.8, 1.2)
 	_draw_sheet(sh, fi, pos, sc, face, mod)
 	if enemies.flash[i] > 0.0: _draw_sheet(sh, fi, pos, sc, face, Color(1, 1, 1, 0.85), true)
 	elif enemies.stun[i] > 0.0: _draw_sheet(sh, fi, pos, sc, face, Color(0.7, 0.85, 1, 0.4), true)
+
+## Invisible enemies: in Ciudad Noir the horde hides outside your light, and in some films the
+## jumpers are see-through. The Gafas 3D (relic) and the Filtro Infrarrojo (passive) show them all.
+const CLOAKED_ARTS := ["neon", "mansion", "spirit", "hotel"]
+const LIGHT_R := 250.0
+
+func sees_invisible() -> bool:
+	return Save.is_unlocked("relics", "gafas_3d") or passives.has("filtro_infrarrojo")
+
+func visibility(i: int) -> float:
+	var t := enemies.type[i]
+	if t >= T.STAR or sees_invisible(): return 1.0
+	if art_key == "noir":
+		var d := Vector2(enemies.x[i], enemies.y[i]).distance_to(player_pos)
+		return clampf(1.0 - (d - LIGHT_R) / 90.0, 0.0, 1.0)
+	if t == T.JUMPER and art_key in CLOAKED_ARTS: return 0.12
+	return 1.0
 
 func _draw_player() -> void:
 	draw_set_transform(player_pos + Vector2(0, 2), 0, Vector2(1, 0.35))
@@ -1265,7 +1289,7 @@ func _draw_player() -> void:
 	var sh: Dictionary = sheets.run if moving else sheets.idle
 	var fi := int(time * (12.0 if moving else 6.0))
 	var face := -1.0 if facing.x < -0.1 else 1.0
-	var mod := Color.WHITE
+	var mod := Data.skin_tint(character.get("id", ""))
 	if iframes > 0.0 and int(time * 20.0) % 2 == 0 and state != "dying": mod.a = 0.5
 	# hurt recoil: squash, tilt away from the hit and a small hop back
 	var rot := 0.0

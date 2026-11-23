@@ -73,7 +73,7 @@ func secret_met(id: String, run: Dictionary = {}) -> bool:
 		"unlock_claqui": return "claqui" in s.get("codes", [])
 		"unlock_michi_del_estudio": return int(s.get("pets", 0)) >= 10
 		"unlock_el_doble_del_doble": return int(s.get("completed_by", {}).get("max_rios", 0)) >= 10
-		"unlock_el_cinefilo": return bestiary_done()
+		"unlock_el_cinefilo": return relic.call("llave_del_archivo") and bestiary_done()
 		"unlock_neon_2099": return "estacion_orbital_zeta" in s.get("dc_completed", [])
 	return false
 

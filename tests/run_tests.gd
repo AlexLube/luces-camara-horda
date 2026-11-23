@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_cursed", "t_secrets", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_cursed", "t_secrets", "t_relic_powers", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -375,6 +375,54 @@ func t_secrets() -> void:
 	sm.montage_cut()
 	ok(absf(Vector2(sm.enemies.x[b], sm.enemies.y[b]).distance_to(sm.player_pos) - 320.0) < 1.0, "El Montador cuts to another spot")
 	sm.queue_free()
+	await get_tree().process_frame
+	Save.data = Save.defaults()
+
+func t_relic_powers() -> void:
+	Save.data = Save.defaults()
+	# Entrada Dorada: +15 % Taquilla
+	var r := new_run()
+	r.coins = 1000.0
+	var plain: int = r.record().earned
+	Save.data.unlocked.relics.append("entrada_dorada")
+	var gold: int = r.record().earned
+	ok(gold == int(round(plain * Data.GOLDEN_TICKET)), "Entrada Dorada: +15 %% Taquilla (%d → %d)" % [plain, gold])
+	r.queue_free()
+	# Carrete de tomas falsas: looks only with the relic
+	Data.next_skin("max_rios")
+	ok(Data.skin_tint("max_rios") == Color.WHITE, "no alternative takes without the Carrete")
+	Save.data.unlocked.relics.append("carrete_de_tomas_falsas")
+	Data.next_skin("max_rios")
+	ok(Data.skin_tint("max_rios") != Color.WHITE, "the Carrete gives alternative takes")
+	for k in Data.SKINS.size(): Data.next_skin("max_rios")
+	ok(Data.skin_index("max_rios") == 1, "takes cycle round")
+	# Tarjeta del Sindicato: sealed items never show up
+	Data.toggle_seal("piel_de_platano")
+	ok(not Data.is_sealed("piel_de_platano"), "no sealing without the Tarjeta")
+	Save.data.unlocked.relics.append("tarjeta_del_sindicato")
+	ok(Data.is_sealed("piel_de_platano"), "the Tarjeta seals")
+	for id in ["ego_de_estrella", "cafe_solo"]: Data.toggle_seal(id)
+	var r2 := new_run()
+	var seen := false
+	for k in 300:
+		for o in Upgrades.roll(r2, 4):
+			if Data.is_sealed(o.id) and o.kind.ends_with("_new"): seen = true
+	ok(not seen, "sealed weapons and passives never appear in level-ups")
+	r2.queue_free()
+	# Gafas 3D: invisible enemies
+	var n := new_run("max_rios", "ciudad_noir")
+	var far := n.enemies.spawn(EnemyPool.T.HORDE, 600.0, 0.0)
+	var near := n.enemies.spawn(EnemyPool.T.HORDE, 100.0, 0.0)
+	ok(n.visibility(far) == 0.0 and n.visibility(near) == 1.0, "Ciudad Noir: enemies hide outside your light")
+	Save.data.unlocked.relics.append("gafas_3d")
+	ok(n.visibility(far) == 1.0, "the Gafas 3D show them")
+	n.queue_free()
+	# Llave del Archivo: the Catálogo (and El Cinéfilo) need it
+	Save.data.unlocked.relics.erase("gafas_3d")
+	for st in Data.stages: Save.data.stats.bestiary[st.id] = {"boss": 1}
+	ok(not Achievements.secret_met("unlock_el_cinefilo"), "El Cinéfilo needs the Llave del Archivo")
+	Save.data.unlocked.relics.append("llave_del_archivo")
+	ok(Achievements.secret_met("unlock_el_cinefilo"), "…and a full Catálogo")
 	await get_tree().process_frame
 	Save.data = Save.defaults()
 
