@@ -19,7 +19,7 @@ static func add(s: Dictionary, stat: String, v: float) -> void:
 	s[stat] += v  # multipliers add percentages (+0.1 => 1.1), flat stats add numbers
 
 ## passive_levels: id -> level. player_level: for items that scale with level.
-static func build(character: Dictionary, passive_levels: Dictionary, clause_bonus: Dictionary, player_level := 1) -> Dictionary:
+static func build(character: Dictionary, passive_levels: Dictionary, clause_bonus: Dictionary, player_level := 1, extra := {}) -> Dictionary:
 	var s := BASE.duplicate()
 	for k in clause_bonus: add(s, k, float(clause_bonus[k]))
 	for k in character.get("mods", {}): add(s, k, float(character.mods[k]))
@@ -40,6 +40,7 @@ static func build(character: Dictionary, passive_levels: Dictionary, clause_bonu
 				if lvl > 7: s.curse += 0.1 * (lvl - 7)
 			_:
 				if p.per_level != null: add(s, p.stat, float(p.per_level) * lvl)
+	for k in extra: add(s, k, float(extra[k]))   # Guiones and other run-wide effects
 	s.hp_max = 100.0 * max(0.1, s.max_hp)
 	s.cooldown = max(0.2, s.cooldown)
 	s.move_speed = BASE_SPEED * s.speed

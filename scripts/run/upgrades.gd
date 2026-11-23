@@ -26,7 +26,7 @@ static func roll(run, n: int) -> Array:
 	var cands: Array = []   # [option, weight]
 	var ws: WeaponSystem = run.weapons
 	for w in ws.list:
-		if w.level < int(w.data.max_level) and not run.banished.has(w.id):
+		if w.level < run.weapon_cap(w) and not run.banished.has(w.id):
 			cands.append([{"kind": "weapon_up", "id": w.id, "name": w.data.name, "desc": describe_up(w.data, w.level + 1), "level_text": Loc.t("lvl_n", [w.level + 1])}, 1.3])
 	if ws.list.size() < MAX_WEAPONS:
 		for id in Data.weapon_pool(run.character):
@@ -128,13 +128,13 @@ static func open_chest(run, n: int) -> Array:
 				run.weapons.evolve(w.id)
 				run.evolutions += 1
 				run.evolved_ids.append(w.id)
-				got.append({"kind": "evolve", "id": w.id, "name": w.data.evolution.name, "desc": w.data.evolution.desc})
+				got.append({"kind": "evolve", "id": w.id, "icon": w.data.evolution.id, "name": w.data.evolution.name, "desc": w.data.evolution.desc})
 				evolved = true
 				break
 		if evolved: continue
 		var ups: Array = []
 		for w in run.weapons.list:
-			if w.level < int(w.data.max_level): ups.append({"kind": "weapon_up", "id": w.id, "name": w.data.name, "desc": describe_up(w.data, w.level + 1)})
+			if w.level < run.weapon_cap(w): ups.append({"kind": "weapon_up", "id": w.id, "name": w.data.name, "desc": describe_up(w.data, w.level + 1)})
 		for id in run.passives:
 			if int(run.passives[id]) < int(Data.passives[id].max_level): ups.append({"kind": "passive_up", "id": id, "name": Data.passives[id].name, "desc": Data.passives[id].desc})
 		if ups.is_empty():

@@ -368,8 +368,8 @@
   "en": "Reset keys"
  },
  "credits_text": {
-  "es": "LUCES, CÁMARA, HORDA\n\nUn juego de Macacaweke Studio\n\nDirección y diseño: Alex\nProgramación y producción: Claude\nArte: generado con Gemini y retocado a mano\n\nFuentes: Limelight, Press Start 2P y Archivo Narrow (SIL Open Font License)\nMotor: Godot Engine 4 (licencia MIT)\n\nGracias por quedarte hasta los créditos.\n\n© 2026 Macacaweke Studio",
-  "en": "LIGHTS, CAMERA, HORDE!\n\nA Macacaweke Studio game\n\nDirection and design: Alex\nProgramming and production: Claude\nArt: generated with Gemini and touched up by hand\n\nFonts: Limelight, Press Start 2P and Archivo Narrow (SIL Open Font License)\nEngine: Godot Engine 4 (MIT license)\n\nThanks for staying for the credits.\n\n© 2026 Macacaweke Studio"
+  "es": "LUCES, CÁMARA, HORDA\n\nUn juego de Macacaweke Studio\n\nDirección y diseño: Alex\nProgramación y producción: Claude\nArte: generado con Gemini y retocado a mano\nMúsica: banda sonora chiptune original compuesta por código\n\nFuentes: Limelight, Press Start 2P y Archivo Narrow (SIL Open Font License)\nMotor: Godot Engine 4 (licencia MIT)\n\nGracias por quedarte hasta los créditos.\n\n© 2026 Macacaweke Studio",
+  "en": "LIGHTS, CAMERA, HORDE!\n\nA Macacaweke Studio game\n\nDirection and design: Alex\nProgramming and production: Claude\nArt: generated with Gemini and touched up by hand\nMusic: original chiptune soundtrack composed in code\n\nFonts: Limelight, Press Start 2P and Archivo Narrow (SIL Open Font License)\nEngine: Godot Engine 4 (MIT license)\n\nThanks for staying for the credits.\n\n© 2026 Macacaweke Studio"
  },
  "boss_phase": {
   "es": "¡%s se pone serio!",
@@ -386,5 +386,93 @@
  "game_title": {
   "es": "LUCES, CÁMARA, HORDA",
   "en": "LIGHTS, CAMERA, HORDE!"
+ },
+ "relic_found": {
+  "es": "¡Reliquia encontrada: %s!",
+  "en": "Relic found: %s!"
+ },
+ "collection": {
+  "es": "Colección",
+  "en": "Collection"
+ },
+ "col_weapons": {
+  "es": "Armas",
+  "en": "Weapons"
+ },
+ "col_unions": {
+  "es": "Uniones",
+  "en": "Unions"
+ },
+ "col_passives": {
+  "es": "Mejoras",
+  "en": "Items"
+ },
+ "col_relics": {
+  "es": "Reliquias",
+  "en": "Relics"
+ },
+ "col_evo_req": {
+  "es": "%s al máximo + %s, desde el minuto 10",
+  "en": "%s maxed + %s, from minute 10"
+ },
+ "col_evo_hidden": {
+  "es": "Evolución por descubrir",
+  "en": "Evolution not found yet"
+ },
+ "col_union_hidden": {
+  "es": "Unión por descubrir: %s",
+  "en": "Union not found yet: %s"
+ },
+ "col_hint": {
+  "es": "Pista: %s",
+  "en": "Hint: %s"
+ },
+ "ev_strike": {
+  "es": "¡Huelga de extras! No entra nadie nuevo durante 20 s",
+  "en": "Extras on strike! Nobody new for 20 s"
+ },
+ "ev_rain": {
+  "es": "¡Lluvia artificial! La horda va más lenta",
+  "en": "Artificial rain! The horde slows down"
+ },
+ "ev_blackout": {
+  "es": "¡Apagón en el plató!",
+  "en": "Blackout on set!"
+ },
+ "ev_visit": {
+  "es": "¡Visita del productor! Llegan sus guardaespaldas",
+  "en": "The producer visits! Here come the bodyguards"
+ },
+ "ev_over": {
+  "es": "Imprevisto superado: ¡una lata de regalo!",
+  "en": "Mishap over: a free film can!"
+ },
+ "modifiers": {
+  "es": "Modificadores",
+  "en": "Modifiers"
+ },
+ "mod_soon": {
+  "es": "Próximamente",
+  "en": "Coming soon"
+ },
+ "mod_locked": {
+  "es": "Se desbloquea con: %s",
+  "en": "Unlocked by: %s"
+ },
+ "guion_pick": {
+  "es": "Elige un Guion",
+  "en": "Pick a Script"
+ },
+ "guion_on": {
+  "es": "Guion: %s",
+  "en": "Script: %s"
+ },
+ "guion_verdict": {
+  "es": "¡La crítica ha hablado! Latas de premio",
+  "en": "The critics have spoken! Prize cans"
+ },
+ "col_guiones": {
+  "es": "Guiones",
+  "en": "Scripts"
  }
 }

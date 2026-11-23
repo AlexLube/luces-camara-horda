@@ -36,7 +36,7 @@ func add(id: String) -> Dictionary:
 
 func level_up(id: String) -> void:
 	var w = get_w(id)
-	if w and w.level < int(w.data.max_level):
+	if w and w.level < run.weapon_cap(w):
 		w.level += 1
 		recompute(w)
 
@@ -88,7 +88,7 @@ func update(dt: float) -> void:
 			"aura": _aura_tick(w, dt)
 			"cone":
 				if p.has("rotate"): w.state.ang += dt * float(p.rotate)
-		w.cd -= dt
+		w.cd -= dt * (1.35 if run.has_guion("g_iii") and run.move_dir.length() > 0.1 else 1.0)
 		if w.cd <= 0.0 and arch != "orbit":
 			w.cd = p.cooldown
 			_fire(w)
@@ -250,6 +250,7 @@ func _update_shots(dt: float) -> void:
 			if s.boomerang and not s.back:
 				s.back = true; s.life = 3.0; s.hits.clear()
 			elif p.has("splash") and not s.boomerang: _splash(w, Vector2(s.x, s.y))
+			elif run.has_guion("g_ii") and not s.boomerang: run.burst(Vector2(s.x, s.y), 50.0, float(p.damage) * 0.5)
 			if not (s.boomerang and s.back and s.life > 0.0): continue
 		if s.boomerang and s.back and Vector2(s.x, s.y).distance_to(pl) < 24.0: continue
 		var dead := false

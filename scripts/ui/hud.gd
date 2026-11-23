@@ -54,6 +54,19 @@ func _draw_overlay() -> void:
 	if run.art_key == "forest":
 		var night := _night_amount()
 		if night > 0.0: overlay.draw_texture_rect(vignette, Rect2(Vector2(-size.x * 0.25, -size.y * 0.6), Vector2(size.x * 1.5, size.y * 2.2)), false, Color(1, 1, 1, night * 0.92))
+	# Imprevistos de Rodaje: blackout (only light around the player) and artificial rain
+	if run.event_active("blackout"):
+		var lit := Rect2(size / 2.0 - Vector2(340, 340), Vector2(680, 680))
+		overlay.draw_texture_rect(vignette, lit, false, Color.WHITE)
+		for r in [Rect2(0, 0, size.x, lit.position.y), Rect2(0, lit.end.y, size.x, size.y), Rect2(0, 0, lit.position.x, size.y), Rect2(lit.end.x, 0, size.x, size.y)]:
+			overlay.draw_rect(r, Color.BLACK)
+	if run.event_active("rain"):
+		var t: float = run.time
+		for k in 140:
+			var x := fmod(k * 97.31 + t * 260.0, size.x + 80.0) - 40.0
+			var y := fmod(k * 53.7 + t * 900.0 + k * 13.0, size.y + 60.0) - 30.0
+			overlay.draw_line(Vector2(x, y), Vector2(x - 6, y + 18), Color(0.7, 0.8, 1.0, 0.45), 1.5)
+		overlay.draw_rect(Rect2(Vector2.ZERO, size), Color(0.2, 0.3, 0.5, 0.12))
 	if run.hurt_flash > 0.0:
 		overlay.draw_texture_rect(vignette, Rect2(Vector2.ZERO, size), false, Color(1, 0.1, 0.1, run.hurt_flash * 0.5))
 	if run.flash > 0.0: overlay.draw_rect(Rect2(Vector2.ZERO, size), Color(1, 1, 0.95, min(0.8, run.flash)))
@@ -76,12 +89,21 @@ func _draw_overlay() -> void:
 		overlay.draw_rect(r, UIKit.GOLD.darkened(0.4), false, 1.0)
 		if k < run.weapons.list.size():
 			var w: Dictionary = run.weapons.list[k]
-			_slot(r, w.id, w.data.name, w.level, w.evolved, font)
+			_slot(r, w.data.evolution.id if w.evolved else w.id, w.data.name, w.level, w.evolved, font)
 	var pk: Array = run.passives.keys()
 	for k in 6:
 		var r := Rect2(x0 + k * 40.0, 66, 36, 36)
 		overlay.draw_rect(r, Color(0, 0, 0, 0.45))
 		if k < pk.size(): _slot(r, pk[k], Data.passives[pk[k]].name, int(run.passives[pk[k]]), false, font)
+	# Mapa de Localizaciones: arrows to the relics still hidden in this stage
+	if Save.is_unlocked("relics", "mapa_de_localizaciones"):
+		var c := size / 2.0
+		for p in run.relic_pickups():
+			var d: Vector2 = Vector2(p.x, p.y) - run.player_pos
+			if d.length() < 420.0: continue
+			var dir := d.normalized()
+			var at: Vector2 = c + dir * (minf(size.x, size.y) / 2.0 - 46.0)
+			overlay.draw_colored_polygon(PackedVector2Array([at + dir * 14.0, at + dir.orthogonal() * 9.0 - dir * 6.0, at - dir.orthogonal() * 9.0 - dir * 6.0]), UIKit.GOLD)
 	# boss bar
 	var boss := -1
 	var best := 0.0
@@ -176,11 +198,22 @@ func show_chest(got: Array, gold: int) -> void:
 	v.add_child(ic)
 	for o in got:
 		var tag := Loc.t("evolved") if o.kind == "evolve" else (Loc.t("union") if o.kind == "union" else "")
-		var c := UIKit.card(Data.icon_for(o.id), o.name, tag, o.desc, func(): pass)
+		var c := UIKit.card(Data.icon_for(o.get("icon", o.id)), o.name, tag, o.desc, func(): pass)
 		c.focus_mode = Control.FOCUS_NONE
 		v.add_child(c)
 	v.add_child(UIKit.label("+ %d $" % gold, 22, UIKit.GOLD))
 	v.add_child(UIKit.button(Loc.t("continue"), run.close_chest))
+	UIKit.focus_first(v)
+
+## Choose one Guion card (modifier «Guiones»): at the start and after each boss.
+func show_guion(opts: Array) -> void:
+	hide_panels()
+	var v := UIKit.centered_panel(panel_root, Vector2(640, 0))
+	v.add_child(UIKit.title(Loc.t("guion_pick"), 42))
+	for g in opts:
+		var c := UIKit.card(Data.guion_icon(g.id), g.name, g.num, g.desc, run.pick_guion.bind(g.id), 600)
+		c.custom_minimum_size.y = 100
+		v.add_child(c)
 	UIKit.focus_first(v)
 
 func show_pause() -> void:
@@ -220,6 +253,8 @@ func show_results(r: Dictionary) -> void:
 		v.add_child(UIKit.label("%s  (%s)  —  %d" % [w[0], Loc.t("lvl_n", [w[1]]), w[2]], 17))
 	for a in r.achievements:
 		v.add_child(UIKit.label("» " + a.name, 18, UIKit.GOLD.lightened(0.2)))
+	for n in r.get("relics", []):
+		v.add_child(UIKit.label(Loc.t("relic_found", [n]), 18, UIKit.GOLD.lightened(0.2)))
 	var row2 := HBoxContainer.new()
 	row2.alignment = BoxContainer.ALIGNMENT_CENTER
 	row2.add_theme_constant_override("separation", 12)

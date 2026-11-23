@@ -219,6 +219,40 @@ def cmd_icons(a):
     print(f"{k} icons from {a.img}")
 
 
+def cmd_iconset(a):
+    """Icons laid out in a loose grid: one icon per blob (blobs closer than --merge px join), read row by row."""
+    rgba = key(a.img, speck=60, open_px=a.open)
+    m = rgba[..., 3] > 0
+    lab, n = ndimage.label(ndimage.binary_dilation(m, iterations=a.merge))
+    objs = ndimage.find_objects(lab)
+    sizes = ndimage.sum(m, lab, range(1, n + 1))
+    keep = [i for i in range(n) if sizes[i] > max(sizes) * 0.08]
+    boxes = sorted(((objs[i][0].start + objs[i][0].stop) / 2, (objs[i][1].start + objs[i][1].stop) / 2, i) for i in keep)
+    rows, cur = [], []
+    for b in boxes:
+        if cur and b[0] - cur[0][0] > a.row_gap:
+            rows.append(cur); cur = []
+        cur.append(b)
+    rows.append(cur)
+    order = [b[2] for r in rows for b in sorted(r, key=lambda b: b[1])]
+    names = a.names.split(",")
+    print(f"{len(order)} blobs, {len(names)} names, rows {[len(r) for r in rows]}")
+    os.makedirs(a.outdir, exist_ok=True)
+    for name, i in zip(names, order):
+        if name in ("", "-"):
+            continue
+        sl = objs[i]
+        cell = rgba[sl].copy()
+        cell[..., 3] = np.where(lab[sl] == i + 1, cell[..., 3], 0)
+        ys, xs = np.where(cell[..., 3] > 0)
+        im = Image.fromarray(cell[ys.min():ys.max() + 1, xs.min():xs.max() + 1])
+        s = (a.size - 4) / max(im.size)
+        im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)
+        ic = Image.new("RGBA", (a.size, a.size))
+        ic.alpha_composite(im, ((a.size - im.width) // 2, (a.size - im.height) // 2))
+        ic.save(os.path.join(a.outdir, name + ".png"))
+
+
 def cmd_check(a):
     im = Image.open(a.sheet).convert("RGBA")
     fw = im.width // a.frames
@@ -254,6 +288,9 @@ def main():
     s.set_defaults(f=cmd_ground)
     s = sub.add_parser("icons"); s.add_argument("img"); s.add_argument("outdir"); s.add_argument("--names", required=True, help="comma list in reading order; - skips a cell")
     s.add_argument("--rows", type=int, default=3); s.add_argument("--cols", type=int, default=4); s.add_argument("--size", type=int, default=64); s.set_defaults(f=cmd_icons)
+    s = sub.add_parser("iconset"); s.add_argument("img"); s.add_argument("outdir"); s.add_argument("--names", required=True)
+    s.add_argument("--merge", type=int, default=12); s.add_argument("--open", type=int, default=0); s.add_argument("--row-gap", type=int, default=90)
+    s.add_argument("--size", type=int, default=64); s.set_defaults(f=cmd_iconset)
     s = sub.add_parser("check"); s.add_argument("sheet"); s.add_argument("--frames", type=int, required=True); s.set_defaults(f=cmd_check)
     a = p.parse_args()
     a.f(a)

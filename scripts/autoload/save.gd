@@ -24,6 +24,7 @@ func defaults() -> Dictionary:
 		"stats": {"kills": 0, "deaths": 0, "runs": 0, "chests": 0, "coins": 0, "food": 0, "evolutions": 0, "evolved": [],
 			"bosses": 0, "max_level": 0, "taquilla_total": 0, "time": 0.0, "survived": {}, "completed": [], "played": [], "productor": 0},
 		"achievements": [],
+		"mods_on": [],          # modifiers switched on for the next run
 		"options": {"lang": "es", "sfx": 0.8, "music": 0.7, "fullscreen": false, "shake": true, "flashes": true, "damage_numbers": true, "binds": {}},
 		"last": {"character": chars[0] if chars.size() > 0 else "max_rios", "stage": Data.stages[0].id},
 	}
@@ -58,6 +59,7 @@ func apply_options() -> void:
 	var o: Dictionary = data.options
 	Loc.set_lang(o.lang)
 	Sfx.volume = o.sfx
+	Music.volume = o.music
 	if not OS.has_feature("web") and DisplayServer.get_name() != "headless":
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if o.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 
