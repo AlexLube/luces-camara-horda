@@ -502,5 +502,109 @@
  "credits_cast": {
   "es": "Reparto",
   "en": "Cast"
+ },
+ "act_swap": {
+  "es": "Cambiar de personaje (Saga)",
+  "en": "Switch hero (Saga)"
+ },
+ "saga_mode": {
+  "es": "Modo Saga",
+  "en": "Saga Mode"
+ },
+ "saga_locked": {
+  "es": "Se abre con la Bobina Dorada (completa 10 escenarios)",
+  "en": "Opens with the Golden Reel (complete 10 stages)"
+ },
+ "saga_mezcla_locked": {
+  "es": "Termina las otras 8 sagas",
+  "en": "Finish the other 8 sagas"
+ },
+ "saga_phase": {
+  "es": "Fase %d: %s",
+  "en": "Phase %d: %s"
+ },
+ "saga_progress": {
+  "es": "%d/%d fases",
+  "en": "%d/%d phases"
+ },
+ "saga_reward": {
+  "es": "Recompensa: %s",
+  "en": "Reward: %s"
+ },
+ "saga_reward_soon": {
+  "es": "(próximamente)",
+  "en": "(coming soon)"
+ },
+ "saga_done": {
+  "es": "¡Saga completada! Recompensa: %s",
+  "en": "Saga complete! Reward: %s"
+ },
+ "saga_phase_done": {
+  "es": "Fase superada: %s",
+  "en": "Phase cleared: %s"
+ },
+ "saga_combo": {
+  "es": "¡Combo de %d!",
+  "en": "%d combo!"
+ },
+ "saga_combo_lost": {
+  "es": "Combo roto (%d)",
+  "en": "Combo broken (%d)"
+ },
+ "saga_alarm": {
+  "es": "¡ALARMA! Te han visto",
+  "en": "ALARM! You've been spotted"
+ },
+ "saga_party_down": {
+  "es": "%s cae. ¡Entra %s!",
+  "en": "%s is down. %s steps in!"
+ },
+ "saga_power_speed": {
+  "es": "Superpoder: Supervelocidad",
+  "en": "Superpower: Super speed"
+ },
+ "saga_power_might": {
+  "es": "Superpoder: Superfuerza",
+  "en": "Superpower: Super strength"
+ },
+ "saga_power_shield": {
+  "es": "Superpoder: Invulnerable",
+  "en": "Superpower: Invulnerable"
+ },
+ "saga_power_magnet": {
+  "es": "Superpoder: Imán Total",
+  "en": "Superpower: Total Magnet"
+ },
+ "saga_power_freeze": {
+  "es": "Superpoder: Congelar el Tiempo",
+  "en": "Superpower: Time Freeze"
+ },
+ "saga_hud_combo": {
+  "es": "Combo %d  ·  +%d %% daño",
+  "en": "Combo %d  ·  +%d %% damage"
+ },
+ "saga_hud_alarm": {
+  "es": "ALARMA %d s",
+  "en": "ALARM %d s"
+ },
+ "saga_hud_hidden": {
+  "es": "Sin ser visto",
+  "en": "Unseen"
+ },
+ "saga_hud_next_power": {
+  "es": "Próximo superpoder en %d s",
+  "en": "Next superpower in %d s"
+ },
+ "saga_hud_scroll": {
+  "es": "¡No te quedes atrás!",
+  "en": "Don't fall behind!"
+ },
+ "saga_hud_car": {
+  "es": "Al volante: giras despacio, atropellas rápido",
+  "en": "Driving: slow turns, fast hits"
+ },
+ "saga_hud_disaster": {
+  "es": "Aléjate de las zonas marcadas",
+  "en": "Stay away from the marked zones"
  }
 }

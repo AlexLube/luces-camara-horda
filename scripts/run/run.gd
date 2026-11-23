@@ -81,6 +81,9 @@ var _bursting := false
 var burns: Array = []               # Efectos Prácticos: [enemy index, seconds left, tick]
 var cameo := {}                     # El Cameo: {"sheet", "t", "hit"} while a guest star helps
 var cameo_t := 60.0
+var saga := {}                      # Modo Saga: the saga of this run (empty otherwise)
+var saga_phase := 0
+var saga_rules: SagaRules
 var cycle := 0                      # Maratón: finished 30-minute cycles
 var cycle_time := 0.0               # Maratón: time played in finished cycles
 var double_t := 0.0                 # El Doble Malvado: next strike of your evil twin
@@ -126,6 +129,12 @@ func setup(char_data: Dictionary, stage_data: Dictionary) -> void:
 	for m in Data.modifiers:
 		if m.id in Save.data.get("mods_on", []) and Data.modifier_ready(m) and Data.modifier_unlocked(m): mods.append(m.id)
 
+## Modo Saga: play phase `p` of saga `s` (an 8-minute run with its own rule).
+func setup_saga(s: Dictionary, p: int) -> void:
+	saga = s
+	saga_phase = p
+	duration = SagaRules.PHASE_SECONDS
+
 func has_mod(id: String) -> bool:
 	return id in mods
 
@@ -147,6 +156,7 @@ func _guion_stats() -> Dictionary:
 		e.proj_speed = -0.3
 		e.power = float(e.get("power", 0.0)) + 0.15
 	if has_guion("g_iv"): e.power = float(e.get("power", 0.0)) + 0.1 + 0.6 * max(0.0, float(stats.get("speed", 1.0)) - 1.0)
+	if Save.is_unlocked("relics", "casco_de_rescate"): e.revival = float(e.get("revival", 0.0)) + 1.0   # saga reward
 	return e
 
 ## Damage multiplier that changes during the run (El Cliffhanger, La Estrella).
@@ -155,6 +165,7 @@ func guion_damage() -> float:
 	if has_guion("g_xvi") and stats.has("hp_max"): k *= 1.0 + 0.6 * (1.0 - clampf(hp / float(stats.hp_max), 0.0, 1.0))
 	if has_guion("g_xix"): k *= 1.0 + kills * 0.0001
 	if montage_t > 0.0: k *= 1.2
+	if saga_rules: k *= saga_rules.damage_mult()
 	return k
 
 func offer_guion() -> void:
@@ -271,6 +282,7 @@ func _ready() -> void:
 	cam = Camera2D.new()
 	add_child(cam)
 	cam.make_current()
+	if not saga.is_empty(): saga_rules = SagaRules.new(self, saga, saga_phase)
 	weapons = WeaponSystem.new(self)
 	director = Director.new(self)
 	boss_ai = BossAI.new(self)
@@ -286,6 +298,7 @@ func _ready() -> void:
 	add_child(hud)
 	_place_relics()
 	_make_filter()
+	if saga_rules: saga_rules.start()
 	if has_mod("cine_mudo"): Sfx.volume = 0.0
 	for p in art.get("start", []):
 		props[Vector2i(99999, 0)] = props.get(Vector2i(99999, 0), []) + [[p[0], float(p[1]), float(p[2]), art.get("land_scale", 1.0) if p[0] == art.get("land", "") else 0.8]]
@@ -462,6 +475,7 @@ func kill(i: int, drops := true) -> void:
 	var at := Vector2(enemies.x[i], enemies.y[i])
 	if drops:
 		kills += 1
+		if saga_rules: saga_rules.on_kill()
 		beasts[d.sprite] = int(beasts.get(d.sprite, 0)) + 1
 		weapons.on_kill()
 		if float(stats.lifesteal) > 0.0: heal(float(stats.lifesteal) * 2.0)
@@ -649,6 +663,15 @@ func record() -> Dictionary:
 	s.bestiary[stage.id] = b
 	for r in Data.relics_for_completions(s.completed.size()):
 		if Save.unlock("relics", r.id): found_relics.append(r.id)
+	var saga_done := false
+	var saga_reward := ""
+	if not saga.is_empty() and completed:
+		var prog: Dictionary = Save.data.saga
+		var before := int(prog.get(saga.id, 0))
+		prog[saga.id] = maxi(before, saga_phase + 1)
+		if before < saga.phases.size() and int(prog[saga.id]) >= saga.phases.size():
+			saga_done = true
+			saga_reward = Data.grant_saga_reward(saga)
 	Save.data.taquilla = int(Save.data.taquilla) + earned
 	Save.data.last = {"character": character.id, "stage": stage.id}
 	Save.save_game()
@@ -657,7 +680,8 @@ func record() -> Dictionary:
 	for w in weapons.list: dmg.append([w.data.name if not w.evolved or w.data.source == "union" else w.data.evolution.name, w.level, int(dmg_by_weapon.get(w.id, 0.0))])
 	return {"time": time + cycle_time, "kills": kills, "level": level, "coins": int(round(coins)), "earned": earned, "completed": completed,
 		"achievements": new_ach, "weapons": dmg, "character": character.name, "character_id": character.id, "stage": stage.name,
-		"relics": found_relics.map(func(id): return Data.relic_by_id[id].name)}
+		"relics": found_relics.map(func(id): return Data.relic_by_id[id].name),
+		"saga": saga.get("name", ""), "saga_phase": saga_phase, "saga_done": saga_done, "saga_reward": saga_reward}
 
 # ---------- update ----------
 func _process(delta: float) -> void:
@@ -702,6 +726,7 @@ func step(dt: float) -> void:
 	hurt_t = max(0.0, hurt_t - dt * 4.0)
 	_move_player(dt)
 	if float(stats.regen) > 0.0: heal(float(stats.regen) * dt)
+	if saga_rules: saga_rules.update(dt)
 	director.update(dt)
 	enemies.rebuild_grid()
 	var hurt := enemies.update(dt * (0.6 if event_active("rain") else 1.0), player_pos.x, player_pos.y, PLAYER_R, freeze_t > 0.0, _enemy_shoot, _enemy_explode)
@@ -726,6 +751,8 @@ func _move_player(dt: float) -> void:
 	if bot:
 		var e := enemies.nearest(player_pos.x, player_pos.y, 400.0)
 		if e >= 0: facing = (Vector2(enemies.x[e], enemies.y[e]) - player_pos).normalized()
+	if saga_rules and saga_rules.rule == "coche": v = saga_rules.move_car(dt, v)
+	if saga_rules: v *= saga_rules.speed_mult()
 	player_pos += v * float(stats.move_speed) * dt
 	cam.position = player_pos
 	if Save.data.options.shake and shake > 0.0:
@@ -734,6 +761,7 @@ func _move_player(dt: float) -> void:
 
 ## Simple autopilot for tests and the demo: dodge what is close, collect tickets, stay near the horde.
 func _bot_dir() -> Vector2:
+	if saga_rules and saga_rules.rule == "naves" and player_pos.y > saga_rules.scroll_y - 180.0: return Vector2(randf_range(-0.3, 0.3), -1.0)
 	var push := Vector2.ZERO
 	for i in enemies.query_circle(player_pos.x, player_pos.y, 110.0, _q):
 		var d := player_pos - Vector2(enemies.x[i], enemies.y[i])
@@ -760,6 +788,7 @@ func _bot_dir() -> Vector2:
 
 func take_damage(amount: float, burst: bool) -> void:
 	if iframes > 0.0 and burst: return
+	if saga_rules and not saga_rules.on_hurt(burst): return
 	var armor := float(stats.armor)
 	var dmg = amount * max(0.25, 1.0 - armor * 0.06)
 	if burst: dmg = max(1.0, amount - armor)
@@ -776,6 +805,7 @@ func take_damage(amount: float, burst: bool) -> void:
 
 func _on_death() -> void:
 	if state == "dying" or state == "over": return
+	if saga_rules and saga_rules.on_death(): return
 	if revivals_used < int(stats.revival):
 		revivals_used += 1
 		hp = stats.hp_max * 0.5
@@ -847,7 +877,7 @@ func _update_bullets(dt: float) -> void:
 	ebullets = keep
 
 func _update_pickups(dt: float) -> void:
-	var mr := float(stats.magnet_radius)
+	var mr := float(stats.magnet_radius) * (saga_rules.magnet_mult() if saga_rules else 1.0)
 	var keep: Array = []
 	for p in pickups:
 		var d := Vector2(p.x, p.y) - player_pos
@@ -937,6 +967,10 @@ func _unhandled_input(e: InputEvent) -> void:
 		toggle_pause()
 		get_viewport().set_input_as_handled()
 		return
+	if e.is_action_pressed("swap") and saga_rules and state == "play":
+		saga_rules.swap()
+		get_viewport().set_input_as_handled()
+		return
 	if state == "levelup": hud.levelup_key(e)
 	if e is InputEventScreenTouch:
 		if e.pressed and touch_id < 0 and state == "play":
@@ -995,6 +1029,7 @@ func _draw() -> void:
 				draw_circle(Vector2(z.x, z.y), z.r, Color(col, 0.22))
 				draw_arc(Vector2(z.x, z.y), z.r, 0, TAU, 32, Color(col, 0.6), 2.0)
 	boss_ai.draw(self)
+	if saga_rules: saga_rules.draw_world(self)
 	# pickups
 	for p in pickups:
 		if not vr.has_point(Vector2(p.x, p.y)): continue

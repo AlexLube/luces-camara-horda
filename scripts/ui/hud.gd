@@ -79,6 +79,10 @@ func _draw_overlay() -> void:
 	# timer, kills, coins
 	var left: float = max(0.0, run.duration - run.time)
 	overlay.draw_string(font, Vector2(0, 52), UIKit.fmt_time(run.time), HORIZONTAL_ALIGNMENT_CENTER, size.x, 22, Color.WHITE if left > 60.0 else Color("ff6060"))
+	if run.saga_rules:
+		var st: String = run.saga_rules.hud_text()
+		overlay.draw_string(font, Vector2(1, 81), st, HORIZONTAL_ALIGNMENT_CENTER, size.x, 11, Color(0, 0, 0, 0.8))
+		overlay.draw_string(font, Vector2(0, 80), st, HORIZONTAL_ALIGNMENT_CENTER, size.x, 11, Color("ffe08a"))
 	overlay.draw_string(font, Vector2(size.x - 230, 46), "☠ %d" % run.kills, HORIZONTAL_ALIGNMENT_RIGHT, 210, 14, UIKit.CREAM)
 	overlay.draw_string(font, Vector2(size.x - 230, 70), "$ %d" % int(round(run.coins)), HORIZONTAL_ALIGNMENT_RIGHT, 210, 14, UIKit.GOLD)
 	# slots: weapons on top row, items below
@@ -265,6 +269,8 @@ func show_results(r: Dictionary) -> void:
 		v.add_child(UIKit.label("%s  (%s)  —  %d" % [w[0], Loc.t("lvl_n", [w[1]]), w[2]], 17))
 	for a in r.achievements:
 		v.add_child(UIKit.label("» " + a.name, 18, UIKit.GOLD.lightened(0.2)))
+	if r.get("saga", "") != "":
+		v.add_child(UIKit.label(Loc.t("saga_done", [r.saga_reward]) if r.saga_done else (Loc.t("saga_phase_done", [r.saga]) if r.completed else r.saga), 18, UIKit.GOLD.lightened(0.2)))
 	for n in r.get("relics", []):
 		v.add_child(UIKit.label(Loc.t("relic_found", [n]), 18, UIKit.GOLD.lightened(0.2)))
 	var row2 := HBoxContainer.new()
