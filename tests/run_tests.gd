@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -255,6 +255,16 @@ func t_modifiers() -> void:
 	ok(r3.kills > 50 and r3.state != "over", "4 min with every Guion at once (%d kills, %d ms)" % [r3.kills, Time.get_ticks_msec() - t0])
 	r3.queue_free()
 	await get_tree().process_frame
+	Save.data.unlocked.relics.append("silla_del_director")
+	Save.data.mods_on = ["maraton"]
+	var r4 := new_run()
+	r4.time = r4.duration - 0.05
+	r4.director.done.clear()
+	for k in 3: r4.step(0.05)
+	ok(r4.cycle == 1 and r4.completed and r4.state != "over" and r4.time < 1.0, "Maratón: a new cycle instead of the end")
+	ok(r4.director.hp_mult() > 1.7, "Maratón: the second cycle is tougher")
+	r4.queue_free()
+	await get_tree().process_frame
 	Save.data.mods_on = ["negativo"]
 	var r2 := new_run()
 	ok(r2.has_mod("negativo") and r2._filter != null, "Negativo puts a filter over the world")
@@ -263,8 +273,24 @@ func t_modifiers() -> void:
 	Save.data.mods_on = []
 	Save.data.unlocked.relics.clear()
 
+func t_bestiary() -> void:
+	var r := new_run()
+	r.bot = true
+	for k in 3:
+		var i := r.enemies.spawn(EnemyPool.T.HORDE, 100.0, 0.0)
+		r.kill(i)
+	var b := r.enemies.spawn(EnemyPool.T.BOSS, 100.0, 0.0)
+	r.kill(b)
+	ok(int(r.beasts.get("enemy", 0)) == 3 and int(r.beasts.get("boss", 0)) == 1, "bestiary counts kills by kind")
+	r.bot = false
+	r.record()
+	ok(int(Save.data.stats.bestiary[r.stage.id].boss) == 1, "bestiary saved per stage")
+	ok(Data.first_frame("res://assets/sprites/stages/forest/boss.png", 6) != null, "bestiary picture")
+	r.queue_free()
+	await get_tree().process_frame
+
 func t_music() -> void:
-	for k in Music.BY_GENRE.keys() + ["titulo", "jefe"]: ok(ResourceLoader.exists("res://assets/music/%s.ogg" % k), "music track " + k)
+	for k in Music.BY_GENRE.keys() + ["titulo", "jefe", "creditos"]: ok(ResourceLoader.exists("res://assets/music/%s.ogg" % k), "music track " + k)
 	for st in Data.stages:
 		var found := false
 		for k in Music.BY_GENRE: found = found or st.genre in Music.BY_GENRE[k]

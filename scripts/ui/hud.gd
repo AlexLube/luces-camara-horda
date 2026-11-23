@@ -238,6 +238,7 @@ func show_pause() -> void:
 
 func show_results(r: Dictionary) -> void:
 	hide_panels()
+	if r.completed: Music.play("creditos")
 	var v := UIKit.centered_panel(panel_root, Vector2(640, 0))
 	v.add_child(UIKit.title(Loc.t("wrap") if r.completed else Loc.t("cut_fail"), 50))
 	v.add_child(UIKit.label("%s · %s" % [r.character, r.stage], 20))

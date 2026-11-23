@@ -40,6 +40,7 @@ TRACKS = {
     "aventura": dict(bpm=140, root=50, scale="mixolydian", prog=[0, 6, 3, 0, 0, 6, 4, 4],  drums="rock",   swing=0.0,  duty=0.25,  seed=67, feel="heroic"),
     "comedia":  dict(bpm=152, root=53, scale="major",      prog=[0, 5, 1, 4, 0, 5, 1, 4],  drums="bounce", swing=0.2,  duty=0.5,   seed=71, feel="bouncy"),
     "accion":   dict(bpm=150, root=45, scale="minor",      prog=[0, 5, 6, 4, 0, 5, 3, 4],  drums="rock",   swing=0.0,  duty=0.25,  seed=83, feel="drive"),
+    "creditos": dict(bpm=96,  root=48, scale="major",      prog=[0, 3, 4, 0, 5, 3, 1, 4],  drums="slow",   swing=0.0,  duty=0.5,   seed=109, feel="bouncy"),
     "jefe":     dict(bpm=164, root=45, scale="harmonic",   prog=[0, 0, 5, 4, 0, 1, 5, 4],  drums="double", swing=0.0,  duty=0.125, seed=97, feel="drive"),
 }
 

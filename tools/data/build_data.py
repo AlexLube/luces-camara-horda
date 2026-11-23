@@ -237,6 +237,9 @@ out['relics'] = relics
 out['guiones'] = [{'id':'g_'+slug(r[0]),'num':r[0],'name':r[1],'desc':r[2],'cursed':False} for r in table('N.º | Guion | Efecto')] + \
                  [{'id':'gm_'+slug(r[0]),'num':r[0],'name':r[1],'desc':r[2],'how':r[3],'cursed':True} for r in table('N.º | Guion Maldito')]
 out['modifiers'] = [{'id':slug(r[0]),'name':r[0],'desc':r[2],'reward':r[3],'relic':r[4]} for r in table('Modificador | Equivale')]
+# Maratón needs the Director's Cut mode, not built yet: until then the Silla del Director (which opens that mode) unlocks it
+for m in out['modifiers']:
+    if m['id'] == 'maraton': m['relic'] = 'Silla del Director'
 
 # ---------------- achievements ("Premios de la Academia del Juego"): one per unlock rule + general ones
 SBYNUM = {s['num']: s for s in stages}

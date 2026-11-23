@@ -474,5 +474,25 @@
  "col_guiones": {
   "es": "Guiones",
   "en": "Scripts"
+ },
+ "col_bestiary": {
+  "es": "Bestiario",
+  "en": "Bestiary"
+ },
+ "col_beasts": {
+  "es": "Extras: %d · Tanques: %d\nJefe: %s (derrotado %d veces)",
+  "en": "Extras: %d · Tanks: %d\nBoss: %s (defeated %d times)"
+ },
+ "col_beast_hidden": {
+  "es": "Aún no has rodado en este plató",
+  "en": "You haven't shot on this set yet"
+ },
+ "cameo": {
+  "es": "¡Cameo de %s!",
+  "en": "Cameo by %s!"
+ },
+ "ev_cycle": {
+  "es": "¡Maratón! Empieza el ciclo %d",
+  "en": "Marathon! Cycle %d begins"
  }
 }
