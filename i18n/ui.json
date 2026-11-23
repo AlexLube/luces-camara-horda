@@ -634,5 +634,97 @@
  "gm_curse_tag": {
   "es": "Guion Maldito",
   "en": "Cursed Script"
+ },
+ "codes": {
+  "es": "Códigos",
+  "en": "Codes"
+ },
+ "music_room": {
+  "es": "Sala de música",
+  "en": "Music room"
+ },
+ "secret_found": {
+  "es": "¡Secreto! %s se une al reparto",
+  "en": "Secret! %s joins the cast"
+ },
+ "codes_help": {
+  "es": "Marca ocho flechas en la claqueta",
+  "en": "Tap eight arrows on the clapperboard"
+ },
+ "code_wrong": {
+  "es": "Esa toma no vale. Otra vez",
+  "en": "That take is no good. Again"
+ },
+ "code_hint_claqui": {
+  "es": "La claqueta se abre y se cierra dos veces; luego mira a un lado y al otro, dos veces",
+  "en": "The slate opens and shuts twice, then looks one way and the other, twice"
+ },
+ "code_hint_palomitas": {
+  "es": "Tres pasos hacia el puesto, tres puñados de palomitas, un vistazo atrás y otro a la pantalla",
+  "en": "Three steps to the stand, three handfuls of popcorn, a look back and one at the screen"
+ },
+ "code_hint_sepia": {
+  "es": "El sol se pone cuatro veces y sale otras cuatro: la película envejece",
+  "en": "The sun sets four times and rises four more: the film grows old"
+ },
+ "code_ok_claqui": {
+  "es": "¡Acción! Claqui se une al reparto",
+  "en": "Action! Claqui joins the cast"
+ },
+ "code_ok_palomitas": {
+  "es": "Palomitas gratis: +1000 de Taquilla (solo la primera vez)",
+  "en": "Free popcorn: +1000 Box Office (first time only)"
+ },
+ "code_ok_sepia_on": {
+  "es": "Filtro sepia activado en las partidas",
+  "en": "Sepia filter on in runs"
+ },
+ "code_ok_sepia_off": {
+  "es": "Filtro sepia desactivado",
+  "en": "Sepia filter off"
+ },
+ "montage_cut": {
+  "es": "¡Corte! Escena: %s",
+  "en": "Cut! Scene: %s"
+ },
+ "track_titulo": {
+  "es": "Tema principal",
+  "en": "Main theme"
+ },
+ "track_terror": {
+  "es": "Terror",
+  "en": "Horror"
+ },
+ "track_western": {
+  "es": "Western",
+  "en": "Western"
+ },
+ "track_scifi": {
+  "es": "Ciencia ficción",
+  "en": "Science fiction"
+ },
+ "track_noir": {
+  "es": "Cine negro",
+  "en": "Film noir"
+ },
+ "track_aventura": {
+  "es": "Aventuras",
+  "en": "Adventure"
+ },
+ "track_comedia": {
+  "es": "Comedia",
+  "en": "Comedy"
+ },
+ "track_accion": {
+  "es": "Acción",
+  "en": "Action"
+ },
+ "track_jefe": {
+  "es": "Tema del jefe",
+  "en": "Boss theme"
+ },
+ "track_creditos": {
+  "es": "Créditos",
+  "en": "Credits"
  }
 }

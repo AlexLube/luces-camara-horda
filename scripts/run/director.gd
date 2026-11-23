@@ -31,11 +31,12 @@ func minute() -> float:
 func hp_mult() -> float:
 	var neg: float = (1.5 if run.has_mod("negativo") else 1.0) * (1.0 + 0.75 * run.cycle)
 	if run.saga_rules: neg *= run.saga_rules.hp_mult()
+	if run.has_mod("directors_cut"): neg *= 1.6
 	return (1.0 + minute() * 0.11 + pow(minute() / 10.0, 2.0) * 0.6) * (0.5 + 0.5 * float(run.stats.curse)) * neg
 
 func target_count() -> int:
 	var m := minute()
-	return int(min(1450.0, (28.0 + m * 40.0 + m * m * 0.55) * float(run.stats.curse)))
+	return int(min(1450.0, (28.0 + m * 40.0 + m * m * 0.55) * float(run.stats.curse) * (1.25 if run.has_mod("directors_cut") else 1.0)))
 
 func _pick_type() -> int:
 	var m := minute()
@@ -70,7 +71,7 @@ func spawn(t: int, at := Vector2.INF, hp_k := 1.0) -> int:
 func update(dt: float) -> void:
 	if run.freeze_t > 0.0 or run.event_active("strike"): return
 	var m := minute()
-	acc += dt * (5.0 + m * 2.6) * float(run.stats.curse) * (run.saga_rules.spawn_mult() if run.saga_rules else 1.0)
+	acc += dt * (5.0 + m * 2.6) * float(run.stats.curse) * (1.25 if run.has_mod("directors_cut") else 1.0) * (run.saga_rules.spawn_mult() if run.saga_rules else 1.0)
 	var want := int(target_count() * (run.saga_rules.spawn_mult() if run.saga_rules else 1.0))
 	while acc >= 1.0:
 		acc -= 1.0

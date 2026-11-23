@@ -82,6 +82,13 @@ var burns: Array = []               # Efectos Prácticos: [enemy index, seconds 
 var cameo := {}                     # El Cameo: {"sheet", "t", "hit"} while a guest star helps
 var cameo_t := 60.0
 var curse: CursedGuiones              # Guiones Malditos in play (null until one is picked)
+var atrezzo: SetProps                # Atrezzo: crates, barrels and set fires
+var dist_px := 0.0                  # distance walked this run (Jack Nitro)
+var trips := 0                      # enemies tripped on a banana peel (Coco Banana)
+var calm_t := 0.0                   # seconds since the last hit, and the best streak (Sor Melodía)
+var best_calm := 0.0
+var cut_t := 60.0                   # La Sala de Montaje: next «¡Corte!»
+var scene_name := ""
 var saga := {}                      # Modo Saga: the saga of this run (empty otherwise)
 var saga_phase := 0
 var saga_rules: SagaRules
@@ -309,6 +316,7 @@ func _ready() -> void:
 	add_child(hud)
 	_place_relics()
 	_make_filter()
+	atrezzo = SetProps.new(self)
 	if saga_rules: saga_rules.start()
 	if has_mod("cine_mudo"): Sfx.volume = 0.0
 	for p in art.get("start", []):
@@ -339,7 +347,7 @@ func event_active(name: String) -> bool:
 
 ## Negativo and Cine Mudo: a full-screen filter over the world (the HUD stays on top).
 func _make_filter() -> void:
-	var mode := 1 if has_mod("negativo") else (2 if has_mod("cine_mudo") else 0)
+	var mode := 1 if has_mod("negativo") else (2 if has_mod("cine_mudo") else (3 if Save.data.options.get("sepia", false) else 0))
 	if mode == 0: return
 	var layer := CanvasLayer.new()
 	layer.layer = 4
@@ -354,7 +362,8 @@ uniform int mode = 1;
 void fragment() {
 	vec3 c = texture(screen, SCREEN_UV).rgb;
 	if (mode == 1) { c = vec3(1.0) - c; }
-	else { float g = dot(c, vec3(0.3, 0.59, 0.11)); c = vec3(g * 1.05 + 0.02); }
+	else if (mode == 2) { float g = dot(c, vec3(0.3, 0.59, 0.11)); c = vec3(g * 1.05 + 0.02); }
+	else { float g = dot(c, vec3(0.3, 0.59, 0.11)); c = vec3(g * 1.07 + 0.08, g * 0.93 + 0.04, g * 0.72); }
 	COLOR = vec4(c, 1.0);
 }"""
 	var mat := ShaderMaterial.new()
@@ -473,7 +482,12 @@ func damage_enemy(i: int, amount: float, kb: Vector2, w) -> void:
 	var heavy := t >= T.STAR
 	enemies.kx[i] += kb.x * (0.15 if heavy else 1.0)
 	enemies.ky[i] += kb.y * (0.15 if heavy else 1.0)
-	if w != null: dmg_by_weapon[w.id] = float(dmg_by_weapon.get(w.id, 0.0)) + amount
+	if w != null:
+		dmg_by_weapon[w.id] = float(dmg_by_weapon.get(w.id, 0.0)) + amount
+		if w.id == "piel_de_platano" and enemies.stun[i] <= 0.0 and enemies.slow[i] < 0.05:
+			trips += 1
+			enemies.stun[i] = 0.35   # down they go
+	if atrezzo and not atrezzo.items.is_empty(): atrezzo.on_hit(Vector2(enemies.x[i], enemies.y[i]))
 	if Save.data.options.damage_numbers and numbers.size() < 90:
 		numbers.append({"x": enemies.x[i] + randf_range(-8, 8), "y": enemies.y[i] - enemies.r[i] * 2.2, "v": amount, "t": 0.0, "crit": crit})
 	if _hit_sfx_t <= 0.0:
@@ -500,6 +514,7 @@ func kill(i: int, drops := true) -> void:
 		if d.get("boss", false) or t == T.GUEST:
 			bosses_killed += 1
 			if has_guion("g_xiii"): pickups.append({"k": "chest", "x": at.x + 40.0, "y": at.y})
+			if has_mod("directors_cut") and t == T.BOSS: pickups.append({"k": "chest", "x": at.x - 40.0, "y": at.y})
 			if has_mod("guiones") and t == T.BOSS: offer_guion()
 			shake = 0.5
 			Sfx.play("explode", 0.7)
@@ -526,6 +541,39 @@ func kill(i: int, drops := true) -> void:
 	elif d.sprite != "enemy":
 		fx.append({"k": "smoke", "x": at.x, "y": at.y - 20.0, "t": 0.0, "life": 0.6, "s": enemies.sc[i] * 1.4})
 	enemies.remove(i)
+
+## La Sala de Montaje: every minute the film is cut and the stage jumps to a scene from another
+## film (floor, scenery and extras); El Montador cuts himself to another spot of the new scene.
+const MONTAGE_EVERY := 60.0
+
+func _update_montage(dt: float) -> void:
+	cut_t -= dt
+	if cut_t > 0.0: return
+	cut_t = MONTAGE_EVERY
+	montage_cut()
+
+func montage_cut() -> void:
+	var pool: Array = []
+	for st in Data.stages:
+		if st.kind != "festival" and st.kind != "oculto" and st.get("art", "") != art_key and Data.art_sets.has(st.get("art", "")): pool.append(st)
+	if pool.is_empty(): return
+	var other: Dictionary = pool[randi() % pool.size()]
+	var boss_sheet: Dictionary = sheets.get("boss", {})
+	art_key = other.art
+	art = Data.stage_art(other)
+	props.clear()
+	_load_sheets()
+	if not boss_sheet.is_empty(): sheets.boss = boss_sheet   # El Montador stays himself
+	scene_name = other.name
+	for i in enemies.n:
+		if enemies.alive[i] == 1 and enemies.type[i] == T.BOSS:
+			var a := randf() * TAU
+			enemies.x[i] = player_pos.x + cos(a) * 320.0
+			enemies.y[i] = player_pos.y + sin(a) * 320.0
+			fx_ring(Vector2(enemies.x[i], enemies.y[i]), 90.0, Color.WHITE)
+	fx_flash(1.2)
+	Sfx.play("chest", 0.7)
+	announce(Loc.t("montage_cut", [other.name]))
 
 ## Back to the stage theme once the last jefe on screen falls.
 func _boss_music_after(dead: int) -> void:
@@ -678,6 +726,7 @@ func record() -> Dictionary:
 	if completed and stage.id not in s.completed: s.completed.append(stage.id)
 	if stage.id not in s.played: s.played.append(stage.id)
 	if productor_killed: s.productor += 1
+	_record_secrets(s)
 	var b: Dictionary = s.bestiary.get(stage.id, {})
 	for k in beasts: b[k] = int(b.get(k, 0)) + int(beasts[k])
 	s.bestiary[stage.id] = b
@@ -695,13 +744,33 @@ func record() -> Dictionary:
 	Save.data.taquilla = int(Save.data.taquilla) + earned
 	Save.data.last = {"character": character.id, "stage": stage.id}
 	Save.save_game()
-	var new_ach: Array = Achievements.check({})
+	var new_ach: Array = Achievements.check({"chests": chests})
 	var dmg: Array = []
 	for w in weapons.list: dmg.append([w.data.name if not w.evolved or w.data.source == "union" else w.data.evolution.name, w.level, int(dmg_by_weapon.get(w.id, 0.0))])
 	return {"time": time + cycle_time, "kills": kills, "level": level, "coins": int(round(coins)), "earned": earned, "completed": completed,
 		"achievements": new_ach, "weapons": dmg, "character": character.name, "character_id": character.id, "stage": stage.name,
 		"relics": found_relics.map(func(id): return Data.relic_by_id[id].name),
 		"saga": saga.get("name", ""), "saga_phase": saga_phase, "saga_done": saga_done, "saga_reward": saga_reward}
+
+## Lifetime counters behind the hidden feats (characters and stages unlocked by «manual» Premios).
+func _record_secrets(s: Dictionary) -> void:
+	for k in ["crates", "barrels", "fires", "trips", "early_deaths", "distance"]:
+		if not s.has(k): s[k] = 0
+	s.crates += atrezzo.crates_moved
+	s.barrels += atrezzo.barrels_broken
+	s.fires += atrezzo.fires_out
+	s.trips += trips
+	s.distance += int(dist_px)
+	if not completed and time < 10.0: s.early_deaths += 1
+	if completed:
+		var by: Dictionary = s.get("completed_by", {})
+		by[character.id] = int(by.get(character.id, 0)) + 1
+		s.completed_by = by
+		if has_mod("directors_cut"):
+			var dc: Array = s.get("dc_completed", [])
+			if stage.id not in dc: dc.append(stage.id)
+			s.dc_completed = dc
+		if stage.id == "broadway_en_llamas" and best_calm >= 300.0: s.flawless_broadway = true
 
 # ---------- update ----------
 func _process(delta: float) -> void:
@@ -745,6 +814,10 @@ func step(dt: float) -> void:
 	hurt_flash = max(0.0, hurt_flash - dt * 3.0)
 	hurt_t = max(0.0, hurt_t - dt * 4.0)
 	_move_player(dt)
+	calm_t += dt
+	best_calm = maxf(best_calm, calm_t)
+	if stage.get("id", "") == "la_sala_de_montaje": _update_montage(dt)
+	atrezzo.update(dt)
 	if float(stats.regen) > 0.0: heal(float(stats.regen) * dt)
 	if saga_rules: saga_rules.update(dt)
 	if curse: curse.update(dt)
@@ -775,6 +848,7 @@ func _move_player(dt: float) -> void:
 	if saga_rules and saga_rules.rule == "coche": v = saga_rules.move_car(dt, v)
 	if saga_rules: v *= saga_rules.speed_mult()
 	player_pos += v * float(stats.move_speed) * dt
+	dist_px += v.length() * float(stats.move_speed) * dt
 	cam.position = player_pos
 	if Save.data.options.shake and shake > 0.0:
 		cam.offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * 7.0 * shake
@@ -815,10 +889,12 @@ func take_damage(amount: float, burst: bool) -> void:
 	if iframes > 0.0 and burst: return
 	if saga_rules and not saga_rules.on_hurt(burst): return
 	if saga_rules and saga_rules.rule == "coche" and not burst: amount *= 0.5   # the car's bodywork takes the bumps
+	if has_mod("directors_cut"): amount *= 1.3
 	var armor := float(stats.armor)
 	var dmg = amount * max(0.25, 1.0 - armor * 0.06)
 	if burst: dmg = max(1.0, amount - armor)
 	hp -= dmg
+	if dmg > 0.0: calm_t = 0.0
 	if hurt_flash < 0.3 or burst:
 		hurt_t = 1.0
 		var e := enemies.nearest(player_pos.x, player_pos.y, 120.0)
@@ -937,12 +1013,12 @@ func _collect(p: Dictionary) -> void:
 		"xp":
 			gem_count -= 1
 			if p == vip_gem: vip_gem = null
-			xp += float(p.v) * float(stats.growth)
+			xp += float(p.v) * float(stats.growth) * (1.2 if has_mod("directors_cut") else 1.0)
 			if has_guion("g_xvii"): add_coins(0.04 * float(p.v))
 			if has_guion("g_vii"): montage_t = 2.5
 			Sfx.play("pickup", randf_range(1.0, 1.3))
 		"coin":
-			add_coins(float(p.v))
+			add_coins(float(p.v) * (1.5 if has_mod("directors_cut") else 1.0))
 			Sfx.play("pickup", 0.8)
 		"food":
 			food += 1
@@ -1056,6 +1132,7 @@ func _draw() -> void:
 				draw_circle(Vector2(z.x, z.y), z.r, Color(col, 0.22))
 				draw_arc(Vector2(z.x, z.y), z.r, 0, TAU, 32, Color(col, 0.6), 2.0)
 	boss_ai.draw(self)
+	atrezzo.draw_world(self)
 	if saga_rules: saga_rules.draw_world(self)
 	if curse: curse.draw_world(self)
 	# pickups
