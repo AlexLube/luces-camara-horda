@@ -27,7 +27,8 @@ func defaults() -> Dictionary:
 		"mods_on": [],          # modifiers switched on for the next run
 		"saga": {},             # Modo Saga: saga id -> phases completed
 		"saga_rewards": [],     # rewards won in the Modo Saga (characters, weapons, passives still to come are kept here)
-		"options": {"lang": "es", "sfx": 0.8, "music": 0.7, "fullscreen": false, "shake": true, "flashes": true, "damage_numbers": true, "binds": {}},
+		"options": {"lang": "es", "sfx": 0.8, "music": 0.7, "fullscreen": false, "shake": true, "flashes": true, "damage_numbers": true, "binds": {},
+			"colorblind": "off", "text_size": 1.0, "game_speed": 1.0, "sepia": false},
 		"last": {"character": chars[0] if chars.size() > 0 else "max_rios", "stage": Data.stages[0].id},
 	}
 
@@ -62,6 +63,8 @@ func apply_options() -> void:
 	Loc.set_lang(o.lang)
 	Sfx.volume = o.sfx
 	Music.volume = o.music
+	var acc := get_node_or_null("/root/Access")
+	if acc: acc.apply()
 	if not OS.has_feature("web") and DisplayServer.get_name() != "headless":
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if o.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 

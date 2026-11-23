@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_cursed", "t_secrets", "t_relic_powers", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_cursed", "t_secrets", "t_relic_powers", "t_access", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -425,6 +425,30 @@ func t_relic_powers() -> void:
 	ok(Achievements.secret_met("unlock_el_cinefilo"), "…and a full Catálogo")
 	await get_tree().process_frame
 	Save.data = Save.defaults()
+
+func t_access() -> void:
+	for n in ["coin", "eat", "relic", "evolve", "clap", "fire_out", "cut", "warn", "ui_move", "reel"]:
+		ok(Sfx._streams.get(n) != null, "sound effect loads: " + n)
+	var o: Dictionary = Save.data.options
+	ok(Access.cycle(Access.MODES, "off") == "protan" and Access.cycle(Access.MODES, "tritan") == "off", "colour-blind modes cycle")
+	o.colorblind = "deutan"
+	o.text_size = 1.3
+	Save.apply_options()
+	ok(Access._rect.visible and UIKit.text_scale == 1.3, "options apply the filter and the text size")
+	ok(UIKit.label("x", 20).get_theme_font_size("font_size") == 26, "menu text grows")
+	o.colorblind = "off"
+	o.text_size = 1.0
+	Save.apply_options()
+	ok(not Access._rect.visible and UIKit.text_scale == 1.0, "and back to normal")
+	o.game_speed = 0.7
+	var r := new_run()
+	r.set_process(true)
+	var t0: float = r.time
+	r._process(0.05)
+	ok(absf((r.time - t0) - 0.035) < 0.001, "game speed 70 %% slows the run (%.4f)" % (r.time - t0))
+	o.game_speed = 1.0
+	r.queue_free()
+	await get_tree().process_frame
 
 func t_bestiary() -> void:
 	var r := new_run()

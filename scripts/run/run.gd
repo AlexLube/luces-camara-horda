@@ -316,6 +316,7 @@ func _ready() -> void:
 	add_child(hud)
 	_place_relics()
 	_make_filter()
+	if not bot: Sfx.play("clap")   # «¡Acción!»
 	atrezzo = SetProps.new(self)
 	if saga_rules: saga_rules.start()
 	if has_mod("cine_mudo"): Sfx.volume = 0.0
@@ -572,7 +573,7 @@ func montage_cut() -> void:
 			enemies.y[i] = player_pos.y + sin(a) * 320.0
 			fx_ring(Vector2(enemies.x[i], enemies.y[i]), 90.0, Color.WHITE)
 	fx_flash(1.2)
-	Sfx.play("chest", 0.7)
+	Sfx.play("cut")
 	announce(Loc.t("montage_cut", [other.name]))
 
 ## Back to the stage theme once the last jefe on screen falls.
@@ -675,6 +676,7 @@ func open_chest(is_boss: bool) -> void:
 	var got := Upgrades.open_chest(self, n)
 	var gold := 30.0 * n
 	add_coins(gold)
+	Sfx.play("reel")
 	Sfx.play("chest")
 	if bot: return
 	state = "chest"
@@ -785,7 +787,7 @@ func _process(delta: float) -> void:
 		_update_dying(min(delta, 1.0 / 20.0))
 		queue_redraw()
 		return
-	var k := 1.3 if has_mod("toma_rapida") else (1.15 if has_mod("cine_mudo") else 1.0)
+	var k := (1.3 if has_mod("toma_rapida") else (1.15 if has_mod("cine_mudo") else 1.0)) * Access.game_speed()
 	step(min(delta, 1.0 / 20.0) * k)
 	queue_redraw()
 
@@ -1020,18 +1022,18 @@ func _collect(p: Dictionary) -> void:
 			Sfx.play("pickup", randf_range(1.0, 1.3))
 		"coin":
 			add_coins(float(p.v) * (1.5 if has_mod("directors_cut") else 1.0))
-			Sfx.play("pickup", 0.8)
+			Sfx.play("coin", randf_range(0.95, 1.08))
 		"food":
 			food += 1
 			heal(30.0)
-			Sfx.play("pickup", 0.6)
+			Sfx.play("eat")
 		"chest": open_chest(p.get("boss", false))
 		"relic":
 			found_relics.append(p.id)
 			if not bot and Save.unlock("relics", p.id): Save.save_game()
 			fx_ring(Vector2(p.x, p.y), 160.0, Color("f2b83b"))
 			fx_flash(0.6)
-			Sfx.play("chest", 1.2)
+			Sfx.play("relic")
 			announce(Loc.t("relic_found", [Data.relic_by_id[p.id].name]))
 		"magnet":
 			for q in pickups:
@@ -1042,6 +1044,7 @@ func _collect(p: Dictionary) -> void:
 			for i in enemies.n:
 				if enemies.alive[i] == 1 and enemies.type[i] < T.STAR and vr.has_point(Vector2(enemies.x[i], enemies.y[i])): kill(i)
 			fx_flash(1.5)
+			Sfx.play("cut", 1.2)
 			announce(Loc.t("cut"))
 		"freeze":
 			freeze_t = 10.0 * float(stats.freeze_time)

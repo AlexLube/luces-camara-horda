@@ -766,5 +766,37 @@
  "skin_4": {
   "es": "Revelado rojo",
   "en": "Red darkroom"
+ },
+ "accessibility": {
+  "es": "Accesibilidad",
+  "en": "Accessibility"
+ },
+ "opt_colorblind": {
+  "es": "Modo daltónico",
+  "en": "Colour-blind mode"
+ },
+ "cb_off": {
+  "es": "Desactivado",
+  "en": "Off"
+ },
+ "cb_protan": {
+  "es": "Protanopia (rojo)",
+  "en": "Protanopia (red)"
+ },
+ "cb_deutan": {
+  "es": "Deuteranopia (verde)",
+  "en": "Deuteranopia (green)"
+ },
+ "cb_tritan": {
+  "es": "Tritanopia (azul)",
+  "en": "Tritanopia (blue)"
+ },
+ "opt_text_size": {
+  "es": "Tamaño del texto",
+  "en": "Text size"
+ },
+ "opt_game_speed": {
+  "es": "Velocidad del juego",
+  "en": "Game speed"
  }
 }

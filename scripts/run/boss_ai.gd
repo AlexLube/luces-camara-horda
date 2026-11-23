@@ -97,6 +97,7 @@ func _pos(i: int) -> Vector2:
 func _start(i: int, atk: String, ph: int) -> void:
 	var at := _pos(i)
 	var pl: Vector2 = run.player_pos
+	Sfx.play("warn")
 	match atk:
 		"charge":
 			var dir := (pl - at).normalized()

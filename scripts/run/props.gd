@@ -126,7 +126,7 @@ func _put_out(it: Dictionary) -> void:
 	fires_out += 1
 	debris.append({"k": "smoke", "x": it.x, "y": it.y, "t": 1.5})
 	run.pickups.append({"k": "coin", "x": it.x, "y": it.y + 20.0, "v": 3.0})
-	Sfx.play("pickup", 0.5)
+	Sfx.play("fire_out")
 
 func draw_world(c: CanvasItem) -> void:
 	var vr: Rect2 = run.view_rect().grow(80.0)

@@ -1,5 +1,5 @@
 extends Node
-## Small pool of players for the placeholder sound effects (assets/sfx). Music lives in music.gd.
+## Small pool of players for the sound effects (assets/sfx; tools/audio/sfx.py makes the newer ones). Music lives in music.gd.
 
 var _players: Array[AudioStreamPlayer] = []
 var _streams := {}
@@ -11,7 +11,8 @@ func _ready() -> void:
 		var p := AudioStreamPlayer.new()
 		add_child(p)
 		_players.append(p)
-	for n in ["hit", "pickup", "levelup", "chest", "boss", "hurt", "death", "select", "shoot", "explode"]:
+	for n in ["hit", "pickup", "levelup", "chest", "boss", "hurt", "death", "select", "shoot", "explode",
+			"coin", "eat", "relic", "evolve", "clap", "fire_out", "cut", "warn", "ui_move", "reel"]:
 		_streams[n] = load("res://assets/sfx/%s.wav" % n)
 
 func play(name: String, pitch := 1.0) -> void:
