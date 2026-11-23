@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -302,6 +302,41 @@ func t_music() -> void:
 	await get_tree().create_timer(1.2).timeout
 	ok(Music._players.size() == 1, "old track freed after the fade")
 	Music.stop()
+
+func t_death() -> void:
+	var r := new_run()
+	r.bot = false
+	r.take_damage(5.0, true)
+	ok(r.hurt_t == 1.0 and r.hurt_flash == 1.0, "a hit starts the hurt recoil")
+	r.step(0.1)
+	ok(r.hurt_t < 1.0 and r.hurt_t > 0.0, "hurt recoil fades")
+	var deaths: int = Save.data.stats.deaths
+	r.hp = 0.0
+	r._on_death()
+	ok(r.state == "dying", "dying plays «¡Corten!» before the results")
+	r.step(0.5)
+	ok(r.state == "dying" and float(r.death_pose()[0]) > 0.0, "the hero tips over")
+	for i in 40: r.step(0.05)
+	ok(r.state == "over" and int(Save.data.stats.deaths) == deaths + 1, "results after the death animation (%s, %d→%d)" % [r.state, deaths, int(Save.data.stats.deaths)])
+	r.queue_free()
+	await get_tree().process_frame
+	var b := new_run()
+	b.hp = 0.0
+	b._on_death()
+	ok(b.state == "over", "bot runs skip the death animation")
+	b.queue_free()
+	await get_tree().process_frame
+	Save.data = Save.defaults()
+
+func t_portraits() -> void:
+	var n := 0
+	for c in Data.characters:
+		if Data.has_portrait(c.id):
+			n += 1
+			var t := Data.portrait(c.id)
+			ok(t != null and t.get_width() >= 128, "portrait " + c.id)
+	ok(n == Data.characters.size(), "every character has a portrait (%d/%d)" % [n, Data.characters.size()])
+	ok(Data.sprite_frame("max_rios") != null, "sprite frame fallback")
 
 func t_achievements() -> void:
 	Save.data = Save.defaults()

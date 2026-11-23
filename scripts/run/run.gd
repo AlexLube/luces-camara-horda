@@ -48,8 +48,12 @@ var used_banishes := 0
 var revivals_used := 0
 var iframes := 0.0
 var hurt_flash := 0.0
+var hurt_t := 0.0                    # hurt recoil (squash and tilt), 0..1
+var hurt_from := Vector2.RIGHT
+var death_t := -1.0                 # «¡Corten!»: seconds into the death animation, -1 while alive
+const DEATH_TIME := 1.9
 var pending_levels := 0
-var state := "play"                 # play, levelup, chest, pause, over
+var state := "play"                 # play, levelup, chest, pause, dying, over
 var completed := false
 
 # --- run counters for results / saves ---
@@ -652,7 +656,7 @@ func record() -> Dictionary:
 	var dmg: Array = []
 	for w in weapons.list: dmg.append([w.data.name if not w.evolved or w.data.source == "union" else w.data.evolution.name, w.level, int(dmg_by_weapon.get(w.id, 0.0))])
 	return {"time": time + cycle_time, "kills": kills, "level": level, "coins": int(round(coins)), "earned": earned, "completed": completed,
-		"achievements": new_ach, "weapons": dmg, "character": character.name, "stage": stage.name,
+		"achievements": new_ach, "weapons": dmg, "character": character.name, "character_id": character.id, "stage": stage.name,
 		"relics": found_relics.map(func(id): return Data.relic_by_id[id].name)}
 
 # ---------- update ----------
@@ -663,11 +667,19 @@ func _process(delta: float) -> void:
 	if state == "over":
 		queue_redraw()
 		return
+	if state == "dying":
+		_update_dying(min(delta, 1.0 / 20.0))
+		queue_redraw()
+		return
 	var k := 1.3 if has_mod("toma_rapida") else (1.15 if has_mod("cine_mudo") else 1.0)
 	step(min(delta, 1.0 / 20.0) * k)
 	queue_redraw()
 
 func step(dt: float) -> void:
+	if state == "over": return
+	if state == "dying":
+		_update_dying(dt)
+		return
 	time += dt * (2.0 if has_mod("fuera_de_plazo") else 1.0)
 	if has_mod("imprevistos_de_rodaje"): _update_events(dt)
 	if has_mod("guiones"):
@@ -687,6 +699,7 @@ func step(dt: float) -> void:
 	announce_t -= dt
 	iframes -= dt
 	hurt_flash = max(0.0, hurt_flash - dt * 3.0)
+	hurt_t = max(0.0, hurt_t - dt * 4.0)
 	_move_player(dt)
 	if float(stats.regen) > 0.0: heal(float(stats.regen) * dt)
 	director.update(dt)
@@ -751,6 +764,10 @@ func take_damage(amount: float, burst: bool) -> void:
 	var dmg = amount * max(0.25, 1.0 - armor * 0.06)
 	if burst: dmg = max(1.0, amount - armor)
 	hp -= dmg
+	if hurt_flash < 0.3 or burst:
+		hurt_t = 1.0
+		var e := enemies.nearest(player_pos.x, player_pos.y, 120.0)
+		hurt_from = (player_pos - Vector2(enemies.x[e], enemies.y[e])).normalized() if e >= 0 else -facing
 	hurt_flash = 1.0
 	if burst:
 		iframes = 0.4
@@ -758,6 +775,7 @@ func take_damage(amount: float, burst: bool) -> void:
 		Sfx.play("hurt")
 
 func _on_death() -> void:
+	if state == "dying" or state == "over": return
 	if revivals_used < int(stats.revival):
 		revivals_used += 1
 		hp = stats.hp_max * 0.5
@@ -768,7 +786,41 @@ func _on_death() -> void:
 		fx_flash(1.0)
 		announce(Loc.t("revive"))
 		return
-	finish(completed)
+	if completed or bot:
+		finish(completed)
+		return
+	# «¡Corten!»: the horde freezes, the hero falls and the film fades before the results.
+	state = "dying"
+	death_t = 0.0
+	hurt_flash = 1.0
+	shake = 0.4
+	fx_flash(0.8)
+	Sfx.play("hurt")
+	announce(Loc.t("corten"))
+
+func _update_dying(dt: float) -> void:
+	death_t += dt
+	shake = max(0.0, shake - dt)
+	hurt_flash = max(0.0, hurt_flash - dt * 1.5)
+	flash = max(0.0, flash - dt * 2.0)
+	announce_t -= dt
+	cam.zoom = Vector2.ONE * lerpf(1.0, 1.45, ease(minf(death_t / 1.2, 1.0), -2.0))
+	cam.position = player_pos
+	cam.offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * 6.0 * shake
+	if _filter: _filter.visible = true
+	if death_t >= DEATH_TIME:
+		cam.zoom = Vector2.ONE
+		finish(false)
+
+## How the hero lies on the floor while dying: [angle, drop, alpha, grey].
+func death_pose() -> Array:
+	var t := death_t
+	if t < 0.25: return [0.0, 0.0, 1.0, 0.0]
+	var k := minf((t - 0.25) / 0.45, 1.0)
+	var bounce := sin(minf((t - 0.7) / 0.3, 1.0) * PI) * 0.12 if t > 0.7 else 0.0
+	var ang := (PI / 2.0) * (k * k) - bounce
+	var grey := clampf((t - 0.7) / 0.8, 0.0, 1.0)
+	return [ang, -k * 4.0, 1.0 - clampf((t - 1.4) / 0.5, 0.0, 1.0) * 0.6, grey]
 
 func _enemy_shoot(x: float, y: float, dx: float, dy: float) -> void:
 	if ebullets.size() < 90:
@@ -1074,9 +1126,34 @@ func _draw_player() -> void:
 	var fi := int(time * (12.0 if moving else 6.0))
 	var face := -1.0 if facing.x < -0.1 else 1.0
 	var mod := Color.WHITE
-	if iframes > 0.0 and int(time * 20.0) % 2 == 0: mod.a = 0.5
-	_draw_sheet(sh, fi, player_pos, PLAYER_SCALE, face, mod)
-	if hurt_flash > 0.0: _draw_sheet(sh, fi, player_pos, PLAYER_SCALE, face, Color(1, 0.2, 0.25, hurt_flash * 0.55), true)
+	if iframes > 0.0 and int(time * 20.0) % 2 == 0 and state != "dying": mod.a = 0.5
+	# hurt recoil: squash, tilt away from the hit and a small hop back
+	var rot := 0.0
+	var scl := Vector2.ONE
+	var off := Vector2.ZERO
+	if state == "dying":
+		sh = sheets.idle
+		fi = 0
+		var pose := death_pose()
+		rot = float(pose[0]) * face
+		off = Vector2(0, float(pose[1]))
+		var g := float(pose[3])
+		mod = Color(1, 1, 1).lerp(Color(0.55, 0.55, 0.6), g)
+		mod.a = float(pose[2])
+	elif hurt_t > 0.0:
+		var k := sin(hurt_t * PI)
+		scl = Vector2(1.0 + 0.16 * k, 1.0 - 0.14 * k)
+		rot = clampf(hurt_from.x, -1.0, 1.0) * 0.22 * k
+		off = hurt_from * 5.0 * k
+	draw_set_transform(player_pos + off, rot, scl)
+	_draw_sheet(sh, fi, Vector2.ZERO, PLAYER_SCALE, face, mod)
+	if hurt_flash > 0.0: _draw_sheet(sh, fi, Vector2.ZERO, PLAYER_SCALE, face, Color(1, 0.2, 0.25, hurt_flash * 0.55), true)
+	draw_set_transform(Vector2.ZERO)
+	if hurt_t > 0.5 and state != "dying":   # little stars around the head
+		for j in 3:
+			var a := time * 9.0 + j * TAU / 3.0
+			var sp := player_pos + Vector2(cos(a) * 16.0, -38.0 + sin(a) * 5.0)
+			draw_circle(sp, 2.5, Color(1, 0.9, 0.4, (hurt_t - 0.5) * 2.0))
 
 func _draw_prop(p: Array) -> void:
 	var tx: Texture2D = sheets.get("p_" + p[0])

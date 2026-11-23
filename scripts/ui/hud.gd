@@ -242,10 +242,21 @@ func show_results(r: Dictionary) -> void:
 	var v := UIKit.centered_panel(panel_root, Vector2(640, 0))
 	v.add_child(UIKit.title(Loc.t("wrap") if r.completed else Loc.t("cut_fail"), 50))
 	v.add_child(UIKit.label("%s · %s" % [r.character, r.stage], 20))
+	var top := HBoxContainer.new()
+	top.alignment = BoxContainer.ALIGNMENT_CENTER
+	top.add_theme_constant_override("separation", 28)
+	v.add_child(top)
+	var pic := TextureRect.new()
+	pic.custom_minimum_size = Vector2(150, 150)
+	pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	pic.texture = Data.portrait(r.get("character_id", ""))
+	if not r.completed: pic.modulate = Color(0.75, 0.72, 0.78)   # a bad take looks a bit washed out
+	top.add_child(pic)
 	var grid := GridContainer.new()
 	grid.columns = 2
 	grid.add_theme_constant_override("h_separation", 40)
-	v.add_child(grid)
+	top.add_child(grid)
 	for row in [[Loc.t("r_time"), UIKit.fmt_time(r.time)], [Loc.t("r_kills"), str(r.kills)], [Loc.t("r_level"), str(r.level)], [Loc.t("r_coins"), str(r.coins)], [Loc.t("r_taquilla"), "+%d" % r.earned]]:
 		grid.add_child(UIKit.label(row[0], 20))
 		grid.add_child(UIKit.label(row[1], 20, UIKit.GOLD))

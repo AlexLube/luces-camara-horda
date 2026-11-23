@@ -75,6 +75,11 @@ func _shot(path: String, wait: float, panel: String) -> void:
 	elif run and panel == "results":
 		run.bot = false
 		run.finish(false)
+	elif run and panel == "death":   # mid «¡Corten!» animation
+		run.bot = false
+		run.hp = 0.0
+		run._on_death()
+		await get_tree().create_timer(0.55).timeout
 	await get_tree().create_timer(0.4).timeout
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png(path)
@@ -200,6 +205,9 @@ func show_characters() -> void:
 		if unlocked and not hired: text += "  ($%d)" % Save.hire_price(c)
 		var b := UIKit.button(text, _on_char.bind(c), 290)
 		b.disabled = not unlocked
+		if unlocked and Data.has_portrait(c.id):
+			b.icon = Data.portrait(c.id)
+			b.add_theme_constant_override("icon_max_width", 30)
 		b.set_meta("id", c.id)
 		b.tooltip_text = "%s — %s\n%s\n%s" % [c.name, c.title, c.bonus, Loc.t("unlock_by", [c.unlock])] if unlocked else Loc.t("unlock_by", [c.unlock])
 		if c.id == sel_char: b.modulate = UIKit.GOLD.lightened(0.4)
@@ -210,7 +218,7 @@ func show_characters() -> void:
 	bottom.add_theme_constant_override("separation", 16)
 	v.add_child(bottom)
 	var pic := TextureRect.new()
-	pic.custom_minimum_size = Vector2(110, 120)
+	pic.custom_minimum_size = Vector2(170, 170)
 	pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	pic.texture = Data.portrait(sel_char)
@@ -479,6 +487,36 @@ func show_credits() -> void:
 	var text := UIKit.label(Loc.t("credits_text"), 22)
 	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_scroll(v).add_child(text)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 24)
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_scroll(v).add_child(box)
+	box.add_child(text)
 	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	# the cast parade: every hired actor takes a bow
+	var cast_t := UIKit.label(Loc.t("credits_cast"), 26, UIKit.GOLD)
+	cast_t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(cast_t)
+	var cast := GridContainer.new()
+	cast.columns = 8
+	cast.add_theme_constant_override("h_separation", 10)
+	cast.add_theme_constant_override("v_separation", 10)
+	cast.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	box.add_child(cast)
+	for c in Data.characters:
+		var known := Save.is_unlocked("characters", c.id)
+		var cell := VBoxContainer.new()
+		var tr := TextureRect.new()
+		tr.custom_minimum_size = Vector2(96, 96)
+		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tr.texture = Data.portrait(c.id)
+		if not known: tr.modulate = Color(0, 0, 0, 0.6)
+		cell.add_child(tr)
+		var nm := UIKit.label(c.name if known else "???", 11)
+		nm.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		nm.custom_minimum_size.x = 96
+		nm.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		cell.add_child(nm)
+		cast.add_child(cell)
 	UIKit.focus_first(v)

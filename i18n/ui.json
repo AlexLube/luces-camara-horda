@@ -494,5 +494,13 @@
  "ev_cycle": {
   "es": "¡Maratón! Empieza el ciclo %d",
   "en": "Marathon! Cycle %d begins"
+ },
+ "corten": {
+  "es": "¡CORTEN! Se nos cae el protagonista",
+  "en": "CUT! We lost our lead"
+ },
+ "credits_cast": {
+  "es": "Reparto",
+  "en": "Cast"
  }
 }

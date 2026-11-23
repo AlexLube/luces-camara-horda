@@ -127,7 +127,17 @@ func weapon_pool(character: Dictionary) -> Array:
 	return out
 
 ## First frame of a character's idle animation, for menus (falls back to Max Ríos).
+## Full-body casting portrait (Gemini art); falls back to the first idle frame.
 func portrait(id: String) -> Texture2D:
+	var pp := "res://assets/sprites/characters/%s/portrait.png" % id
+	if ResourceLoader.exists(pp): return tex(pp)
+	return sprite_frame(id)
+
+func has_portrait(id: String) -> bool:
+	return ResourceLoader.exists("res://assets/sprites/characters/%s/portrait.png" % id)
+
+## First idle frame of a character's sprite sheet.
+func sprite_frame(id: String) -> Texture2D:
 	var path := "res://assets/sprites/characters/%s/idle.png" % id
 	var t: Texture2D = tex(path) if ResourceLoader.exists(path) else tex("res://assets/sprites/player/player_idle.png")
 	if t == null: return null
