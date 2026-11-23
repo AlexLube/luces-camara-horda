@@ -531,10 +531,6 @@
   "es": "Recompensa: %s",
   "en": "Reward: %s"
  },
- "saga_reward_soon": {
-  "es": "(próximamente)",
-  "en": "(coming soon)"
- },
  "saga_done": {
   "es": "¡Saga completada! Recompensa: %s",
   "en": "Saga complete! Reward: %s"
@@ -606,5 +602,9 @@
  "saga_hud_disaster": {
   "es": "Aléjate de las zonas marcadas",
   "en": "Stay away from the marked zones"
+ },
+ "col_saga_hint": {
+  "es": "Recompensa del Modo Saga",
+  "en": "Saga Mode reward"
  }
 }

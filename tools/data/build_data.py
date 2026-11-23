@@ -280,6 +280,23 @@ def cond(t):
     if (m := re.match(r'(?:Llegar (?:al|a la|a)) (.+)', t)) and stage_ref(t): return {'type':'play','stage':stage_ref(t)}
     if t.startswith('Desbloquear 20 armas'): return {'type':'weapons_unlocked','value':20}
     return {'type':'manual','text':t}
+# ---------------- Modo Saga rewards (not in the catalogue tables): 4 characters, a weapon and a passive
+SAGA_CHARS = [
+    ('la_ultima_chica', 'La Última Chica', 'La Superviviente', 'foco', '+1 revivir y +10 % velocidad', 'Completar la saga La Trilogía del Enmascarado', {'revival': 1.0, 'speed': 0.1}),
+    ('el_vigilante_enmascarado', 'El Vigilante Enmascarado', 'El Héroe del Barrio', 'paraguas_de_musical', '+20 % área y +10 % poder', 'Completar la saga Liga de Héroes de Barrio', {'area': 0.2, 'power': 0.1}),
+    ('el_agente_con_esmoquin', 'El Agente con Esmoquin', 'El Espía', 'dardos_tranquilizantes', '+25 % suerte y +10 % velocidad de proyectil', 'Completar la saga Agente 00-Nadie', {'luck': 0.25, 'proj_speed': 0.1}),
+    ('el_director_fantasma', 'El Director Fantasma', 'El Autor', 'megafono_del_director', '+1 proyectil, +10 % poder y +10 % área', 'Completar la saga Retrospectiva del Director', {'amount': 1.0, 'power': 0.1, 'area': 0.1}),
+]
+for k, (cid, name, title, weapon, bonus, unlock, mods) in enumerate(SAGA_CHARS):
+    chars.append({'id': cid, 'num': 97 + k, 'name': name, 'title': title, 'weapon': weapon, 'bonus': bonus, 'unlock': unlock, 'group': 'saga', 'mods': mods})
+weapons.append({'id': 'espada_de_plasma', 'name': 'Espada de Plasma', 'desc': 'Un tajo de luz que barre todo a tu alrededor', 'archetype': 'arc',
+    'base': {'damage': 16, 'cooldown': 1.1, 'area': 120, 'amount': 1, 'shape': 'spin'},
+    'levels': [{'damage': 5}, {'area': 0.15}, {'cooldown': -0.1}, {'damage': 6}, {'amount': 1}, {'area': 0.15}, {'damage': 8}],
+    'max_level': 8,
+    'evolution': {'id': 'espada_del_ultimo_remake', 'name': 'Espada del Último Remake', 'desc': 'Dos tajos y lanza ondas de luz', 'requires': 'turbo', 'mods': {'amount_add': 1, 'area': 1.3, 'damage': 1.5}},
+    'source': 'saga'})
+passives.append({'id': 'turbo', 'name': 'Turbo', 'desc': '+8 % velocidad y −4 % enfriamiento', 'max_level': 5, 'stat': 'turbo', 'per_level': 0.08, 'saga': True})
+
 ach = []
 for c in chars:
     if c['group'] in ('base', 'secreto'):

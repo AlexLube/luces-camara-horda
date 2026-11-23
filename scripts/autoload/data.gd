@@ -111,11 +111,17 @@ func saga_open(sg: Dictionary) -> bool:
 		if o.rule != "mezcla" and saga_progress(o) < o.phases.size(): return false
 	return true
 
-## Give the saga's reward once. Relics unlock now; the rest is kept until its content exists.
+## Give the saga's reward once: a relic, a weapon, a passive or a character (hired for free).
 func grant_saga_reward(sg: Dictionary) -> String:
 	var r: Dictionary = sg.reward
-	if r.kind == "relic": Save.unlock("relics", r.id)
-	elif r.id not in Save.data.saga_rewards: Save.data.saga_rewards.append(r.id)
+	match r.kind:
+		"relic": Save.unlock("relics", r.id)
+		"weapon": Save.unlock("weapons", r.id)
+		"passive": Save.unlock("passives", r.id)
+		"character":
+			Save.unlock("characters", r.id)
+			Save.unlock("hired", r.id)
+	if r.id not in Save.data.saga_rewards: Save.data.saga_rewards.append(r.id)
 	return r.name
 
 func _load(name: String) -> Variant:

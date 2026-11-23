@@ -41,6 +41,7 @@ static func roll(run, n: int) -> Array:
 	if run.passives.size() < MAX_PASSIVES:
 		for p in Data.passive_list:
 			if run.passives.has(p.id) or run.banished.has(p.id): continue
+			if p.get("saga", false) and not Save.is_unlocked("passives", p.id): continue   # won in the Modo Saga
 			# rarer items (those with 9 levels or special effects) show up more with luck
 			var wgt := 0.8 if int(p.max_level) <= 5 else 0.35 * float(run.stats.luck)
 			cands.append([{"kind": "passive_new", "id": p.id, "name": p.name, "desc": p.desc, "level_text": Loc.t("new")}, wgt])

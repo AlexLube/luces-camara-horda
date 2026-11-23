@@ -1214,5 +1214,62 @@
   "group": "Festival Gótico Eterno",
   "mods": {},
   "weapon_exclusive": true
+ },
+ {
+  "id": "la_ultima_chica",
+  "num": 97,
+  "name": "La Última Chica",
+  "title": "La Superviviente",
+  "weapon": "foco",
+  "bonus": "+1 revivir y +10 % velocidad",
+  "unlock": "Completar la saga La Trilogía del Enmascarado",
+  "group": "saga",
+  "mods": {
+   "revival": 1.0,
+   "speed": 0.1
+  }
+ },
+ {
+  "id": "el_vigilante_enmascarado",
+  "num": 98,
+  "name": "El Vigilante Enmascarado",
+  "title": "El Héroe del Barrio",
+  "weapon": "paraguas_de_musical",
+  "bonus": "+20 % área y +10 % poder",
+  "unlock": "Completar la saga Liga de Héroes de Barrio",
+  "group": "saga",
+  "mods": {
+   "area": 0.2,
+   "power": 0.1
+  }
+ },
+ {
+  "id": "el_agente_con_esmoquin",
+  "num": 99,
+  "name": "El Agente con Esmoquin",
+  "title": "El Espía",
+  "weapon": "dardos_tranquilizantes",
+  "bonus": "+25 % suerte y +10 % velocidad de proyectil",
+  "unlock": "Completar la saga Agente 00-Nadie",
+  "group": "saga",
+  "mods": {
+   "luck": 0.25,
+   "proj_speed": 0.1
+  }
+ },
+ {
+  "id": "el_director_fantasma",
+  "num": 100,
+  "name": "El Director Fantasma",
+  "title": "El Autor",
+  "weapon": "megafono_del_director",
+  "bonus": "+1 proyectil, +10 % poder y +10 % área",
+  "unlock": "Completar la saga Retrospectiva del Director",
+  "group": "saga",
+  "mods": {
+   "amount": 1.0,
+   "power": 0.1,
+   "area": 0.1
+  }
  }
 ]

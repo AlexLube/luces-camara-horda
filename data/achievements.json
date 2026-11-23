@@ -1478,6 +1478,16 @@
   "reward": {}
  },
  {
+  "id": "evolve_espada_de_plasma",
+  "name": "Espada del Último Remake",
+  "desc": "Evolucionar Espada de Plasma",
+  "cond": {
+   "type": "evolve",
+   "weapon": "espada_de_plasma"
+  },
+  "reward": {}
+ },
+ {
   "id": "productor",
   "name": "Película cancelada",
   "desc": "Derrotar al Productor Ejecutivo",

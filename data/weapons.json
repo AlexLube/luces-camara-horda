@@ -2674,5 +2674,54 @@
    }
   },
   "source": "Festival Gótico Eterno"
+ },
+ {
+  "id": "espada_de_plasma",
+  "name": "Espada de Plasma",
+  "desc": "Un tajo de luz que barre todo a tu alrededor",
+  "archetype": "arc",
+  "base": {
+   "damage": 16,
+   "cooldown": 1.1,
+   "area": 120,
+   "amount": 1,
+   "shape": "spin"
+  },
+  "levels": [
+   {
+    "damage": 5
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "cooldown": -0.1
+   },
+   {
+    "damage": 6
+   },
+   {
+    "amount": 1
+   },
+   {
+    "area": 0.15
+   },
+   {
+    "damage": 8
+   }
+  ],
+  "max_level": 8,
+  "evolution": {
+   "id": "espada_del_ultimo_remake",
+   "name": "Espada del Último Remake",
+   "desc": "Dos tajos y lanza ondas de luz",
+   "requires": "turbo",
+   "mods": {
+    "amount_add": 1,
+    "area": 1.3,
+    "damage": 1.5
+   }
+  },
+  "source": "saga"
  }
 ]
