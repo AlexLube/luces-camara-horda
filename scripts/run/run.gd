@@ -12,6 +12,7 @@ const PLAYER_R := 16.0
 const PLAYER_SCALE := 0.82
 const CHUNK := 640.0
 const MAX_GEMS := 380
+const SURVIVAL_PAY := 8               # Taquilla per minute survived
 
 # --- setup ---
 var character: Dictionary
@@ -34,6 +35,7 @@ var facing := Vector2.RIGHT
 var move_dir := Vector2.ZERO
 var time := 0.0
 var freeze_t := 0.0
+var freeze_ready_at := 0.0           # Exposición Total: earliest time of the next screen freeze
 
 # --- player state ---
 var hp := 100.0
@@ -443,7 +445,8 @@ func banishes_left() -> int: return int(stats.banishes) - used_banishes
 static func xp_for(l: int) -> float:
 	if l < 20: return 5.0 + (l - 1) * 10.0
 	if l < 40: return 195.0 + (l - 20) * 13.0
-	return 455.0 + (l - 40) * 16.0
+	if l < 80: return 455.0 + (l - 40) * 16.0
+	return 1095.0 + (l - 80) * 40.0   # late levels cost more, so a 30-minute run ends around level 110-150
 
 # ---------- API for weapons ----------
 func view_rect() -> Rect2:
@@ -533,10 +536,10 @@ func kill(i: int, drops := true) -> void:
 			return
 		var r := randf()
 		if r < 0.006: pickups.append({"k": "food", "x": at.x, "y": at.y})
-		elif r < 0.021: pickups.append({"k": "coin", "x": at.x, "y": at.y, "v": float(randi_range(1, 5))})
-		elif r < 0.0218: pickups.append({"k": "magnet", "x": at.x, "y": at.y})
-		elif r < 0.0223: pickups.append({"k": "cut", "x": at.x, "y": at.y})
-		elif r < 0.0228: pickups.append({"k": "freeze", "x": at.x, "y": at.y})
+		elif r < 0.016: pickups.append({"k": "coin", "x": at.x, "y": at.y, "v": float(randi_range(1, 5))})
+		elif r < 0.0168: pickups.append({"k": "magnet", "x": at.x, "y": at.y})
+		elif r < 0.0173: pickups.append({"k": "cut", "x": at.x, "y": at.y})
+		elif r < 0.0178: pickups.append({"k": "freeze", "x": at.x, "y": at.y})
 	if corpses.size() < 70 and d.sprite == "enemy":
 		corpses.append({"x": at.x, "y": at.y, "face": enemies.face[i], "t": 0.0, "sc": enemies.sc[i], "fi": int(enemies.anim[i])})
 	elif d.sprite != "enemy":
@@ -636,9 +639,31 @@ func open_levelup() -> void:
 	Sfx.play("levelup")
 	var opts := Upgrades.roll(self, Upgrades.option_count(self))
 	if bot:
-		choose(opts[0])
+		choose(bot_pick(opts))
 		return
 	hud.show_levelup(opts)
+
+## The autopilot picks like a sensible player: level what it has, collect the items its weapons
+## need to evolve, and fill up to four weapons early.
+func bot_pick(opts: Array) -> Dictionary:
+	var wants := {}
+	for w in weapons.list:
+		var req: String = w.data.get("evolution", {}).get("requires", "")
+		if req != "" and not w.evolved: wants[req] = true
+	var best: Dictionary = opts[0]
+	var best_s := -1.0
+	for o in opts:
+		var sc := 1.0
+		match o.kind:
+			"weapon_up": sc = 3.0
+			"weapon_new": sc = 3.5 if weapons.list.size() < 4 else 1.2
+			"passive_new": sc = 4.0 if wants.has(o.id) else 1.5
+			"passive_up": sc = 2.6 if wants.has(o.id) else 2.0
+		sc += randf() * 0.5
+		if sc > best_s:
+			best_s = sc
+			best = o
+	return best
 
 func choose(o: Dictionary) -> void:
 	Upgrades.apply(self, o)
@@ -674,7 +699,7 @@ func open_chest(is_boss: bool) -> void:
 	var n := Upgrades.chest_size(self)
 	if is_boss: n = max(n, 3)
 	var got := Upgrades.open_chest(self, n)
-	var gold := 30.0 * n
+	var gold := 20.0 * n
 	add_coins(gold)
 	Sfx.play("reel")
 	Sfx.play("chest")
@@ -707,11 +732,16 @@ func finish(won: bool) -> void:
 	summary.won = won
 	hud.show_results(summary)
 
+## Taquilla paid for this run: coins, a bonus for finishing, kills and minutes survived, times the modifiers.
+func taquilla_earned() -> int:
+	var earned := int(round((int(round(coins)) + (300 if completed else 0) + kills / 50 + int(time / 60.0) * SURVIVAL_PAY) * (1.0 + mod_bonus()) * (curse.taquilla_mult() if curse else 1.0)))
+	if Save.is_unlocked("relics", "entrada_dorada"): earned = int(round(earned * Data.GOLDEN_TICKET))
+	return earned
+
 ## Write this run into the profile and check achievements. Returns the summary for the results screen.
 func record() -> Dictionary:
 	var s: Dictionary = Save.data.stats
-	var earned := int(round((int(round(coins)) + (300 if completed else 0) + kills / 50) * (1.0 + mod_bonus()) * (curse.taquilla_mult() if curse else 1.0)))
-	if Save.is_unlocked("relics", "entrada_dorada"): earned = int(round(earned * Data.GOLDEN_TICKET))
+	var earned := taquilla_earned()
 	s.kills += kills
 	s.deaths += 0 if completed else 1
 	s.runs += 1
@@ -868,8 +898,16 @@ func _bot_dir() -> Vector2:
 	for i in enemies.query_circle(player_pos.x, player_pos.y, 110.0, _q):
 		var d := player_pos - Vector2(enemies.x[i], enemies.y[i])
 		push += d.normalized() / max(16.0, d.length())
+	for b in ebullets:   # sidestep enemy shots
+		var bd2 := player_pos - Vector2(b.x, b.y)
+		if bd2.length() < 90.0: push += bd2.normalized() / max(12.0, bd2.length()) * 1.5
+	if atrezzo:
+		for it in atrezzo.items:   # keep off set fires and lit barrels
+			if it.k == "fire" or (it.k == "barrel" and it.fuse >= 0.0):
+				var fd := player_pos - Vector2(it.x, it.y)
+				if fd.length() < 70.0: push += fd.normalized() / max(16.0, fd.length()) * 2.0
 	var best = null
-	var bd := 380.0 * 380.0
+	var bd := 560.0 * 560.0
 	for p in pickups:
 		if p.k == "food" and hp > stats.hp_max * 0.7: continue
 		var dd := Vector2(p.x, p.y).distance_squared_to(player_pos)

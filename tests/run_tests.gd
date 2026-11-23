@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_cursed", "t_secrets", "t_relic_powers", "t_access", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_cursed", "t_secrets", "t_relic_powers", "t_access", "t_balance", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -448,6 +448,26 @@ func t_access() -> void:
 	ok(absf((r.time - t0) - 0.035) < 0.001, "game speed 70 %% slows the run (%.4f)" % (r.time - t0))
 	o.game_speed = 1.0
 	r.queue_free()
+	await get_tree().process_frame
+
+func t_balance() -> void:
+	var a := new_run("max_rios", "bosque_de_la_cabana")
+	var b := new_run("max_rios", "archivo_de_cine_mudo")
+	var c := new_run("max_rios", "templo_de_la_selva")
+	ok(b.director.stage_k() > c.director.stage_k() and c.director.stage_k() > a.director.stage_k(), "challenge films are harder, and base films grow harder one after another")
+	ok(b.director.hp_mult() > a.director.hp_mult() * 1.3, "challenge enemies are tougher")
+	ok(Run.xp_for(100) - Run.xp_for(99) > Run.xp_for(50) - Run.xp_for(49), "late levels cost more")
+	# Exposición Total: the screen freeze has a pause between uses
+	a.weapons.list.clear()
+	var w: Dictionary = a.weapons.add("camara_de_flash")
+	a.weapons.evolve("camara_de_flash")
+	var frozen := 0.0
+	for f in 20 * 40:
+		a.step(0.05)
+		a.hp = 999.0
+		if a.freeze_t > 0.0: frozen += 0.05
+	ok(frozen < 40.0 * 0.6, "Exposición Total never keeps the horde frozen for good (%.0f of 40 s)" % frozen)
+	for r in [a, b, c]: r.queue_free()
 	await get_tree().process_frame
 
 func t_bestiary() -> void:
