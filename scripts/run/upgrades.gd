@@ -30,7 +30,7 @@ static func roll(run, n: int) -> Array:
 			cands.append([{"kind": "weapon_up", "id": w.id, "name": w.data.name, "desc": describe_up(w.data, w.level + 1), "level_text": Loc.t("lvl_n", [w.level + 1])}, 1.3])
 	if ws.list.size() < MAX_WEAPONS:
 		for id in Data.weapon_pool(run.character):
-			if ws.has(id) or run.banished.has(id): continue
+			if ws.has(id) or run.banished.has(id) or Data.is_sealed(id): continue
 			if run.union_parts_used.has(id): continue
 			var d: Dictionary = Data.weapons[id]
 			cands.append([{"kind": "weapon_new", "id": id, "name": d.name, "desc": d.desc, "level_text": Loc.t("new")}, 0.9])
@@ -40,7 +40,7 @@ static func roll(run, n: int) -> Array:
 			cands.append([{"kind": "passive_up", "id": id, "name": p.name, "desc": p.desc, "level_text": Loc.t("lvl_n", [int(run.passives[id]) + 1])}, 1.0])
 	if run.passives.size() < MAX_PASSIVES:
 		for p in Data.passive_list:
-			if run.passives.has(p.id) or run.banished.has(p.id): continue
+			if run.passives.has(p.id) or run.banished.has(p.id) or Data.is_sealed(p.id): continue
 			if p.get("saga", false) and not Save.is_unlocked("passives", p.id): continue   # won in the Modo Saga
 			# rarer items (those with 9 levels or special effects) show up more with luck
 			var wgt := 0.8 if int(p.max_level) <= 5 else 0.35 * float(run.stats.luck)

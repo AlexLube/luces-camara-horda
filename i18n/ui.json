@@ -726,5 +726,45 @@
  "track_creditos": {
   "es": "Créditos",
   "en": "Credits"
+ },
+ "col_archive_locked": {
+  "es": "El Catálogo está cerrado. Encuentra la Llave del Archivo (%s)",
+  "en": "The Catalogue is locked. Find the Archive Key (%s)"
+ },
+ "seal_help": {
+  "es": "Pulsa para sellar o quitar el sello: lo sellado no sale en las mejoras",
+  "en": "Press to seal or unseal: sealed items never show up in level-ups"
+ },
+ "sealed": {
+  "es": "Sellado",
+  "en": "Sealed"
+ },
+ "skin_take": {
+  "es": "Toma: %s",
+  "en": "Take: %s"
+ },
+ "skin_help": {
+  "es": "Carrete de tomas falsas: cambia el aspecto del personaje",
+  "en": "Blooper Reel: change the actor's look"
+ },
+ "skin_0": {
+  "es": "Original",
+  "en": "Original"
+ },
+ "skin_1": {
+  "es": "Croma verde",
+  "en": "Green screen"
+ },
+ "skin_2": {
+  "es": "Noche americana",
+  "en": "Day for night"
+ },
+ "skin_3": {
+  "es": "Estreno dorado",
+  "en": "Golden premiere"
+ },
+ "skin_4": {
+  "es": "Revelado rojo",
+  "en": "Red darkroom"
  }
 }

@@ -80,6 +80,37 @@ func modifier_unlocked(m: Dictionary) -> bool:
 		if r.name == m.relic: return Save.is_unlocked("relics", r.id)
 	return false
 
+## Entrada Dorada (relic): bonus Taquilla at the end of every run.
+const GOLDEN_TICKET := 1.15
+
+## Carrete de tomas falsas (relic): alternative looks for every actor (tint and name of the take).
+const SKINS := [["skin_0", Color(1, 1, 1)], ["skin_1", Color(0.72, 1.0, 0.72)], ["skin_2", Color(0.72, 0.82, 1.2)], ["skin_3", Color(1.2, 1.02, 0.62)], ["skin_4", Color(1.15, 0.75, 0.72)]]
+
+func skin_index(id: String) -> int:
+	if not Save.is_unlocked("relics", "carrete_de_tomas_falsas"): return 0
+	return int(Save.data.get("skins", {}).get(id, 0)) % SKINS.size()
+
+func skin_tint(id: String) -> Color:
+	return SKINS[skin_index(id)][1]
+
+func next_skin(id: String) -> void:
+	if not Save.is_unlocked("relics", "carrete_de_tomas_falsas"): return
+	var sk: Dictionary = Save.data.get("skins", {})
+	sk[id] = (skin_index(id) + 1) % SKINS.size()
+	Save.data.skins = sk
+	Save.save_game()
+
+## Tarjeta del Sindicato (relic): sealed weapons and passives never show up in the upgrades.
+func is_sealed(id: String) -> bool:
+	return Save.is_unlocked("relics", "tarjeta_del_sindicato") and id in Save.data.get("sealed", [])
+
+func toggle_seal(id: String) -> void:
+	var s: Array = Save.data.get("sealed", [])
+	if id in s: s.erase(id)
+	else: s.append(id)
+	Save.data.sealed = s
+	Save.save_game()
+
 func guion_icon(id: String) -> Texture2D:
 	return tex("res://assets/sprites/guiones/%s.png" % id)
 

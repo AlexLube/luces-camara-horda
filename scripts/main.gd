@@ -398,14 +398,29 @@ func show_characters() -> void:
 	pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	pic.texture = Data.portrait(sel_char)
+	pic.modulate = Data.skin_tint(sel_char)
 	bottom.add_child(pic)
+	if Save.is_unlocked("relics", "carrete_de_tomas_falsas") and Save.is_unlocked("characters", sel_char):
+		skin_char = sel_char
+		var sk := UIKit.button(Loc.t("skin_take", [Loc.t(Data.SKINS[Data.skin_index(sel_char)][0])]), func(): sel_char = skin_char; Data.next_skin(skin_char); show_characters(), 260)
+		sk.tooltip_text = Loc.t("skin_help")
+		sk.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		bottom.add_child(sk)
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	bottom.add_child(info)
 	for b in grid.get_children():
 		var cid: String = b.get_meta("id")
-		b.focus_entered.connect(func(): pic.texture = Data.portrait(cid) if Save.is_unlocked("characters", cid) else null)
-		b.mouse_entered.connect(func(): pic.texture = Data.portrait(cid) if Save.is_unlocked("characters", cid) else null)
+		b.focus_entered.connect(_show_pic.bind(pic, cid))
+		b.mouse_entered.connect(_show_pic.bind(pic, cid))
 	UIKit.focus_first(grid)
+
+var skin_char := ""
+
+func _show_pic(pic: TextureRect, cid: String) -> void:
+	var known := Save.is_unlocked("characters", cid)
+	pic.texture = Data.portrait(cid) if known else null
+	pic.modulate = Data.skin_tint(cid)
+	if known: skin_char = cid
 
 func _on_char(c: Dictionary) -> void:
 	if not Save.is_unlocked("hired", c.id):
@@ -620,7 +635,7 @@ func show_collection(tab := "weapons") -> void:
 		"weapons":
 			for w in Data.weapon_list:
 				var avail: bool = w.source == "base" or Save.is_unlocked("weapons", w.id)
-				grid.add_child(_col_card(Data.icon_for(w.id), w.name, w.desc, avail))
+				grid.add_child(_seal_card(_col_card(Data.icon_for(w.id), w.name, w.desc, avail), w.id, avail and w.source != "union", tab))
 				var e: Dictionary = w.evolution
 				var known: bool = w.id in evolved
 				var req: String = Data.passives[e.requires].name if Data.passives.has(e.requires) else ""
@@ -637,7 +652,7 @@ func show_collection(tab := "weapons") -> void:
 		"passives":
 			for p in Data.passive_list:
 				var have: bool = not p.get("saga", false) or Save.is_unlocked("passives", p.id)
-				grid.add_child(_col_card(Data.icon_for(p.id), p.name if have else "???", p.desc if have else Loc.t("col_saga_hint"), have))
+				grid.add_child(_seal_card(_col_card(Data.icon_for(p.id), p.name if have else "???", p.desc if have else Loc.t("col_saga_hint"), have), p.id, have, tab))
 		"guiones":
 			var deck := Save.is_unlocked("relics", "baraja_del_guionista")
 			for g in Data.guiones:
@@ -647,6 +662,9 @@ func show_collection(tab := "weapons") -> void:
 				if known and not playable: text += "  (" + Loc.t("mod_soon") + ")"
 				grid.add_child(_col_card(Data.guion_icon(g.id), g.name if known else "???", text, known, ("☠ " if g.cursed else "") + g.num))
 		"bestiary":
+			if not Save.is_unlocked("relics", "llave_del_archivo"):
+				grid.add_child(_col_card(Data.icon_for("llave_del_archivo"), Loc.t("col_bestiary"), Loc.t("col_archive_locked", [Data.relic_by_id.llave_del_archivo.where]), false))
+				return
 			var beasts: Dictionary = Save.data.stats.get("bestiary", {})
 			for st in Data.stages:
 				var b: Dictionary = beasts.get(st.id, {})
@@ -661,6 +679,18 @@ func show_collection(tab := "weapons") -> void:
 			for r in Data.relics:
 				var got := Save.is_unlocked("relics", r.id)
 				grid.add_child(_col_card(Data.icon_for(r.id), r.name if got else "???", r.unlocks if got else Loc.t("col_hint", [r.where]), got))
+
+## Tarjeta del Sindicato: a weapon or passive card that seals or unseals the item when pressed.
+func _seal_card(c: Control, id: String, can: bool, tab: String) -> Control:
+	if not can or not Save.is_unlocked("relics", "tarjeta_del_sindicato"): return c
+	c.focus_mode = Control.FOCUS_ALL
+	c.pressed.connect(func(): Data.toggle_seal(id); show_collection(tab))
+	c.tooltip_text = Loc.t("seal_help")
+	if Data.is_sealed(id):
+		c.modulate = Color(0.55, 0.55, 0.6)
+		var labels := c.find_children("*", "Label", true, false)
+		if not labels.is_empty(): labels[0].text += "   ✖ " + Loc.t("sealed")
+	return c
 
 ## One entry of the Colección: icon (a dark silhouette while undiscovered), name and text.
 func _col_card(icon: Texture2D, name: String, desc: String, known: bool, tag := "") -> Control:
