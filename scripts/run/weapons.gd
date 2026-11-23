@@ -74,6 +74,7 @@ func recompute(w: Dictionary) -> void:
 	p.area *= s.area
 	p.size *= sqrt(s.area)
 	p.amount = int(p.amount) + int(s.amount)
+	if w.data.archetype in ["arc", "cone"] and Save.is_unlocked("relics", "cinturon_negro"): p.amount += 1   # saga reward
 	p.speed *= s.proj_speed
 	p.duration *= s.duration
 	w.p = p

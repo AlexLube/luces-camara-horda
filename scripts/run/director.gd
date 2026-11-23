@@ -17,13 +17,16 @@ func _init(r) -> void:
 	calendar = [[300.0, "guest"], [600.0, "boss_weak"], [900.0, "wave"], [1200.0, "boss"], [1500.0, "guests"], [total - 120.0, "boss_final"], [total, "productor"]]
 	if total < 1800.0:  # bonus stages (20 min): compressed calendar
 		calendar = [[300.0, "guest"], [600.0, "boss_weak"], [900.0, "wave"], [total - 120.0, "boss_final"], [total, "productor"]]
+	if not run.saga.is_empty():  # saga phases (8 min)
+		calendar = [[90.0, "guest"], [210.0, "boss_weak"], [300.0, "wave"], [total - 90.0, "boss_final"], [total, "productor"]]
 
 func minute() -> float:
-	return run.time / 60.0
+	return run.time / 60.0 + (run.saga_rules.minute_offset() if run.saga_rules else 0.0)
 
 ## Health multiplier for normal enemies: grows with time and Maldición.
 func hp_mult() -> float:
 	var neg: float = (1.5 if run.has_mod("negativo") else 1.0) * (1.0 + 0.75 * run.cycle)
+	if run.saga_rules: neg *= run.saga_rules.hp_mult()
 	return (1.0 + minute() * 0.11 + pow(minute() / 10.0, 2.0) * 0.6) * (0.5 + 0.5 * float(run.stats.curse)) * neg
 
 func target_count() -> int:
@@ -63,8 +66,8 @@ func spawn(t: int, at := Vector2.INF, hp_k := 1.0) -> int:
 func update(dt: float) -> void:
 	if run.freeze_t > 0.0 or run.event_active("strike"): return
 	var m := minute()
-	acc += dt * (5.0 + m * 2.6) * float(run.stats.curse)
-	var want := target_count()
+	acc += dt * (5.0 + m * 2.6) * float(run.stats.curse) * (run.saga_rules.spawn_mult() if run.saga_rules else 1.0)
+	var want := int(target_count() * (run.saga_rules.spawn_mult() if run.saga_rules else 1.0))
 	while acc >= 1.0:
 		acc -= 1.0
 		if run.enemies.count >= want: break

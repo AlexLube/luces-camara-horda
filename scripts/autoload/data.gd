@@ -18,6 +18,8 @@ var achievements: Array = []
 var art_sets := {}
 var evolution_of := {}             # evolution id -> base weapon id
 var relic_by_id := {}
+var sagas: Array = []
+var saga_by_id := {}
 var _tex := {}
 
 func _ready() -> void:
@@ -39,6 +41,8 @@ func _ready() -> void:
 	modifiers = _load("modifiers")
 	achievements = _load("achievements")
 	art_sets = _load("art_sets")
+	sagas = _load("sagas")
+	for sg in sagas: saga_by_id[sg.id] = sg
 	_make_union_weapons()
 
 ## Each Unión becomes a weapon of its own: the first weapon's behaviour, evolved numbers of both,
@@ -93,6 +97,27 @@ func relics_for_completions(done: int) -> Array:
 		if m and done >= int(m.get_string(1)): out.append(r)
 	return out
 
+## Modo Saga opens with the Bobina Dorada. The Retrospectiva needs every other saga finished.
+func saga_mode_open() -> bool:
+	return Save.is_unlocked("relics", "bobina_dorada")
+
+func saga_progress(sg: Dictionary) -> int:
+	return int(Save.data.saga.get(sg.id, 0))
+
+func saga_open(sg: Dictionary) -> bool:
+	if not saga_mode_open(): return false
+	if sg.rule != "mezcla": return true
+	for o in sagas:
+		if o.rule != "mezcla" and saga_progress(o) < o.phases.size(): return false
+	return true
+
+## Give the saga's reward once. Relics unlock now; the rest is kept until its content exists.
+func grant_saga_reward(sg: Dictionary) -> String:
+	var r: Dictionary = sg.reward
+	if r.kind == "relic": Save.unlock("relics", r.id)
+	elif r.id not in Save.data.saga_rewards: Save.data.saga_rewards.append(r.id)
+	return r.name
+
 func _load(name: String) -> Variant:
 	var f := FileAccess.open("res://data/%s.json" % name, FileAccess.READ)
 	if f == null:
@@ -127,7 +152,17 @@ func weapon_pool(character: Dictionary) -> Array:
 	return out
 
 ## First frame of a character's idle animation, for menus (falls back to Max Ríos).
+## Full-body casting portrait (Gemini art); falls back to the first idle frame.
 func portrait(id: String) -> Texture2D:
+	var pp := "res://assets/sprites/characters/%s/portrait.png" % id
+	if ResourceLoader.exists(pp): return tex(pp)
+	return sprite_frame(id)
+
+func has_portrait(id: String) -> bool:
+	return ResourceLoader.exists("res://assets/sprites/characters/%s/portrait.png" % id)
+
+## First idle frame of a character's sprite sheet.
+func sprite_frame(id: String) -> Texture2D:
 	var path := "res://assets/sprites/characters/%s/idle.png" % id
 	var t: Texture2D = tex(path) if ResourceLoader.exists(path) else tex("res://assets/sprites/player/player_idle.png")
 	if t == null: return null

@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -302,6 +302,133 @@ func t_music() -> void:
 	await get_tree().create_timer(1.2).timeout
 	ok(Music._players.size() == 1, "old track freed after the fade")
 	Music.stop()
+
+func t_death() -> void:
+	var r := new_run()
+	r.bot = false
+	r.take_damage(5.0, true)
+	ok(r.hurt_t == 1.0 and r.hurt_flash == 1.0, "a hit starts the hurt recoil")
+	r.step(0.1)
+	ok(r.hurt_t < 1.0 and r.hurt_t > 0.0, "hurt recoil fades")
+	var deaths: int = Save.data.stats.deaths
+	r.hp = 0.0
+	r._on_death()
+	ok(r.state == "dying", "dying plays «¡Corten!» before the results")
+	r.step(0.5)
+	ok(r.state == "dying" and float(r.death_pose()[0]) > 0.0, "the hero tips over")
+	for i in 40: r.step(0.05)
+	ok(r.state == "over" and int(Save.data.stats.deaths) == deaths + 1, "results after the death animation (%s, %d→%d)" % [r.state, deaths, int(Save.data.stats.deaths)])
+	r.queue_free()
+	await get_tree().process_frame
+	var b := new_run()
+	b.hp = 0.0
+	b._on_death()
+	ok(b.state == "over", "bot runs skip the death animation")
+	b.queue_free()
+	await get_tree().process_frame
+	Save.data = Save.defaults()
+
+func t_portraits() -> void:
+	var n := 0
+	for c in Data.characters:
+		if Data.has_portrait(c.id):
+			n += 1
+			var t := Data.portrait(c.id)
+			ok(t != null and t.get_width() >= 128, "portrait " + c.id)
+	ok(n == Data.characters.size(), "every character has a portrait (%d/%d)" % [n, Data.characters.size()])
+	ok(Data.sprite_frame("max_rios") != null, "sprite frame fallback")
+
+func saga_run(saga_id: String, phase := 0, char_id := "max_rios") -> Run:
+	var sg: Dictionary = Data.saga_by_id[saga_id]
+	var r := Run.new()
+	r.setup(Data.char_by_id[char_id], Data.stage_by_id[sg.phases[phase].stage])
+	r.setup_saga(sg, phase)
+	r.bot = true
+	add_child(r)
+	r.set_process(false)
+	return r
+
+func t_saga() -> void:
+	Save.data = Save.defaults()
+	ok(Data.sagas.size() == 9, "9 sagas")
+	var n := 0
+	for sg in Data.sagas:
+		n += sg.phases.size()
+		ok(sg.rule in ["secuela", "naves", "superpoder", "combo", "sigilo", "grupo", "coche", "desastre", "mezcla"], "saga rule " + sg.id)
+		for ph in sg.phases: ok(Data.stage_by_id.has(ph.stage), "saga stage %s / %s" % [sg.id, ph.stage])
+		for id in sg.get("party", []): ok(Data.char_by_id.has(id), "party member " + id)
+	ok(n == 51, "51 saga phases (got %d)" % n)
+	ok(not Data.saga_mode_open(), "saga mode closed before the Bobina Dorada")
+	Save.unlock("relics", "bobina_dorada")
+	ok(Data.saga_open(Data.saga_by_id.leyenda_del_puno) and not Data.saga_open(Data.saga_by_id.retrospectiva_director), "sagas open, the Retrospectiva waits")
+	# every rule survives a minute of autoplay
+	for sg in Data.sagas:
+		var r := saga_run(sg.id, 1)
+		for k in 600: r.step(0.1)
+		ok(r.time >= 59.0 and r.saga_rules != null and r.duration == SagaRules.PHASE_SECONDS, "saga %s plays (%d kills)" % [sg.id, r.kills])
+		r.queue_free()
+		await get_tree().process_frame
+	var c := saga_run("leyenda_del_puno")
+	for k in 30: c.saga_rules.on_kill()
+	ok(c.saga_rules.damage_mult() > 1.05, "combo raises damage")
+	c.take_damage(5.0, true)
+	ok(c.saga_rules.combo == 0, "a hit breaks the combo")
+	c.queue_free()
+	var st := saga_run("agente_00_nadie")
+	var calm: float = st.saga_rules.spawn_mult()
+	st.take_damage(5.0, true)
+	ok(calm < 1.0 and st.saga_rules.spawn_mult() > 1.0, "stealth: the alarm brings more extras")
+	st.queue_free()
+	var sp := saga_run("liga_heroes_barrio")
+	sp.saga_rules.power_t = 0.0
+	sp.saga_rules.update(0.1)
+	ok(sp.saga_rules.power != "", "a superpower falls from the sky")
+	sp.saga_rules.power = "shield"
+	var hp0: float = sp.hp
+	sp.take_damage(50.0, true)
+	ok(sp.hp == hp0, "invulnerable superpower")
+	sp.queue_free()
+	var car := saga_run("nitro_y_familia")
+	car.saga_rules.car_dir = Vector2.RIGHT
+	var v: Vector2 = car.saga_rules.move_car(0.1, Vector2.LEFT)
+	ok(v.x > 0.0 and car.saga_rules.car_dir.angle() != 0.0, "the car turns slowly")
+	car.queue_free()
+	var ds := saga_run("dia_de_desastre")
+	ds.saga_rules.hazard_t = 0.0
+	ds.saga_rules.update(0.1)
+	ok(ds.saga_rules.hazards.size() >= 2, "disaster zones appear")
+	for k in 20: ds.saga_rules.update(0.1)
+	ok(ds.saga_rules.hazards.is_empty(), "disaster zones go off")
+	ds.queue_free()
+	var nv := saga_run("opera_galactica")
+	var y0: float = nv.saga_rules.scroll_y
+	nv.saga_rules.update(1.0)
+	ok(nv.saga_rules.scroll_y < y0, "the scroll moves up")
+	nv.queue_free()
+	var g := saga_run("odisea_anillo_roto", 0, "max_rios")
+	ok(g.saga_rules.party.size() == 3, "party of three")
+	g.saga_rules.swap()
+	ok(g.character.id == "brann", "swap to the next hero")
+	g.hp = 0.0
+	g._on_death()
+	ok(g.state != "dying" and g.character.id == "elowen" and g.hp > 0.0, "the next hero steps in when one falls")
+	g.queue_free()
+	await get_tree().process_frame
+	# progress and reward
+	var last := saga_run("leyenda_del_puno", 4)
+	last.bot = false
+	Save.data.saga["leyenda_del_puno"] = 4
+	last.completed = true
+	var sum: Dictionary = last.record()
+	ok(int(Save.data.saga.leyenda_del_puno) == 5 and sum.saga_done and Save.is_unlocked("relics", "cinturon_negro"), "finishing a saga gives its reward")
+	last.queue_free()
+	await get_tree().process_frame
+	var w := new_run("kenji_arata")
+	var arc: Array = w.weapons.list.filter(func(x): return x.data.archetype in ["arc", "cone"])
+	ok(arc.is_empty() or int(arc[0].p.amount) >= 2, "Cinturón Negro: +1 to melee weapons")
+	w.queue_free()
+	await get_tree().process_frame
+	Save.data = Save.defaults()
 
 func t_achievements() -> void:
 	Save.data = Save.defaults()

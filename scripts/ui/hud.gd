@@ -79,6 +79,10 @@ func _draw_overlay() -> void:
 	# timer, kills, coins
 	var left: float = max(0.0, run.duration - run.time)
 	overlay.draw_string(font, Vector2(0, 52), UIKit.fmt_time(run.time), HORIZONTAL_ALIGNMENT_CENTER, size.x, 22, Color.WHITE if left > 60.0 else Color("ff6060"))
+	if run.saga_rules:
+		var st: String = run.saga_rules.hud_text()
+		overlay.draw_string(font, Vector2(1, 81), st, HORIZONTAL_ALIGNMENT_CENTER, size.x, 11, Color(0, 0, 0, 0.8))
+		overlay.draw_string(font, Vector2(0, 80), st, HORIZONTAL_ALIGNMENT_CENTER, size.x, 11, Color("ffe08a"))
 	overlay.draw_string(font, Vector2(size.x - 230, 46), "☠ %d" % run.kills, HORIZONTAL_ALIGNMENT_RIGHT, 210, 14, UIKit.CREAM)
 	overlay.draw_string(font, Vector2(size.x - 230, 70), "$ %d" % int(round(run.coins)), HORIZONTAL_ALIGNMENT_RIGHT, 210, 14, UIKit.GOLD)
 	# slots: weapons on top row, items below
@@ -242,10 +246,21 @@ func show_results(r: Dictionary) -> void:
 	var v := UIKit.centered_panel(panel_root, Vector2(640, 0))
 	v.add_child(UIKit.title(Loc.t("wrap") if r.completed else Loc.t("cut_fail"), 50))
 	v.add_child(UIKit.label("%s · %s" % [r.character, r.stage], 20))
+	var top := HBoxContainer.new()
+	top.alignment = BoxContainer.ALIGNMENT_CENTER
+	top.add_theme_constant_override("separation", 28)
+	v.add_child(top)
+	var pic := TextureRect.new()
+	pic.custom_minimum_size = Vector2(150, 150)
+	pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	pic.texture = Data.portrait(r.get("character_id", ""))
+	if not r.completed: pic.modulate = Color(0.75, 0.72, 0.78)   # a bad take looks a bit washed out
+	top.add_child(pic)
 	var grid := GridContainer.new()
 	grid.columns = 2
 	grid.add_theme_constant_override("h_separation", 40)
-	v.add_child(grid)
+	top.add_child(grid)
 	for row in [[Loc.t("r_time"), UIKit.fmt_time(r.time)], [Loc.t("r_kills"), str(r.kills)], [Loc.t("r_level"), str(r.level)], [Loc.t("r_coins"), str(r.coins)], [Loc.t("r_taquilla"), "+%d" % r.earned]]:
 		grid.add_child(UIKit.label(row[0], 20))
 		grid.add_child(UIKit.label(row[1], 20, UIKit.GOLD))
@@ -254,6 +269,8 @@ func show_results(r: Dictionary) -> void:
 		v.add_child(UIKit.label("%s  (%s)  —  %d" % [w[0], Loc.t("lvl_n", [w[1]]), w[2]], 17))
 	for a in r.achievements:
 		v.add_child(UIKit.label("» " + a.name, 18, UIKit.GOLD.lightened(0.2)))
+	if r.get("saga", "") != "":
+		v.add_child(UIKit.label(Loc.t("saga_done", [r.saga_reward]) if r.saga_done else (Loc.t("saga_phase_done", [r.saga]) if r.completed else r.saga), 18, UIKit.GOLD.lightened(0.2)))
 	for n in r.get("relics", []):
 		v.add_child(UIKit.label(Loc.t("relic_found", [n]), 18, UIKit.GOLD.lightened(0.2)))
 	var row2 := HBoxContainer.new()
