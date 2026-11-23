@@ -4,6 +4,7 @@ extends RefCounted
 ## (arc, orbit, projectile, beam, screen, zone, cone, aura, companion, car, mark) with its own numbers
 ## from data/weapons.json, 8 levels, and an evolution that boosts numbers and switches on flags.
 
+const FREEZE_GAP := 8.0             # seconds of normal play between two screen freezes
 const MULT_KEYS := ["area", "duration", "size", "cooldown", "range"]
 const COLORS := {"arc": Color("fff3c8"), "orbit": Color("d8d8e8"), "projectile": Color("ffd36b"), "beam": Color("fff6a0"),
 	"screen": Color.WHITE, "zone": Color("ff7a4a"), "cone": Color("9fd8ff"), "aura": Color("c8b4ff"),
@@ -153,7 +154,11 @@ func _fire(w: Dictionary) -> void:
 				if run.enemies.alive[i] == 1 and rect.has_point(Vector2(run.enemies.x[i], run.enemies.y[i])):
 					_dmg(w, i, p.damage, pl)
 			run.fx_flash(1.0)
-			if p.has("freeze"): run.freeze_t = max(run.freeze_t, float(p.freeze) * run.stats.freeze_time)
+			# Exposición Total freezes the screen, but never back to back: a fast cooldown used to keep the horde frozen forever
+			if p.has("freeze") and run.time >= run.freeze_ready_at:
+				var ft: float = float(p.freeze) * run.stats.freeze_time
+				run.freeze_t = max(run.freeze_t, ft)
+				run.freeze_ready_at = run.time + ft + FREEZE_GAP
 		"zone":
 			for k in int(p.amount): _place_zone(w)
 		"cone":

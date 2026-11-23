@@ -24,6 +24,16 @@ func build_calendar() -> void:
 	if not run.saga.is_empty():  # saga phases (8 min)
 		calendar = [[90.0, "guest"], [210.0, "boss_weak"], [300.0, "wave"], [total - 90.0, "boss_final"], [total, "productor"]]
 
+## How hard the stage is (balance pass Q1): base films grow a little harder one after another, the
+## bonus and challenge films are tougher, and the hidden one is the hardest.
+const KIND_K := {"normal": 1.0, "bonus": 1.2, "desafio": 1.4, "especial": 0.9, "oculto": 1.5, "festival": 1.3}
+
+func stage_k() -> float:
+	var st: Dictionary = run.stage
+	var k: float = KIND_K.get(st.get("kind", "normal"), 1.0)
+	if st.get("kind", "normal") == "normal": k += 0.04 * (int(st.get("num", 1)) - 1)
+	return k
+
 func minute() -> float:
 	return run.time / 60.0 + (run.saga_rules.minute_offset() if run.saga_rules else 0.0)
 
@@ -32,11 +42,12 @@ func hp_mult() -> float:
 	var neg: float = (1.5 if run.has_mod("negativo") else 1.0) * (1.0 + 0.75 * run.cycle)
 	if run.saga_rules: neg *= run.saga_rules.hp_mult()
 	if run.has_mod("directors_cut"): neg *= 1.6
+	neg *= stage_k()
 	return (1.0 + minute() * 0.11 + pow(minute() / 10.0, 2.0) * 0.6) * (0.5 + 0.5 * float(run.stats.curse)) * neg
 
 func target_count() -> int:
 	var m := minute()
-	return int(min(1450.0, (28.0 + m * 40.0 + m * m * 0.55) * float(run.stats.curse) * (1.25 if run.has_mod("directors_cut") else 1.0)))
+	return int(min(1450.0, (28.0 + m * 40.0 + m * m * 0.55) * float(run.stats.curse) * (1.25 if run.has_mod("directors_cut") else 1.0) * sqrt(stage_k())))
 
 func _pick_type() -> int:
 	var m := minute()

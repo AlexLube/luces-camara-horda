@@ -19,6 +19,7 @@ const TYPES := {
 	T.WALL:      {"sprite": "enemy", "hp": 12.0,  "sp": 50.0,  "dmg": 8.0,  "r": 16.0, "sc": 0.82, "xp": 1,  "tint": Color(0.95, 0.95, 0.8)},
 }
 const MAX := 1600
+const CONTACT_RATE := 2.0          # contact damage per second = dmg × this (balance pass Q1)
 const CELL := 64.0
 const NB := 4096
 
@@ -168,7 +169,7 @@ func update(dt: float, px: float, py: float, prad: float, freeze: bool, on_shoot
 				hurt += dmg[i]
 				remove(i)
 				continue
-			hurt += dmg[i] * dt * 2.0
+			hurt += dmg[i] * dt * CONTACT_RATE
 		# far behind the camera: bring them back ahead of the player (keeps the horde around you)
 		if d > 1400.0 and t != T.BOSS and t != T.PRODUCTOR and t != T.GUEST:
 			var a2 := atan2(dy, dx) + randf_range(-0.6, 0.6)
