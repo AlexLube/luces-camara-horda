@@ -206,5 +206,14 @@
   "max_level": 9,
   "stat": "all_then_curse",
   "per_level": null
+ },
+ {
+  "id": "turbo",
+  "name": "Turbo",
+  "desc": "+8 % velocidad y −4 % enfriamiento",
+  "max_level": 5,
+  "stat": "turbo",
+  "per_level": 0.08,
+  "saga": true
  }
 ]

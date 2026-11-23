@@ -20,7 +20,7 @@ func defaults() -> Dictionary:
 		"taquilla": 0,
 		"clauses": {},          # id -> level bought
 		"clauses_off": {},      # id -> true when the player switched a maxed clause off
-		"unlocked": {"characters": chars, "hired": chars.duplicate(), "stages": [Data.stages[0].id], "relics": [], "weapons": []},
+		"unlocked": {"characters": chars, "hired": chars.duplicate(), "stages": [Data.stages[0].id], "relics": [], "weapons": [], "passives": []},
 		"stats": {"kills": 0, "deaths": 0, "runs": 0, "chests": 0, "coins": 0, "food": 0, "evolutions": 0, "evolved": [], "bestiary": {},
 			"bosses": 0, "max_level": 0, "taquilla_total": 0, "time": 0.0, "survived": {}, "completed": [], "played": [], "productor": 0},
 		"achievements": [],

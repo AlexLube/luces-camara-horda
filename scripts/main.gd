@@ -342,7 +342,7 @@ func show_sagas() -> void:
 		var open := Data.saga_open(sg)
 		var done := Data.saga_progress(sg)
 		var n: int = sg.phases.size()
-		var reward: String = Loc.t("saga_reward", [sg.reward.name]) + ("" if sg.reward.kind == "relic" else " " + Loc.t("saga_reward_soon"))
+		var reward: String = Loc.t("saga_reward", [sg.reward.name])
 		var desc := "%s\n%s" % [sg.rule_desc, reward] if open else (Loc.t("saga_mezcla_locked") if Data.saga_mode_open() else Loc.t("saga_locked"))
 		var card := UIKit.card(Data.portrait(_saga_face(sg)), sg.name if open else "🔒 " + sg.name, ("★ " if done >= n else "") + Loc.t("saga_progress", [done, n]), desc, show_saga.bind(sg), 400)
 		card.disabled = not open
@@ -470,7 +470,8 @@ func show_collection(tab := "weapons") -> void:
 				grid.add_child(_col_card(Data.icon_for(u.id), u.name if known or book else "???", u.desc + "\n" + " + ".join(parts) if known or book else Loc.t("col_union_hidden", [" + ".join(parts)]), known, "★★"))
 		"passives":
 			for p in Data.passive_list:
-				grid.add_child(_col_card(Data.icon_for(p.id), p.name, p.desc, true))
+				var have: bool = not p.get("saga", false) or Save.is_unlocked("passives", p.id)
+				grid.add_child(_col_card(Data.icon_for(p.id), p.name if have else "???", p.desc if have else Loc.t("col_saga_hint"), have))
 		"guiones":
 			var deck := Save.is_unlocked("relics", "baraja_del_guionista")
 			for g in Data.guiones:

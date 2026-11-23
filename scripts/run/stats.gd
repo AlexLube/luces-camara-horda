@@ -29,6 +29,9 @@ static func build(character: Dictionary, passive_levels: Dictionary, clause_bonu
 		if p.is_empty() or lvl <= 0: continue
 		match p.stat:
 			"shield", "union_part": pass
+			"turbo":   # Modo Saga reward
+				s.speed += 0.08 * lvl
+				s.cooldown -= 0.04 * lvl
 			"rerolls_skips":
 				s.rerolls += lvl
 				s.skips += lvl

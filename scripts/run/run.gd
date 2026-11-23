@@ -762,6 +762,10 @@ func _move_player(dt: float) -> void:
 ## Simple autopilot for tests and the demo: dodge what is close, collect tickets, stay near the horde.
 func _bot_dir() -> Vector2:
 	if saga_rules and saga_rules.rule == "naves" and player_pos.y > saga_rules.scroll_y - 180.0: return Vector2(randf_range(-0.3, 0.3), -1.0)
+	if saga_rules:
+		for h in saga_rules.hazards:   # Día de Desastre: step out of the marked zones
+			var away: Vector2 = player_pos - Vector2(h[0], h[1])
+			if away.length() < float(h[2]) + 20.0: return away.normalized() if away.length() > 1.0 else Vector2.RIGHT
 	var push := Vector2.ZERO
 	for i in enemies.query_circle(player_pos.x, player_pos.y, 110.0, _q):
 		var d := player_pos - Vector2(enemies.x[i], enemies.y[i])
@@ -789,6 +793,7 @@ func _bot_dir() -> Vector2:
 func take_damage(amount: float, burst: bool) -> void:
 	if iframes > 0.0 and burst: return
 	if saga_rules and not saga_rules.on_hurt(burst): return
+	if saga_rules and saga_rules.rule == "coche" and not burst: amount *= 0.5   # the car's bodywork takes the bumps
 	var armor := float(stats.armor)
 	var dmg = amount * max(0.25, 1.0 - armor * 0.06)
 	if burst: dmg = max(1.0, amount - armor)

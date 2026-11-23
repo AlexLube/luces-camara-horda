@@ -40,11 +40,11 @@ func new_run(char_id := "max_rios", stage_id := "bosque_de_la_cabana") -> Run:
 	return r
 
 func t_data() -> void:
-	ok(Data.passive_list.size() == 26, "26 passives (got %d)" % Data.passive_list.size())
-	ok(Data.weapon_list.size() == 54, "54 weapons (got %d)" % Data.weapon_list.size())
+	ok(Data.passive_list.size() == 27, "27 passives (got %d)" % Data.passive_list.size())
+	ok(Data.weapon_list.size() == 55, "55 weapons (got %d)" % Data.weapon_list.size())
 	ok(Data.unions.size() == 8, "8 unions")
 	ok(Data.clauses.size() == 22, "22 clauses")
-	ok(Data.characters.size() == 96, "96 characters")
+	ok(Data.characters.size() == 100, "100 characters (96 + 4 from the Modo Saga)")
 	ok(Data.stages.size() == 34, "34 stages")
 	ok(Data.achievements.size() >= 100, "achievements list")
 	for w in Data.weapon_list:
@@ -64,7 +64,7 @@ func t_data() -> void:
 	ok(with_art >= 12, "stages 1-12 have their own art (%d)" % with_art)
 	ok(ResourceLoader.exists("res://assets/sprites/productor/productor.png"), "productor sprite")
 	for id in weapons_and_items(): ok(Data.icon_for(id) != null, "icon for " + id)
-	for c in Data.characters.slice(0, 96): ok(ResourceLoader.exists("res://assets/sprites/characters/%s/run.png" % c.id) or c.id == "max_rios", "sprite for " + c.id)
+	for c in Data.characters: ok(ResourceLoader.exists("res://assets/sprites/characters/%s/run.png" % c.id) or c.id == "max_rios", "sprite for " + c.id)
 	for k in Loc._s: ok(Loc._s[k].has("en") and Loc._s[k].has("es"), "ES/EN string " + k)
 
 func weapons_and_items() -> Array:
@@ -350,6 +350,8 @@ func saga_run(saga_id: String, phase := 0, char_id := "max_rios") -> Run:
 
 func t_saga() -> void:
 	Save.data = Save.defaults()
+	ok(not Data.weapon_pool(Data.characters[0]).has("espada_de_plasma"), "the Espada de Plasma waits for its saga")
+	ok(not Save.is_unlocked("characters", "la_ultima_chica"), "saga characters start locked")
 	ok(Data.sagas.size() == 9, "9 sagas")
 	var n := 0
 	for sg in Data.sagas:
@@ -421,6 +423,17 @@ func t_saga() -> void:
 	last.completed = true
 	var sum: Dictionary = last.record()
 	ok(int(Save.data.saga.leyenda_del_puno) == 5 and sum.saga_done and Save.is_unlocked("relics", "cinturon_negro"), "finishing a saga gives its reward")
+	for sg in Data.sagas:
+		var r: Dictionary = sg.reward
+		Data.grant_saga_reward(sg)
+		match r.kind:
+			"character": ok(Save.is_unlocked("characters", r.id) and Save.is_unlocked("hired", r.id) and Data.char_by_id.has(r.id), "saga reward character " + r.id)
+			"weapon": ok(Data.weapons.has(r.id) and r.id in Data.weapon_pool(Data.characters[0]), "saga reward weapon " + r.id)
+			"passive": ok(Data.passives.has(r.id) and Save.is_unlocked("passives", r.id), "saga reward passive " + r.id)
+			"relic": ok(Save.is_unlocked("relics", r.id), "saga reward relic " + r.id)
+	var tb := Stats.build(Data.characters[0], {"turbo": 5}, {}, 1)
+	var t0 := Stats.build(Data.characters[0], {}, {}, 1)
+	ok(tb.move_speed > t0.move_speed and tb.cooldown < t0.cooldown, "Turbo: faster and shorter cooldowns")
 	last.queue_free()
 	await get_tree().process_frame
 	var w := new_run("kenji_arata")

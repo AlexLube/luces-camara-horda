@@ -233,7 +233,7 @@
   "name": "Nitro y Familia",
   "genre": "Coches rápidos",
   "rule": "coche",
-  "rule_desc": "Siempre vas en coche: muy rápido, gira despacio y atropella a la horda.",
+  "rule_desc": "Siempre vas en coche: muy rápido, gira despacio, atropella a la horda y los roces dañan la mitad.",
   "reward": {
    "kind": "passive",
    "id": "turbo",

@@ -54,7 +54,7 @@ func start() -> void:
 # ---------- numbers the run and the director ask for ----------
 ## Extra minutes of difficulty: later phases start harder.
 func minute_offset() -> float:
-	return 3.0 + phase * 1.5
+	return 1.0 + phase * 1.0
 
 func hp_mult() -> float:
 	var k := 1.0 + 0.1 * phase
