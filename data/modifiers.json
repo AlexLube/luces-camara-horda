@@ -1,5 +1,12 @@
 [
  {
+  "id": "directors_cut",
+  "name": "Director's Cut",
+  "desc": "Enemigos más fuertes y numerosos, golpes que duelen más; mejor botín: más experiencia, monedas y una lata extra por jefe",
+  "reward": "+60 % Taquilla",
+  "relic": "Silla del Director"
+ },
+ {
   "id": "toma_rapida",
   "name": "Toma Rápida",
   "desc": "Todo va más rápido: jugador, enemigos y proyectiles",
@@ -39,7 +46,7 @@
   "name": "Maratón",
   "desc": "Al llegar a los créditos empieza otro ciclo más difícil",
   "reward": "+x por ciclo",
-  "relic": "Silla del Director"
+  "relic": "Superar 30 min en el modo Director's Cut"
  },
  {
   "id": "imprevistos_de_rodaje",

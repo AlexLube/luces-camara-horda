@@ -20,7 +20,7 @@ func _ready() -> void:
 	Save.data = Save.defaults()
 	Sfx.volume = 0.0
 	var quick := "--quick" in OS.get_cmdline_user_args()
-	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_cursed", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
+	for t in ["t_data", "t_stats", "t_save", "t_clauses", "t_weapons", "t_levelup", "t_chest_evolution", "t_union", "t_relics", "t_modifiers", "t_music", "t_death", "t_portraits", "t_saga", "t_cursed", "t_secrets", "t_bestiary", "t_achievements", "t_bosses", "t_perf"]:
 		print("· ", t)
 		await call(t)
 	if not quick:
@@ -257,6 +257,10 @@ func t_modifiers() -> void:
 	await get_tree().process_frame
 	Save.data.unlocked.relics.append("silla_del_director")
 	Save.data.mods_on = ["maraton"]
+	var r5 := new_run()
+	ok(not r5.has_mod("maraton"), "Maratón stays locked until a Director's Cut run is beaten")
+	r5.queue_free()
+	Save.data.stats.dc_completed = ["bosque_de_la_cabana"]
 	var r4 := new_run()
 	r4.time = r4.duration - 0.05
 	r4.director.done.clear()
@@ -272,6 +276,107 @@ func t_modifiers() -> void:
 	await get_tree().process_frame
 	Save.data.mods_on = []
 	Save.data.unlocked.relics.clear()
+
+func t_secrets() -> void:
+	Save.data = Save.defaults()
+	# Director's Cut: a modifier opened by the Silla del Director; tougher horde, better loot
+	Save.data.mods_on = ["directors_cut"]
+	var r0 := new_run()
+	ok(not r0.has_mod("directors_cut"), "Director's Cut needs the Silla del Director")
+	r0.queue_free()
+	Save.data.unlocked.relics.append("silla_del_director")
+	var dc := new_run()
+	var plain_hp: float
+	Save.data.mods_on = []
+	var pl := new_run()
+	plain_hp = pl.director.hp_mult()
+	ok(dc.has_mod("directors_cut") and dc.director.hp_mult() > plain_hp * 1.5 and dc.director.target_count() > pl.director.target_count(), "Director's Cut: stronger, more enemies")
+	ok(absf(dc.mod_bonus() - 0.6) < 0.001, "Director's Cut: +60 % Taquilla")
+	var hp0: float = dc.hp
+	dc.iframes = 0.0
+	dc.take_damage(10.0, true)
+	var hp1: float = pl.hp
+	pl.iframes = 0.0
+	pl.take_damage(10.0, true)
+	ok(hp0 - dc.hp > hp1 - pl.hp, "Director's Cut: hits hurt more")
+	pl.queue_free()
+	dc.completed = true
+	dc.stage = Data.stage_by_id["estacion_orbital_zeta"]
+	dc.record()
+	ok(Save.is_unlocked("stages", "neon_2099"), "beating stage 3 in Director's Cut opens Neón 2099")
+	ok(Data.modifier_unlocked(Data.modifiers.filter(func(m): return m.id == "maraton")[0]), "…and Maratón")
+	dc.queue_free()
+	await get_tree().process_frame
+	# Atrezzo: crates move, barrels blow up, fires go out
+	var r := new_run()
+	r.director.acc = -99999.0
+	var a: SetProps = r.atrezzo
+	a.items = [{"k": "crate", "x": 30.0, "y": 0.0, "moved": 0.0, "counted": false}, {"k": "barrel", "x": -400.0, "y": 0.0, "fuse": -1.0},
+		{"k": "barrel", "x": -480.0, "y": 0.0, "fuse": -1.0}, {"k": "fire", "x": 0.0, "y": 400.0, "stomp": 0.0, "tick": 0.5}]
+	a.spawn_t = 999.0
+	for f in 40:
+		r.move_dir = Vector2.RIGHT
+		r.player_pos.x += 4.0
+		a.update(0.05)
+	ok(a.crates_moved == 1 and a.items[0].x > 100.0, "walking into a crate pushes it")
+	var e := r.enemies.spawn(EnemyPool.T.HORDE, -400.0, 10.0, 100.0)
+	r.damage_enemy(e, 1.0, Vector2.ZERO, r.weapons.list[0])
+	for f in 20: a.update(0.05)
+	ok(a.barrels_broken == 2, "a hit near a barrel blows it up, and its neighbour goes too (%d)" % a.barrels_broken)
+	r.player_pos = Vector2(0, 400)
+	for f in 20: a.update(0.05)
+	ok(a.fires_out == 1, "standing on a fire puts it out")
+	for f in 80: a.update(0.05)
+	ok(a.items.size() > 0, "the stage keeps some atrezzo around")
+	r.time = 5.0
+	r.trips = 12
+	r.dist_px = 4000.0
+	r.record()
+	var st: Dictionary = Save.data.stats
+	ok(int(st.crates) == 1 and int(st.barrels) == 2 and int(st.fires) == 1 and int(st.trips) == 12 and int(st.early_deaths) == 1, "atrezzo and feats are saved")
+	r.queue_free()
+	await get_tree().process_frame
+	# hidden feats
+	st.barrels = 500
+	st.early_deaths = 3
+	st.pets = 10
+	st.completed_by = {"max_rios": 10}
+	Save.data.unlocked.relics.append_array(["gabardina", "bobina_0", "gramofono"])
+	Achievements.check({"chests": 5})
+	for c in ["bill_mecha", "el_extra", "michi_del_estudio", "el_doble_del_doble", "sam_shade", "fotograma_0", "sully_pluma"]:
+		ok(Save.is_unlocked("characters", c), "secret unlocked: " + c)
+	ok(Save.is_unlocked("stages", "broadway_en_llamas"), "the Gramófono opens Broadway en Llamas")
+	ok(not Save.is_unlocked("characters", "claqui"), "Claqui waits for its code")
+	var m: Node = load("res://scripts/main.gd").new()
+	m.enter_code("claqui")
+	Achievements.check({})
+	ok(Save.is_unlocked("characters", "claqui"), "the Claqui code works")
+	var t0 := int(Save.data.taquilla)
+	m.enter_code("palomitas")
+	m.enter_code("palomitas")
+	ok(int(Save.data.taquilla) == t0 + 1000, "the popcorn code pays once")
+	m.enter_code("sepia")
+	ok(Save.data.options.sepia, "sepia code toggles the filter")
+	Save.data.options.sepia = false
+	m.free()
+	# La Sala de Montaje: a cut every minute to another film; El Montador cuts too
+	var sm := new_run("max_rios", "la_sala_de_montaje")
+	sm.director.acc = -99999.0
+	var b := sm.enemies.spawn(EnemyPool.T.BOSS, 50.0, 0.0, 10.0)
+	var art0: String = sm.art_key
+	var boss_tex = sm.sheets.boss.tex
+	for f in 61 * 20:
+		sm.step(0.05)
+		sm.hp = 999.0
+	ok(sm.art_key != art0 and sm.scene_name != "", "¡Corte!: the scene changes after a minute (%s)" % sm.art_key)
+	ok(sm.sheets.boss.tex == boss_tex, "El Montador keeps his look")
+	sm.enemies.x[b] = sm.player_pos.x + 30.0
+	sm.enemies.y[b] = sm.player_pos.y
+	sm.montage_cut()
+	ok(absf(Vector2(sm.enemies.x[b], sm.enemies.y[b]).distance_to(sm.player_pos) - 320.0) < 1.0, "El Montador cuts to another spot")
+	sm.queue_free()
+	await get_tree().process_frame
+	Save.data = Save.defaults()
 
 func t_bestiary() -> void:
 	var r := new_run()

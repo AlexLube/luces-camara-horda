@@ -49,6 +49,8 @@ func _ready() -> void:
 			"sagas": show_sagas()
 			"saga": show_saga(Data.saga_by_id.get(sel_saga, Data.sagas[0]))
 			"splash": show_splash()
+			"codes": show_codes()
+			"music": show_music()
 			_: show_title() if opt.has("screen") or opt.has("shot") else show_splash()
 	if opt.has("shot"): _shot(opt.shot, float(opt.get("wait", "1.5")), opt.get("panel", ""))
 
@@ -70,6 +72,14 @@ func _shot(path: String, wait: float, panel: String) -> void:
 		run.pending_levels = 1
 		run.open_levelup()
 	elif run and panel == "pause": run.toggle_pause()
+	elif run and panel == "atrezzo":   # crates, barrels and a set fire around the player
+		var pp := run.player_pos
+		run.atrezzo.items = [{"k": "crate", "x": pp.x - 220.0, "y": pp.y - 90.0, "moved": 0.0, "counted": false},
+			{"k": "barrel", "x": pp.x + 180.0, "y": pp.y - 120.0, "fuse": -1.0}, {"k": "barrel", "x": pp.x + 240.0, "y": pp.y - 70.0, "fuse": -1.0},
+			{"k": "fire", "x": pp.x + 420.0, "y": pp.y + 20.0, "stomp": 0.0, "tick": 0.5}, {"k": "crate", "x": pp.x + 330.0, "y": pp.y + 170.0, "moved": 0.0, "counted": false}]
+		run.atrezzo.debris.append({"k": "barrel_broken", "x": pp.x - 330.0, "y": pp.y + 60.0, "t": 9.0})
+		run.atrezzo.spawn_t = 999.0
+		run.bot = false
 	elif run and panel == "cast":   # show El Cameo and El Doble Malvado
 		run.guiones.append_array(["g_ix", "g_xv"])
 		run.cameo_t = 0.0
@@ -206,7 +216,152 @@ func show_title() -> void:
 	row2.add_child(UIKit.button(Loc.t("options"), show_options, 240))
 	row2.add_child(UIKit.button(Loc.t("credits"), show_credits, 240))
 	if not OS.has_feature("web"): row2.add_child(UIKit.button(Loc.t("quit"), func(): get_tree().quit(), 240))
+	var extras: Array = []
+	if Save.is_unlocked("relics", "codigo_de_claqueta"): extras.append(UIKit.button(Loc.t("codes"), show_codes, 240))
+	if Save.is_unlocked("relics", "cintas_de_musica"): extras.append(UIKit.button(Loc.t("music_room"), show_music, 240))
+	if not extras.is_empty():
+		var row3 := HBoxContainer.new()
+		row3.alignment = BoxContainer.ALIGNMENT_CENTER
+		row3.add_theme_constant_override("separation", 8)
+		col.add_child(row3)
+		for b in extras: row3.add_child(b)
+	_add_michi()
 	UIKit.focus_first(col)
+
+# ---------- Michi del Estudio: the cat who lives on set naps in the corner of the menu ----------
+func _add_michi() -> void:
+	var cat := TextureButton.new()
+	cat.texture_normal = Data.sprite_frame("michi_del_estudio")
+	cat.ignore_texture_size = true
+	cat.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	cat.anchor_left = 1.0; cat.anchor_right = 1.0; cat.anchor_top = 1.0; cat.anchor_bottom = 1.0
+	cat.offset_left = -140.0; cat.offset_right = -40.0; cat.offset_top = -120.0; cat.offset_bottom = -20.0
+	cat.pivot_offset = Vector2(50, 100)
+	cat.focus_mode = Control.FOCUS_NONE
+	cat.tooltip_text = "?"
+	cat.pressed.connect(_pet_michi.bind(cat))
+	root.add_child(cat)
+
+func _pet_michi(cat: Control) -> void:
+	var s: Dictionary = Save.data.stats
+	s.pets = int(s.get("pets", 0)) + 1
+	var heart := UIKit.label("♥", 30, Color("ff7a9a"))
+	heart.position = cat.position + Vector2(30, -10)
+	root.add_child(heart)
+	var tw := create_tween()
+	tw.tween_property(heart, "position:y", heart.position.y - 60.0, 0.8)
+	tw.parallel().tween_property(heart, "modulate:a", 0.0, 0.8)
+	tw.tween_callback(heart.queue_free)
+	cat.scale = Vector2(1.08, 0.92)
+	create_tween().tween_property(cat, "scale", Vector2.ONE, 0.25)
+	Sfx.play("pickup", 1.6)
+	_check_secrets()
+
+## Check the hidden feats from the menu and say who joined the cast.
+func _check_secrets() -> void:
+	var got: Array = Achievements.check({})
+	Save.save_game()
+	for a in got:
+		var who: String = Data.char_by_id[a.reward.character].name if a.reward.has("character") else a.name
+		_toast(Loc.t("secret_found", [who]))
+
+func _toast(text: String) -> void:
+	var l := UIKit.label(text, 26, UIKit.GOLD)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	l.position = Vector2(0, 90)
+	l.size.x = get_viewport().get_visible_rect().size.x
+	l.add_theme_color_override("font_outline_color", Color.BLACK)
+	l.add_theme_constant_override("outline_size", 8)
+	root.add_child(l)
+	var tw := create_tween()
+	tw.tween_interval(2.2)
+	tw.tween_property(l, "modulate:a", 0.0, 0.6)
+	tw.tween_callback(l.queue_free)
+
+# ---------- Códigos de claqueta (relic: Código de Claqueta) ----------
+## Each code is eight arrows typed on the clapperboard; the hint is a riddle.
+const CODES := {
+	"claqui": "UDUDLRLR",        # open and shut twice, then the slate slides
+	"palomitas": "RRRDDDLU",
+	"sepia": "DDDDUUUU",
+}
+var code_input := ""
+
+func show_codes() -> void:
+	code_input = ""
+	var v := _clear()
+	_header(v, Loc.t("codes"))
+	var box := VBoxContainer.new()
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	box.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	box.add_theme_constant_override("separation", 14)
+	v.add_child(box)
+	var shown := UIKit.label("", 48, UIKit.GOLD, UIKit.pixel_font)
+	shown.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(shown)
+	var msg := UIKit.label(Loc.t("codes_help"), 20)
+	msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(msg)
+	var c := CenterContainer.new()
+	box.add_child(c)
+	var pad := HBoxContainer.new()
+	pad.add_theme_constant_override("separation", 10)
+	c.add_child(pad)
+	for d in [["L", "←"], ["U", "↑"], ["D", "↓"], ["R", "→"]]:
+		pad.add_child(UIKit.button(d[1], _code_key.bind(d[0], shown, msg), 110))
+	var hints := UIKit.label("\n".join(CODES.keys().map(func(k): return ("✔ " if k in Save.data.stats.get("codes", []) else "· ") + Loc.t("code_hint_" + k))), 18)
+	hints.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hints.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(hints)
+	UIKit.focus_first(pad)
+
+func _code_key(d: String, shown: Label, msg: Label) -> void:
+	code_input += d
+	shown.text = code_input.replace("L", "←").replace("U", "↑").replace("D", "↓").replace("R", "→")
+	Sfx.play("hit", 1.4)
+	if code_input.length() < 8: return
+	var hit := ""
+	for k in CODES:
+		if CODES[k] == code_input: hit = k
+	code_input = ""
+	if hit == "":
+		msg.text = Loc.t("code_wrong")
+		return
+	msg.text = enter_code(hit)
+	Sfx.play("levelup", 1.0)
+	_check_secrets()
+
+## Apply a code (also used by the tests). Returns the message for the screen.
+func enter_code(id: String) -> String:
+	var used: Array = Save.data.stats.get("codes", [])
+	var first := id not in used
+	if first: used.append(id)
+	Save.data.stats.codes = used
+	match id:
+		"palomitas":
+			if first: Save.data.taquilla = int(Save.data.taquilla) + 1000
+		"sepia":
+			Save.data.options.sepia = not Save.data.options.get("sepia", false)
+	Save.save_game()
+	return Loc.t("code_ok_" + id) if id != "sepia" else Loc.t("code_ok_sepia_" + ("on" if Save.data.options.sepia else "off"))
+
+# ---------- Sala de música (relic: Cintas de Música) ----------
+const TRACKS := ["titulo", "terror", "western", "scifi", "noir", "aventura", "comedia", "accion", "jefe", "creditos"]
+
+func show_music() -> void:
+	var v := _clear()
+	_header(v, Loc.t("music_room"))
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 10)
+	grid.add_theme_constant_override("v_separation", 10)
+	_scroll(v).add_child(grid)
+	for t in TRACKS:
+		var b := UIKit.button(("♪ " if Music.current == t else "") + Loc.t("track_" + t), func(): Music.play(t); show_music(), 520)
+		if Music.current == t: b.modulate = UIKit.GOLD.lightened(0.4)
+		grid.add_child(b)
+	UIKit.focus_first(grid)
 
 # ---------- casting ----------
 func show_characters() -> void:
