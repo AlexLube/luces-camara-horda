@@ -63,6 +63,11 @@ func _shot(path: String, wait: float, panel: String) -> void:
 		run.pending_levels = 1
 		run.open_levelup()
 	elif run and panel == "pause": run.toggle_pause()
+	elif run and panel == "cast":   # show El Cameo and El Doble Malvado
+		run.guiones.append_array(["g_ix", "g_xv"])
+		run.cameo_t = 0.0
+		run.step(0.05)
+		run.step(0.05)
 	elif run and panel == "guion":
 		run.bot = false
 		run.guion_offers = 0
@@ -350,10 +355,12 @@ func show_collection(tab := "weapons") -> void:
 	tabs.alignment = BoxContainer.ALIGNMENT_CENTER
 	tabs.add_theme_constant_override("separation", 8)
 	v.add_child(tabs)
-	for t in [["weapons", Loc.t("col_weapons")], ["unions", Loc.t("col_unions")], ["passives", Loc.t("col_passives")], ["guiones", Loc.t("col_guiones")], ["relics", Loc.t("col_relics") + "  %d/%d" % [found, Data.relics.size()]]]:
-		var b := UIKit.button(t[1], show_collection.bind(t[0]), 200)
-		if t[0] == tab: b.modulate = UIKit.GOLD.lightened(0.4)
+	for t in [["weapons", Loc.t("col_weapons")], ["unions", Loc.t("col_unions")], ["passives", Loc.t("col_passives")], ["guiones", Loc.t("col_guiones")], ["bestiary", Loc.t("col_bestiary")], ["relics", Loc.t("col_relics") + "  %d/%d" % [found, Data.relics.size()]]]:
+		var b := UIKit.button(t[1], show_collection.bind(t[0]), 172)
 		tabs.add_child(b)
+		if t[0] == tab:
+			b.modulate = UIKit.GOLD.lightened(0.4)
+			b.call_deferred("grab_focus")
 	var grid := GridContainer.new()
 	grid.columns = 2
 	grid.add_theme_constant_override("h_separation", 8)
@@ -390,11 +397,21 @@ func show_collection(tab := "weapons") -> void:
 				var text: String = g.desc if known else (Loc.t("col_hint", [g.get("how", Data.relic_by_id.baraja_del_guionista.name)]))
 				if known and not playable: text += "  (" + Loc.t("mod_soon") + ")"
 				grid.add_child(_col_card(Data.guion_icon(g.id), g.name if known else "???", text, known, ("☠ " if g.cursed else "") + g.num))
+		"bestiary":
+			var beasts: Dictionary = Save.data.stats.get("bestiary", {})
+			for st in Data.stages:
+				var b: Dictionary = beasts.get(st.id, {})
+				var art: Dictionary = Data.stage_art(st)
+				var base := "res://assets/sprites/stages/%s/" % st.get("art", "forest")
+				var seen := b.size() > 0
+				var boss_down := int(b.get("boss", 0)) > 0
+				var pic := Data.first_frame(base + ("boss.png" if boss_down else "enemy.png"), int(art.get("boss" if boss_down else "enemy", 8)))
+				var text := Loc.t("col_beasts", [int(b.get("enemy", 0)), int(b.get("tank", 0)), st.boss if boss_down else "???", int(b.get("boss", 0))]) if seen else Loc.t("col_beast_hidden")
+				grid.add_child(_col_card(pic, st.name if seen else "???", text, seen))
 		"relics":
 			for r in Data.relics:
 				var got := Save.is_unlocked("relics", r.id)
 				grid.add_child(_col_card(Data.icon_for(r.id), r.name if got else "???", r.unlocks if got else Loc.t("col_hint", [r.where]), got))
-	UIKit.focus_first(tabs)
 
 ## One entry of the Colección: icon (a dark silhouette while undiscovered), name and text.
 func _col_card(icon: Texture2D, name: String, desc: String, known: bool, tag := "") -> Control:
@@ -456,6 +473,7 @@ func _input(e: InputEvent) -> void:
 
 # ---------- credits ----------
 func show_credits() -> void:
+	Music.play("creditos")
 	var v := _clear()
 	_header(v, Loc.t("credits"))
 	var text := UIKit.label(Loc.t("credits_text"), 22)

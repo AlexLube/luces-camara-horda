@@ -23,7 +23,7 @@ func minute() -> float:
 
 ## Health multiplier for normal enemies: grows with time and Maldición.
 func hp_mult() -> float:
-	var neg := 1.5 if run.has_mod("negativo") else 1.0
+	var neg: float = (1.5 if run.has_mod("negativo") else 1.0) * (1.0 + 0.75 * run.cycle)
 	return (1.0 + minute() * 0.11 + pow(minute() / 10.0, 2.0) * 0.6) * (0.5 + 0.5 * float(run.stats.curse)) * neg
 
 func target_count() -> int:
@@ -121,6 +121,9 @@ func _event(ev: String) -> void:
 				run.enemies.spawn(T.WALL, run.player_pos.x + cos(a) * 620.0, run.player_pos.y + sin(a) * 620.0, hp_mult() * 2.0, 0.0)
 			run.announce(Loc.t("ev_wave"))
 		"productor":
+			if run.has_mod("maraton"):
+				run.next_cycle()
+				return
 			run.reach_end()
 			for k in 1:
 				var i = run.enemies.spawn(T.PRODUCTOR, run.player_pos.x + 700.0, run.player_pos.y, 1.0, 0.0)

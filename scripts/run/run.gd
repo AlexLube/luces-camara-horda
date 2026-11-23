@@ -61,6 +61,7 @@ var bosses_killed := 0
 var evolutions := 0
 var evolved_ids: Array = []
 var productor_killed := false
+var beasts := {}                    # bestiary kills this run: "enemy" / "tank" / "boss" -> count
 var found_relics: Array = []        # relic ids picked up this run
 var mods: Array = []                # modifiers on for this run (see Data.MOD_BONUS)
 var event_t := 120.0                # Imprevistos de Rodaje: next event
@@ -73,7 +74,13 @@ var guion_t := 300.0                # El Juicio de la Crítica: next verdict
 var montage_t := 0.0                # El Montaje de Entrenamiento: buff after picking a ticket
 var letters: Array = []             # Los Créditos Finales: letters falling on the horde
 var _bursting := false
-const GUION_READY := ["g_i", "g_ii", "g_vi", "g_vii", "g_viii", "g_xviii", "g_xxi", "g_iii", "g_iv", "g_v", "g_x", "g_xi", "g_xii", "g_xiii", "g_xvi", "g_xvii", "g_xix", "g_xx"]
+var burns: Array = []               # Efectos Prácticos: [enemy index, seconds left, tick]
+var cameo := {}                     # El Cameo: {"sheet", "t", "hit"} while a guest star helps
+var cameo_t := 60.0
+var cycle := 0                      # Maratón: finished 30-minute cycles
+var cycle_time := 0.0               # Maratón: time played in finished cycles
+var double_t := 0.0                 # El Doble Malvado: next strike of your evil twin
+const GUION_READY := ["g_0", "g_ix", "g_xiv", "g_xv", "g_i", "g_ii", "g_vi", "g_vii", "g_viii", "g_xviii", "g_xxi", "g_iii", "g_iv", "g_v", "g_x", "g_xi", "g_xii", "g_xiii", "g_xvi", "g_xvii", "g_xix", "g_xx"]
 var dmg_by_weapon := {}
 
 # --- world objects ---
@@ -129,6 +136,7 @@ func has_guion(id: String) -> bool:
 func _guion_stats() -> Dictionary:
 	var e := {}
 	if has_guion("g_v"): e = {"max_hp": -0.2, "power": 0.4}
+	if has_guion("g_0"): e.duration = 0.5
 	if has_guion("g_xi"): e.boss_damage = 0.5
 	if has_guion("g_xii"): e.revival = 1.0
 	if has_guion("g_vi"):
@@ -185,6 +193,23 @@ func _update_guiones(dt: float) -> void:
 	if has_guion("g_xviii"):   # Noche Americana: the horde far away loses track of you
 		for i in enemies.n:
 			if enemies.alive[i] == 1 and absf(enemies.x[i] - player_pos.x) + absf(enemies.y[i] - player_pos.y) > 700.0: enemies.slow[i] = max(enemies.slow[i], 0.6)
+	if has_guion("g_xiv") and not burns.is_empty():
+		var bk: Array = []
+		for b in burns:
+			b[1] -= dt
+			b[2] -= dt
+			if enemies.alive[b[0]] == 0: continue
+			if b[2] <= 0.0:
+				b[2] = 0.5
+				damage_enemy(b[0], 3.0 + level * 0.6, Vector2.ZERO, null)
+			if b[1] > 0.0: bk.append(b)
+		burns = bk
+	if has_guion("g_ix"): _update_cameo(dt)
+	if has_guion("g_xv"):
+		double_t -= dt
+		if double_t <= 0.0:
+			double_t = 0.8
+			burst(double_pos(), 100.0, (8.0 + level * 2.0) * float(stats.power))
 	if letters.is_empty(): return
 	var keep: Array = []
 	for l in letters:
@@ -192,6 +217,33 @@ func _update_guiones(dt: float) -> void:
 		if l.t <= 0.0: burst(Vector2(l.x, l.y), 55.0, 20.0 + level * 2.0)
 		else: keep.append(l)
 	letters = keep
+
+## El Doble Malvado stands behind you.
+func double_pos() -> Vector2:
+	return player_pos - facing.normalized() * 70.0
+
+## El Cameo: every minute a random member of the cast fights at your side for 10 s.
+func _update_cameo(dt: float) -> void:
+	if cameo.is_empty():
+		cameo_t -= dt
+		if cameo_t > 0.0: return
+		cameo_t = 60.0
+		var c: Dictionary = Data.characters[randi() % Data.characters.size()]
+		var path := "res://assets/sprites/characters/%s/run.png" % c.id
+		if not ResourceLoader.exists(path): return
+		cameo = {"sheet": _sheet(path, 8), "t": 10.0, "hit": 0.0, "ang": 0.0}
+		announce(Loc.t("cameo", [c.name]))
+		return
+	cameo.t -= dt
+	cameo.ang += dt * 2.2
+	cameo.hit -= dt
+	if cameo.hit <= 0.0:
+		cameo.hit = 0.5
+		burst(cameo_pos(), 90.0, (10.0 + level * 2.0) * float(stats.power))
+	if cameo.t <= 0.0: cameo = {}
+
+func cameo_pos() -> Vector2:
+	return player_pos + Vector2(cos(cameo.ang), sin(cameo.ang)) * 110.0
 
 ## Explosion around the player (El Héroe Reticente on level-up).
 func blast(r: float, dmg: float) -> void:
@@ -202,7 +254,7 @@ func blast(r: float, dmg: float) -> void:
 
 ## Extra Taquilla for the modifiers of this run (0.5 = +50 %).
 func mod_bonus() -> float:
-	var b := 0.0
+	var b := 0.5 * cycle   # Maratón: +50 % per finished cycle
 	for id in mods: b += float(Data.MOD_BONUS.get(id, 0.0))
 	return b
 
@@ -382,6 +434,7 @@ func damage_enemy(i: int, amount: float, kb: Vector2, w) -> void:
 	if enemies.alive[i] == 0: return
 	var t := enemies.type[i]
 	amount *= guion_damage()
+	if w != null and has_guion("g_xiv") and burns.size() < 200 and randf() < 0.2: burns.append([i, 3.0, 0.5])
 	var crit := randf() < float(stats.crit)
 	if crit: amount *= 2.6 if has_guion("g_xviii") else 2.0
 	if crit and has_guion("g_viii") and not _bursting: burst(Vector2(enemies.x[i], enemies.y[i]), 70.0, amount * 0.4)
@@ -405,6 +458,7 @@ func kill(i: int, drops := true) -> void:
 	var at := Vector2(enemies.x[i], enemies.y[i])
 	if drops:
 		kills += 1
+		beasts[d.sprite] = int(beasts.get(d.sprite, 0)) + 1
 		weapons.on_kill()
 		if float(stats.lifesteal) > 0.0: heal(float(stats.lifesteal) * 2.0)
 		if int(d.xp) > 0: drop_gem(at, float(d.xp))
@@ -477,6 +531,18 @@ func announce(text: String) -> void:
 # ---------- flow ----------
 func reach_end() -> void:
 	completed = true
+
+## Maratón: instead of El Productor, the clock restarts with a tougher horde.
+func next_cycle() -> void:
+	reach_end()
+	cycle += 1
+	cycle_time += time
+	time = 0.0
+	director.done.clear()
+	event_t = 120.0
+	announce(Loc.t("ev_cycle", [cycle + 1]))
+	Sfx.play("boss", 0.8)
+	Music.play(Music.track_for(stage))
 
 func open_levelup() -> void:
 	state = "levelup"
@@ -568,12 +634,15 @@ func record() -> Dictionary:
 		if id not in s.evolved: s.evolved.append(id)
 	s.bosses += bosses_killed
 	s.max_level = max(int(s.max_level), level)
-	s.time += time
+	s.time += time + cycle_time
 	s.taquilla_total += earned
 	s.survived[stage.id] = max(float(s.survived.get(stage.id, 0.0)), floor(time / 60.0))
 	if completed and stage.id not in s.completed: s.completed.append(stage.id)
 	if stage.id not in s.played: s.played.append(stage.id)
 	if productor_killed: s.productor += 1
+	var b: Dictionary = s.bestiary.get(stage.id, {})
+	for k in beasts: b[k] = int(b.get(k, 0)) + int(beasts[k])
+	s.bestiary[stage.id] = b
 	for r in Data.relics_for_completions(s.completed.size()):
 		if Save.unlock("relics", r.id): found_relics.append(r.id)
 	Save.data.taquilla = int(Save.data.taquilla) + earned
@@ -582,7 +651,7 @@ func record() -> Dictionary:
 	var new_ach: Array = Achievements.check({})
 	var dmg: Array = []
 	for w in weapons.list: dmg.append([w.data.name if not w.evolved or w.data.source == "union" else w.data.evolution.name, w.level, int(dmg_by_weapon.get(w.id, 0.0))])
-	return {"time": time, "kills": kills, "level": level, "coins": int(round(coins)), "earned": earned, "completed": completed,
+	return {"time": time + cycle_time, "kills": kills, "level": level, "coins": int(round(coins)), "earned": earned, "completed": completed,
 		"achievements": new_ach, "weapons": dmg, "character": character.name, "stage": stage.name,
 		"relics": found_relics.map(func(id): return Data.relic_by_id[id].name)}
 
@@ -920,7 +989,10 @@ func _draw() -> void:
 	_keys.sort()
 	for key in _keys:
 		var id := key % 1048576
-		if id == 1000000: _draw_player()
+		if id == 1000000:
+			if has_guion("g_xv"): _draw_sheet(sheets.run, int(time * 12.0), double_pos(), PLAYER_SCALE, -1.0 if facing.x < -0.1 else 1.0, Color(0.25, 0.1, 0.35, 0.75))
+			if not cameo.is_empty() and not cameo.sheet.is_empty(): _draw_sheet(cameo.sheet, int(time * 12.0), cameo_pos(), PLAYER_SCALE, 1.0 if cos(cameo.ang + PI / 2.0) > 0.0 else -1.0, Color(1, 1, 1, clampf(cameo.t, 0.0, 1.0)))
+			_draw_player()
 		elif id >= 600000: _draw_prop(_vis_props[id - 600000])
 		else: _draw_enemy(id)
 	# weapons in the air

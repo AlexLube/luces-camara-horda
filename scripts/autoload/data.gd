@@ -63,13 +63,14 @@ func _make_union_weapons() -> void:
 		weapons[u.id] = w
 
 ## Taquilla bonus of each modifier (fraction), the ones that can be switched on, and what unlocks each.
-const MOD_BONUS := {"guiones": 0.0, "toma_rapida": 0.5, "fuera_de_plazo": 0.5, "sin_limite": 0.5, "negativo": 1.0, "imprevistos_de_rodaje": 0.25, "cine_mudo": 0.3}
+const MOD_BONUS := {"maraton": 0.0, "guiones": 0.0, "toma_rapida": 0.5, "fuera_de_plazo": 0.5, "sin_limite": 0.5, "negativo": 1.0, "imprevistos_de_rodaje": 0.25, "cine_mudo": 0.3}
 
 func modifier_ready(m: Dictionary) -> bool:
 	return MOD_BONUS.has(m.id)
 
 func modifier_unlocked(m: Dictionary) -> bool:
 	if m.id == "cine_mudo": return "archivo_de_cine_mudo" in Save.data.stats.completed
+	if m.id == "maraton": return Save.is_unlocked("relics", "silla_del_director")
 	for r in relics:
 		if r.name == m.relic: return Save.is_unlocked("relics", r.id)
 	return false
@@ -133,6 +134,15 @@ func portrait(id: String) -> Texture2D:
 	var a := AtlasTexture.new()
 	a.atlas = t
 	a.region = Rect2(0, 0, t.get_width() / 4, t.get_height())
+	return a
+
+## First frame of a sprite sheet (bestiary pictures).
+func first_frame(path: String, frames: int) -> Texture2D:
+	var t := tex(path)
+	if t == null: return null
+	var a := AtlasTexture.new()
+	a.atlas = t
+	a.region = Rect2(0, 0, t.get_width() / max(1, frames), t.get_height())
 	return a
 
 func stage_art(stage: Dictionary) -> Dictionary:
